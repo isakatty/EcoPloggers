@@ -32,6 +32,8 @@
 		C90FF09F2C6E3BD400590563 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF09E2C6E3BD400590563 /* SignUpViewModel.swift */; };
 		C90FF0A42C6E3CBE00590563 /* TextFieldWithLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0A32C6E3CBE00590563 /* TextFieldWithLabelView.swift */; };
 		C90FF0A62C6E450F00590563 /* PaddingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0A52C6E450F00590563 /* PaddingButton.swift */; };
+		C90FF0A82C6E551C00590563 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C90FF0A72C6E551C00590563 /* Localizable.xcstrings */; };
+		C90FF0AB2C6E556900590563 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C90FF0AA2C6E556900590563 /* InfoPlist.xcstrings */; };
 		C99AA8622C6DFC1500C07BC2 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8612C6DFC1500C07BC2 /* Constant.swift */; };
 		C99AA8682C6DFF6900C07BC2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8672C6DFF6900C07BC2 /* BaseViewController.swift */; };
 		C99AA86A2C6DFF9600C07BC2 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8692C6DFF9600C07BC2 /* UIViewController+.swift */; };
@@ -66,6 +68,9 @@
 		C90FF09E2C6E3BD400590563 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		C90FF0A32C6E3CBE00590563 /* TextFieldWithLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithLabelView.swift; sourceTree = "<group>"; };
 		C90FF0A52C6E450F00590563 /* PaddingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingButton.swift; sourceTree = "<group>"; };
+		C90FF0A72C6E551C00590563 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		C90FF0A92C6E554B00590563 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		C90FF0AA2C6E556900590563 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		C99AA8612C6DFC1500C07BC2 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		C99AA8672C6DFF6900C07BC2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C99AA8692C6DFF9600C07BC2 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
@@ -189,6 +194,8 @@
 				C9D68BDF2C6CD155002AF632 /* Assets.xcassets */,
 				C9D68BE12C6CD155002AF632 /* LaunchScreen.storyboard */,
 				C9D68BE42C6CD155002AF632 /* Info.plist */,
+				C90FF0A72C6E551C00590563 /* Localizable.xcstrings */,
+				C90FF0AA2C6E556900590563 /* InfoPlist.xcstrings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -357,6 +364,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = C9D68BCA2C6CD154002AF632;
 			packageReferences = (
@@ -377,8 +385,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C90FF0AB2C6E556900590563 /* InfoPlist.xcstrings in Resources */,
 				C9D68BE02C6CD155002AF632 /* Assets.xcassets in Resources */,
 				C9D68BE32C6CD155002AF632 /* Base in Resources */,
+				C90FF0A82C6E551C00590563 /* Localizable.xcstrings in Resources */,
 				C90EAE642C6E13E300F5F0AE /* Pretendard-Bold.otf in Resources */,
 				C90EAE672C6E13E300F5F0AE /* Pretendard-Light.otf in Resources */,
 				C90EAE662C6E13E300F5F0AE /* Pretendard-Thin.otf in Resources */,
@@ -428,6 +438,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				C9D68BE22C6CD155002AF632 /* Base */,
+				C90FF0A92C6E554B00590563 /* ko */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -441,6 +452,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -505,6 +517,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
