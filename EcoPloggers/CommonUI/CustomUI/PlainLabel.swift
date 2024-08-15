@@ -15,6 +15,10 @@ final class PlainLabel: UILabel {
         text = labelText
     }
     
+    init() {
+        super.init(frame: .zero)
+    }
+    
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -23,5 +27,10 @@ final class PlainLabel: UILabel {
     func configureUI(txtColor: UIColor?, bgColor: UIColor?) {
         textColor = txtColor
         backgroundColor = bgColor
+    }
+    func configureText(labelText: String, validate: Bool) {
+        text = labelText
+        
+        textColor = validate ? Constant.Color.black : Constant.Color.carrotOrange
     }
 }

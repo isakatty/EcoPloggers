@@ -60,10 +60,17 @@ final class LogInViewController: BaseViewController {
         let input = LogInViewModel.Input(
             emailString: idTextField.rx.text.orEmpty,
             pwString: pwTextField.rx.text.orEmpty,
+            logInEvent: loginBtn.rx.tap,
             signUpEvent: signUpBtn.rx.tap
         )
         
         let output = viewModel.transform(input: input)
+        
+        output.logInEvent
+            .bind(with: self) { owner, _ in
+                // 로그인된 정보를 들고 화면 전환
+            }
+            .disposed(by: disposeBag)
         
         output.signUpEvent
             .bind(with: self) { owner, _ in

@@ -47,6 +47,8 @@ final class SignUpViewController: BaseViewController {
     private func bind() {
         let input = SignUpViewModel.Input()
         let output = viewModel.transform(input: input)
+        
+        
     }
     override func configureHierarchy() {
         [emailView, validationBtn, pwView, nicknameView, joinBtn]
@@ -58,7 +60,6 @@ final class SignUpViewController: BaseViewController {
         emailView.snp.makeConstraints { make in
             make.top.equalTo(safeArea).offset(50)
             make.leading.equalTo(safeArea)
-            make.height.equalTo(60)
         }
         validationBtn.snp.makeConstraints { make in
             make.leading.equalTo(emailView.snp.trailing)
@@ -68,16 +69,14 @@ final class SignUpViewController: BaseViewController {
             make.centerY.equalTo(emailView.snp.centerY)
         }
         pwView.snp.makeConstraints { make in
-            make.top.equalTo(emailView.snp.bottom).offset(20)
+            make.top.equalTo(emailView.snp.bottom).offset(18)
             make.horizontalEdges.equalTo(safeArea)
             make.centerX.equalTo(safeArea)
-            make.height.equalTo(60)
         }
         nicknameView.snp.makeConstraints { make in
-            make.top.equalTo(pwView.snp.bottom).offset(20)
+            make.top.equalTo(pwView.snp.bottom).offset(18)
             make.horizontalEdges.equalTo(safeArea)
             make.centerX.equalTo(safeArea)
-            make.height.equalTo(60)
         }
         joinBtn.snp.makeConstraints { make in
             make.bottom.equalTo(safeArea).inset(30)

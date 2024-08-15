@@ -15,14 +15,19 @@ final class TextFieldWithLabelView: BaseView {
     private lazy var topLabel: PlainLabel = {
         let label = PlainLabel(labelText: topLabelText)
         label.configureUI(txtColor: Constant.Color.black, bgColor: Constant.Color.clear)
-        label.font = Constant.Font.regular14
+        label.font = Constant.Font.regular15
         return label
     }()
-    let textField = UnderlineTextField()
     private let requiredLabel: PlainLabel = {
         let label = PlainLabel(labelText: "*")
         label.configureUI(txtColor: Constant.Color.black, bgColor: Constant.Color.clear)
         label.font = Constant.Font.regular13
+        return label
+    }()
+    let textField = UnderlineTextField()
+    let validationLabel: PlainLabel = {
+        let label = PlainLabel()
+        label.font = Constant.Font.light12
         return label
     }()
     
@@ -33,7 +38,7 @@ final class TextFieldWithLabelView: BaseView {
     }
     
     override func configureHierarchy() {
-        [topLabel, requiredLabel, textField]
+        [topLabel, requiredLabel, textField, validationLabel]
             .forEach { addSubview($0) }
     }
     
@@ -44,6 +49,7 @@ final class TextFieldWithLabelView: BaseView {
         topLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.equalToSuperview().inset(30)
+            make.height.equalTo(20)
         }
         requiredLabel.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -52,6 +58,12 @@ final class TextFieldWithLabelView: BaseView {
         textField.snp.makeConstraints { make in
             make.top.equalTo(topLabel.snp.bottom).offset(12)
             make.horizontalEdges.equalToSuperview().inset(30)
+            make.height.equalTo(30)
+        }
+        validationLabel.snp.makeConstraints { make in
+            make.top.equalTo(textField.snp.bottom).offset(14)
+            make.horizontalEdges.equalToSuperview().inset(30)
+            make.bottom.equalToSuperview()
         }
     }
     func configureUI() {

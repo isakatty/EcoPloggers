@@ -16,10 +16,12 @@ final class LogInViewModel: ViewModelType {
     struct Input {
         let emailString: ControlProperty<String>
         let pwString: ControlProperty<String>
+        let logInEvent: ControlEvent<Void>
         let signUpEvent: ControlEvent<Void>
     }
     struct Output {
         let validation: BehaviorRelay<Bool>
+        let logInEvent: ControlEvent<Void>
         let signUpEvent: ControlEvent<Void>
     }
     func transform(input: Input) -> Output {
@@ -28,6 +30,7 @@ final class LogInViewModel: ViewModelType {
         
         return Output(
             validation: .init(value: true),
+            logInEvent: input.logInEvent,
             signUpEvent: input.signUpEvent
         )
     }

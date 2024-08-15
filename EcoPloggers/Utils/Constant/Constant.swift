@@ -10,6 +10,8 @@ import UIKit
 enum Constant {
     /// Font
     enum Font {
+        static let light12 = UIFont(name: FontWeight.light.rawValue, size: 12)
+        
         static let regular13 = UIFont(name: FontWeight.regular.rawValue, size: 13)
         static let regular14 = UIFont(name: FontWeight.regular.rawValue, size: 14)
         static let regular15 = UIFont(name: FontWeight.regular.rawValue, size: 15)
@@ -29,6 +31,7 @@ enum Constant {
         static let support = UIColor(named: "Support")
         static let core = UIColor(named: "Core")
         static let limeYellow = UIColor(named: "LimeYellow")
+        static let carrotOrange = UIColor(named: "CarrotOrange")
         static let black = UIColor.black
         static let white = UIColor.white
         static let lightGray = UIColor.lightGray
