@@ -22,6 +22,7 @@
 		C9D68BDF2C6CD155002AF632 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C9D68BE22C6CD155002AF632 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C9D68BE42C6CD155002AF632 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C9D68BEA2C6DD293002AF632 /* XCConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = XCConfig.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,9 +36,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C99AA8512C6DF56D00C07BC2 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				C9D68BD62C6CD154002AF632 /* AppDelegate.swift */,
+				C9D68BD82C6CD154002AF632 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		C99AA8522C6DF6B500C07BC2 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				C9D68BDA2C6CD154002AF632 /* ViewController.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		C99AA8532C6DF6EB00C07BC2 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		C99AA8542C6DF71900C07BC2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C9D68BDF2C6CD155002AF632 /* Assets.xcassets */,
+				C9D68BE12C6CD155002AF632 /* LaunchScreen.storyboard */,
+				C9D68BE42C6CD155002AF632 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		C9D68BCA2C6CD154002AF632 = {
 			isa = PBXGroup;
 			children = (
+				C9D68BEA2C6DD293002AF632 /* XCConfig.xcconfig */,
 				C9D68BD52C6CD154002AF632 /* EcoPloggers */,
 				C9D68BD42C6CD154002AF632 /* Products */,
 			);
@@ -54,12 +90,10 @@
 		C9D68BD52C6CD154002AF632 /* EcoPloggers */ = {
 			isa = PBXGroup;
 			children = (
-				C9D68BD62C6CD154002AF632 /* AppDelegate.swift */,
-				C9D68BD82C6CD154002AF632 /* SceneDelegate.swift */,
-				C9D68BDA2C6CD154002AF632 /* ViewController.swift */,
-				C9D68BDF2C6CD155002AF632 /* Assets.xcassets */,
-				C9D68BE12C6CD155002AF632 /* LaunchScreen.storyboard */,
-				C9D68BE42C6CD155002AF632 /* Info.plist */,
+				C99AA8512C6DF56D00C07BC2 /* Application */,
+				C99AA8522C6DF6B500C07BC2 /* Presentation */,
+				C99AA8532C6DF6EB00C07BC2 /* Common */,
+				C99AA8542C6DF71900C07BC2 /* Resources */,
 			);
 			path = EcoPloggers;
 			sourceTree = "<group>";
@@ -156,6 +190,7 @@
 /* Begin XCBuildConfiguration section */
 		C9D68BE52C6CD155002AF632 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C9D68BEA2C6DD293002AF632 /* XCConfig.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -206,6 +241,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -263,6 +299,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -275,13 +312,14 @@
 		};
 		C9D68BE82C6CD155002AF632 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C9D68BEA2C6DD293002AF632 /* XCConfig.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = EcoPloggers/Info.plist;
+				INFOPLIST_FILE = EcoPloggers/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -312,7 +350,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = EcoPloggers/Info.plist;
+				INFOPLIST_FILE = EcoPloggers/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
