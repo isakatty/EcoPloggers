@@ -26,8 +26,13 @@ enum Constant {
     enum Color {
         static let mainBG = UIColor(named: "MainBG")
         static let secondaryBG = UIColor(named: "SecondaryBG")
-        static let secondary = UIColor(named: "Secondary")
-        static let primary = UIColor(named: "Primary")
+        static let support = UIColor(named: "Support")
+        static let core = UIColor(named: "Core")
+        static let limeYellow = UIColor(named: "LimeYellow")
+        static let black = UIColor.black
+        static let white = UIColor.white
+        static let lightGray = UIColor.lightGray
+        static let clear = UIColor.clear
     }
 }
 
