@@ -16,6 +16,10 @@
 		C90EAE662C6E13E300F5F0AE /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = C90EAE5D2C6E13E300F5F0AE /* Pretendard-Thin.otf */; };
 		C90EAE672C6E13E300F5F0AE /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = C90EAE5E2C6E13E300F5F0AE /* Pretendard-Light.otf */; };
 		C90EAE682C6E13E300F5F0AE /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C90EAE5F2C6E13E300F5F0AE /* Pretendard-Regular.otf */; };
+		C90FF07F2C6E185A00590563 /* UserEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF07E2C6E185A00590563 /* UserEndpoint.swift */; };
+		C90FF0812C6E186100590563 /* PostEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0802C6E186100590563 /* PostEndpoint.swift */; };
+		C90FF0832C6E186E00590563 /* Reusables.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0822C6E186E00590563 /* Reusables.swift */; };
+		C90FF0852C6E187B00590563 /* LogInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0842C6E187B00590563 /* LogInModel.swift */; };
 		C99AA8622C6DFC1500C07BC2 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8612C6DFC1500C07BC2 /* Constant.swift */; };
 		C99AA8682C6DFF6900C07BC2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8672C6DFF6900C07BC2 /* BaseViewController.swift */; };
 		C99AA86A2C6DFF9600C07BC2 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8692C6DFF9600C07BC2 /* UIViewController+.swift */; };
@@ -37,6 +41,10 @@
 		C90EAE5D2C6E13E300F5F0AE /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
 		C90EAE5E2C6E13E300F5F0AE /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
 		C90EAE5F2C6E13E300F5F0AE /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		C90FF07E2C6E185A00590563 /* UserEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEndpoint.swift; sourceTree = "<group>"; };
+		C90FF0802C6E186100590563 /* PostEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEndpoint.swift; sourceTree = "<group>"; };
+		C90FF0822C6E186E00590563 /* Reusables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusables.swift; sourceTree = "<group>"; };
+		C90FF0842C6E187B00590563 /* LogInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInModel.swift; sourceTree = "<group>"; };
 		C99AA8612C6DFC1500C07BC2 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		C99AA8672C6DFF6900C07BC2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C99AA8692C6DFF9600C07BC2 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
@@ -78,6 +86,23 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		C90FF0862C6E190A00590563 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C99AA8602C6DFC1000C07BC2 /* Constant */,
+				C99AA8642C6DFE5800C07BC2 /* Protocol */,
+				C99AA8632C6DFE5200C07BC2 /* Extension */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		C90FF0872C6E1A1D00590563 /* CustomUI */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CustomUI;
+			sourceTree = "<group>";
+		};
 		C99AA8512C6DF56D00C07BC2 /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -96,17 +121,13 @@
 			path = Presentation;
 			sourceTree = "<group>";
 		};
-		C99AA8532C6DF6EB00C07BC2 /* Common */ = {
+		C99AA8532C6DF6EB00C07BC2 /* CommonUI */ = {
 			isa = PBXGroup;
 			children = (
+				C90FF0872C6E1A1D00590563 /* CustomUI */,
 				C99AA8662C6DFF5D00C07BC2 /* BaseUI */,
-				C99AA8652C6DFE6100C07BC2 /* Model */,
-				C99AA8642C6DFE5800C07BC2 /* Protocol */,
-				C99AA8632C6DFE5200C07BC2 /* Extension */,
-				C99AA8602C6DFC1000C07BC2 /* Constant */,
-				C99AA8572C6DF98300C07BC2 /* Network */,
 			);
-			path = Common;
+			path = CommonUI;
 			sourceTree = "<group>";
 		};
 		C99AA8542C6DF71900C07BC2 /* Resources */ = {
@@ -147,6 +168,7 @@
 		C99AA85C2C6DFBDD00C07BC2 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				C90FF07E2C6E185A00590563 /* UserEndpoint.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -154,6 +176,7 @@
 		C99AA85D2C6DFBE200C07BC2 /* Post */ = {
 			isa = PBXGroup;
 			children = (
+				C90FF0802C6E186100590563 /* PostEndpoint.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -177,6 +200,7 @@
 		C99AA8642C6DFE5800C07BC2 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
+				C90FF0822C6E186E00590563 /* Reusables.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -184,6 +208,7 @@
 		C99AA8652C6DFE6100C07BC2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C90FF0842C6E187B00590563 /* LogInModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -219,7 +244,10 @@
 			children = (
 				C99AA8512C6DF56D00C07BC2 /* Application */,
 				C99AA8522C6DF6B500C07BC2 /* Presentation */,
-				C99AA8532C6DF6EB00C07BC2 /* Common */,
+				C99AA8532C6DF6EB00C07BC2 /* CommonUI */,
+				C99AA8652C6DFE6100C07BC2 /* Model */,
+				C99AA8572C6DF98300C07BC2 /* Network */,
+				C90FF0862C6E190A00590563 /* Utils */,
 				C99AA8542C6DF71900C07BC2 /* Resources */,
 			);
 			path = EcoPloggers;
@@ -304,11 +332,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C90FF0812C6E186100590563 /* PostEndpoint.swift in Sources */,
 				C99AA8682C6DFF6900C07BC2 /* BaseViewController.swift in Sources */,
 				C99AA8622C6DFC1500C07BC2 /* Constant.swift in Sources */,
 				C99AA86A2C6DFF9600C07BC2 /* UIViewController+.swift in Sources */,
+				C90FF0852C6E187B00590563 /* LogInModel.swift in Sources */,
 				C9D68BDB2C6CD154002AF632 /* LogInViewController.swift in Sources */,
 				C99AA86C2C6E001100C07BC2 /* BaseView.swift in Sources */,
+				C90FF0832C6E186E00590563 /* Reusables.swift in Sources */,
+				C90FF07F2C6E185A00590563 /* UserEndpoint.swift in Sources */,
 				C9D68BD72C6CD154002AF632 /* AppDelegate.swift in Sources */,
 				C9D68BD92C6CD154002AF632 /* SceneDelegate.swift in Sources */,
 			);
