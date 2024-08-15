@@ -35,7 +35,7 @@ final class UnderlineTextField: UITextField {
         underline.snp.makeConstraints { make in
             make.height.equalTo(1)
             make.horizontalEdges.equalToSuperview()
-            make.bottom.equalToSuperview().offset(16)
+            make.bottom.equalToSuperview().offset(8)
         }
     }
 }

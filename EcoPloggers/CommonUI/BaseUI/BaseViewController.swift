@@ -22,6 +22,7 @@ class BaseViewController: UIViewController {
         
         configureHierarchy()
         configureLayout()
+        hideKeyboard()
     }
     
     func configureHierarchy() { }

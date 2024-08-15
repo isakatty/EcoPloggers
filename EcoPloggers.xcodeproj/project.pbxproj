@@ -24,6 +24,14 @@
 		C90FF08C2C6E219B00590563 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C90FF08B2C6E219B00590563 /* SnapKit */; };
 		C90FF08E2C6E25DA00590563 /* UnderlineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF08D2C6E25DA00590563 /* UnderlineTextField.swift */; };
 		C90FF0902C6E280C00590563 /* PlainLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF08F2C6E280C00590563 /* PlainLabel.swift */; };
+		C90FF0942C6E30B300590563 /* LogInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0932C6E30B300590563 /* LogInViewModel.swift */; };
+		C90FF0972C6E30EE00590563 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = C90FF0962C6E30EE00590563 /* RxCocoa */; };
+		C90FF0992C6E30EE00590563 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C90FF0982C6E30EE00590563 /* RxSwift */; };
+		C90FF09B2C6E311E00590563 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF09A2C6E311E00590563 /* ViewModelType.swift */; };
+		C90FF09D2C6E38E000590563 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF09C2C6E38E000590563 /* SignUpViewController.swift */; };
+		C90FF09F2C6E3BD400590563 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF09E2C6E3BD400590563 /* SignUpViewModel.swift */; };
+		C90FF0A42C6E3CBE00590563 /* TextFieldWithLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0A32C6E3CBE00590563 /* TextFieldWithLabelView.swift */; };
+		C90FF0A62C6E450F00590563 /* PaddingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0A52C6E450F00590563 /* PaddingButton.swift */; };
 		C99AA8622C6DFC1500C07BC2 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8612C6DFC1500C07BC2 /* Constant.swift */; };
 		C99AA8682C6DFF6900C07BC2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8672C6DFF6900C07BC2 /* BaseViewController.swift */; };
 		C99AA86A2C6DFF9600C07BC2 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8692C6DFF9600C07BC2 /* UIViewController+.swift */; };
@@ -52,6 +60,12 @@
 		C90FF0882C6E20B300590563 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		C90FF08D2C6E25DA00590563 /* UnderlineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineTextField.swift; sourceTree = "<group>"; };
 		C90FF08F2C6E280C00590563 /* PlainLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainLabel.swift; sourceTree = "<group>"; };
+		C90FF0932C6E30B300590563 /* LogInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModel.swift; sourceTree = "<group>"; };
+		C90FF09A2C6E311E00590563 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
+		C90FF09C2C6E38E000590563 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		C90FF09E2C6E3BD400590563 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		C90FF0A32C6E3CBE00590563 /* TextFieldWithLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithLabelView.swift; sourceTree = "<group>"; };
+		C90FF0A52C6E450F00590563 /* PaddingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingButton.swift; sourceTree = "<group>"; };
 		C99AA8612C6DFC1500C07BC2 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		C99AA8672C6DFF6900C07BC2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C99AA8692C6DFF9600C07BC2 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
@@ -71,6 +85,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C90FF0992C6E30EE00590563 /* RxSwift in Frameworks */,
+				C90FF0972C6E30EE00590563 /* RxCocoa in Frameworks */,
 				C90FF08C2C6E219B00590563 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -110,8 +126,33 @@
 				C90FF0882C6E20B300590563 /* RoundedButton.swift */,
 				C90FF08D2C6E25DA00590563 /* UnderlineTextField.swift */,
 				C90FF08F2C6E280C00590563 /* PlainLabel.swift */,
+				C90FF0A52C6E450F00590563 /* PaddingButton.swift */,
 			);
 			path = CustomUI;
+			sourceTree = "<group>";
+		};
+		C90FF0A02C6E3C8F00590563 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C90FF09E2C6E3BD400590563 /* SignUpViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C90FF0A12C6E3C9500590563 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C90FF09C2C6E38E000590563 /* SignUpViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		C90FF0A22C6E3C9D00590563 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C90FF0A32C6E3CBE00590563 /* TextFieldWithLabelView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		C99AA8512C6DF56D00C07BC2 /* Application */ = {
@@ -156,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				C9D68BDA2C6CD154002AF632 /* LogInViewController.swift */,
+				C90FF0932C6E30B300590563 /* LogInViewModel.swift */,
 			);
 			path = LogIn;
 			sourceTree = "<group>";
@@ -163,6 +205,9 @@
 		C99AA8562C6DF87700C07BC2 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
+				C90FF0A22C6E3C9D00590563 /* View */,
+				C90FF0A12C6E3C9500590563 /* ViewController */,
+				C90FF0A02C6E3C8F00590563 /* ViewModel */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -212,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				C90FF0822C6E186E00590563 /* Reusables.swift */,
+				C90FF09A2C6E311E00590563 /* ViewModelType.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -282,6 +328,8 @@
 			name = EcoPloggers;
 			packageProductDependencies = (
 				C90FF08B2C6E219B00590563 /* SnapKit */,
+				C90FF0962C6E30EE00590563 /* RxCocoa */,
+				C90FF0982C6E30EE00590563 /* RxSwift */,
 			);
 			productName = EcoPloggers;
 			productReference = C9D68BD32C6CD154002AF632 /* EcoPloggers.app */;
@@ -313,6 +361,7 @@
 			mainGroup = C9D68BCA2C6CD154002AF632;
 			packageReferences = (
 				C90FF08A2C6E219B00590563 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				C90FF0952C6E30EE00590563 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = C9D68BD42C6CD154002AF632 /* Products */;
 			projectDirPath = "";
@@ -350,9 +399,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C90FF08E2C6E25DA00590563 /* UnderlineTextField.swift in Sources */,
+				C90FF0A62C6E450F00590563 /* PaddingButton.swift in Sources */,
+				C90FF0A42C6E3CBE00590563 /* TextFieldWithLabelView.swift in Sources */,
+				C90FF0942C6E30B300590563 /* LogInViewModel.swift in Sources */,
 				C90FF0902C6E280C00590563 /* PlainLabel.swift in Sources */,
 				C90FF0812C6E186100590563 /* PostEndpoint.swift in Sources */,
+				C90FF09F2C6E3BD400590563 /* SignUpViewModel.swift in Sources */,
 				C99AA8682C6DFF6900C07BC2 /* BaseViewController.swift in Sources */,
+				C90FF09D2C6E38E000590563 /* SignUpViewController.swift in Sources */,
 				C99AA8622C6DFC1500C07BC2 /* Constant.swift in Sources */,
 				C99AA86A2C6DFF9600C07BC2 /* UIViewController+.swift in Sources */,
 				C90FF0852C6E187B00590563 /* LogInModel.swift in Sources */,
@@ -360,6 +414,7 @@
 				C99AA86C2C6E001100C07BC2 /* BaseView.swift in Sources */,
 				C90FF0892C6E20B300590563 /* RoundedButton.swift in Sources */,
 				C90FF0832C6E186E00590563 /* Reusables.swift in Sources */,
+				C90FF09B2C6E311E00590563 /* ViewModelType.swift in Sources */,
 				C90FF07F2C6E185A00590563 /* UserEndpoint.swift in Sources */,
 				C9D68BD72C6CD154002AF632 /* AppDelegate.swift in Sources */,
 				C9D68BD92C6CD154002AF632 /* SceneDelegate.swift in Sources */,
@@ -597,6 +652,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		C90FF0952C6E30EE00590563 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.7.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -604,6 +667,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C90FF08A2C6E219B00590563 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		C90FF0962C6E30EE00590563 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C90FF0952C6E30EE00590563 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		C90FF0982C6E30EE00590563 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C90FF0952C6E30EE00590563 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

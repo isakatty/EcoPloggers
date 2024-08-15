@@ -15,8 +15,6 @@ final class RoundedButton: UIButton {
         setTitle(title, for: .normal)
         setTitleColor(Constant.Color.white, for: .normal)
         layer.cornerRadius = 10
-        
-        unavailableBtn()
     }
     
     @available(*, unavailable)
@@ -25,10 +23,12 @@ final class RoundedButton: UIButton {
     }
     
     func availableBtn() {
+        isEnabled = true
         backgroundColor = Constant.Color.core
     }
     
     func unavailableBtn() {
+        isEnabled = false
         backgroundColor = Constant.Color.lightGray
     }
     

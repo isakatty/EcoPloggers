@@ -7,10 +7,17 @@
 
 import UIKit
 
+import RxSwift
+import RxCocoa
 import SnapKit
 
 final class LogInViewController: BaseViewController {
-    private let loginBtn = RoundedButton(title: "로그인")
+    private let viewModel = LogInViewModel()
+    
+    private let loginBtn: RoundedButton = {
+        let btn = RoundedButton(title: "로그인")
+        return btn
+    }()
     private let idLabel: PlainLabel = {
         let lb = PlainLabel(labelText: "이메일 주소")
         lb.configureUI(txtColor: Constant.Color.black, bgColor: Constant.Color.clear)
@@ -19,7 +26,7 @@ final class LogInViewController: BaseViewController {
     }()
     private let idTextField: UnderlineTextField = {
         let tf = UnderlineTextField()
-        tf.placeholder = "예) ecoPloggers@Ecoploggers.com"
+        tf.placeholder = "예) id@id.com"
         return tf
     }()
     private let pwLabel: PlainLabel = {
@@ -40,6 +47,41 @@ final class LogInViewController: BaseViewController {
         btn.backgroundColor = Constant.Color.clear
         return btn
     }()
+    
+    private let disposeBag = DisposeBag()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        bind()
+    }
+    
+    private func bind() {
+        let input = LogInViewModel.Input(
+            emailString: idTextField.rx.text.orEmpty,
+            pwString: pwTextField.rx.text.orEmpty,
+            signUpEvent: signUpBtn.rx.tap
+        )
+        
+        let output = viewModel.transform(input: input)
+        
+        output.signUpEvent
+            .bind(with: self) { owner, _ in
+                let vc = SignUpViewController()
+                owner.navigationController?.pushViewController(vc, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        output.validation
+            .bind(with: self) { owner, validation in
+                if validation {
+                    owner.loginBtn.availableBtn()
+                } else {
+                    owner.loginBtn.unavailableBtn()
+                }
+            }
+            .disposed(by: disposeBag)
+    }
     
     override func configureHierarchy() {
         [idLabel, idTextField, pwLabel, pwTextField, loginBtn, signUpBtn]
