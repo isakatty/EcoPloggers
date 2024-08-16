@@ -27,6 +27,7 @@ final class LogInViewController: BaseViewController {
     private let idTextField: UnderlineTextField = {
         let tf = UnderlineTextField()
         tf.placeholder = "예) id@id.com"
+        tf.keyboardType = .emailAddress
         return tf
     }()
     private let pwLabel: PlainLabel = {
@@ -38,6 +39,7 @@ final class LogInViewController: BaseViewController {
     private let pwTextField: UnderlineTextField = {
         let tf = UnderlineTextField()
         tf.isSecureTextEntry = true
+        tf.placeholder = "5자 이상"
         return tf
     }()
     private let signUpBtn: UIButton = {
@@ -54,18 +56,6 @@ final class LogInViewController: BaseViewController {
         super.viewDidLoad()
         
         bind()
-        
-        let login = UserRequest.login(login: LogInQuery(email: "isak@isak.com", password: "qwerty"))
-        NetworkManager.shared.callUserRequest(endpoint: login, type: LoginResponse.self)
-            .subscribe{ value in
-                switch value {
-                case .success(let response):
-                    print(response)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-            .disposed(by: disposeBag)
     }
     
     private func bind() {
@@ -79,8 +69,13 @@ final class LogInViewController: BaseViewController {
         let output = viewModel.transform(input: input)
         
         output.logInEvent
-            .bind(with: self) { owner, _ in
+            .observe(on: MainScheduler.instance)
+            .bind(with: self) { owner, success in
                 // 로그인된 정보를 들고 화면 전환
+                if success {
+                    let vc = PloggersViewController()
+                    owner.navigationController?.pushViewController(vc, animated: true)
+                }
             }
             .disposed(by: disposeBag)
         
@@ -98,6 +93,12 @@ final class LogInViewController: BaseViewController {
                 } else {
                     owner.loginBtn.unavailableBtn()
                 }
+            }
+            .disposed(by: disposeBag)
+        
+        output.logInFailText
+            .bind(with: self) { owner, text in
+                print(text, "VC")
             }
             .disposed(by: disposeBag)
     }
