@@ -37,6 +37,20 @@ enum Constant {
         static let lightGray = UIColor.lightGray
         static let clear = UIColor.clear
     }
+    
+    enum NetworkComponents {
+        static let baseURL = Bundle.main.object(forInfoDictionaryKey: "BASE_URL") as? String
+        static let portString = Bundle.main.object(forInfoDictionaryKey: "PORT_STRING") as? String
+        static let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String
+    }
+    enum NetworkHeader: String {
+        case authorization = "Authorization"
+        case sesacKey = "SesacKey"
+        case refresh = "Refresh"
+        case contentType = "Content-Type"
+        case json = "application/json"
+        case multipart = "multipart/form-data"
+    }
 }
 
 extension Constant {

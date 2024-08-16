@@ -54,6 +54,18 @@ final class LogInViewController: BaseViewController {
         super.viewDidLoad()
         
         bind()
+        
+        let login = UserRequest.login(login: LogInQuery(email: "isak@isak.com", password: "qwerty"))
+        NetworkManager.shared.callUserRequest(endpoint: login, type: LoginResponse.self)
+            .subscribe{ value in
+                switch value {
+                case .success(let response):
+                    print(response)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            .disposed(by: disposeBag)
     }
     
     private func bind() {
