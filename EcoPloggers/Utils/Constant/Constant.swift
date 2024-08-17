@@ -11,6 +11,7 @@ enum Constant {
     /// Font
     enum Font {
         static let light12 = UIFont(name: FontWeight.light.rawValue, size: 12)
+        static let light13 = UIFont(name: FontWeight.light.rawValue, size: 13)
         
         static let regular13 = UIFont(name: FontWeight.regular.rawValue, size: 13)
         static let regular14 = UIFont(name: FontWeight.regular.rawValue, size: 14)
@@ -23,6 +24,11 @@ enum Constant {
         static let medium16 = UIFont(name: FontWeight.medium.rawValue, size: 16)
         static let medium17 = UIFont(name: FontWeight.medium.rawValue, size: 17)
         static let medium18 = UIFont(name: FontWeight.medium.rawValue, size: 18)
+        static let medium20 = UIFont(name: FontWeight.medium.rawValue, size: 20)
+        
+        static let bold13 = UIFont(name: FontWeight.bold.rawValue, size: 13)
+        static let bold16 = UIFont(name: FontWeight.bold.rawValue, size: 16)
+        static let bold20 = UIFont(name: FontWeight.bold.rawValue, size: 20)
     }
     /// 앱 내 사용 컬러
     enum Color {
@@ -32,6 +38,8 @@ enum Constant {
         static let core = UIColor(named: "Core")
         static let limeYellow = UIColor(named: "LimeYellow")
         static let carrotOrange = UIColor(named: "CarrotOrange")
+        static let deepGreen = UIColor(named: "DeepGreen")
+        static let blueGreen = UIColor(named: "BlueGreen")
         static let black = UIColor.black
         static let white = UIColor.white
         static let lightGray = UIColor.lightGray
