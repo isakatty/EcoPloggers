@@ -5,14 +5,16 @@
 //  Created by Jisoo Ham on 8/15/24.
 //
 
-import Foundation
+import UIKit
 
 protocol Reusables {
-    static var id: String { get }
+    static var identifier: String { get }
 }
 
 extension Reusables {
-    static var id: String {
+    static var identifier: String {
         return String(describing: self)
     }
 }
+
+extension UICollectionViewCell: Reusables { }

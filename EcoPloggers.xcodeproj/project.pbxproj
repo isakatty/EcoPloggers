@@ -49,6 +49,13 @@
 		C90FF0D32C709DBC00590563 /* PloggerTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0D22C709DBC00590563 /* PloggerTabBarController.swift */; };
 		C90FF0D62C70A04000590563 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0D52C70A04000590563 /* SearchViewController.swift */; };
 		C90FF0D92C70A06600590563 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0D82C70A06600590563 /* MyPageViewController.swift */; };
+		C90FF0DB2C70B9BD00590563 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0DA2C70B9BD00590563 /* SearchView.swift */; };
+		C90FF0DD2C70C60800590563 /* RegionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0DC2C70C60800590563 /* RegionCollectionViewCell.swift */; };
+		C90FF0DF2C70C64C00590563 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0DE2C70C64C00590563 /* BaseCollectionViewCell.swift */; };
+		C90FF0E12C70CAC400590563 /* PloggersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0E02C70CAC400590563 /* PloggersViewModel.swift */; };
+		C90FF0E52C70F02700590563 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0E42C70F02700590563 /* TestViewController.swift */; };
+		C90FF0E72C70F2E500590563 /* ContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0E62C70F2E500590563 /* ContentsView.swift */; };
+		C90FF0E92C70F31900590563 /* ImgWithTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0E82C70F31900590563 /* ImgWithTitleView.swift */; };
 		C99AA8622C6DFC1500C07BC2 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8612C6DFC1500C07BC2 /* Constant.swift */; };
 		C99AA8682C6DFF6900C07BC2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8672C6DFF6900C07BC2 /* BaseViewController.swift */; };
 		C99AA86A2C6DFF9600C07BC2 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8692C6DFF9600C07BC2 /* UIViewController+.swift */; };
@@ -101,6 +108,13 @@
 		C90FF0D22C709DBC00590563 /* PloggerTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PloggerTabBarController.swift; sourceTree = "<group>"; };
 		C90FF0D52C70A04000590563 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		C90FF0D82C70A06600590563 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		C90FF0DA2C70B9BD00590563 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		C90FF0DC2C70C60800590563 /* RegionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionCollectionViewCell.swift; sourceTree = "<group>"; };
+		C90FF0DE2C70C64C00590563 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		C90FF0E02C70CAC400590563 /* PloggersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PloggersViewModel.swift; sourceTree = "<group>"; };
+		C90FF0E42C70F02700590563 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		C90FF0E62C70F2E500590563 /* ContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsView.swift; sourceTree = "<group>"; };
+		C90FF0E82C70F31900590563 /* ImgWithTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgWithTitleView.swift; sourceTree = "<group>"; };
 		C99AA8612C6DFC1500C07BC2 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		C99AA8672C6DFF6900C07BC2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C99AA8692C6DFF9600C07BC2 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
@@ -248,6 +262,7 @@
 		C90FF0C82C6FC0A600590563 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				C90FF0E02C70CAC400590563 /* PloggersViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -256,6 +271,7 @@
 			isa = PBXGroup;
 			children = (
 				C90FF0C52C6FBF9400590563 /* PloggersViewController.swift */,
+				C90FF0E42C70F02700590563 /* TestViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -263,6 +279,10 @@
 		C90FF0CA2C6FC0B300590563 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C90FF0DA2C70B9BD00590563 /* SearchView.swift */,
+				C90FF0DC2C70C60800590563 /* RegionCollectionViewCell.swift */,
+				C90FF0E62C70F2E500590563 /* ContentsView.swift */,
+				C90FF0E82C70F31900590563 /* ImgWithTitleView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -438,6 +458,7 @@
 			children = (
 				C99AA8672C6DFF6900C07BC2 /* BaseViewController.swift */,
 				C99AA86B2C6E001100C07BC2 /* BaseView.swift */,
+				C90FF0DE2C70C64C00590563 /* BaseCollectionViewCell.swift */,
 			);
 			path = BaseUI;
 			sourceTree = "<group>";
@@ -575,15 +596,19 @@
 				C90FF0B12C6F27E800590563 /* SignUpQuery.swift in Sources */,
 				C90FF09F2C6E3BD400590563 /* SignUpViewModel.swift in Sources */,
 				C99AA8682C6DFF6900C07BC2 /* BaseViewController.swift in Sources */,
+				C90FF0E52C70F02700590563 /* TestViewController.swift in Sources */,
 				C90FF09D2C6E38E000590563 /* SignUpViewController.swift in Sources */,
 				C90FF0BD2C6F9A9B00590563 /* LoginResponse.swift in Sources */,
+				C90FF0E92C70F31900590563 /* ImgWithTitleView.swift in Sources */,
 				C90FF0BB2C6F4B4000590563 /* ValidateEmailResponse.swift in Sources */,
 				C99AA8622C6DFC1500C07BC2 /* Constant.swift in Sources */,
 				C90FF0B32C6F394000590563 /* NetworkManager.swift in Sources */,
 				C99AA86A2C6DFF9600C07BC2 /* UIViewController+.swift in Sources */,
+				C90FF0E72C70F2E500590563 /* ContentsView.swift in Sources */,
 				C90FF0852C6E187B00590563 /* LogInQuery.swift in Sources */,
 				C90FF0C62C6FBF9400590563 /* PloggersViewController.swift in Sources */,
 				C9D68BDB2C6CD154002AF632 /* LogInViewController.swift in Sources */,
+				C90FF0DD2C70C60800590563 /* RegionCollectionViewCell.swift in Sources */,
 				C90FF0CC2C70766500590563 /* ValidateEmailQuery.swift in Sources */,
 				C90FF0D62C70A04000590563 /* SearchViewController.swift in Sources */,
 				C90FF0CE2C70935800590563 /* SignUpResponse.swift in Sources */,
@@ -593,6 +618,9 @@
 				C90FF0D32C709DBC00590563 /* PloggerTabBarController.swift in Sources */,
 				C90FF0B72C6F466E00590563 /* NetworkError.swift in Sources */,
 				C90FF0832C6E186E00590563 /* Reusables.swift in Sources */,
+				C90FF0DF2C70C64C00590563 /* BaseCollectionViewCell.swift in Sources */,
+				C90FF0E12C70CAC400590563 /* PloggersViewModel.swift in Sources */,
+				C90FF0DB2C70B9BD00590563 /* SearchView.swift in Sources */,
 				C90FF0C12C6FBC6A00590563 /* UserDefaultsManager.swift in Sources */,
 				C90FF09B2C6E311E00590563 /* ViewModelType.swift in Sources */,
 				C90FF0D92C70A06600590563 /* MyPageViewController.swift in Sources */,

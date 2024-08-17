@@ -18,6 +18,11 @@ final class PlainLabel: UILabel {
     init() {
         super.init(frame: .zero)
     }
+    init(fontSize: UIFont?) {
+        super.init(frame: .zero)
+        
+        font = fontSize
+    }
     
     @available(*, unavailable)
     required init?(coder: NSCoder) {
