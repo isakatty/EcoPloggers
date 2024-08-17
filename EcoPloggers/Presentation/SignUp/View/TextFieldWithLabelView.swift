@@ -69,4 +69,8 @@ final class TextFieldWithLabelView: BaseView {
     func configureUI() {
         
     }
+    func configureTextColor(color: UIColor?) {
+        [topLabel, requiredLabel, validationLabel]
+            .forEach { $0.textColor = color}
+    }
 }

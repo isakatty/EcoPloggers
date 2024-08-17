@@ -11,7 +11,7 @@ enum UserRequest {
     case signup(login: SignUpQuery)
     case login(login: LogInQuery)
     case refreshToken(refreshToken: String)
-    case validateEmail(email: String)
+    case validateEmail(email: ValidateEmailQuery)
     case withdraw
 }
 

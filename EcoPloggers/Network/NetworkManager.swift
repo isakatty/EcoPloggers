@@ -27,33 +27,23 @@ final class NetworkManager {
                 observer(.success(.failure(NetworkError.invalidURL)))
                 return Disposables.create()
             }
+//            print("Request URL: \(urlRequest.url?.absoluteString ?? "No URL")")
+//            print("Request Method: \(urlRequest.httpMethod ?? "No Method")")
+//            print("Request Headers: \(urlRequest.allHTTPHeaderFields ?? [:])")
+//            print("Request Body: \(String(data: urlRequest.httpBody ?? Data(), encoding: .utf8) ?? "No Body")")
+            
             session.dataTask(with: urlRequest) { data, response, error in
-                if let error = error {
+                if let _ = error {
                     observer(.success(.failure(NetworkError.invalidError)))
                 }
                 guard let response = response as? HTTPURLResponse else {
                     observer(.success(.failure(NetworkError.invalidResponse)))
                     return
                 }
-                if let userRequest = endpoint as? UserRequest {
-                    let statusCodeError: StatusCode?
-                    switch userRequest {
-                    case .login:
-                        statusCodeError = self.handleLoginStatusCode(response.statusCode)
-                    case .signup:
-                        statusCodeError = self.handleSignupStatusCode(response.statusCode)
-                    case .refreshToken:
-                        statusCodeError = self.handleRefreshTokenStatusCode(response.statusCode)
-                    case .validateEmail:
-                        statusCodeError = self.handleValidateEmailStatusCode(response.statusCode)
-                    case .withdraw:
-                        statusCodeError = self.handleWithdrawStatusCode(response.statusCode)
-                    }
-                    
-                    if let error = statusCodeError {
-                        observer(.success(.failure(.statusCodeError(error))))
-                        return
-                    }
+                
+                if !(200...299).contains(response.statusCode) {
+                    observer(.success(.failure(NetworkError.tempStatusCodeError(response.statusCode))))
+                    return
                 }
                 
                 if let data = data,
@@ -65,51 +55,6 @@ final class NetworkManager {
             }.resume()
             
             return Disposables.create()
-        }
-    }
-}
-extension NetworkManager {
-    private func handleLoginStatusCode(_ statusCode: Int) -> StatusCode? {
-        switch statusCode {
-        case 400, 401:
-            return .login(errorCode: statusCode)
-        default:
-            return nil
-        }
-    }
-
-    private func handleSignupStatusCode(_ statusCode: Int) -> StatusCode? {
-        switch statusCode {
-        case 400, 409:
-            return .signup(errorCode: statusCode)
-        default:
-            return nil
-        }
-    }
-
-    private func handleRefreshTokenStatusCode(_ statusCode: Int) -> StatusCode? {
-        switch statusCode {
-        case 418, 401, 403:
-            return .refreshToken(errorCode: statusCode)
-        default:
-            return nil
-        }
-    }
-
-    private func handleWithdrawStatusCode(_ statusCode: Int) -> StatusCode? {
-        switch statusCode {
-        case 419, 401, 403:
-            return .withdraw(errorCode: statusCode)
-        default:
-            return nil
-        }
-    }
-    private func handleValidateEmailStatusCode(_ statusCode: Int) -> StatusCode? {
-        switch statusCode {
-        case 400, 409:
-            return .validateEmail(errorCode: statusCode)
-        default:
-            return nil
         }
     }
 }

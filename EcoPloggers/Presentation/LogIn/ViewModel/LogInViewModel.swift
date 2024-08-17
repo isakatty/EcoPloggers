@@ -30,17 +30,6 @@ final class LogInViewModel: ViewModelType {
         let logInFailText = PublishRelay<String>()
         let loginSuccess = PublishRelay<Bool>()
         
-        input.emailString
-            .bind { email in
-                print(email, "VM")
-            }
-            .disposed(by: disposeBag)
-        input.pwString
-            .bind { pw in
-                print(pw, "VM")
-            }
-            .disposed(by: disposeBag)
-        
         Observable.combineLatest(input.emailString, input.pwString)
             .map { email, pw in
                 return email.isValidEmail && pw.count >= 5
@@ -61,18 +50,19 @@ final class LogInViewModel: ViewModelType {
             .subscribe(with: self) { owner, result in
                 switch result {
                 case .success(let response):
-                    /*
-                     - UD 저장 / accessToken 들고 다녀야하나 ?
-                     - UD에 뭐 저장해야하지 ? accessToken, refreshToken
-                     */
-                    loginSuccess.accept(true)
                     print(response)
-//                    UserDefaultsManager.shared.accessToken = response.accessToken
-//                    UserDefaultsManager.shared.refreshToken = response.refreshToken
+                    UserDefaultsManager.shared.accessToken = response.accessToken
+                    UserDefaultsManager.shared.refreshToken = response.refreshToken
+                    loginSuccess.accept(true)
                 case .failure(let error):
                     // 로그인 실패 sign 보내줘야함
+                    switch error {
+                    case .tempStatusCodeError(let statusCode):
+                        print(StatusCode.login(errorCode: statusCode).errorDescription)
+                    default:
+                        print("Login StatusCode Default ")
+                    }
                     loginSuccess.accept(false)
-                    print(error.localizedDescription)
                     logInFailText.accept("로그인 실패! 다시 시도해주세요")
                 }
             }

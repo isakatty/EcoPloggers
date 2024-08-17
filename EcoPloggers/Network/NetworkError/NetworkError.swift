@@ -12,7 +12,7 @@ enum NetworkError: LocalizedError {
     case invalidResponse
     case invalidError
     case invalidData
-    case statusCodeError(StatusCode)
+    case tempStatusCodeError(Int)
 }
 
 enum StatusCode: LocalizedError {
@@ -73,7 +73,7 @@ enum StatusCode: LocalizedError {
                 errorDes = "통신 성공"
             case 400:
                 errorDes = "필수값 누락"
-            case 401:
+            case 409:
                 errorDes = "사용 불가능한 이메일"
             default:
                 errorDes = "unknown Error"

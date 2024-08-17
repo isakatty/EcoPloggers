@@ -44,6 +44,9 @@
 		C90FF0BF2C6FB2DA00590563 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0BE2C6FB2DA00590563 /* String+.swift */; };
 		C90FF0C12C6FBC6A00590563 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0C02C6FBC6A00590563 /* UserDefaultsManager.swift */; };
 		C90FF0C62C6FBF9400590563 /* PloggersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0C52C6FBF9400590563 /* PloggersViewController.swift */; };
+		C90FF0CC2C70766500590563 /* ValidateEmailQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0CB2C70766500590563 /* ValidateEmailQuery.swift */; };
+		C90FF0CE2C70935800590563 /* SignUpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0CD2C70935800590563 /* SignUpResponse.swift */; };
+		C90FF0D32C709DBC00590563 /* PloggerTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0D22C709DBC00590563 /* PloggerTabBarController.swift */; };
 		C99AA8622C6DFC1500C07BC2 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8612C6DFC1500C07BC2 /* Constant.swift */; };
 		C99AA8682C6DFF6900C07BC2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8672C6DFF6900C07BC2 /* BaseViewController.swift */; };
 		C99AA86A2C6DFF9600C07BC2 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8692C6DFF9600C07BC2 /* UIViewController+.swift */; };
@@ -91,6 +94,9 @@
 		C90FF0BE2C6FB2DA00590563 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		C90FF0C02C6FBC6A00590563 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		C90FF0C52C6FBF9400590563 /* PloggersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PloggersViewController.swift; sourceTree = "<group>"; };
+		C90FF0CB2C70766500590563 /* ValidateEmailQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateEmailQuery.swift; sourceTree = "<group>"; };
+		C90FF0CD2C70935800590563 /* SignUpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResponse.swift; sourceTree = "<group>"; };
+		C90FF0D22C709DBC00590563 /* PloggerTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PloggerTabBarController.swift; sourceTree = "<group>"; };
 		C99AA8612C6DFC1500C07BC2 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		C99AA8672C6DFF6900C07BC2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C99AA8692C6DFF9600C07BC2 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
@@ -202,6 +208,7 @@
 			children = (
 				C90FF0BA2C6F4B4000590563 /* ValidateEmailResponse.swift */,
 				C90FF0BC2C6F9A9B00590563 /* LoginResponse.swift */,
+				C90FF0CD2C70935800590563 /* SignUpResponse.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -211,6 +218,7 @@
 			children = (
 				C90FF0842C6E187B00590563 /* LogInQuery.swift */,
 				C90FF0B02C6F27E800590563 /* SignUpQuery.swift */,
+				C90FF0CB2C70766500590563 /* ValidateEmailQuery.swift */,
 			);
 			path = Query;
 			sourceTree = "<group>";
@@ -255,6 +263,30 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		C90FF0CF2C709D0800590563 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C90FF0932C6E30B300590563 /* LogInViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C90FF0D02C709D0F00590563 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C9D68BDA2C6CD154002AF632 /* LogInViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		C90FF0D12C709DB600590563 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				C90FF0D22C709DBC00590563 /* PloggerTabBarController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
 		C99AA8512C6DF56D00C07BC2 /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,6 +299,7 @@
 		C99AA8522C6DF6B500C07BC2 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				C90FF0D12C709DB600590563 /* TabBar */,
 				C90FF0C22C6FBF6A00590563 /* Ploggers */,
 				C99AA8562C6DF87700C07BC2 /* SignUp */,
 				C99AA8552C6DF85200C07BC2 /* LogIn */,
@@ -299,8 +332,8 @@
 		C99AA8552C6DF85200C07BC2 /* LogIn */ = {
 			isa = PBXGroup;
 			children = (
-				C9D68BDA2C6CD154002AF632 /* LogInViewController.swift */,
-				C90FF0932C6E30B300590563 /* LogInViewModel.swift */,
+				C90FF0D02C709D0F00590563 /* ViewController */,
+				C90FF0CF2C709D0800590563 /* ViewModel */,
 			);
 			path = LogIn;
 			sourceTree = "<group>";
@@ -529,9 +562,12 @@
 				C90FF0852C6E187B00590563 /* LogInQuery.swift in Sources */,
 				C90FF0C62C6FBF9400590563 /* PloggersViewController.swift in Sources */,
 				C9D68BDB2C6CD154002AF632 /* LogInViewController.swift in Sources */,
+				C90FF0CC2C70766500590563 /* ValidateEmailQuery.swift in Sources */,
+				C90FF0CE2C70935800590563 /* SignUpResponse.swift in Sources */,
 				C90FF0AF2C6F014C00590563 /* HTTPMethod.swift in Sources */,
 				C99AA86C2C6E001100C07BC2 /* BaseView.swift in Sources */,
 				C90FF0892C6E20B300590563 /* RoundedButton.swift in Sources */,
+				C90FF0D32C709DBC00590563 /* PloggerTabBarController.swift in Sources */,
 				C90FF0B72C6F466E00590563 /* NetworkError.swift in Sources */,
 				C90FF0832C6E186E00590563 /* Reusables.swift in Sources */,
 				C90FF0C12C6FBC6A00590563 /* UserDefaultsManager.swift in Sources */,
@@ -690,6 +726,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T4W7695R5C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EcoPloggers/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -721,6 +758,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = T4W7695R5C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EcoPloggers/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

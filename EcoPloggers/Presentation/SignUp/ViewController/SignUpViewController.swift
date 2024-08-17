@@ -13,7 +13,9 @@ import SnapKit
 
 final class SignUpViewController: BaseViewController {
     private var disposeBag = DisposeBag()
+    
     private let viewModel = SignUpViewModel()
+    
     private let emailView: TextFieldWithLabelView = {
         let view = TextFieldWithLabelView(topLabelText: "이메일주소")
         view.textField.placeholder = "예) id@id.com"
@@ -29,12 +31,10 @@ final class SignUpViewController: BaseViewController {
     }()
     private let validationBtn: RoundedButton = {
         let btn = RoundedButton(title: "이메일 확인")
-        btn.unavailableBtn()
         return btn
     }()
     private let joinBtn: RoundedButton = {
         let btn = RoundedButton(title: "회원가입")
-        btn.availableBtn()
         return btn
     }()
     
@@ -45,10 +45,86 @@ final class SignUpViewController: BaseViewController {
         bind()
     }
     private func bind() {
-        let input = SignUpViewModel.Input()
+        let input = SignUpViewModel.Input(
+            emailText: emailView.textField.rx.text.orEmpty,
+            pwText: pwView.textField.rx.text.orEmpty,
+            nicknameText: nicknameView.textField.rx.text.orEmpty,
+            emailValidateTap: validationBtn.rx.tap,
+            signUpBtnTap: joinBtn.rx.tap
+        )
         let output = viewModel.transform(input: input)
         
+        output.emailValidationBtn
+            .bind(with: self) { owner, isValidated in
+                if isValidated {
+                    owner.validationBtn.availableBtn()
+                } else {
+                    owner.validationBtn.unavailableBtn()
+                }
+            }
+            .disposed(by: disposeBag)
         
+        output.validationBtn
+            .bind(with: self) { owner, isValidated in
+                if isValidated {
+                    owner.joinBtn.availableBtn()
+                } else {
+                    owner.joinBtn.unavailableBtn()
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        output.isvalidatedPW
+            .observe(on: MainScheduler.instance)
+            .bind(with: self) { owner, isValidatedPW in
+                let textColor = isValidatedPW ? Constant.Color.core : Constant.Color.carrotOrange
+                owner.pwView.configureTextColor(color: textColor)
+            }
+            .disposed(by: disposeBag)
+        
+        output.validatedPWText
+            .observe(on: MainScheduler.instance)
+            .bind(with: self) { owner, text in
+                owner.pwView.validationLabel.text = text
+            }
+            .disposed(by: disposeBag)
+        
+        output.validatedEmailText
+            .observe(on: MainScheduler.instance)
+            .bind(with: self) { owner, text in
+                if text != "사용 가능한 이메일입니다." {
+                    owner.emailView.validationLabel.text = text
+                    owner.emailView.configureTextColor(color: Constant.Color.carrotOrange)
+                } else {
+                    owner.emailView.validationLabel.text = text
+                    owner.emailView.configureTextColor(color: Constant.Color.core)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        output.validatedNickText
+            .observe(on: MainScheduler.instance)
+            .bind(with: self) { owner, text in
+                owner.nicknameView.validationLabel.text = text
+            }
+            .disposed(by: disposeBag)
+        output.isValidatedNickname
+            .observe(on: MainScheduler.instance)
+            .bind(with: self) { owner, isValidatedNickname in
+                let textColor = isValidatedNickname ? Constant.Color.core : Constant.Color.carrotOrange
+                owner.nicknameView.configureTextColor(color: textColor)
+            }
+            .disposed(by: disposeBag)
+        output.successSignUp
+            .observe(on: MainScheduler.instance)
+            .bind(with: self) { owner, isSignedUp in
+                if isSignedUp {
+                    print("로그인 페이지로 이동")
+                    let loginVC = LogInViewController()
+                    owner.setRootViewController(UINavigationController(rootViewController: loginVC))
+                }
+            }
+            .disposed(by: disposeBag)
     }
     override func configureHierarchy() {
         [emailView, validationBtn, pwView, nicknameView, joinBtn]

@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+struct ValidateEmailResponse: Decodable {
+    let message: String
+}
