@@ -41,6 +41,7 @@ final class LogInViewModel: ViewModelType {
         let passwordObservable = input.pwString.asObservable()
         
         input.logInEvent
+            .throttle(.seconds(2), scheduler: MainScheduler.instance)
             .withLatestFrom(Observable.combineLatest(emailObservable, passwordObservable))
             .flatMap { email, password in
                 let loginQuery = LogInQuery(email: email, password: password)

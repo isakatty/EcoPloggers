@@ -14,10 +14,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
+        let savedAccess = UserDefaultsManager.shared.accessToken
+        
         window = UIWindow(windowScene: scene)
-        let vc = LogInViewController()
-        window?.rootViewController = UINavigationController(rootViewController: vc)
-        window?.makeKeyAndVisible()
+        if savedAccess == "" {
+            print("로그인")
+            // 로그인 - 빈값 accessToken 없음.
+            let vc = LogInViewController()
+            window?.rootViewController = UINavigationController(rootViewController: vc)
+            window?.makeKeyAndVisible()
+        } else {
+            print("탭바")
+            // TabBar - 빈값 아니면 이미 저장된 accessToken 있다는 것.
+            let vc = PloggerTabBarController()
+            window?.rootViewController = vc
+            window?.makeKeyAndVisible()
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

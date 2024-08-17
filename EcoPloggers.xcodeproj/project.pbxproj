@@ -47,6 +47,8 @@
 		C90FF0CC2C70766500590563 /* ValidateEmailQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0CB2C70766500590563 /* ValidateEmailQuery.swift */; };
 		C90FF0CE2C70935800590563 /* SignUpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0CD2C70935800590563 /* SignUpResponse.swift */; };
 		C90FF0D32C709DBC00590563 /* PloggerTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0D22C709DBC00590563 /* PloggerTabBarController.swift */; };
+		C90FF0D62C70A04000590563 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0D52C70A04000590563 /* SearchViewController.swift */; };
+		C90FF0D92C70A06600590563 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0D82C70A06600590563 /* MyPageViewController.swift */; };
 		C99AA8622C6DFC1500C07BC2 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8612C6DFC1500C07BC2 /* Constant.swift */; };
 		C99AA8682C6DFF6900C07BC2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8672C6DFF6900C07BC2 /* BaseViewController.swift */; };
 		C99AA86A2C6DFF9600C07BC2 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8692C6DFF9600C07BC2 /* UIViewController+.swift */; };
@@ -97,6 +99,8 @@
 		C90FF0CB2C70766500590563 /* ValidateEmailQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateEmailQuery.swift; sourceTree = "<group>"; };
 		C90FF0CD2C70935800590563 /* SignUpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResponse.swift; sourceTree = "<group>"; };
 		C90FF0D22C709DBC00590563 /* PloggerTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PloggerTabBarController.swift; sourceTree = "<group>"; };
+		C90FF0D52C70A04000590563 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		C90FF0D82C70A06600590563 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		C99AA8612C6DFC1500C07BC2 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		C99AA8672C6DFF6900C07BC2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C99AA8692C6DFF9600C07BC2 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
@@ -287,6 +291,22 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
+		C90FF0D42C70A03700590563 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				C90FF0D52C70A04000590563 /* SearchViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		C90FF0D72C70A05B00590563 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				C90FF0D82C70A06600590563 /* MyPageViewController.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
 		C99AA8512C6DF56D00C07BC2 /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -301,6 +321,8 @@
 			children = (
 				C90FF0D12C709DB600590563 /* TabBar */,
 				C90FF0C22C6FBF6A00590563 /* Ploggers */,
+				C90FF0D42C70A03700590563 /* Search */,
+				C90FF0D72C70A05B00590563 /* MyPage */,
 				C99AA8562C6DF87700C07BC2 /* SignUp */,
 				C99AA8552C6DF85200C07BC2 /* LogIn */,
 			);
@@ -563,6 +585,7 @@
 				C90FF0C62C6FBF9400590563 /* PloggersViewController.swift in Sources */,
 				C9D68BDB2C6CD154002AF632 /* LogInViewController.swift in Sources */,
 				C90FF0CC2C70766500590563 /* ValidateEmailQuery.swift in Sources */,
+				C90FF0D62C70A04000590563 /* SearchViewController.swift in Sources */,
 				C90FF0CE2C70935800590563 /* SignUpResponse.swift in Sources */,
 				C90FF0AF2C6F014C00590563 /* HTTPMethod.swift in Sources */,
 				C99AA86C2C6E001100C07BC2 /* BaseView.swift in Sources */,
@@ -572,6 +595,7 @@
 				C90FF0832C6E186E00590563 /* Reusables.swift in Sources */,
 				C90FF0C12C6FBC6A00590563 /* UserDefaultsManager.swift in Sources */,
 				C90FF09B2C6E311E00590563 /* ViewModelType.swift in Sources */,
+				C90FF0D92C70A06600590563 /* MyPageViewController.swift in Sources */,
 				C90FF07F2C6E185A00590563 /* UserRequest.swift in Sources */,
 				C9D68BD72C6CD154002AF632 /* AppDelegate.swift in Sources */,
 				C90FF0BF2C6FB2DA00590563 /* String+.swift in Sources */,
