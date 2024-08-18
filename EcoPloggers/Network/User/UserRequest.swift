@@ -75,8 +75,11 @@ extension UserRequest: EndpointType {
         case .signup, .login, .validateEmail, .withdraw:
             return combinedHeaders
         case .refreshToken(let token):
-            let refresh = [Constant.NetworkHeader.refresh.rawValue: token]
-            return combinedHeaders.merging(refresh) { value1, _ in
+            let refresh = [
+                Constant.NetworkHeader.refresh.rawValue: token,
+                Constant.NetworkHeader.authorization.rawValue: UserDefaultsManager.shared.accessToken
+            ]
+            return baseHeader.merging(refresh) { value1, _ in
                 value1
             }
         }

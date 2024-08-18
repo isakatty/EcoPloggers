@@ -15,7 +15,7 @@ enum NetworkError: LocalizedError {
     case tempStatusCodeError(Int)
 }
 
-enum StatusCode: LocalizedError {
+enum UserStatusCode: LocalizedError {
     case common(errorCode: Int)
     case login(errorCode: Int)
     case signup(errorCode: Int)
@@ -43,8 +43,6 @@ enum StatusCode: LocalizedError {
         case .login(let errorCode):
             var errorDes: String = ""
             switch errorCode {
-            case 200:
-                errorDes = "통신 성공"
             case 400:
                 errorDes = "필수값 누락"
             case 401:
@@ -105,6 +103,29 @@ enum StatusCode: LocalizedError {
                 errorDes = "Forbidden"
             case 419:
                 errorDes = "AccessToken 만료"
+            default:
+                errorDes = "unknown Error"
+            }
+            return errorDes
+        }
+    }
+}
+enum PostStatusCode: LocalizedError {
+    case viewPost(errorCode: Int)
+    
+    var errorDescription: String? {
+        switch self {
+        case .viewPost(let errorCode):
+            var errorDes: String = ""
+            switch errorCode {
+            case 400:
+                errorDes = "잘못된 요청"
+            case 401:
+                errorDes = "인증할 수 없는 accessToken"
+            case 403:
+                errorDes = "Forbidden"
+            case 419:
+                errorDes = "토큰 만료"
             default:
                 errorDes = "unknown Error"
             }

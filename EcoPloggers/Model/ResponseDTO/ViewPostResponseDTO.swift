@@ -26,7 +26,7 @@ extension ViewPostResponseDTO {
                     recruits: $0.content3,
                     price: $0.content4,
                     due_date: $0.content5,
-                    posted_date: $0.created_At,
+                    posted_date: $0.createdAt,
                     creator: $0.creator,
                     files: $0.files,
                     joins: $0.likes,
@@ -43,26 +43,28 @@ struct ViewPostDetailResponseDTO: Decodable {
     let product_id: String?
     let title: String
     let content: String
-    let content1: String
-    let content2: String
-    let content3: String
-    let content4: String
-    let content5: String
-    let created_At: Date
+    let content1: String?
+    let content2: String?
+    let content3: String?
+    let content4: String?
+    let content5: String?
+    let createdAt: String
     let creator: Creator
     let files: [String]
     let likes: [String]
     let likes2: [String]
+    let buyers: [String]
+    let hashTags: [String]
     let comments: [Comment]
 }
 struct Creator: Decodable {
     let user_id: String
-    let nickname: String
-    let profileImage: String
+    let nick: String
+    let profileImage: String?
 }
 struct Comment: Decodable {
     let comment_id: String
     let content: String
-    let createdAt: Date
+    let createdAt: String
     let creator: Creator
 }

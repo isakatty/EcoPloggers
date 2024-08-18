@@ -16,12 +16,12 @@ struct ViewPostDetailResponse: Decodable {
     let product_id: String?
     let title: String
     let content: String
-    let required_time: String
-    let path: String
-    let recruits: String
-    let price: String
-    let due_date: String
-    let posted_date: Date
+    let required_time: String?
+    let path: String?
+    let recruits: String?
+    let price: String?
+    let due_date: String?
+    let posted_date: String
     let creator: Creator
     let files: [String]
     let joins: [String]

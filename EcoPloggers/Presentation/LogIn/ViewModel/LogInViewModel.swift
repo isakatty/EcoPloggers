@@ -59,7 +59,7 @@ final class LogInViewModel: ViewModelType {
                     // 로그인 실패 sign 보내줘야함
                     switch error {
                     case .tempStatusCodeError(let statusCode):
-                        print(StatusCode.login(errorCode: statusCode).errorDescription)
+                        print(UserStatusCode.login(errorCode: statusCode).errorDescription)
                     default:
                         print("Login StatusCode Default ")
                     }
