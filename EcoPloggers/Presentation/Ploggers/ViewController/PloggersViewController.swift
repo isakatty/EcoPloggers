@@ -20,7 +20,6 @@ final class PloggersViewController: BaseViewController {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: regionLayout())
         cv.register(RegionCollectionViewCell.self, forCellWithReuseIdentifier: RegionCollectionViewCell.identifier)
         cv.backgroundColor = Constant.Color.mainBG
-        
         return cv
     }()
     private let vScrollView = UIScrollView()
@@ -32,16 +31,11 @@ final class PloggersViewController: BaseViewController {
         view.backgroundColor = Constant.Color.white
         return view
     }()
-    private let imgView: UIImageView = {
-        let img = UIImageView()
-        img.image = UIImage(systemName: "person.fill")
-        return img
-    }()
-    private let textLabels: UILabel = {
-        let label = UILabel()
-        label.text = "하이루"
-        label.backgroundColor = Constant.Color.white
-        return label
+    private lazy var bannerCollectionView: UICollectionView = {
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: bannerLayout())
+        cv.register(BannerCollectionViewCell.self, forCellWithReuseIdentifier: BannerCollectionViewCell.identifier)
+        cv.layer.cornerRadius = 25
+        return cv
     }()
     private let rizingContents = ContentsView()
     private let regionContents = ContentsView()
@@ -64,15 +58,25 @@ final class PloggersViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-        Observable.zip(regionCollectionView.rx.itemSelected, regionCollectionView.rx.modelSelected(Region.self))
-            .debug("Selected item")
-            .subscribe(onNext: { indexPath, region in
-                print("Item selected at: \(indexPath), region: \(region.rawValue)")
-            })
+        let bannerImgs = BehaviorRelay<[UIImage?]>(value: [UIImage(systemName: "star.fill"), UIImage(systemName: "star.fill"), UIImage(systemName: "star.fill"), UIImage(systemName: "star.fill"), UIImage(systemName: "star.fill")])
+        
+        bannerImgs
+            .observe(on: MainScheduler.instance)
+            .bind(to: bannerCollectionView.rx.items(cellIdentifier: BannerCollectionViewCell.identifier, cellType: BannerCollectionViewCell.self)) { row, element, cell in
+                cell.configureUI(count: String(row + 1), img: element)
+            }
+            .disposed(by: disposeBag)
+        
+        bannerCollectionView.rx.itemSelected
+            .debug("네?")
+            .bind(with: self) { owner, indexPath in
+                print(indexPath, "여기도 안되나 설마?")
+            }
             .disposed(by: disposeBag)
     }
+    
     override func configureHierarchy() {
-        [textLabels, rizingContents, regionContents]
+        [bannerCollectionView, rizingContents, regionContents]
             .forEach { containerView.addSubview($0) }
         
         vScrollView.addSubview(containerView)
@@ -101,12 +105,14 @@ final class PloggersViewController: BaseViewController {
             make.width.equalTo(vScrollView.snp.width)
             make.verticalEdges.equalTo(vScrollView)
         }
-        textLabels.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalTo(containerView)
-            make.height.equalTo(300)
+        bannerCollectionView.snp.makeConstraints { make in
+            make.centerX.equalTo(containerView)
+            make.top.equalTo(containerView).offset(20)
+            make.horizontalEdges.equalToSuperview().inset(20)
+            make.height.equalTo(170)
         }
         rizingContents.snp.makeConstraints { make in
-            make.top.equalTo(textLabels.snp.bottom).offset(20)
+            make.top.equalTo(bannerCollectionView.snp.bottom).offset(20)
             make.horizontalEdges.equalTo(safeArea)
         }
         regionContents.snp.makeConstraints { make in
@@ -133,6 +139,22 @@ extension PloggersViewController {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+        return UICollectionViewCompositionalLayout(section: section)
+    }
+    private func bannerLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .paging
         return UICollectionViewCompositionalLayout(section: section)
     }
 }

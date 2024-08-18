@@ -56,6 +56,7 @@
 		C90FF0E52C70F02700590563 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0E42C70F02700590563 /* TestViewController.swift */; };
 		C90FF0E72C70F2E500590563 /* ContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0E62C70F2E500590563 /* ContentsView.swift */; };
 		C90FF0E92C70F31900590563 /* ImgWithTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0E82C70F31900590563 /* ImgWithTitleView.swift */; };
+		C9118ECB2C71B1DB00CF22ED /* BannerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9118ECA2C71B1DB00CF22ED /* BannerCollectionViewCell.swift */; };
 		C99AA8622C6DFC1500C07BC2 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8612C6DFC1500C07BC2 /* Constant.swift */; };
 		C99AA8682C6DFF6900C07BC2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8672C6DFF6900C07BC2 /* BaseViewController.swift */; };
 		C99AA86A2C6DFF9600C07BC2 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8692C6DFF9600C07BC2 /* UIViewController+.swift */; };
@@ -115,6 +116,7 @@
 		C90FF0E42C70F02700590563 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		C90FF0E62C70F2E500590563 /* ContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsView.swift; sourceTree = "<group>"; };
 		C90FF0E82C70F31900590563 /* ImgWithTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgWithTitleView.swift; sourceTree = "<group>"; };
+		C9118ECA2C71B1DB00CF22ED /* BannerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCollectionViewCell.swift; sourceTree = "<group>"; };
 		C99AA8612C6DFC1500C07BC2 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		C99AA8672C6DFF6900C07BC2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C99AA8692C6DFF9600C07BC2 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 				C90FF0DC2C70C60800590563 /* RegionCollectionViewCell.swift */,
 				C90FF0E62C70F2E500590563 /* ContentsView.swift */,
 				C90FF0E82C70F31900590563 /* ImgWithTitleView.swift */,
+				C9118ECA2C71B1DB00CF22ED /* BannerCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -611,6 +614,7 @@
 				C90FF0DD2C70C60800590563 /* RegionCollectionViewCell.swift in Sources */,
 				C90FF0CC2C70766500590563 /* ValidateEmailQuery.swift in Sources */,
 				C90FF0D62C70A04000590563 /* SearchViewController.swift in Sources */,
+				C9118ECB2C71B1DB00CF22ED /* BannerCollectionViewCell.swift in Sources */,
 				C90FF0CE2C70935800590563 /* SignUpResponse.swift in Sources */,
 				C90FF0AF2C6F014C00590563 /* HTTPMethod.swift in Sources */,
 				C99AA86C2C6E001100C07BC2 /* BaseView.swift in Sources */,
