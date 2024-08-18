@@ -17,7 +17,7 @@
 		C90EAE672C6E13E300F5F0AE /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = C90EAE5E2C6E13E300F5F0AE /* Pretendard-Light.otf */; };
 		C90EAE682C6E13E300F5F0AE /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C90EAE5F2C6E13E300F5F0AE /* Pretendard-Regular.otf */; };
 		C90FF07F2C6E185A00590563 /* UserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF07E2C6E185A00590563 /* UserRequest.swift */; };
-		C90FF0812C6E186100590563 /* PostEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0802C6E186100590563 /* PostEndpoint.swift */; };
+		C90FF0812C6E186100590563 /* PostRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0802C6E186100590563 /* PostRequest.swift */; };
 		C90FF0832C6E186E00590563 /* Reusables.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0822C6E186E00590563 /* Reusables.swift */; };
 		C90FF0852C6E187B00590563 /* LogInQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0842C6E187B00590563 /* LogInQuery.swift */; };
 		C90FF0892C6E20B300590563 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0882C6E20B300590563 /* RoundedButton.swift */; };
@@ -62,6 +62,11 @@
 		C9118ED22C71DC7200CF22ED /* ViewPostResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9118ED12C71DC7200CF22ED /* ViewPostResponseDTO.swift */; };
 		C9118ED42C71DFAA00CF22ED /* ViewPostQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9118ED32C71DFAA00CF22ED /* ViewPostQuery.swift */; };
 		C9118ED72C71E11000CF22ED /* ViewPostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9118ED62C71E11000CF22ED /* ViewPostResponse.swift */; };
+		C9118ED92C71E3BF00CF22ED /* PloggingClubCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9118ED82C71E3BF00CF22ED /* PloggingClubCollectionViewCell.swift */; };
+		C9118EDB2C71E42D00CF22ED /* PloggingClubHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9118EDA2C71E42D00CF22ED /* PloggingClubHeaderView.swift */; };
+		C9118EDD2C71E72900CF22ED /* TestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9118EDC2C71E72900CF22ED /* TestViewModel.swift */; };
+		C9118EE12C7204F800CF22ED /* RefreshResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9118EE02C7204F800CF22ED /* RefreshResponse.swift */; };
+		C9118EE32C72126A00CF22ED /* mockPlogging.json in Resources */ = {isa = PBXBuildFile; fileRef = C9118EE22C72126A00CF22ED /* mockPlogging.json */; };
 		C99AA8622C6DFC1500C07BC2 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8612C6DFC1500C07BC2 /* Constant.swift */; };
 		C99AA8682C6DFF6900C07BC2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8672C6DFF6900C07BC2 /* BaseViewController.swift */; };
 		C99AA86A2C6DFF9600C07BC2 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8692C6DFF9600C07BC2 /* UIViewController+.swift */; };
@@ -84,7 +89,7 @@
 		C90EAE5E2C6E13E300F5F0AE /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
 		C90EAE5F2C6E13E300F5F0AE /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		C90FF07E2C6E185A00590563 /* UserRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequest.swift; sourceTree = "<group>"; };
-		C90FF0802C6E186100590563 /* PostEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEndpoint.swift; sourceTree = "<group>"; };
+		C90FF0802C6E186100590563 /* PostRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRequest.swift; sourceTree = "<group>"; };
 		C90FF0822C6E186E00590563 /* Reusables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusables.swift; sourceTree = "<group>"; };
 		C90FF0842C6E187B00590563 /* LogInQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInQuery.swift; sourceTree = "<group>"; };
 		C90FF0882C6E20B300590563 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
@@ -125,6 +130,11 @@
 		C9118ED12C71DC7200CF22ED /* ViewPostResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPostResponseDTO.swift; sourceTree = "<group>"; };
 		C9118ED32C71DFAA00CF22ED /* ViewPostQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPostQuery.swift; sourceTree = "<group>"; };
 		C9118ED62C71E11000CF22ED /* ViewPostResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPostResponse.swift; sourceTree = "<group>"; };
+		C9118ED82C71E3BF00CF22ED /* PloggingClubCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PloggingClubCollectionViewCell.swift; sourceTree = "<group>"; };
+		C9118EDA2C71E42D00CF22ED /* PloggingClubHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PloggingClubHeaderView.swift; sourceTree = "<group>"; };
+		C9118EDC2C71E72900CF22ED /* TestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewModel.swift; sourceTree = "<group>"; };
+		C9118EE02C7204F800CF22ED /* RefreshResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshResponse.swift; sourceTree = "<group>"; };
+		C9118EE22C72126A00CF22ED /* mockPlogging.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mockPlogging.json; sourceTree = "<group>"; };
 		C99AA8612C6DFC1500C07BC2 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		C99AA8672C6DFF6900C07BC2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C99AA8692C6DFF9600C07BC2 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
@@ -240,6 +250,7 @@
 				C90FF0BC2C6F9A9B00590563 /* LoginResponse.swift */,
 				C90FF0CD2C70935800590563 /* SignUpResponse.swift */,
 				C9118ED12C71DC7200CF22ED /* ViewPostResponseDTO.swift */,
+				C9118EE02C7204F800CF22ED /* RefreshResponse.swift */,
 			);
 			path = ResponseDTO;
 			sourceTree = "<group>";
@@ -277,6 +288,7 @@
 			isa = PBXGroup;
 			children = (
 				C90FF0E02C70CAC400590563 /* PloggersViewModel.swift */,
+				C9118EDC2C71E72900CF22ED /* TestViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -298,6 +310,8 @@
 				C90FF0E62C70F2E500590563 /* ContentsView.swift */,
 				C90FF0E82C70F31900590563 /* ImgWithTitleView.swift */,
 				C9118ECA2C71B1DB00CF22ED /* BannerCollectionViewCell.swift */,
+				C9118ED82C71E3BF00CF22ED /* PloggingClubCollectionViewCell.swift */,
+				C9118EDA2C71E42D00CF22ED /* PloggingClubHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -384,6 +398,7 @@
 		C99AA8542C6DF71900C07BC2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C9118EE22C72126A00CF22ED /* mockPlogging.json */,
 				C90EAE542C6E131F00F5F0AE /* Font */,
 				C9D68BDF2C6CD155002AF632 /* Assets.xcassets */,
 				C9D68BE12C6CD155002AF632 /* LaunchScreen.storyboard */,
@@ -435,7 +450,7 @@
 		C99AA85D2C6DFBE200C07BC2 /* Post */ = {
 			isa = PBXGroup;
 			children = (
-				C90FF0802C6E186100590563 /* PostEndpoint.swift */,
+				C90FF0802C6E186100590563 /* PostRequest.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -594,6 +609,7 @@
 				C9D68BE02C6CD155002AF632 /* Assets.xcassets in Resources */,
 				C9D68BE32C6CD155002AF632 /* Base in Resources */,
 				C90FF0A82C6E551C00590563 /* Localizable.xcstrings in Resources */,
+				C9118EE32C72126A00CF22ED /* mockPlogging.json in Resources */,
 				C90EAE642C6E13E300F5F0AE /* Pretendard-Bold.otf in Resources */,
 				C90EAE672C6E13E300F5F0AE /* Pretendard-Light.otf in Resources */,
 				C90EAE662C6E13E300F5F0AE /* Pretendard-Thin.otf in Resources */,
@@ -613,13 +629,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9118EE12C7204F800CF22ED /* RefreshResponse.swift in Sources */,
 				C90FF08E2C6E25DA00590563 /* UnderlineTextField.swift in Sources */,
 				C90FF0A62C6E450F00590563 /* PaddingButton.swift in Sources */,
 				C90FF0A42C6E3CBE00590563 /* TextFieldWithLabelView.swift in Sources */,
 				C90FF0942C6E30B300590563 /* LogInViewModel.swift in Sources */,
 				C90FF0902C6E280C00590563 /* PlainLabel.swift in Sources */,
 				C90FF0AD2C6F012400590563 /* EndpointType.swift in Sources */,
-				C90FF0812C6E186100590563 /* PostEndpoint.swift in Sources */,
+				C90FF0812C6E186100590563 /* PostRequest.swift in Sources */,
 				C90FF0B12C6F27E800590563 /* SignUpQuery.swift in Sources */,
 				C90FF09F2C6E3BD400590563 /* SignUpViewModel.swift in Sources */,
 				C99AA8682C6DFF6900C07BC2 /* BaseViewController.swift in Sources */,
@@ -631,6 +648,8 @@
 				C99AA8622C6DFC1500C07BC2 /* Constant.swift in Sources */,
 				C90FF0B32C6F394000590563 /* NetworkManager.swift in Sources */,
 				C99AA86A2C6DFF9600C07BC2 /* UIViewController+.swift in Sources */,
+				C9118ED92C71E3BF00CF22ED /* PloggingClubCollectionViewCell.swift in Sources */,
+				C9118EDD2C71E72900CF22ED /* TestViewModel.swift in Sources */,
 				C90FF0E72C70F2E500590563 /* ContentsView.swift in Sources */,
 				C90FF0852C6E187B00590563 /* LogInQuery.swift in Sources */,
 				C90FF0C62C6FBF9400590563 /* PloggersViewController.swift in Sources */,
@@ -652,6 +671,7 @@
 				C90FF0E12C70CAC400590563 /* PloggersViewModel.swift in Sources */,
 				C90FF0DB2C70B9BD00590563 /* SearchView.swift in Sources */,
 				C90FF0C12C6FBC6A00590563 /* UserDefaultsManager.swift in Sources */,
+				C9118EDB2C71E42D00CF22ED /* PloggingClubHeaderView.swift in Sources */,
 				C9118ED72C71E11000CF22ED /* ViewPostResponse.swift in Sources */,
 				C90FF09B2C6E311E00590563 /* ViewModelType.swift in Sources */,
 				C90FF0D92C70A06600590563 /* MyPageViewController.swift in Sources */,

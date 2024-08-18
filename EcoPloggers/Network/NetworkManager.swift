@@ -31,6 +31,11 @@ final class NetworkManager {
 //            print("Request Method: \(urlRequest.httpMethod ?? "No Method")")
 //            print("Request Headers: \(urlRequest.allHTTPHeaderFields ?? [:])")
 //            print("Request Body: \(String(data: urlRequest.httpBody ?? Data(), encoding: .utf8) ?? "No Body")")
+//            if #available(iOS 16.0, *) {
+//                print("Request query: \(urlRequest.url?.query(percentEncoded: true))")
+//            } else {
+//                // Fallback on earlier versions
+//            }
             
             session.dataTask(with: urlRequest) { data, response, error in
                 if let _ = error {
@@ -46,8 +51,11 @@ final class NetworkManager {
                     return
                 }
                 
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
+                
                 if let data = data,
-                   let appData = try? JSONDecoder().decode(T.self, from: data) {
+                   let appData = try? decoder.decode(T.self, from: data) {
                     observer(.success(.success(appData)))
                 } else {
                     observer(.success(.failure(.invalidData)))
