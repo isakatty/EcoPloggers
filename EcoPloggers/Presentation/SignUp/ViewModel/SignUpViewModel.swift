@@ -79,7 +79,7 @@ final class SignUpViewModel: ViewModelType {
                 case .failure(let error):
                     switch error {
                     case .tempStatusCodeError(let statusCode):
-                        guard let errorSign = StatusCode.validateEmail(errorCode: statusCode).errorDescription else {
+                        guard let errorSign = UserStatusCode.validateEmail(errorCode: statusCode).errorDescription else {
                             return
                         }
                         validatedEmailText.accept(errorSign)
@@ -161,7 +161,7 @@ final class SignUpViewModel: ViewModelType {
                 case .failure(let error):
                     switch error {
                     case .tempStatusCodeError(let statusCode):
-                        guard let errorSign = StatusCode.signup(errorCode: statusCode).errorDescription else {
+                        guard let errorSign = UserStatusCode.signup(errorCode: statusCode).errorDescription else {
                             return
                         }
                         print(errorSign, statusCode, "🟢")

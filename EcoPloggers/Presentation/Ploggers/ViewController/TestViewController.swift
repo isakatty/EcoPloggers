@@ -28,11 +28,11 @@ extension MainDataSection: SectionModelType {
 
 final class TestViewController: BaseViewController {
     var disposeBag = DisposeBag()
-    
+    private let viewModel = TestViewModel()
     private lazy var ploggingCollectionView: UICollectionView = {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: configureCVLayout())
         cv.register(BannerCollectionViewCell.self, forCellWithReuseIdentifier: BannerCollectionViewCell.identifier)
-//        cv.register(BannerCollectionViewCell.self, forCellWithReuseIdentifier: BannerCollectionViewCell.identifier)
+        cv.register(PloggingClubCollectionViewCell.self, forCellWithReuseIdentifier: PloggingClubCollectionViewCell.identifier)
         return cv
     }()
     
@@ -47,11 +47,14 @@ final class TestViewController: BaseViewController {
     }
     
     override func configureHierarchy() {
-        
+        view.addSubview(ploggingCollectionView)
     }
     override func configureLayout() {
         super.configureLayout()
         
+        ploggingCollectionView.snp.makeConstraints { make in
+            make.edges.equalTo(safeArea)
+        }
     }
 }
 
@@ -83,26 +86,26 @@ extension TestViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.5),
+            widthDimension: .fractionalWidth(1.0),
             heightDimension: .fractionalHeight(0.2)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.boundarySupplementaryItems = [createSectionHeader()]
+//        section.boundarySupplementaryItems = [createSectionHeader()]
         return section
     }
 
     private func createSecondSectionLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
+            widthDimension: .fractionalWidth(0.5),
             heightDimension: .fractionalHeight(1.0)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(0.1)
+            heightDimension: .fractionalHeight(0.4)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
@@ -113,14 +116,14 @@ extension TestViewController {
 
     private func createThirdSectionLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
+            widthDimension: .fractionalWidth(0.5),
             heightDimension: .fractionalHeight(1.0)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.25),
-            heightDimension: .fractionalHeight(0.3)
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(0.4)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
@@ -143,7 +146,7 @@ extension TestViewController {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.boundarySupplementaryItems = [createSectionHeader()]
+//        section.boundarySupplementaryItems = [createSectionHeader()]
         return section
     }
 

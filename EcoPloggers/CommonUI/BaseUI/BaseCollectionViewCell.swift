@@ -19,6 +19,7 @@ class BaseCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     func configureHierarchy() { }
     func configureLayout() {
         contentView.backgroundColor = Constant.Color.mainBG
