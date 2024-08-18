@@ -39,6 +39,8 @@ final class BannerCollectionViewCell: BaseCollectionViewCell {
     }
     override func configureLayout() {
         super.configureLayout()
+        contentView.layer.cornerRadius = 25
+        contentView.backgroundColor = Constant.Color.core
         
         bannerImg.snp.makeConstraints { make in
             make.edges.equalToSuperview()

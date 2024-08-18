@@ -65,4 +65,26 @@ final class NetworkManager {
             return Disposables.create()
         }
     }
+    
+    func callMockData() -> Single<Result<ViewPostResponseDTO, NetworkError>> {
+        return Single.create { observer in
+            guard let path = Bundle.main.path(forResource: "mockPlogging", ofType: "json"),
+                  let jsonString = try? String(contentsOfFile: path) else {
+                observer(.success(.failure(NetworkError.invalidURL)))
+                return Disposables.create()
+            }
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+            let data = jsonString.data(using: .utf8)
+            
+            if let data = data,
+               let converted = try? decoder.decode(ViewPostResponseDTO.self, from: data) {
+                observer(.success(.success(converted)))
+            } else {
+                observer(.success(.failure(NetworkError.invalidData)))
+            }
+            
+            return Disposables.create()
+        }
+    }
 }

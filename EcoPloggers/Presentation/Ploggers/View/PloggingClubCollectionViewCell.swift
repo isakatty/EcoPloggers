@@ -34,7 +34,6 @@ final class PloggingClubCollectionViewCell: BaseCollectionViewCell {
     }
     override func configureLayout() {
         super.configureLayout()
-        contentTitleLabel.numberOfLines = 2
         creatorLabel.text = "영등포 불주먹"
         contentTitleLabel.text = "도림천을 기준으로 플로깅을 해보아요"
         locationLabel.text = "영등포구"
@@ -79,5 +78,8 @@ final class PloggingClubCollectionViewCell: BaseCollectionViewCell {
         super.prepareForReuse()
         
         disposeBag = DisposeBag()
+        
+        [creatorLabel, contentTitleLabel, locationLabel, openLabel]
+            .forEach { $0.text = nil }
     }
 }

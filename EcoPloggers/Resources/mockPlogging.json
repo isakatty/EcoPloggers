@@ -39,28 +39,6 @@
         "comments":[{
             "comment_id":"66c0d13c095d10898ea425f5","content":"오 댓글은 이렇게 쓰는구나.","createdAt":"2024-08-17T16:35:08.199Z","creator":{"user_id":"66c021c6dd20ad683c7ebdfe","nick":"영등포 불주먹"}
         }]
-    },{
-        "post_id":"66c0c8f5095d10898ea425ae",
-        "product_id":"ecoPloggers_rising",
-        "title":"세곡천 플로깅 할 사람! 같이 해요!!",
-        "content":"이러쿵 저러쿵 알콩달콩 \n 저 지금 무슨 노래 듣고 있을까요? 처름 들어보는 발라드가 갑자기 나오고 있어요; 밴드 음악 틀어주세요 스포티파이 .. ",
-        "content1":"이러쿵쿵",
-        "createdAt":"2024-08-17T15:59:49.480Z",
-        "creator":{
-            "user_id":"66c05f62a1af54e0ff967b78","nick":"룸토리들"
-        },
-        "files":[],
-        "likes":[],
-        "likes2":[],
-        "buyers":[],
-        "hashTags":[],
-        "comments":[{
-            "comment_id":"66c0d12824a42e898fb1ad77","content":"오 댓글은 이렇게 쓰는구나.","createdAt":"2024-08-17T16:34:48.750Z",
-            "creator":{"user_id":"66c021c6dd20ad683c7ebdfe","nick":"영등포 불주먹"}
-        },
-            {"comment_id":"66c0d11b095d10898ea425ea","content":"아는 천이라곤 도림천, 안양천, 양재천, 세곡천 뿐. 물놀이 하러 가고싶다. 이런 글을 써도 되는걸까. 지금 사실 컬렉션뷰 cell tap 안되는 문제 해결 못해서 더미 데이터 쌓는중.","createdAt":"2024-08-17T16:34:35.974Z",
-            "creator":{"user_id":"66c021c6dd20ad683c7ebdfe","nick":"영등포 불주먹"}}
-        ]
     }
     ],
     "next_cursor":"0"

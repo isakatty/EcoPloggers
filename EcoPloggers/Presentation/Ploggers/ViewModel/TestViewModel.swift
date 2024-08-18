@@ -33,6 +33,20 @@ final class TestViewModel: ViewModelType {
 //            }
 //        }.resume()
         
+        /*
+         함수로 나눠야함 ~!
+         - post 조회
+            -> 성공
+            -> 실패
+                -> status code 확인
+                    - 토큰 갱신
+                        - 성공
+                            - 다시 post 조회
+                        - 실패
+                            - status Code
+                                - 419? 로그인 화면으로 변경
+
+         */
         
 //        NetworkManager.shared.callUserRequest(endpoint: postRequest, type: ViewPostResponseDTO.self)
 //            .asObservable()
@@ -81,11 +95,35 @@ final class TestViewModel: ViewModelType {
         
     }
     struct Output {
-        
+        let sectionData: BehaviorRelay<[MainDataSection]>
     }
     
     func transform(input: Input) -> Output {
+        let sectionData: BehaviorRelay<[MainDataSection]> = .init(value: [])
         
-        return Output()
+        /* 목데이터임 */
+        NetworkManager.shared.callMockData()
+            .asObservable()
+            .subscribe { result in
+                switch result {
+                case .success(let response):
+                    
+                    let first = MainDataSection(header: "Banner", items: response.data)
+                    let second = MainDataSection(header: "지금 뜨는 플로깅 모임", items: response.data)
+                    let third = MainDataSection(header: "플로깅 모임", items: response.data)
+                    let sections = [first, second, third]
+                    sectionData.accept(sections)
+                    
+                case .failure(let error):
+                    print(error.localizedDescription, "?")
+                }
+            } onError: { error in
+                print(error, "?")
+            }
+            .disposed(by: disposeBag)
+        
+        return Output(
+            sectionData: sectionData
+        )
     }
 }
