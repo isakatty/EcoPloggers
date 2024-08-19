@@ -92,3 +92,4 @@ iOSInjectionProject/
 **/.DS_Store
 *.xcconfig
 PrivateKey.swift
+GoogleService-Info.plist
