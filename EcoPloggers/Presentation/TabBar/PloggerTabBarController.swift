@@ -34,7 +34,7 @@ final class PloggerTabBarController: UITabBarController {
     
     private func configureTabbar() {
         let vcs = [
-            TestViewController(),
+            PloggersViewController(),
             SearchViewController(),
             MyPageViewController()
         ]

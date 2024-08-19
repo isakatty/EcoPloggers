@@ -14,13 +14,13 @@ import SnapKit
 
 struct MainDataSection {
     var header: String
-    var items: [ViewPostDetailResponseDTO]
+    var items: [ViewPostDetailResponse]
 }
 
 extension MainDataSection: SectionModelType {
-    typealias Item = ViewPostDetailResponseDTO
+    typealias Item = ViewPostDetailResponse
     
-    init(original: MainDataSection, items: [ViewPostDetailResponseDTO]) {
+    init(original: MainDataSection, items: [ViewPostDetailResponse]) {
         self = original
         self.items = items
     }
@@ -34,6 +34,8 @@ final class TestViewController: BaseViewController {
         cv.register(BannerCollectionViewCell.self, forCellWithReuseIdentifier: BannerCollectionViewCell.identifier)
         cv.register(PloggingClubCollectionViewCell.self, forCellWithReuseIdentifier: PloggingClubCollectionViewCell.identifier)
         cv.register(PloggingClubHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PloggingClubHeaderView.identifier)
+        cv.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        cv.layer.cornerRadius = 40
         return cv
     }()
     
@@ -55,15 +57,14 @@ final class TestViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         ploggingCollectionView.rx.itemSelected
-            .bind(with: self) { owner, indexPath in
-                print(indexPath.section, indexPath.item)
-            }
+            .debug("왜요")
+            .subscribe(onNext: { indexPath in
+                print("Item selected at \(indexPath)")
+            })
             .disposed(by: disposeBag)
     }
     func configureDataSource() {
-        dataSource = RxCollectionViewSectionedReloadDataSource<MainDataSection>(configureCell: { [weak self] dataSource, collectionView, indexPath, item in
-            guard let self = self else { return UICollectionViewCell() }
-            
+        dataSource = RxCollectionViewSectionedReloadDataSource<MainDataSection>(configureCell: { dataSource, collectionView, indexPath, item in
             switch indexPath.section {
             case 0:
                 guard let cell: BannerCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: BannerCollectionViewCell.identifier, for: indexPath) as? BannerCollectionViewCell else { return UICollectionViewCell() }
@@ -82,8 +83,7 @@ final class TestViewController: BaseViewController {
                 
                 return cell
             }
-        }, configureSupplementaryView: { [weak self] dataSource, collectionView, headerText, indexPath in
-            guard let self = self else { return UICollectionReusableView() }
+        }, configureSupplementaryView: { dataSource, collectionView, headerText, indexPath in
             switch indexPath.section {
             case 0:
                 return UICollectionReusableView()
@@ -150,6 +150,7 @@ extension TestViewController {
             heightDimension: .fractionalHeight(1.0)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = .init(top: 0, leading: 5, bottom: 0, trailing: 5)
         
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
@@ -159,7 +160,7 @@ extension TestViewController {
         
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [createSectionHeader()]
-        section.contentInsets = .init(top: 10, leading: 20, bottom: 10, trailing: 20)
+        section.contentInsets = .init(top: 10, leading: 15, bottom: 10, trailing: 15)
         return section
     }
 

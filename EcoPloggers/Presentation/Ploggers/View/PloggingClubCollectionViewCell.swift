@@ -48,6 +48,7 @@ final class PloggingClubCollectionViewCell: BaseCollectionViewCell {
         creatorLabel.snp.makeConstraints { make in
             make.top.equalTo(img.snp.bottom).offset(4)
             make.horizontalEdges.equalTo(img)
+            make.height.equalTo(15)
         }
         contentTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(creatorLabel.snp.bottom).offset(8)
@@ -62,9 +63,7 @@ final class PloggingClubCollectionViewCell: BaseCollectionViewCell {
             make.top.equalTo(contentTitleLabel.snp.bottom).offset(8)
             make.bottom.equalToSuperview()
             make.trailing.equalToSuperview().inset(4)
-            make.leading.equalTo(locationLabel.snp.trailing)
         }
-        
     }
     
     func configureUI(imageFile: UIImage?, creator: String, title: String, location: String) {

@@ -108,9 +108,9 @@ final class TestViewModel: ViewModelType {
                 switch result {
                 case .success(let response):
                     
-                    let first = MainDataSection(header: "Banner", items: response.data)
-                    let second = MainDataSection(header: "지금 뜨는 플로깅 모임", items: response.data)
-                    let third = MainDataSection(header: "플로깅 모임", items: response.data)
+                    let first = MainDataSection(header: "Banner", items: response.toDomain.data)
+                    let second = MainDataSection(header: "지금 뜨는 플로깅 모임", items: response.toDomain.data)
+                    let third = MainDataSection(header: "플로깅 모임", items: response.toDomain.data)
                     let sections = [first, second, third]
                     sectionData.accept(sections)
                     

@@ -32,8 +32,6 @@
 		C90FF09F2C6E3BD400590563 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF09E2C6E3BD400590563 /* SignUpViewModel.swift */; };
 		C90FF0A42C6E3CBE00590563 /* TextFieldWithLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0A32C6E3CBE00590563 /* TextFieldWithLabelView.swift */; };
 		C90FF0A62C6E450F00590563 /* PaddingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0A52C6E450F00590563 /* PaddingButton.swift */; };
-		C90FF0A82C6E551C00590563 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C90FF0A72C6E551C00590563 /* Localizable.xcstrings */; };
-		C90FF0AB2C6E556900590563 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C90FF0AA2C6E556900590563 /* InfoPlist.xcstrings */; };
 		C90FF0AD2C6F012400590563 /* EndpointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0AC2C6F012400590563 /* EndpointType.swift */; };
 		C90FF0AF2C6F014C00590563 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0AE2C6F014C00590563 /* HTTPMethod.swift */; };
 		C90FF0B12C6F27E800590563 /* SignUpQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0B02C6F27E800590563 /* SignUpQuery.swift */; };
@@ -67,6 +65,7 @@
 		C9118EDD2C71E72900CF22ED /* TestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9118EDC2C71E72900CF22ED /* TestViewModel.swift */; };
 		C9118EE12C7204F800CF22ED /* RefreshResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9118EE02C7204F800CF22ED /* RefreshResponse.swift */; };
 		C9118EE32C72126A00CF22ED /* mockPlogging.json in Resources */ = {isa = PBXBuildFile; fileRef = C9118EE22C72126A00CF22ED /* mockPlogging.json */; };
+		C9118EE52C72387800CF22ED /* LastTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9118EE42C72387800CF22ED /* LastTestViewController.swift */; };
 		C99AA8622C6DFC1500C07BC2 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8612C6DFC1500C07BC2 /* Constant.swift */; };
 		C99AA8682C6DFF6900C07BC2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8672C6DFF6900C07BC2 /* BaseViewController.swift */; };
 		C99AA86A2C6DFF9600C07BC2 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8692C6DFF9600C07BC2 /* UIViewController+.swift */; };
@@ -101,9 +100,7 @@
 		C90FF09E2C6E3BD400590563 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		C90FF0A32C6E3CBE00590563 /* TextFieldWithLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithLabelView.swift; sourceTree = "<group>"; };
 		C90FF0A52C6E450F00590563 /* PaddingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingButton.swift; sourceTree = "<group>"; };
-		C90FF0A72C6E551C00590563 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		C90FF0A92C6E554B00590563 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		C90FF0AA2C6E556900590563 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		C90FF0AC2C6F012400590563 /* EndpointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointType.swift; sourceTree = "<group>"; };
 		C90FF0AE2C6F014C00590563 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		C90FF0B02C6F27E800590563 /* SignUpQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpQuery.swift; sourceTree = "<group>"; };
@@ -135,6 +132,7 @@
 		C9118EDC2C71E72900CF22ED /* TestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewModel.swift; sourceTree = "<group>"; };
 		C9118EE02C7204F800CF22ED /* RefreshResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshResponse.swift; sourceTree = "<group>"; };
 		C9118EE22C72126A00CF22ED /* mockPlogging.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mockPlogging.json; sourceTree = "<group>"; };
+		C9118EE42C72387800CF22ED /* LastTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastTestViewController.swift; sourceTree = "<group>"; };
 		C99AA8612C6DFC1500C07BC2 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		C99AA8672C6DFF6900C07BC2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C99AA8692C6DFF9600C07BC2 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
@@ -298,6 +296,7 @@
 			children = (
 				C90FF0C52C6FBF9400590563 /* PloggersViewController.swift */,
 				C90FF0E42C70F02700590563 /* TestViewController.swift */,
+				C9118EE42C72387800CF22ED /* LastTestViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -403,8 +402,6 @@
 				C9D68BDF2C6CD155002AF632 /* Assets.xcassets */,
 				C9D68BE12C6CD155002AF632 /* LaunchScreen.storyboard */,
 				C9D68BE42C6CD155002AF632 /* Info.plist */,
-				C90FF0A72C6E551C00590563 /* Localizable.xcstrings */,
-				C90FF0AA2C6E556900590563 /* InfoPlist.xcstrings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -605,10 +602,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C90FF0AB2C6E556900590563 /* InfoPlist.xcstrings in Resources */,
 				C9D68BE02C6CD155002AF632 /* Assets.xcassets in Resources */,
 				C9D68BE32C6CD155002AF632 /* Base in Resources */,
-				C90FF0A82C6E551C00590563 /* Localizable.xcstrings in Resources */,
 				C9118EE32C72126A00CF22ED /* mockPlogging.json in Resources */,
 				C90EAE642C6E13E300F5F0AE /* Pretendard-Bold.otf in Resources */,
 				C90EAE672C6E13E300F5F0AE /* Pretendard-Light.otf in Resources */,
@@ -679,6 +674,7 @@
 				C9D68BD72C6CD154002AF632 /* AppDelegate.swift in Sources */,
 				C90FF0BF2C6FB2DA00590563 /* String+.swift in Sources */,
 				C9D68BD92C6CD154002AF632 /* SceneDelegate.swift in Sources */,
+				C9118EE52C72387800CF22ED /* LastTestViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

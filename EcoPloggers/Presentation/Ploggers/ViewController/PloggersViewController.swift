@@ -58,6 +58,12 @@ final class PloggersViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
+        regionCollectionView.rx.itemSelected
+            .bind(with: self) { owner, indexPath in
+                print(indexPath, "되어야지 ^^")
+            }
+            .disposed(by: disposeBag)
+        
         let bannerImgs = BehaviorRelay<[UIImage?]>(value: [UIImage(systemName: "star.fill"), UIImage(systemName: "star.fill"), UIImage(systemName: "star.fill"), UIImage(systemName: "star.fill"), UIImage(systemName: "star.fill")])
         
         bannerImgs
