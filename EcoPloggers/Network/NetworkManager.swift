@@ -7,6 +7,7 @@
 
 import Foundation
 
+import Alamofire
 import RxSwift
 import RxCocoa
 
@@ -65,7 +66,6 @@ final class NetworkManager {
             return Disposables.create()
         }
     }
-    
     func callMockData() -> Single<Result<ViewPostResponseDTO, NetworkError>> {
         return Single.create { observer in
             guard let path = Bundle.main.path(forResource: "mockPlogging", ofType: "json"),
@@ -84,6 +84,34 @@ final class NetworkManager {
                 observer(.success(.failure(NetworkError.invalidData)))
             }
             
+            return Disposables.create()
+        }
+    }
+    func callRequest<T: Decodable>(
+        endpoint: TargetType,
+        type: T.Type
+    ) -> Single<Result<T, NetworkError>> {
+        return Single.create { observer in
+            do {
+                let urlRequest = try endpoint.asURLRequest()
+                AF.request(urlRequest, interceptor: NetworkInterceptor())
+                    .responseDecodable(of: T.self) { response in
+                        if let statusCode = response.response?.statusCode {
+                            switch statusCode {
+                            case 200..<300:
+                                if let data = response.value {
+                                    observer(.success(.success(data)))
+                                } else {
+                                    observer(.success(.failure(.invalidData)))
+                                }
+                            default:
+                                observer(.success(.failure(.tempStatusCodeError(statusCode))))
+                            }
+                        }
+                    }
+            } catch {
+                observer(.success(.failure(.invalidURL)))
+            }
             return Disposables.create()
         }
     }

@@ -19,7 +19,7 @@ protocol EndpointType {
     var query: [URLQueryItem] { get }
     var header: [String: String] { get }
     var body: Data? { get }
-    var method: HTTPMethod { get }
+    var method: _HTTPMethod { get }
 }
 
 extension EndpointType {

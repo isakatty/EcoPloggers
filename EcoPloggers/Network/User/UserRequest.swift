@@ -85,7 +85,7 @@ extension UserRequest: EndpointType {
         }
     }
     
-    var method: HTTPMethod {
+    var method: _HTTPMethod {
         switch self {
         case .signup, .login, .validateEmail:
                 .post

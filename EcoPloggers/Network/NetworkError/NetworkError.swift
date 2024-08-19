@@ -54,8 +54,6 @@ enum UserStatusCode: LocalizedError {
         case .signup(let errorCode):
             var errorDes: String = ""
             switch errorCode {
-            case 200:
-                errorDes = "통신 성공"
             case 400:
                 errorDes = "필수값 누락"
             case 409:
@@ -67,8 +65,6 @@ enum UserStatusCode: LocalizedError {
         case .validateEmail(let errorCode):
             var errorDes: String = ""
             switch errorCode {
-            case 200:
-                errorDes = "통신 성공"
             case 400:
                 errorDes = "필수값 누락"
             case 409:
@@ -80,8 +76,6 @@ enum UserStatusCode: LocalizedError {
         case .refreshToken(let errorCode):
             var errorDes: String = ""
             switch errorCode {
-            case 200:
-                errorDes = "통신 성공"
             case 401:
                 errorDes = "token 오류"
             case 403:
@@ -94,10 +88,7 @@ enum UserStatusCode: LocalizedError {
             return errorDes
         case .withdraw(let errorCode):
             var errorDes: String = ""
-            switch errorCode {
-            case 200:
-                errorDes = "통신 성공"
-            case 401:
+            switch errorCode {            case 401:
                 errorDes = "인증 할 수 없는 token"
             case 403:
                 errorDes = "Forbidden"

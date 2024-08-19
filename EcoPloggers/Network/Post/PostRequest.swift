@@ -60,7 +60,7 @@ extension PostRequest: EndpointType {
             return nil
         }
     }
-    var method: HTTPMethod {
+    var method: _HTTPMethod {
         switch self {
         case .viewPost:
             return .get

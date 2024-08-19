@@ -33,7 +33,7 @@
 		C90FF0A42C6E3CBE00590563 /* TextFieldWithLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0A32C6E3CBE00590563 /* TextFieldWithLabelView.swift */; };
 		C90FF0A62C6E450F00590563 /* PaddingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0A52C6E450F00590563 /* PaddingButton.swift */; };
 		C90FF0AD2C6F012400590563 /* EndpointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0AC2C6F012400590563 /* EndpointType.swift */; };
-		C90FF0AF2C6F014C00590563 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0AE2C6F014C00590563 /* HTTPMethod.swift */; };
+		C90FF0AF2C6F014C00590563 /* _HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0AE2C6F014C00590563 /* _HTTPMethod.swift */; };
 		C90FF0B12C6F27E800590563 /* SignUpQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0B02C6F27E800590563 /* SignUpQuery.swift */; };
 		C90FF0B32C6F394000590563 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0B22C6F394000590563 /* NetworkManager.swift */; };
 		C90FF0B72C6F466E00590563 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C90FF0B62C6F466E00590563 /* NetworkError.swift */; };
@@ -69,6 +69,14 @@
 		C9118EEF2C72F2B400CF22ED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9118EEE2C72F2B400CF22ED /* GoogleService-Info.plist */; };
 		C9118EF22C72F32000CF22ED /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = C9118EF12C72F32000CF22ED /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		C9118EF42C72F32000CF22ED /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = C9118EF32C72F32000CF22ED /* FirebaseCrashlytics */; };
+		C9118F052C737C5B00CF22ED /* UserRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9118F042C737C5B00CF22ED /* UserRouter.swift */; };
+		C9118F072C737C6100CF22ED /* TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9118F062C737C6100CF22ED /* TargetType.swift */; };
+		C9118F0A2C737C9700CF22ED /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = C9118F092C737C9700CF22ED /* Alamofire */; };
+		C9118F0C2C73863800CF22ED /* RealTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9118F0B2C73863800CF22ED /* RealTestViewController.swift */; };
+		C9118F0E2C73870200CF22ED /* RealViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9118F0D2C73870200CF22ED /* RealViewModel.swift */; };
+		C9118F102C738C9E00CF22ED /* NetworkInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9118F0F2C738C9E00CF22ED /* NetworkInterceptor.swift */; };
+		C9118F122C73940100CF22ED /* PostRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9118F112C73940100CF22ED /* PostRouter.swift */; };
+		C9118F142C739B7500CF22ED /* UploadPostQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9118F132C739B7500CF22ED /* UploadPostQuery.swift */; };
 		C99AA8622C6DFC1500C07BC2 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8612C6DFC1500C07BC2 /* Constant.swift */; };
 		C99AA8682C6DFF6900C07BC2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8672C6DFF6900C07BC2 /* BaseViewController.swift */; };
 		C99AA86A2C6DFF9600C07BC2 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8692C6DFF9600C07BC2 /* UIViewController+.swift */; };
@@ -105,7 +113,7 @@
 		C90FF0A52C6E450F00590563 /* PaddingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingButton.swift; sourceTree = "<group>"; };
 		C90FF0A92C6E554B00590563 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		C90FF0AC2C6F012400590563 /* EndpointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointType.swift; sourceTree = "<group>"; };
-		C90FF0AE2C6F014C00590563 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		C90FF0AE2C6F014C00590563 /* _HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _HTTPMethod.swift; sourceTree = "<group>"; };
 		C90FF0B02C6F27E800590563 /* SignUpQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpQuery.swift; sourceTree = "<group>"; };
 		C90FF0B22C6F394000590563 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C90FF0B62C6F466E00590563 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -137,6 +145,13 @@
 		C9118EE22C72126A00CF22ED /* mockPlogging.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mockPlogging.json; sourceTree = "<group>"; };
 		C9118EE42C72387800CF22ED /* LastTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastTestViewController.swift; sourceTree = "<group>"; };
 		C9118EEE2C72F2B400CF22ED /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C9118F042C737C5B00CF22ED /* UserRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRouter.swift; sourceTree = "<group>"; };
+		C9118F062C737C6100CF22ED /* TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetType.swift; sourceTree = "<group>"; };
+		C9118F0B2C73863800CF22ED /* RealTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTestViewController.swift; sourceTree = "<group>"; };
+		C9118F0D2C73870200CF22ED /* RealViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealViewModel.swift; sourceTree = "<group>"; };
+		C9118F0F2C738C9E00CF22ED /* NetworkInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInterceptor.swift; sourceTree = "<group>"; };
+		C9118F112C73940100CF22ED /* PostRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRouter.swift; sourceTree = "<group>"; };
+		C9118F132C739B7500CF22ED /* UploadPostQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostQuery.swift; sourceTree = "<group>"; };
 		C99AA8612C6DFC1500C07BC2 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		C99AA8672C6DFF6900C07BC2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C99AA8692C6DFF9600C07BC2 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
@@ -157,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9118ECE2C71D92600CF22ED /* Differentiator in Frameworks */,
+				C9118F0A2C737C9700CF22ED /* Alamofire in Frameworks */,
 				C9118EF22C72F32000CF22ED /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				C90FF0992C6E30EE00590563 /* RxSwift in Frameworks */,
 				C9118EF42C72F32000CF22ED /* FirebaseCrashlytics in Frameworks */,
@@ -234,7 +250,7 @@
 		C90FF0B42C6F397B00590563 /* Enum */ = {
 			isa = PBXGroup;
 			children = (
-				C90FF0AE2C6F014C00590563 /* HTTPMethod.swift */,
+				C90FF0AE2C6F014C00590563 /* _HTTPMethod.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -266,6 +282,7 @@
 				C90FF0B02C6F27E800590563 /* SignUpQuery.swift */,
 				C90FF0CB2C70766500590563 /* ValidateEmailQuery.swift */,
 				C9118ED32C71DFAA00CF22ED /* ViewPostQuery.swift */,
+				C9118F132C739B7500CF22ED /* UploadPostQuery.swift */,
 			);
 			path = Query;
 			sourceTree = "<group>";
@@ -293,6 +310,7 @@
 			children = (
 				C90FF0E02C70CAC400590563 /* PloggersViewModel.swift */,
 				C9118EDC2C71E72900CF22ED /* TestViewModel.swift */,
+				C9118F0D2C73870200CF22ED /* RealViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -303,6 +321,7 @@
 				C90FF0C52C6FBF9400590563 /* PloggersViewController.swift */,
 				C90FF0E42C70F02700590563 /* TestViewController.swift */,
 				C9118EE42C72387800CF22ED /* LastTestViewController.swift */,
+				C9118F0B2C73863800CF22ED /* RealTestViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -438,6 +457,7 @@
 				C99AA85D2C6DFBE200C07BC2 /* Post */,
 				C99AA85C2C6DFBDD00C07BC2 /* User */,
 				C90FF0B22C6F394000590563 /* NetworkManager.swift */,
+				C9118F0F2C738C9E00CF22ED /* NetworkInterceptor.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -446,6 +466,7 @@
 			isa = PBXGroup;
 			children = (
 				C90FF07E2C6E185A00590563 /* UserRequest.swift */,
+				C9118F042C737C5B00CF22ED /* UserRouter.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -454,6 +475,7 @@
 			isa = PBXGroup;
 			children = (
 				C90FF0802C6E186100590563 /* PostRequest.swift */,
+				C9118F112C73940100CF22ED /* PostRouter.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -481,6 +503,7 @@
 				C90FF0AC2C6F012400590563 /* EndpointType.swift */,
 				C90FF0822C6E186E00590563 /* Reusables.swift */,
 				C90FF09A2C6E311E00590563 /* ViewModelType.swift */,
+				C9118F062C737C6100CF22ED /* TargetType.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -563,6 +586,7 @@
 				C9118ECF2C71D92600CF22ED /* RxDataSources */,
 				C9118EF12C72F32000CF22ED /* FirebaseAnalyticsWithoutAdIdSupport */,
 				C9118EF32C72F32000CF22ED /* FirebaseCrashlytics */,
+				C9118F092C737C9700CF22ED /* Alamofire */,
 			);
 			productName = EcoPloggers;
 			productReference = C9D68BD32C6CD154002AF632 /* EcoPloggers.app */;
@@ -598,6 +622,7 @@
 				C90FF0952C6E30EE00590563 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				C9118ECC2C71D92600CF22ED /* XCRemoteSwiftPackageReference "RxDataSources" */,
 				C9118EF02C72F32000CF22ED /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				C9118F082C737C9700CF22ED /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = C9D68BD42C6CD154002AF632 /* Products */;
 			projectDirPath = "";
@@ -671,7 +696,10 @@
 				C90FF0812C6E186100590563 /* PostRequest.swift in Sources */,
 				C90FF0B12C6F27E800590563 /* SignUpQuery.swift in Sources */,
 				C90FF09F2C6E3BD400590563 /* SignUpViewModel.swift in Sources */,
+				C9118F0E2C73870200CF22ED /* RealViewModel.swift in Sources */,
 				C99AA8682C6DFF6900C07BC2 /* BaseViewController.swift in Sources */,
+				C9118F102C738C9E00CF22ED /* NetworkInterceptor.swift in Sources */,
+				C9118F122C73940100CF22ED /* PostRouter.swift in Sources */,
 				C90FF0E52C70F02700590563 /* TestViewController.swift in Sources */,
 				C90FF09D2C6E38E000590563 /* SignUpViewController.swift in Sources */,
 				C90FF0BD2C6F9A9B00590563 /* LoginResponse.swift in Sources */,
@@ -681,6 +709,7 @@
 				C90FF0B32C6F394000590563 /* NetworkManager.swift in Sources */,
 				C99AA86A2C6DFF9600C07BC2 /* UIViewController+.swift in Sources */,
 				C9118ED92C71E3BF00CF22ED /* PloggingClubCollectionViewCell.swift in Sources */,
+				C9118F072C737C6100CF22ED /* TargetType.swift in Sources */,
 				C9118EDD2C71E72900CF22ED /* TestViewModel.swift in Sources */,
 				C90FF0E72C70F2E500590563 /* ContentsView.swift in Sources */,
 				C90FF0852C6E187B00590563 /* LogInQuery.swift in Sources */,
@@ -692,18 +721,21 @@
 				C90FF0D62C70A04000590563 /* SearchViewController.swift in Sources */,
 				C9118ECB2C71B1DB00CF22ED /* BannerCollectionViewCell.swift in Sources */,
 				C90FF0CE2C70935800590563 /* SignUpResponse.swift in Sources */,
-				C90FF0AF2C6F014C00590563 /* HTTPMethod.swift in Sources */,
+				C90FF0AF2C6F014C00590563 /* _HTTPMethod.swift in Sources */,
 				C99AA86C2C6E001100C07BC2 /* BaseView.swift in Sources */,
 				C90FF0892C6E20B300590563 /* RoundedButton.swift in Sources */,
 				C90FF0D32C709DBC00590563 /* PloggerTabBarController.swift in Sources */,
 				C90FF0B72C6F466E00590563 /* NetworkError.swift in Sources */,
 				C90FF0832C6E186E00590563 /* Reusables.swift in Sources */,
+				C9118F0C2C73863800CF22ED /* RealTestViewController.swift in Sources */,
 				C9118ED42C71DFAA00CF22ED /* ViewPostQuery.swift in Sources */,
+				C9118F142C739B7500CF22ED /* UploadPostQuery.swift in Sources */,
 				C90FF0DF2C70C64C00590563 /* BaseCollectionViewCell.swift in Sources */,
 				C90FF0E12C70CAC400590563 /* PloggersViewModel.swift in Sources */,
 				C90FF0DB2C70B9BD00590563 /* SearchView.swift in Sources */,
 				C90FF0C12C6FBC6A00590563 /* UserDefaultsManager.swift in Sources */,
 				C9118EDB2C71E42D00CF22ED /* PloggingClubHeaderView.swift in Sources */,
+				C9118F052C737C5B00CF22ED /* UserRouter.swift in Sources */,
 				C9118ED72C71E11000CF22ED /* ViewPostResponse.swift in Sources */,
 				C90FF09B2C6E311E00590563 /* ViewModelType.swift in Sources */,
 				C90FF0D92C70A06600590563 /* MyPageViewController.swift in Sources */,
@@ -785,7 +817,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_PREPROCESS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -844,7 +876,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_PREPROCESS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -870,7 +902,8 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -903,7 +936,8 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -978,6 +1012,14 @@
 				minimumVersion = 11.0.0;
 			};
 		};
+		C9118F082C737C9700CF22ED /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1015,6 +1057,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C9118EF02C72F32000CF22ED /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		C9118F092C737C9700CF22ED /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C9118F082C737C9700CF22ED /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
