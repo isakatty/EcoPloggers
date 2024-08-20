@@ -23,7 +23,26 @@ final class PloggersViewController: BaseViewController {
         return cv
     }()
     private let vScrollView = UIScrollView()
+    private lazy var searchController: UISearchController = {
+        let search = UISearchController(searchResultsController: nil)
+        search.searchBar.placeholder = "지역을 검색해보세요."
+        search.searchBar.sizeToFit()
+        search.searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
+        let searchTextField = search.searchBar.searchTextField
+        searchTextField.backgroundColor = Constant.Color.clear
+        searchTextField.clipsToBounds = true
+        searchTextField.layer.borderWidth = 1
+        searchTextField.layer.borderColor = Constant.Color.black.withAlphaComponent(0.5).cgColor
+        searchTextField.layer.cornerRadius = 18
+        return search
+    }()
     private let containerView: UIView = {
+        let view = UIView()
+        view.clipsToBounds = true
+        view.backgroundColor = Constant.Color.mainBG
+        return view
+    }()
+    private let bottomContainerView: UIView = {
         let view = UIView()
         view.clipsToBounds = true
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -44,6 +63,11 @@ final class PloggersViewController: BaseViewController {
         super.viewDidLoad()
         
         bind()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let textField = searchController.searchBar.searchTextField
+        textField.subviews.first?.subviews.first?.removeFromSuperview()
     }
     
     private func bind() {
@@ -79,41 +103,54 @@ final class PloggersViewController: BaseViewController {
                 print(indexPath, "여기도 안되나 설마?")
             }
             .disposed(by: disposeBag)
+        
+        searchController.searchBar.rx.textDidBeginEditing
+            .bind(with: self) { owner, _ in
+                let vc = TestViewController()
+                owner.navigationController?.pushViewController(vc, animated: true)
+            }
+            .disposed(by: disposeBag)
     }
     
     override func configureHierarchy() {
+        navigationItem.title = "🌿EcoPloggers🌿"
+        navigationController?.navigationBar.titleTextAttributes = [.font: Constant.Font.medium20]
+        
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = true
+        
         [bannerCollectionView, rizingContents, regionContents]
+            .forEach { bottomContainerView.addSubview($0)}
+        
+        [regionCollectionView, bottomContainerView]
             .forEach { containerView.addSubview($0) }
         
         vScrollView.addSubview(containerView)
         
-        [ploggingSearchBar, regionCollectionView, vScrollView]
+        [vScrollView]
             .forEach { view.addSubview($0) }
     }
     override func configureLayout() {
         super.configureLayout()
-        
-        ploggingSearchBar.snp.makeConstraints { make in
-            make.top.equalTo(safeArea)
-            make.horizontalEdges.equalTo(safeArea).inset(20)
-            make.height.equalTo(44)
-        }
-        regionCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(ploggingSearchBar.snp.bottom).offset(12)
-            make.horizontalEdges.equalTo(safeArea).inset(20)
-            make.height.equalTo(50)
-        }
         vScrollView.snp.makeConstraints { make in
-            make.top.equalTo(regionCollectionView.snp.bottom).offset(8)
-            make.horizontalEdges.bottom.equalTo(safeArea)
+            make.edges.equalTo(safeArea)
         }
         containerView.snp.makeConstraints { make in
             make.width.equalTo(vScrollView.snp.width)
             make.verticalEdges.equalTo(vScrollView)
         }
+        regionCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(containerView).offset(10)
+            make.horizontalEdges.equalTo(safeArea).inset(20)
+            make.height.equalTo(50)
+        }
+        bottomContainerView.snp.makeConstraints { make in
+            make.top.equalTo(regionCollectionView.snp.bottom)
+            make.horizontalEdges.bottom.equalTo(containerView)
+        }
         bannerCollectionView.snp.makeConstraints { make in
             make.centerX.equalTo(containerView)
-            make.top.equalTo(containerView).offset(20)
+            make.top.equalTo(bottomContainerView).offset(20)
             make.horizontalEdges.equalToSuperview().inset(20)
             make.height.equalTo(170)
         }
@@ -124,9 +161,10 @@ final class PloggersViewController: BaseViewController {
         regionContents.snp.makeConstraints { make in
             make.top.equalTo(rizingContents.snp.bottom).offset(20)
             make.horizontalEdges.equalTo(safeArea)
-            make.bottom.equalTo(containerView.snp.bottom).inset(20)
+            make.bottom.equalTo(bottomContainerView.snp.bottom).inset(20)
         }
     }
+    
 }
 extension PloggersViewController {
     private func regionLayout() -> UICollectionViewLayout {

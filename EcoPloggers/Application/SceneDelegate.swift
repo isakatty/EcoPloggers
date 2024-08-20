@@ -24,7 +24,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window?.rootViewController = UINavigationController(rootViewController: vc)
             window?.makeKeyAndVisible()
         } else {
-            print("탭바")
             // TabBar - 빈값 아니면 이미 저장된 accessToken 있다는 것.
             let vc = PloggerTabBarController()
             window?.rootViewController = vc

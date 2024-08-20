@@ -17,7 +17,6 @@ final class SearchView: BaseView {
         searchBar.searchTextField.backgroundColor = Constant.Color.clear
         searchBar.layer.borderWidth = 0
         searchBar.layer.borderColor = Constant.Color.clear.cgColor
-        
         searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
         return searchBar
     }()

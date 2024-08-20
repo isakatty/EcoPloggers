@@ -27,14 +27,14 @@ final class RegionCollectionViewCell: BaseCollectionViewCell {
     }
     override func configureLayout() {
         regionLabel.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+            make.horizontalEdges.top.equalToSuperview()
         }
         selectedBar.snp.makeConstraints { make in
             make.height.equalTo(1)
             make.top.equalTo(regionLabel.snp.bottom).offset(4)
             make.centerX.equalTo(regionLabel)
             make.width.equalTo(regionLabel).inset(4)
-            make.bottom.equalTo(contentView)
+            make.bottom.equalToSuperview()
         }
         selectedBar.isHidden = true
     }

@@ -78,26 +78,26 @@ final class TestViewModel: ViewModelType {
             .disposed(by: disposeBag)
          */
         
-        let loginQuery = LogInQuery(email: "eco@eco1.com", password: "qwerty")
-        let endpoint = UserRouter.login(login: loginQuery)
-        NetworkManager.shared.callRequest(endpoint: endpoint, type: LoginResponse.self)
-            .asObservable()
-            .subscribe { result in
-                switch result {
-                case .success(let loginResponse):
-                    print(loginResponse)
-                case .failure(let error):
-                    switch error {
-                    case .tempStatusCodeError(let statusCode):
-                        print(statusCode, error.errorDescription)
-                    default:
-                        print(error.localizedDescription)
-                    }
-                }
-            } onError: { err in
-                print(err, "아예 Failure")
-            }
-            .disposed(by: disposeBag)
+//        let loginQuery = LogInQuery(email: "eco@eco1.com", password: "qwerty")
+//        let endpoint = UserRouter.login(login: loginQuery)
+//        NetworkManager.shared.callRequest(endpoint: endpoint, type: LoginResponse.self)
+//            .asObservable()
+//            .subscribe { result in
+//                switch result {
+//                case .success(let loginResponse):
+//                    print(loginResponse)
+//                case .failure(let error):
+//                    switch error {
+//                    case .tempStatusCodeError(let statusCode):
+//                        print(statusCode, error.errorDescription)
+//                    default:
+//                        print(error.localizedDescription)
+//                    }
+//                }
+//            } onError: { err in
+//                print(err, "아예 Failure")
+//            }
+//            .disposed(by: disposeBag)
 
 
     }
@@ -107,11 +107,13 @@ final class TestViewModel: ViewModelType {
     }
     struct Output {
         let sectionData: BehaviorRelay<[MainDataSection]>
+        let regions: BehaviorRelay<[Region]>
     }
     
     func transform(input: Input) -> Output {
         let sectionData: BehaviorRelay<[MainDataSection]> = .init(value: [])
         
+        let regions = BehaviorRelay<[Region]>(value: Region.allCases)
         /* 목데이터임 */
         NetworkManager.shared.callMockData()
             .asObservable()
@@ -134,7 +136,8 @@ final class TestViewModel: ViewModelType {
             .disposed(by: disposeBag)
         
         return Output(
-            sectionData: sectionData
+            sectionData: sectionData,
+            regions: regions
         )
     }
 }

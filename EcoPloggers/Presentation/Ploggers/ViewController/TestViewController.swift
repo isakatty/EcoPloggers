@@ -29,6 +29,27 @@ extension MainDataSection: SectionModelType {
 final class TestViewController: BaseViewController {
     var disposeBag = DisposeBag()
     private let viewModel = TestViewModel()
+    
+    private let searchView = SearchView()
+    private lazy var searchController: UISearchController = {
+        let search = UISearchController(searchResultsController: nil)
+        search.searchBar.placeholder = "지역을 검색해보세요."
+        search.searchBar.sizeToFit()
+        search.searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
+        let searchTextField = search.searchBar.searchTextField
+        searchTextField.backgroundColor = Constant.Color.clear
+        searchTextField.clipsToBounds = true
+        searchTextField.layer.borderWidth = 1
+        searchTextField.layer.borderColor = Constant.Color.black.withAlphaComponent(0.5).cgColor
+        searchTextField.layer.cornerRadius = 18
+        return search
+    }()
+    private lazy var regionCollectionView: UICollectionView = {
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: regionLayout())
+        cv.register(RegionCollectionViewCell.self, forCellWithReuseIdentifier: RegionCollectionViewCell.identifier)
+        cv.backgroundColor = Constant.Color.mainBG
+        return cv
+    }()
     private lazy var ploggingCollectionView: UICollectionView = {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: configureCVLayout())
         cv.register(BannerCollectionViewCell.self, forCellWithReuseIdentifier: BannerCollectionViewCell.identifier)
@@ -47,6 +68,11 @@ final class TestViewController: BaseViewController {
         configureDataSource()
         bind()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let textField = searchController.searchBar.searchTextField
+        textField.subviews.first?.subviews.first?.removeFromSuperview()
+    }
     
     func bind() {
         let input = TestViewModel.Input()
@@ -56,8 +82,13 @@ final class TestViewController: BaseViewController {
             .bind(to: ploggingCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
+        output.regions
+            .bind(to: regionCollectionView.rx.items(cellIdentifier: RegionCollectionViewCell.identifier, cellType: RegionCollectionViewCell.self)) { row, element, cell in
+                cell.configureLabel(regionName: element.rawValue)
+            }
+            .disposed(by: disposeBag)
+        
         ploggingCollectionView.rx.itemSelected
-            .debug("왜요")
             .subscribe(onNext: { indexPath in
                 print("Item selected at \(indexPath)")
             })
@@ -99,13 +130,27 @@ final class TestViewController: BaseViewController {
     }
     
     override func configureHierarchy() {
-        view.addSubview(ploggingCollectionView)
+        navigationItem.title = "🌿EcoPloggers🌿"
+        navigationController?.navigationBar.titleTextAttributes = [.font: Constant.Font.medium20]
+        
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = true
+        
+        [regionCollectionView, ploggingCollectionView]
+            .forEach { view.addSubview($0) }
+        
     }
     override func configureLayout() {
         super.configureLayout()
-        
+        regionCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(safeArea)
+            make.leading.equalTo(safeArea).inset(10)
+            make.trailing.equalTo(safeArea)
+            make.height.equalTo(50)
+        }
         ploggingCollectionView.snp.makeConstraints { make in
-            make.edges.equalTo(safeArea)
+            make.top.equalTo(regionCollectionView.snp.bottom)
+            make.horizontalEdges.bottom.equalTo(safeArea)
         }
     }
 }
@@ -174,5 +219,23 @@ extension TestViewController {
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top
         )
+    }
+    private func regionLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(0.1),
+            heightDimension: .fractionalHeight(1.0)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        item.edgeSpacing = .init(leading: .fixed(10), top: .fixed(0), trailing: .fixed(10), bottom: .fixed(0))
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(0.8)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .paging
+        return UICollectionViewCompositionalLayout(section: section)
     }
 }
