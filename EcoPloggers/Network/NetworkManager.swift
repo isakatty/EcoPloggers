@@ -90,27 +90,45 @@ final class NetworkManager {
     func callRequest<T: Decodable>(
         endpoint: TargetType,
         type: T.Type
-    ) -> Single<Result<T, NetworkError>> {
+    ) -> Single<T> {
         return Single.create { observer in
             do {
                 let urlRequest = try endpoint.asURLRequest()
                 AF.request(urlRequest, interceptor: NetworkInterceptor())
+                    .validate(statusCode: 200..<300)
                     .responseDecodable(of: T.self) { response in
-                        if let statusCode = response.response?.statusCode {
-                            switch statusCode {
-                            case 200..<300:
-                                if let data = response.value {
-                                    observer(.success(.success(data)))
-                                } else {
-                                    observer(.success(.failure(.invalidData)))
-                                }
-                            default:
-                                observer(.success(.failure(.tempStatusCodeError(statusCode))))
-                            }
+                        switch response.result {
+                        case .success(let value):
+                            observer(.success(value))
+                        case .failure(let error):
+                            observer(.failure(error))
                         }
                     }
             } catch {
-                observer(.success(.failure(.invalidURL)))
+                observer(.failure(error))
+            }
+            return Disposables.create()
+        }
+    }
+    func callRequestss<T: Decodable>(
+        endpoint: TargetType,
+        type: T.Type
+    ) -> Single<T> {
+        return Single.create { observer in
+            do {
+                let urlRequest = try endpoint.asURLRequest()
+                AF.request(urlRequest, interceptor: NetworkInterceptor())
+                    .validate(statusCode: 200..<300)
+                    .responseDecodable(of: T.self) { response in
+                        switch response.result {
+                        case .success(let value):
+                            observer(.success(value))
+                        case .failure(let error):
+                            observer(.failure(error))
+                        }
+                    }
+            } catch {
+                observer(.failure(error))
             }
             return Disposables.create()
         }
