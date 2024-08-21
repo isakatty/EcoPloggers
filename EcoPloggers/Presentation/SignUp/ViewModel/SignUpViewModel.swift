@@ -67,33 +67,25 @@ final class SignUpViewModel: ViewModelType {
             .flatMap { emailText in
                 print(emailText, "❓")
                 let emailQuery = ValidateEmailQuery(email: emailText)
-                let emailRequest = UserRequest.validateEmail(email: emailQuery)
-                return NetworkManager.shared.callUserRequest(endpoint: emailRequest, type: ValidateEmailResponse.self)
+                return UserNetworkService.validateEmail(query: emailQuery)
+                    .debug("이메일")
             }
-            .subscribe { response in
-                switch response {
-                case .success(let result):
-                    print(result.message, "")
-                    validatedEmailText.accept(result.message)
+            .subscribe { result in
+                switch result {
+                case .success(let resopnse):
                     isValidatedEmail.accept(true)
-                case .failure(let error):
-                    switch error {
-                    case .tempStatusCodeError(let statusCode):
-                        guard let errorSign = UserStatusCode.validateEmail(errorCode: statusCode).errorDescription else {
-                            return
-                        }
-                        validatedEmailText.accept(errorSign)
-                        isValidatedEmail.accept(false)
-                        print(statusCode, "⭐️")
-                    default:
-                        print("Email Validation Error Default")
-                    }
+                    validatedEmailText.accept("사용 가능한 이메일!")
+                case .badRequest:
+                    print("요청 실패 - SignUpVM")
+                case .invalidEmail:
+                    isValidatedEmail.accept(false)
+                    validatedEmailText.accept("사용 불가능한 이메일!")
+                case .error(let error):
+                    print("에러 발생: \(error.localizedDescription)")
                 }
-            } onError: { error in
-                print(error.localizedDescription)
             }
             .disposed(by: disposeBag)
-        
+
         emailValidation
             .bind { isValidated in
                 emailValidationBtn.accept(isValidated)
@@ -148,29 +140,25 @@ final class SignUpViewModel: ViewModelType {
         input.signUpBtnTap
             .throttle(.seconds(2), scheduler: MainScheduler.instance)
             .withLatestFrom(Observable.combineLatest(input.emailText.asObservable(), input.pwText.asObservable(), input.nicknameText.asObservable()))
-            .flatMap{ email, password, nicknmae in
+            .flatMap { email, password, nicknmae in
                 let signUpQuery = SignUpQuery(email: email, password: password, nick: nicknmae)
-                let request = UserRequest.signup(login: signUpQuery)
-                return NetworkManager.shared.callUserRequest(endpoint: request, type: SignUpResponse.self)
+                return UserNetworkService.signUpUser(query: signUpQuery)
             }
+            .debug("회원가입")
             .subscribe { result in
                 switch result {
-                case .success(let query):
-                    print(query)
+                case .success(let respone):
                     successSignup.accept(true)
-                case .failure(let error):
-                    switch error {
-                    case .tempStatusCodeError(let statusCode):
-                        guard let errorSign = UserStatusCode.signup(errorCode: statusCode).errorDescription else {
-                            return
-                        }
-                        print(errorSign, statusCode, "🟢")
-                    default:
-                        print("Email Validation Error Default")
-                    }
+                case .badRequest:
+                    print("bad Reuqest - Signup")
+                case .whiteSpacesNickname:
+                    print("빈문자열 에러")
+                    validatedNicknameText.accept("닉네임엔 빈문자열을 포함할 수 없습니다.")
+                case .alreadyOwned:
+                    validatedNicknameText.accept("이미 사용중인 닉네임 입니다.")
+                case .error(let error):
+                    print("에러 발생: \(error.localizedDescription)")
                 }
-            } onError: { error in
-                print(error.localizedDescription)
             }
             .disposed(by: disposeBag)
 

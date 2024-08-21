@@ -45,32 +45,24 @@ final class LogInViewModel: ViewModelType {
             .withLatestFrom(Observable.combineLatest(emailObservable, passwordObservable))
             .flatMap { email, password in
                 let loginQuery = LogInQuery(email: email, password: password)
-                let loginRequest = UserRequest.login(login: loginQuery)
-                return NetworkManager.shared.callUserRequest(endpoint: loginRequest, type: LoginResponse.self)
+                return UserNetworkService.createLogin(query: loginQuery)
             }
-            .subscribe(with: self) { owner, result in
+            .debug("VM")
+            .subscribe { result in
                 switch result {
                 case .success(let response):
-                    print(response)
                     UserDefaultsManager.shared.accessToken = response.accessToken
                     UserDefaultsManager.shared.refreshToken = response.refreshToken
-                    loginSuccess.accept(true)
-                case .failure(let error):
-                    // 로그인 실패 sign 보내줘야함
-                    switch error {
-                    case .tempStatusCodeError(let statusCode):
-                        print(UserStatusCode.login(errorCode: statusCode).errorDescription)
-                    default:
-                        print("Login StatusCode Default ")
-                    }
-                    loginSuccess.accept(false)
-                    logInFailText.accept("로그인 실패! 다시 시도해주세요")
+                case .badRequest:
+                    print("bad Request") // MARK: validation 때문에 badRequest가 필요한지에 대한 의문
+                case .unauthorized:
+                    logInFailText.accept("로그인 실패! 계정을 확인해주세요.")
+                case .error(let error):
+                    print("에러 발생: \(error.localizedDescription)")
                 }
             }
             .disposed(by: disposeBag)
 
-
-        
         return Output(
             validation: validation,
             logInEvent: loginSuccess,
