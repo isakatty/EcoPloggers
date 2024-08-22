@@ -27,4 +27,5 @@ struct ViewPostDetailResponse: Decodable {
     let joins: [String]
     let likes2: [String]
     let comments: [Comment]
+    let hashtags: [String]
 }

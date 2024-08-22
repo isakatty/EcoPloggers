@@ -59,6 +59,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
-
+    func changeToLoginVC() {
+        let navi = UINavigationController(rootViewController: LogInViewController())
+        window?.rootViewController = navi
+        window?.makeKeyAndVisible()
+    }
 }
 

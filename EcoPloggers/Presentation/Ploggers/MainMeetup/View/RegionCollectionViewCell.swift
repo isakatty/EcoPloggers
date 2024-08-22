@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import SnapKit
 
+// TODO: 선택시, color 변하게 하기
 final class RegionCollectionViewCell: BaseCollectionViewCell {
     var disposeBag = DisposeBag()
     
@@ -19,39 +20,19 @@ final class RegionCollectionViewCell: BaseCollectionViewCell {
         label.textAlignment = .center
         return label
     }()
-    private let selectedBar = UIView()
     
     override func configureHierarchy() {
-        [regionLabel, selectedBar]
+        [regionLabel]
             .forEach { contentView.addSubview($0) }
     }
     override func configureLayout() {
         regionLabel.snp.makeConstraints { make in
             make.horizontalEdges.top.equalToSuperview()
         }
-        selectedBar.snp.makeConstraints { make in
-            make.height.equalTo(1)
-            make.top.equalTo(regionLabel.snp.bottom).offset(4)
-            make.centerX.equalTo(regionLabel)
-            make.width.equalTo(regionLabel).inset(4)
-            make.bottom.equalToSuperview()
-        }
-        selectedBar.isHidden = true
     }
     
     func configureLabel(regionName: String) {
         regionLabel.text = regionName
-        
-        if regionName == "서울" {
-            regionLabel.textColor = Constant.Color.deepGreen
-            selectedBar.backgroundColor = Constant.Color.deepGreen
-            selectedBar.isHidden = false
-        }
-    }
-    func configureSelectedBar(isSelected: Bool) {
-        let color = isSelected ? Constant.Color.deepGreen : Constant.Color.blueGreen
-        regionLabel.textColor = color
-        selectedBar.backgroundColor = color
     }
     
     override func prepareForReuse() {

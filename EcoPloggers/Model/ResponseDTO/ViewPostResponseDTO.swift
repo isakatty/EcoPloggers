@@ -31,7 +31,8 @@ extension ViewPostResponseDTO {
                     files: $0.files,
                     joins: $0.likes,
                     likes2: $0.likes2,
-                    comments: $0.comments
+                    comments: $0.comments,
+                    hashtags: $0.hashTags
                 )
             },
             next_cursor: next_cursor

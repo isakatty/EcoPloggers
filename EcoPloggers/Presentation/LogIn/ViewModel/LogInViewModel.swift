@@ -53,6 +53,7 @@ final class LogInViewModel: ViewModelType {
                 case .success(let response):
                     UserDefaultsManager.shared.accessToken = response.accessToken
                     UserDefaultsManager.shared.refreshToken = response.refreshToken
+                    loginSuccess.accept(true)
                 case .badRequest:
                     print("bad Request") // MARK: validation 때문에 badRequest가 필요한지에 대한 의문
                 case .unauthorized:

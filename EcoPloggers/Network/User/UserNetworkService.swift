@@ -98,5 +98,34 @@ struct UserNetworkService {
             return Disposables.create()
         }
     }
-    
+    static func refreshToken() -> Single<RefreshTokenResult> {
+        return Single.create { single in
+            do {
+                let refreshToken = UserDefaultsManager.shared.refreshToken
+                let urlRequest = try UserRouter.refreshToken(refreshToken: refreshToken).asURLRequest()
+                
+                AF.request(urlRequest, interceptor: NetworkInterceptor())
+                    .responseDecodable(of: RefreshResponse.self) { response in
+                        switch response.result {
+                        case .success(let refresh):
+                            single(.success(.success(refresh)))
+                        case .failure(_):
+                            switch response.response?.statusCode {
+                            case 401:
+                                single(.success(.unauthorized))
+                            case 403:
+                                single(.success(.forbidden))
+                            case 418:
+                                single(.success(.reLogin))
+                            default:
+                                single(.success(.error(.unknown)))
+                            }
+                        }
+                    }
+            } catch {
+                single(.failure(error))
+            }
+            return Disposables.create()
+        }
+    }
 }
