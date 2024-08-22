@@ -15,3 +15,22 @@ enum FetchPostResult {
     case expiredToken
     case error(CommonError)
 }
+
+enum FetchFavResult {
+    case success(ViewPostResponseDTO)
+    case badRequest
+    case invalidToken
+    case forbidden
+    case invalidPost
+    case expiredToken
+    case error(CommonError)
+}
+
+enum FetchHashtagsResult {
+    case success(ViewPostResponseDTO)
+    case badRequest
+    case invalidToken
+    case forbidden
+    case expiredToken
+    case error(CommonError)
+}

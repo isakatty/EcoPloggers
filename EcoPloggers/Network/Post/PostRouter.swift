@@ -11,12 +11,14 @@ import Alamofire
 
 enum PostRouter {
     case uploadImg
-    case uploadPost(post: UploadPostQuery)
+    case uploadPost(query: UploadPostQuery)
     case viewPost(query: ViewPostQuery)
     case specificPost(postID: String)
-    case editPost(postID: String, post: UploadPostQuery)
+    case editPost(postID: String, query: UploadPostQuery)
     case deletePost(postID: String)
-    case userPost(postID: String, ViewPostQuery)
+    case userPost(postID: String, query: ViewPostQuery)
+    case favoritePost(query: FavoriteQuery)
+    case hashtags(query: HashtagsQuery)
 }
 extension PostRouter: TargetType {
     var baseURL: String {
@@ -28,7 +30,7 @@ extension PostRouter: TargetType {
         switch self {
         case .uploadImg, .uploadPost:
                 .post
-        case .viewPost, .specificPost, .userPost:
+        case .viewPost, .specificPost, .userPost, .favoritePost, .hashtags:
                 .get
         case .editPost:
                 .put
@@ -53,6 +55,10 @@ extension PostRouter: TargetType {
             return "/v1/pots/\(postID)"
         case .userPost(let postID, _):
             return "/v1/posts/users/\(postID)"
+        case .favoritePost:
+            return "/v1/posts/likes-2/me"
+        case .hashtags:
+            return "/v1/posts/hashtags"
         }
     }
     
@@ -81,7 +87,7 @@ extension PostRouter: TargetType {
             return baseHeaders.merging(jsonHeader) { value1, _ in
                 value1
             }
-        case .viewPost, .specificPost, .deletePost, .userPost:
+        case .viewPost, .specificPost, .deletePost, .userPost, .favoritePost, .hashtags:
             return baseHeaders
         }
     }
@@ -93,7 +99,7 @@ extension PostRouter: TargetType {
         case .viewPost(let viewPostQuery):
             return [
                 URLQueryItem(name: "next", value: viewPostQuery.next),
-                URLQueryItem(name: "limit", value: viewPostQuery.limit ?? "0"),
+                URLQueryItem(name: "limit", value: viewPostQuery.limit ?? "10"),
                 URLQueryItem(name: "product_id", value: viewPostQuery.product_id)
             ]
         case .specificPost, .editPost, .deletePost:
@@ -101,8 +107,20 @@ extension PostRouter: TargetType {
         case .userPost( _, let viewPostQuery):
             return [
                 URLQueryItem(name: "next", value: viewPostQuery.next),
-                URLQueryItem(name: "limit", value: viewPostQuery.limit ?? "0"),
+                URLQueryItem(name: "limit", value: viewPostQuery.limit ?? "10"),
                 URLQueryItem(name: "product_id", value: viewPostQuery.product_id)
+            ]
+        case .favoritePost(let favoriteQuery):
+            return [
+                URLQueryItem(name: "next", value: favoriteQuery.next),
+                URLQueryItem(name: "limit", value: favoriteQuery.limit ?? "10")
+            ]
+        case .hashtags(let hashtagsQuery):
+            return [
+                URLQueryItem(name: "next", value: hashtagsQuery.next),
+                URLQueryItem(name: "limit", value: hashtagsQuery.limit ?? "10"),
+                URLQueryItem(name: "product_id", value: hashtagsQuery.product_id),
+                URLQueryItem(name: "hashTag", value: hashtagsQuery.hashTag)
             ]
         }
     }
@@ -123,7 +141,7 @@ extension PostRouter: TargetType {
             return try? encoder.encode(post)
         case .deletePost:
             return nil
-        case .userPost:
+        case .userPost, .favoritePost, .hashtags:
             return nil
         }
     }

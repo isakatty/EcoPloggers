@@ -17,10 +17,10 @@ enum MultiSectionModel {
 }
 
 enum SectionItem {
-    case bannerSectionItem
+    case bannerSectionItem(data: ViewPostDetailResponse)
     case regionSectionItem(data: String)
-    case favoriteSectionItem(data: ViewPostResponse)
-    case latestSectionItem(data: ViewPostResponse)
+    case favoriteSectionItem(data: ViewPostDetailResponse)
+    case latestSectionItem(data: ViewPostDetailResponse)
 }
 
 extension MultiSectionModel: SectionModelType {

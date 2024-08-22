@@ -83,6 +83,9 @@
 		C9E3684A2C76278900C0207A /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E368492C76278900C0207A /* CommonError.swift */; };
 		C9E3684C2C7627A000C0207A /* PostResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E3684B2C7627A000C0207A /* PostResultType.swift */; };
 		C9EF5A872C7760DC000DD5FB /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5A862C7760DC000DD5FB /* UIViewController+Rx.swift */; };
+		C9EF5A892C7766CF000DD5FB /* FavoriteQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5A882C7766CF000DD5FB /* FavoriteQuery.swift */; };
+		C9EF5A8B2C776968000DD5FB /* NetworkKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5A8A2C776968000DD5FB /* NetworkKey.swift */; };
+		C9EF5A8E2C7774B0000DD5FB /* HashtagsQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5A8D2C7774B0000DD5FB /* HashtagsQuery.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -158,6 +161,9 @@
 		C9E368492C76278900C0207A /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
 		C9E3684B2C7627A000C0207A /* PostResultType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostResultType.swift; sourceTree = "<group>"; };
 		C9EF5A862C7760DC000DD5FB /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
+		C9EF5A882C7766CF000DD5FB /* FavoriteQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteQuery.swift; sourceTree = "<group>"; };
+		C9EF5A8A2C776968000DD5FB /* NetworkKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkKey.swift; sourceTree = "<group>"; };
+		C9EF5A8D2C7774B0000DD5FB /* HashtagsQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagsQuery.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +252,7 @@
 		C90FF0B42C6F397B00590563 /* Enum */ = {
 			isa = PBXGroup;
 			children = (
+				C9EF5A8A2C776968000DD5FB /* NetworkKey.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -280,6 +287,8 @@
 				C90FF0CB2C70766500590563 /* ValidateEmailQuery.swift */,
 				C9118ED32C71DFAA00CF22ED /* ViewPostQuery.swift */,
 				C9118F132C739B7500CF22ED /* UploadPostQuery.swift */,
+				C9EF5A882C7766CF000DD5FB /* FavoriteQuery.swift */,
+				C9EF5A8D2C7774B0000DD5FB /* HashtagsQuery.swift */,
 			);
 			path = Query;
 			sourceTree = "<group>";
@@ -492,6 +501,7 @@
 		C99AA8572C6DF98300C07BC2 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				C9EF5A8C2C777450000DD5FB /* Hashtag */,
 				C90FF0B52C6F466500590563 /* NetworkResultType */,
 				C99AA85D2C6DFBE200C07BC2 /* Post */,
 				C99AA85C2C6DFBDD00C07BC2 /* User */,
@@ -598,6 +608,13 @@
 				C99AA8542C6DF71900C07BC2 /* Resources */,
 			);
 			path = EcoPloggers;
+			sourceTree = "<group>";
+		};
+		C9EF5A8C2C777450000DD5FB /* Hashtag */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Hashtag;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -729,6 +746,7 @@
 				C90FF08E2C6E25DA00590563 /* UnderlineTextField.swift in Sources */,
 				C90FF0A62C6E450F00590563 /* PaddingButton.swift in Sources */,
 				C90FF0A42C6E3CBE00590563 /* TextFieldWithLabelView.swift in Sources */,
+				C9EF5A892C7766CF000DD5FB /* FavoriteQuery.swift in Sources */,
 				C90FF0942C6E30B300590563 /* LogInViewModel.swift in Sources */,
 				C90FF0902C6E280C00590563 /* PlainLabel.swift in Sources */,
 				C90FF0B12C6F27E800590563 /* SignUpQuery.swift in Sources */,
@@ -763,6 +781,7 @@
 				C90FF0D32C709DBC00590563 /* PloggerTabBarController.swift in Sources */,
 				C90FF0B72C6F466E00590563 /* UserResultType.swift in Sources */,
 				C90FF0832C6E186E00590563 /* Reusables.swift in Sources */,
+				C9EF5A8B2C776968000DD5FB /* NetworkKey.swift in Sources */,
 				C9118ED42C71DFAA00CF22ED /* ViewPostQuery.swift in Sources */,
 				C9118F142C739B7500CF22ED /* UploadPostQuery.swift in Sources */,
 				C90FF0DF2C70C64C00590563 /* BaseCollectionViewCell.swift in Sources */,
@@ -778,6 +797,7 @@
 				C976FB1F2C77438D00E433CA /* HashtagLabel.swift in Sources */,
 				C9EF5A872C7760DC000DD5FB /* UIViewController+Rx.swift in Sources */,
 				C9D68BD72C6CD154002AF632 /* AppDelegate.swift in Sources */,
+				C9EF5A8E2C7774B0000DD5FB /* HashtagsQuery.swift in Sources */,
 				C90FF0BF2C6FB2DA00590563 /* String+.swift in Sources */,
 				C9D68BD92C6CD154002AF632 /* SceneDelegate.swift in Sources */,
 			);

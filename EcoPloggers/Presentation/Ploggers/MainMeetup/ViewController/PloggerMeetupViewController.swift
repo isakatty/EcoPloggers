@@ -40,16 +40,23 @@ final class PloggerMeetupViewController: BaseViewController {
     }()
     
     private var dataSource: RxCollectionViewSectionedReloadDataSource<MultiSectionModel>!
+    
+    override init() {
+        super.init()
+        
+//        bind()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureDataSource()
-        bind()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let textField = searchController.searchBar.searchTextField
         textField.subviews.first?.subviews.first?.removeFromSuperview()
+        
+        configureDataSource()
+        bind()
     }
     
     private func configureDataSource() {
@@ -87,6 +94,10 @@ final class PloggerMeetupViewController: BaseViewController {
         let input = PloggersViewModel.Input(viewWillAppear: rx.viewWillAppear)
         let output = viewModel.transform(input: input)
         
+        output.sections
+            .debug("VC - Sections")
+            .bind(to: ploggingCollectionView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
     }
     
     override func configureHierarchy() {
