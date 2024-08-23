@@ -20,6 +20,7 @@ enum Constant {
         static let regular17 = UIFont(name: FontWeight.regular.rawValue, size: 17)
         static let regular18 = UIFont(name: FontWeight.regular.rawValue, size: 18)
         
+        static let medium13 = UIFont(name: FontWeight.medium.rawValue, size: 13)
         static let medium15 = UIFont(name: FontWeight.medium.rawValue, size: 15)
         static let medium16 = UIFont(name: FontWeight.medium.rawValue, size: 16)
         static let medium17 = UIFont(name: FontWeight.medium.rawValue, size: 17)

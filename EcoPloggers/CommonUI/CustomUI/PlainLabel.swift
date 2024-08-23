@@ -23,6 +23,13 @@ final class PlainLabel: UILabel {
         
         font = fontSize
     }
+    init(fontSize: UIFont?, txtColor: UIColor?) {
+        super.init(frame: .zero)
+        
+        font = fontSize
+        textColor = txtColor
+    }
+    
     
     @available(*, unavailable)
     required init?(coder: NSCoder) {

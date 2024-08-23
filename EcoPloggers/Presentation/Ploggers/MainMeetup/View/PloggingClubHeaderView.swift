@@ -16,8 +16,14 @@ final class PloggingClubHeaderView: BaseCollectionViewCell {
     private let headerTitle = PlainLabel(fontSize: Constant.Font.medium20)
     private let addLabel = PlainLabel(fontSize: Constant.Font.regular13)
     
+    let clearBtn: UIButton = {
+        let btn = UIButton()
+        btn.backgroundColor = Constant.Color.clear
+        return btn
+    }()
+    
     override func configureHierarchy() {
-        [headerTitle, addLabel]
+        [headerTitle, addLabel, clearBtn]
             .forEach { contentView.addSubview($0) }
     }
     override func configureLayout() {
@@ -31,13 +37,22 @@ final class PloggingClubHeaderView: BaseCollectionViewCell {
             make.centerY.equalTo(headerTitle)
             make.trailing.equalToSuperview().inset(20)
         }
-        headerTitle.text = "주간 인기글"
+        
+        clearBtn.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
         addLabel.text = "더보기"
         addLabel.textColor = Constant.Color.black.withAlphaComponent(0.5)
     }
     
-    func configureUI(headerText: String) {
+    func configureUI(headerText: String, sectionNum: Int) {
         headerTitle.text = headerText
+        if sectionNum == 1 {
+            addLabel.isHidden = true
+        } else {
+            addLabel.isHidden = false
+        }
     }
     override func prepareForReuse() {
         super.prepareForReuse()
