@@ -86,6 +86,9 @@
 		C9EF5A892C7766CF000DD5FB /* FavoriteQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5A882C7766CF000DD5FB /* FavoriteQuery.swift */; };
 		C9EF5A8B2C776968000DD5FB /* NetworkKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5A8A2C776968000DD5FB /* NetworkKey.swift */; };
 		C9EF5A8E2C7774B0000DD5FB /* HashtagsQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5A8D2C7774B0000DD5FB /* HashtagsQuery.swift */; };
+		C9EF5A992C789A8B000DD5FB /* MeetupListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5A982C789A8B000DD5FB /* MeetupListViewController.swift */; };
+		C9EF5A9B2C789B93000DD5FB /* MeetupListCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5A9A2C789B93000DD5FB /* MeetupListCVCell.swift */; };
+		C9EF5A9D2C78AAAB000DD5FB /* MeetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5A9C2C78AAAB000DD5FB /* MeetupViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -164,6 +167,9 @@
 		C9EF5A882C7766CF000DD5FB /* FavoriteQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteQuery.swift; sourceTree = "<group>"; };
 		C9EF5A8A2C776968000DD5FB /* NetworkKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkKey.swift; sourceTree = "<group>"; };
 		C9EF5A8D2C7774B0000DD5FB /* HashtagsQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagsQuery.swift; sourceTree = "<group>"; };
+		C9EF5A982C789A8B000DD5FB /* MeetupListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupListViewController.swift; sourceTree = "<group>"; };
+		C9EF5A9A2C789B93000DD5FB /* MeetupListCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupListCVCell.swift; sourceTree = "<group>"; };
+		C9EF5A9C2C78AAAB000DD5FB /* MeetupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -296,6 +302,7 @@
 		C90FF0C22C6FBF6A00590563 /* Ploggers */ = {
 			isa = PBXGroup;
 			children = (
+				C9EF5A942C789A62000DD5FB /* MeetupList */,
 				C976FB172C77333300E433CA /* MainMeetup */,
 				C976FB132C7732F000E433CA /* MeetupDetail */,
 			);
@@ -617,6 +624,40 @@
 			path = Hashtag;
 			sourceTree = "<group>";
 		};
+		C9EF5A942C789A62000DD5FB /* MeetupList */ = {
+			isa = PBXGroup;
+			children = (
+				C9EF5A972C789A7A000DD5FB /* View */,
+				C9EF5A962C789A72000DD5FB /* ViewController */,
+				C9EF5A952C789A6D000DD5FB /* ViewModel */,
+			);
+			path = MeetupList;
+			sourceTree = "<group>";
+		};
+		C9EF5A952C789A6D000DD5FB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C9EF5A9C2C78AAAB000DD5FB /* MeetupViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C9EF5A962C789A72000DD5FB /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C9EF5A982C789A8B000DD5FB /* MeetupListViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		C9EF5A972C789A7A000DD5FB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C9EF5A9A2C789B93000DD5FB /* MeetupListCVCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -744,6 +785,7 @@
 			files = (
 				C9118EE12C7204F800CF22ED /* RefreshResponse.swift in Sources */,
 				C90FF08E2C6E25DA00590563 /* UnderlineTextField.swift in Sources */,
+				C9EF5A9B2C789B93000DD5FB /* MeetupListCVCell.swift in Sources */,
 				C90FF0A62C6E450F00590563 /* PaddingButton.swift in Sources */,
 				C90FF0A42C6E3CBE00590563 /* TextFieldWithLabelView.swift in Sources */,
 				C9EF5A892C7766CF000DD5FB /* FavoriteQuery.swift in Sources */,
@@ -755,6 +797,7 @@
 				C976FB1D2C77420300E433CA /* CornerRadiusImage.swift in Sources */,
 				C99AA8682C6DFF6900C07BC2 /* BaseViewController.swift in Sources */,
 				C9118F102C738C9E00CF22ED /* NetworkInterceptor.swift in Sources */,
+				C9EF5A9D2C78AAAB000DD5FB /* MeetupViewModel.swift in Sources */,
 				C9118F122C73940100CF22ED /* PostRouter.swift in Sources */,
 				C976FB222C774FA800E433CA /* MeetupSectionModel.swift in Sources */,
 				C90FF09D2C6E38E000590563 /* SignUpViewController.swift in Sources */,
@@ -799,6 +842,7 @@
 				C9D68BD72C6CD154002AF632 /* AppDelegate.swift in Sources */,
 				C9EF5A8E2C7774B0000DD5FB /* HashtagsQuery.swift in Sources */,
 				C90FF0BF2C6FB2DA00590563 /* String+.swift in Sources */,
+				C9EF5A992C789A8B000DD5FB /* MeetupListViewController.swift in Sources */,
 				C9D68BD92C6CD154002AF632 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

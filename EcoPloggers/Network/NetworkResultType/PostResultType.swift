@@ -7,6 +7,16 @@
 
 import Foundation
 
+enum CommonResult {
+    case success(ViewPostResponseDTO)
+    case badRequest
+    case invalidToken
+    case forbidden
+    case expiredToken
+    case invalidPost
+    case error(CommonError)
+}
+
 enum FetchPostResult {
     case success(ViewPostResponseDTO)
     case badRequest
@@ -33,4 +43,63 @@ enum FetchHashtagsResult {
     case forbidden
     case expiredToken
     case error(CommonError)
+}
+
+extension FetchPostResult {
+    func toCommonResult() -> CommonResult {
+        switch self {
+        case .success(let response):
+            return .success(response)
+        case .badRequest:
+            return .badRequest
+        case .invalidToken:
+            return .invalidToken
+        case .forbidden:
+            return .forbidden
+        case .expiredToken:
+            return .expiredToken
+        case .error(let error):
+            return .error(error)
+        }
+    }
+}
+
+extension FetchFavResult {
+    func toCommonResult() -> CommonResult {
+        switch self {
+        case .success(let response):
+            return .success(response)
+        case .badRequest:
+            return .badRequest
+        case .invalidToken:
+            return .invalidToken
+        case .forbidden:
+            return .forbidden
+        case .invalidPost:
+            return .invalidPost
+        case .expiredToken:
+            return .expiredToken
+        case .error(let error):
+            return .error(error)
+        }
+    }
+}
+
+extension FetchHashtagsResult {
+    func toCommonResult() -> CommonResult {
+        switch self {
+        case .success(let response):
+            return .success(response)
+        case .badRequest:
+            return .badRequest
+        case .invalidToken:
+            return .invalidToken
+        case .forbidden:
+            return .forbidden
+        case .expiredToken:
+            return .expiredToken
+        case .error(let error):
+            return .error(error)
+        }
+    }
 }
