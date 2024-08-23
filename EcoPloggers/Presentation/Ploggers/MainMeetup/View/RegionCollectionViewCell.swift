@@ -18,6 +18,7 @@ final class RegionCollectionViewCell: BaseCollectionViewCell {
         let label = UILabel()
         label.font = Constant.Font.medium15
         label.textAlignment = .center
+        label.textColor = Constant.Color.black
         return label
     }()
     
@@ -27,7 +28,7 @@ final class RegionCollectionViewCell: BaseCollectionViewCell {
     }
     override func configureLayout() {
         regionLabel.snp.makeConstraints { make in
-            make.horizontalEdges.top.equalToSuperview()
+            make.edges.equalToSuperview()
         }
     }
     

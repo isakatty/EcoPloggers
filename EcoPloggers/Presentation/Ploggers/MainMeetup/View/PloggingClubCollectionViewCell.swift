@@ -41,28 +41,27 @@ final class PloggingClubCollectionViewCell: BaseCollectionViewCell {
         openLabel.textColor = Constant.Color.carrotOrange
         
         img.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.horizontalEdges.equalToSuperview().inset(4)
-            make.height.equalTo(img.snp.width)
+            make.top.equalToSuperview().offset(4)
+            make.horizontalEdges.equalToSuperview().inset(8)
         }
         creatorLabel.snp.makeConstraints { make in
             make.top.equalTo(img.snp.bottom).offset(4)
-            make.horizontalEdges.equalTo(img)
+            make.leading.equalTo(img)
             make.height.equalTo(15)
         }
         contentTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(creatorLabel.snp.bottom).offset(8)
+            make.top.equalTo(creatorLabel.snp.bottom).offset(4)
             make.horizontalEdges.equalTo(img)
         }
         locationLabel.snp.makeConstraints { make in
             make.top.equalTo(contentTitleLabel.snp.bottom).offset(8)
+            make.leading.equalToSuperview().inset(4)
             make.bottom.equalToSuperview()
-            make.leading.equalTo(4)
         }
         openLabel.snp.makeConstraints { make in
             make.top.equalTo(contentTitleLabel.snp.bottom).offset(8)
-            make.bottom.equalToSuperview()
             make.trailing.equalToSuperview().inset(4)
+            make.bottom.equalToSuperview()
         }
     }
     
@@ -78,7 +77,7 @@ final class PloggingClubCollectionViewCell: BaseCollectionViewCell {
         
         disposeBag = DisposeBag()
         
-        [creatorLabel, contentTitleLabel, locationLabel, openLabel]
-            .forEach { $0.text = nil }
+//        [creatorLabel, contentTitleLabel, locationLabel, openLabel]
+//            .forEach { $0.text = nil }
     }
 }
