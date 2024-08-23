@@ -28,4 +28,5 @@ struct ViewPostDetailResponse: Decodable {
     let likes2: [String]
     let comments: [Comment]
     let hashtags: [String]
+    let fileData: [Data]
 }

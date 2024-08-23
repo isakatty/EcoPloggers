@@ -80,9 +80,32 @@ extension PloggersViewModel {
             .subscribe(onSuccess: { response in
                 switch response {
                 case .success(let data):
-                    let banner = data.toDomain.data.map { SectionItem.bannerSectionItem(data: $0) }
-                    let bannerSection = MultiSectionModel.bannerSection(title: "", items: banner)
-                    completion(bannerSection)
+                    // 비동기 작업을 기다리기 위해 DispatchGroup 사용
+                    let dispatchGroup = DispatchGroup()
+                    var sectionItems: [SectionItem] = []
+                    
+                    let filePaths = data.toDomainProperty.data.flatMap { $0.files }
+                    
+                    for filePath in filePaths {
+                        dispatchGroup.enter()
+                        
+                        PostNetworkService.fetchFiles(filePath: filePath)
+                            .subscribe(onSuccess: { fileData in
+                                let sectionItem = SectionItem.bannerSectionItem(data: fileData)
+                                sectionItems.append(sectionItem)
+                                dispatchGroup.leave()
+                            }, onFailure: { error in
+                                print("파일 다운로드 실패: \(error)")
+                                dispatchGroup.leave()
+                            })
+                            .disposed(by: self.disposeBag)
+
+                    }
+                    dispatchGroup.notify(queue: .main) {
+                        let bannerSection = MultiSectionModel.bannerSection(title: "", items: sectionItems)
+                        completion(bannerSection)
+                    }
+                    
                 default:
                     print("멈춰")
                     completion(nil)
@@ -99,9 +122,16 @@ extension PloggersViewModel {
             .subscribe(onSuccess: { result in
                 switch result {
                 case .success(let response):
-                    let fav = response.toDomain.data.map { SectionItem.favoriteSectionItem(data: $0) }
-                    let favSection = MultiSectionModel.favoriteSection(title: "즐겨찾기한 플로깅 모임", items: fav)
-                    completion(favSection)
+                    response.toDomain()
+                        .subscribe(onSuccess: { viewPostResponse in
+                            let fav = viewPostResponse.data.map { SectionItem.favoriteSectionItem(data: $0) }
+                            let favSection = MultiSectionModel.favoriteSection(title: "즐겨찾기한 플로깅 모임", items: fav)
+                            completion(favSection)
+                        }, onFailure: { error in
+                            print("ViewPostResponse 변환 실패: \(error)")
+                            completion(nil)
+                        })
+                        .disposed(by: self.disposeBag)
                 default:
                     print("멈춰")
                     completion(nil)
@@ -118,9 +148,16 @@ extension PloggersViewModel {
             .subscribe(onSuccess: { response in
                 switch response {
                 case .success(let response):
-                    let hash = response.toDomain.data.map { SectionItem.latestSectionItem(data: $0)}
-                    let hashtagSection = MultiSectionModel.latestSection(title: "최신 모집글", items: hash)
-                    completion(hashtagSection)
+                    response.toDomain()
+                        .subscribe(onSuccess: { viewPostResponse in
+                            let hash = viewPostResponse.data.map { SectionItem.latestSectionItem(data: $0) }
+                            let hashtagSection = MultiSectionModel.favoriteSection(title: "최신 모집글", items: hash)
+                            completion(hashtagSection)
+                        }, onFailure: { error in
+                            print("ViewPostResponse 변환 실패: \(error)")
+                            completion(nil)
+                        })
+                        .disposed(by: self.disposeBag)
                 default:
                     print("멈춰")
                     completion(nil)

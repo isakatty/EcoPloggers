@@ -19,6 +19,7 @@ enum PostRouter {
     case userPost(postID: String, query: ViewPostQuery)
     case favoritePost(query: FavoriteQuery)
     case hashtags(query: HashtagsQuery)
+    case fetchImage(query: String)
 }
 extension PostRouter: TargetType {
     var baseURL: String {
@@ -30,7 +31,7 @@ extension PostRouter: TargetType {
         switch self {
         case .uploadImg, .uploadPost:
                 .post
-        case .viewPost, .specificPost, .userPost, .favoritePost, .hashtags:
+        case .viewPost, .specificPost, .userPost, .favoritePost, .hashtags, .fetchImage:
                 .get
         case .editPost:
                 .put
@@ -59,6 +60,8 @@ extension PostRouter: TargetType {
             return "/v1/posts/likes-2/me"
         case .hashtags:
             return "/v1/posts/hashtags"
+        case .fetchImage(let query):
+            return "/v1/\(query)"
         }
     }
     
@@ -87,7 +90,7 @@ extension PostRouter: TargetType {
             return baseHeaders.merging(jsonHeader) { value1, _ in
                 value1
             }
-        case .viewPost, .specificPost, .deletePost, .userPost, .favoritePost, .hashtags:
+        case .viewPost, .specificPost, .deletePost, .userPost, .favoritePost, .hashtags, .fetchImage:
             return baseHeaders
         }
     }
@@ -102,7 +105,7 @@ extension PostRouter: TargetType {
                 URLQueryItem(name: "limit", value: viewPostQuery.limit ?? "10"),
                 URLQueryItem(name: "product_id", value: viewPostQuery.product_id)
             ]
-        case .specificPost, .editPost, .deletePost:
+        case .specificPost, .editPost, .deletePost, .fetchImage:
             return nil
         case .userPost( _, let viewPostQuery):
             return [
@@ -141,10 +144,8 @@ extension PostRouter: TargetType {
             return try? encoder.encode(post)
         case .deletePost:
             return nil
-        case .userPost, .favoritePost, .hashtags:
+        case .userPost, .favoritePost, .hashtags, .fetchImage:
             return nil
         }
     }
-    
-    
 }

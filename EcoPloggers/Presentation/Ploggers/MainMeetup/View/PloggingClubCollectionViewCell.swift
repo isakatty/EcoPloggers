@@ -33,16 +33,15 @@ final class PloggingClubCollectionViewCell: BaseCollectionViewCell {
             .forEach { contentView.addSubview($0) }
     }
     override func configureLayout() {
-        super.configureLayout()
-        creatorLabel.text = "영등포 불주먹"
-        contentTitleLabel.text = "도림천을 기준으로 플로깅을 해보아요"
-        locationLabel.text = "영등포구"
+//        super.configureLayout()
         openLabel.text = "모집중"
         openLabel.textColor = Constant.Color.carrotOrange
+        contentTitleLabel.numberOfLines = .zero
         
         img.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(4)
             make.horizontalEdges.equalToSuperview().inset(8)
+            make.height.equalTo(img.snp.width)
         }
         creatorLabel.snp.makeConstraints { make in
             make.top.equalTo(img.snp.bottom).offset(4)
@@ -55,7 +54,7 @@ final class PloggingClubCollectionViewCell: BaseCollectionViewCell {
         }
         locationLabel.snp.makeConstraints { make in
             make.top.equalTo(contentTitleLabel.snp.bottom).offset(8)
-            make.leading.equalToSuperview().inset(4)
+            make.leading.equalTo(img.snp.leading)
             make.bottom.equalToSuperview()
         }
         openLabel.snp.makeConstraints { make in

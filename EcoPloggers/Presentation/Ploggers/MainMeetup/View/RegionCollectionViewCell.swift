@@ -27,8 +27,10 @@ final class RegionCollectionViewCell: BaseCollectionViewCell {
             .forEach { contentView.addSubview($0) }
     }
     override func configureLayout() {
+        super.configureLayout()
+        
         regionLabel.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.center.equalToSuperview()
         }
     }
     

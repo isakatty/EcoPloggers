@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Kingfisher
 import RxDataSources
 import RxSwift
 import RxCocoa
@@ -36,6 +37,7 @@ final class PloggerMeetupViewController: BaseViewController {
         cv.register(RegionCollectionViewCell.self, forCellWithReuseIdentifier: RegionCollectionViewCell.identifier)
         cv.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         cv.layer.cornerRadius = 40
+        cv.backgroundColor = Constant.Color.secondaryBG
         return cv
     }()
     
@@ -62,38 +64,28 @@ final class PloggerMeetupViewController: BaseViewController {
         dataSource = RxCollectionViewSectionedReloadDataSource<MultiSectionModel>(configureCell: { dataSource, collectionView, indexPath, item in
             switch item {
             case .bannerSectionItem(let data):
-                guard let cell: BannerCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: BannerCollectionViewCell.identifier, for: indexPath) as? BannerCollectionViewCell else { return UICollectionViewCell() }
-                cell.configureUI(count: String(indexPath.item + 1), img: UIImage(systemName: "star.fill"))
+                guard let cell: BannerCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: BannerCollectionViewCell.identifier, for: indexPath) as? BannerCollectionViewCell
+                else { return UICollectionViewCell() }
+                
+                cell.configureUI(count: String(indexPath.item + 1), img: UIImage(data: data))
+                
                 return cell
             case .regionSectionItem(data: let data):
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RegionCollectionViewCell.identifier, for: indexPath) as? RegionCollectionViewCell else { return UICollectionViewCell() }
                 cell.configureLabel(regionName: data)
                 return cell
             case .favoriteSectionItem(data: let data):
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PloggingClubCollectionViewCell.identifier, for: indexPath) as? PloggingClubCollectionViewCell else { return UICollectionViewCell() }
-//                cell.configure
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PloggingClubCollectionViewCell.identifier, for: indexPath) as? PloggingClubCollectionViewCell
+                else { return UICollectionViewCell() }
+                
+                cell.configureUI(imageFile: UIImage(data: data.fileData.first!), creator: data.creator.nick, title: data.title, location: "영등포")
                 return cell
             case .latestSectionItem(data: let data):
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PloggingClubCollectionViewCell.identifier, for: indexPath) as? PloggingClubCollectionViewCell else { return UICollectionViewCell() }
                 
+                cell.configureUI(imageFile: UIImage(data: data.fileData.first!), creator: data.creator.nick, title: data.title, location: "영등포")
                 return cell
             }
-            
-//            switch indexPath.section {
-//            case 0:
-//                guard let cell: BannerCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: BannerCollectionViewCell.identifier, for: indexPath) as? BannerCollectionViewCell else { return UICollectionViewCell() }
-//                cell.configureUI(count: String(indexPath.item + 1), img: UIImage(systemName: "star.fill"))
-//                return cell
-//            case 1:
-//                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RegionCollectionViewCell.identifier, for: indexPath) as? RegionCollectionViewCell else { return UICollectionViewCell() }
-//                
-//                
-//                return cell
-//            default:
-//                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PloggingClubCollectionViewCell.identifier, for: indexPath) as? PloggingClubCollectionViewCell else { return UICollectionViewCell() }
-//                
-//                return cell
-//            }
         }, configureSupplementaryView: { dataSource, collectionView, headerText, indexPath in
             switch indexPath.section {
             case 0:
@@ -113,9 +105,10 @@ final class PloggerMeetupViewController: BaseViewController {
         let output = viewModel.transform(input: input)
         
         output.sections
-            .delay(.seconds(2), scheduler: MainScheduler.instance)
             .bind(to: ploggingCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
+        
+        
     }
     
     override func configureHierarchy() {
@@ -182,17 +175,18 @@ extension PloggerMeetupViewController {
             heightDimension: .fractionalHeight(1.0)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 5, leading: 0, bottom: 5, trailing: 0)
+        item.contentInsets = .init(top: 5, leading: 4, bottom: 5, trailing: 4)
         
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(0.08)
+            heightDimension: .fractionalHeight(0.04)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [createSectionHeader()]
-        section.contentInsets = .init(top: 5, leading: 15, bottom: 5, trailing: 15)
+        section.contentInsets = .init(top: 5, leading: 15, bottom: 15, trailing: 15)
+        section.orthogonalScrollingBehavior = .continuous
         return section
     }
     /// 기본 Cell layout
@@ -206,7 +200,7 @@ extension PloggerMeetupViewController {
         
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(0.38)
+            heightDimension: .fractionalHeight(0.42)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
@@ -235,7 +229,6 @@ extension PloggerMeetupViewController {
         section.contentInsets = .init(top: 10, leading: 15, bottom: 10, trailing: 15)
         return section
     }
-
     private func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),

@@ -43,7 +43,6 @@ struct PostNetworkService {
             return Disposables.create()
         }
     }
-    
     static func fetchFavPost(query: FavoriteQuery) -> Single<FetchFavResult> {
         return Single.create { single in
             do {
@@ -104,6 +103,28 @@ struct PostNetworkService {
             } catch {
                 single(.failure(error))
             }
+            return Disposables.create()
+        }
+    }
+    
+    static func fetchFiles(filePath: String) -> Single<Data> {
+        return Single.create { single in
+            
+            do {
+                let urlRequest = try PostRouter.fetchImage(query: filePath).asURLRequest()
+                AF.request(urlRequest, interceptor: NetworkInterceptor())
+                    .responseData { response in
+                        switch response.result {
+                        case .success(let data):
+                            single(.success(data))
+                        case .failure(let error):
+                            single(.failure(error))
+                        }
+                    }
+            } catch {
+                single(.failure(error))
+            }
+            
             return Disposables.create()
         }
     }

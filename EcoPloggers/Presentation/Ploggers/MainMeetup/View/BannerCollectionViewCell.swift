@@ -15,6 +15,7 @@ final class BannerCollectionViewCell: BaseCollectionViewCell {
         let img = UIImageView()
         img.contentMode = .scaleAspectFill
         img.clipsToBounds = true
+        img.layer.cornerRadius = 25
         return img
     }()
     

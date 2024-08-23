@@ -7,13 +7,15 @@
 
 import Foundation
 
+import RxSwift
+
 struct ViewPostResponseDTO: Decodable {
     let data: [ViewPostDetailResponseDTO]
     let next_cursor: String
 }
 
 extension ViewPostResponseDTO {
-    var toDomain: ViewPostResponse {
+    var toDomainProperty: ViewPostResponse {
         return .init(
             data: data.map {
                 .init(
@@ -32,11 +34,45 @@ extension ViewPostResponseDTO {
                     joins: $0.likes,
                     likes2: $0.likes2,
                     comments: $0.comments,
-                    hashtags: $0.hashTags
+                    hashtags: $0.hashTags,
+                    fileData: []
                 )
             },
             next_cursor: next_cursor
         )
+    }
+    func toDomain() -> Single<ViewPostResponse> {
+        let fileData = data.map { dto in
+            let files = dto.files.map { filePath in
+                PostNetworkService.fetchFiles(filePath: filePath)
+            }
+            
+            return Single.zip(files).map { files in
+                return ViewPostDetailResponse.init(
+                    post_id: dto.post_id,
+                    product_id: dto.product_id,
+                    title: dto.title,
+                    content: dto.content,
+                    required_time: dto.content1,
+                    path: dto.content2,
+                    recruits: dto.content3,
+                    price: dto.content4,
+                    due_date: dto.content5,
+                    posted_date: dto.createdAt,
+                    creator: dto.creator,
+                    files: dto.files,
+                    joins: dto.likes,
+                    likes2: dto.likes2,
+                    comments: dto.comments,
+                    hashtags: dto.hashTags,
+                    fileData: files
+                )
+            }
+        }
+        
+        return Single.zip(fileData).map { response in
+            return ViewPostResponse(data: response, next_cursor: next_cursor)
+        }
     }
 }
 struct ViewPostDetailResponseDTO: Decodable {
