@@ -15,26 +15,55 @@ final class PloggersViewModel: ViewModelType {
     
     struct Input {
         let viewWillAppear: Observable<Void>
+        let headerTapEvent: PublishRelay<IndexPath>
+        let headerText: PublishRelay<String>
     }
     struct Output {
         let sections: BehaviorRelay<[MultiSectionModel]>
+        let postRouter: PublishRelay<PostRouter>
+        let naviTitle: PublishRelay<String>
     }
     func transform(input: Input) -> Output {
         let sectionData = BehaviorRelay<[MultiSectionModel]>(value: [])
+        let postRouter = PublishRelay<PostRouter>()
+        
         input.viewWillAppear
             .debug("VM - ViewWillAppear")
             .subscribe(with: self) { owner, _ in
                 owner.fetchSections { sections in
-                    sectionData.accept(sections)
+                    sectionData.accept(sections.sorted())
                     dump(sections)
                 }
             } onError: { owner, error in
                 print(error)
             }
             .disposed(by: disposeBag)
+        
+        input.headerTapEvent
+            .bind { indexPath in
+                switch indexPath.section {
+                case 2: // 찜한 모임 -> Router 만들어서 내보내줘야함
+                    print("2")
+                    let query = FavoriteQuery(next: nil, limit: "20")
+                    let favRouter = PostRouter.favoritePost(query: query)
+                    postRouter.accept(favRouter)
+                case 3: // 최신글 ->
+                    print("3")
+                    let query = HashtagsQuery(next: nil, limit: "20", product_id: nil, hashTag: NetworkKey.hashtag.rawValue)
+                    let latestRouter = PostRouter.hashtags(query: query)
+                    postRouter.accept(latestRouter)
+                default:
+                    print("헤더")
+                }
+            }
+            .disposed(by: disposeBag)
 
         
-        return Output(sections: sectionData)
+        return Output(
+            sections: sectionData,
+            postRouter: postRouter,
+            naviTitle: input.headerText
+        )
     }
 }
 
@@ -71,7 +100,7 @@ extension PloggersViewModel {
         }
 
         dispatchGroup.notify(queue: .main) {
-            completion(fetchedSections.sorted())
+            completion(fetchedSections)
         }
     }
     private func fetchBanner(completion: @escaping (MultiSectionModel?) -> Void) {
@@ -151,7 +180,7 @@ extension PloggersViewModel {
                     response.toDomain()
                         .subscribe(onSuccess: { viewPostResponse in
                             let hash = viewPostResponse.data.map { SectionItem.latestSectionItem(data: $0) }
-                            let hashtagSection = MultiSectionModel.favoriteSection(title: "최신 모집글", items: hash)
+                            let hashtagSection = MultiSectionModel.latestSection(title: "최신 모집글", items: hash)
                             completion(hashtagSection)
                         }, onFailure: { error in
                             print("ViewPostResponse 변환 실패: \(error)")

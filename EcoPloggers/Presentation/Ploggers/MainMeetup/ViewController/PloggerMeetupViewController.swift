@@ -43,6 +43,9 @@ final class PloggerMeetupViewController: BaseViewController {
     
     private var dataSource: RxCollectionViewSectionedReloadDataSource<MultiSectionModel>!
     
+    private var headerTapEvent = PublishRelay<IndexPath>()
+    private var headerText = PublishRelay<String>()
+    
     override init() {
         super.init()
         
@@ -75,15 +78,18 @@ final class PloggerMeetupViewController: BaseViewController {
                 cell.configureLabel(regionName: data)
                 return cell
             case .favoriteSectionItem(data: let data):
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PloggingClubCollectionViewCell.identifier, for: indexPath) as? PloggingClubCollectionViewCell
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PloggingClubCollectionViewCell.identifier, for: indexPath) as? PloggingClubCollectionViewCell,
+                      let fileData = data.fileData.first
                 else { return UICollectionViewCell() }
                 
-                cell.configureUI(imageFile: UIImage(data: data.fileData.first!), creator: data.creator.nick, title: data.title, location: "영등포")
+                cell.configureUI(imageFile: UIImage(data: fileData), creator: data.creator.nick, title: data.title, location: "영등포")
                 return cell
             case .latestSectionItem(data: let data):
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PloggingClubCollectionViewCell.identifier, for: indexPath) as? PloggingClubCollectionViewCell else { return UICollectionViewCell() }
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PloggingClubCollectionViewCell.identifier, for: indexPath) as? PloggingClubCollectionViewCell,
+                      let fileData = data.fileData.first
+                else { return UICollectionViewCell() }
                 
-                cell.configureUI(imageFile: UIImage(data: data.fileData.first!), creator: data.creator.nick, title: data.title, location: "영등포")
+                cell.configureUI(imageFile: UIImage(data: fileData), creator: data.creator.nick, title: data.title, location: "영등포")
                 return cell
             }
         }, configureSupplementaryView: { dataSource, collectionView, headerText, indexPath in
@@ -94,20 +100,55 @@ final class PloggerMeetupViewController: BaseViewController {
                 guard let header: PloggingClubHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PloggingClubHeaderView.identifier, for: indexPath) as? PloggingClubHeaderView else { return UICollectionReusableView() }
                 
                 let section = dataSource.sectionModels[indexPath.section]
-                header.configureUI(headerText: section.title)
+                header.configureUI(headerText: section.title, sectionNum: indexPath.section)
+                
+                header.clearBtn.rx.tap
+                    .map { indexPath }
+                    .bind(with: self) { owner, indexPath in
+                        owner.headerTapEvent.accept(indexPath)
+                        owner.headerText.accept(section.title)
+                    }
+                    .disposed(by: header.disposeBag)
+                
                 return header
             }
         })
         
     }
     private func bind() {
-        let input = PloggersViewModel.Input(viewWillAppear: rx.methodInvoked(#selector(viewWillAppear)).map { _ in })
+        let input = PloggersViewModel.Input(
+            viewWillAppear: rx.methodInvoked(#selector(viewWillAppear)).map { _ in },
+            headerTapEvent: headerTapEvent,
+            headerText: headerText
+        )
         let output = viewModel.transform(input: input)
         
         output.sections
             .bind(to: ploggingCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
+        Observable.zip(ploggingCollectionView.rx.modelSelected(SectionItem.self), ploggingCollectionView.rx.itemSelected)
+            .bind { model, indexPath in
+                switch model {
+                case .bannerSectionItem(let data):
+                    print(data, indexPath)
+                case .regionSectionItem(data: let data):
+                    print(data, indexPath)
+                case .favoriteSectionItem(data: let data):
+                    print(data, indexPath)
+                case .latestSectionItem(data: let data):
+                    print(data, indexPath)
+                }
+            }
+            .disposed(by: disposeBag)
+
+        Observable.zip(output.postRouter, output.naviTitle)
+            .bind(with: self) { owner, arg1 in
+                let vc = MeetupListViewController(viewModel: MeetupViewModel(router: arg1.0))
+                vc.navigationController?.title = arg1.1
+                owner.navigationController?.pushViewController(vc, animated: true)
+            }
+            .disposed(by: disposeBag)
         
     }
     
