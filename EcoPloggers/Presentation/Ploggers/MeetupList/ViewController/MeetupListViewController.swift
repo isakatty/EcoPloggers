@@ -36,13 +36,28 @@ final class MeetupListViewController: BaseViewController {
     }
     
     func bind() {
-        let input = MeetupViewModel.Input(viewWillAppear: rx.methodInvoked(#selector(viewWillAppear)).map { _ in })
+        let selectedData = PublishRelay<ViewPostDetailResponse>()
+        let input = MeetupViewModel.Input(
+            viewWillAppear: rx.methodInvoked(#selector(viewWillAppear)).map { _ in },
+            cellTapEvent: selectedData)
         let output = viewModel.transform(input: input)
         
         output.meetupList
             .asDriver()
             .drive(listCollectionView.rx.items(cellIdentifier: MeetupListCVCell.identifier, cellType: MeetupListCVCell.self)) { row, element, cell in
                 cell.configureUI(data: element)
+            }
+            .disposed(by: disposeBag)
+        
+        Observable.zip(listCollectionView.rx.itemSelected, listCollectionView.rx.modelSelected(ViewPostDetailResponse.self))
+            .bind(with: self) { owner, arg1 in
+                selectedData.accept(arg1.1)
+            }
+            .disposed(by: disposeBag)
+        output.cellTapEvent
+            .bind(with: self) { owner, detailData in
+                let vc = MeetupDetailViewController(viewModel: MeetupDetailViewModel(detailPost: detailData))
+                owner.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: disposeBag)
 

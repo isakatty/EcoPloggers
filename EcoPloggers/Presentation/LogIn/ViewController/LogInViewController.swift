@@ -73,8 +73,7 @@ final class LogInViewController: BaseViewController {
             .bind(with: self) { owner, success in
                 // 로그인된 정보를 들고 화면 전환
                 if success {
-                    let vc = PloggerMeetupViewController()
-                    owner.navigationController?.pushViewController(vc, animated: true)
+                    owner.setRootViewController(PloggerTabBarController())
                 }
             }
             .disposed(by: disposeBag)

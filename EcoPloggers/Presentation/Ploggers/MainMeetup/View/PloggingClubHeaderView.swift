@@ -60,4 +60,8 @@ final class PloggingClubHeaderView: BaseCollectionViewCell {
         disposeBag = DisposeBag()
         addLabel.textColor = Constant.Color.black.withAlphaComponent(0.5)
     }
+    func configureMeetupUI(headerText: String) {
+        headerTitle.text = headerText
+        addLabel.isHidden = true
+    }
 }

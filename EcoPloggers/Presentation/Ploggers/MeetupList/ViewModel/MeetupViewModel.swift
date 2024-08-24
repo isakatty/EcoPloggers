@@ -20,9 +20,11 @@ final class MeetupViewModel: ViewModelType {
     
     struct Input {
         let viewWillAppear: Observable<Void>
+        let cellTapEvent: PublishRelay<ViewPostDetailResponse>
     }
     struct Output {
         let meetupList: Driver<[ViewPostDetailResponse]>
+        let cellTapEvent: PublishRelay<ViewPostDetailResponse>
     }
     func transform(input: Input) -> Output {
         let lists = BehaviorRelay<[ViewPostDetailResponse]>(value: [])
@@ -62,7 +64,10 @@ final class MeetupViewModel: ViewModelType {
             .bind(to: lists)
             .disposed(by: disposeBag)
         
-        return Output(meetupList: lists.asDriver(onErrorJustReturn: []))
+        return Output(
+            meetupList: lists.asDriver(onErrorJustReturn: []),
+            cellTapEvent: input.cellTapEvent
+        )
     }
     
 }
