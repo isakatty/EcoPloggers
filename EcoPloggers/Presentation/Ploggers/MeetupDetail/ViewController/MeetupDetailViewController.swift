@@ -21,6 +21,7 @@ final class MeetupDetailViewController: BaseViewController {
         cv.register(MeetupInfoCVCell.self, forCellWithReuseIdentifier: MeetupInfoCVCell.identifier)
         cv.register(MeetupDetailCVCell.self, forCellWithReuseIdentifier: MeetupDetailCVCell.identifier)
         cv.register(MeetupMapCVCell.self, forCellWithReuseIdentifier: MeetupMapCVCell.identifier)
+        cv.register(MeetupProfileCVCell.self, forCellWithReuseIdentifier: MeetupProfileCVCell.identifier)
         cv.register(PloggingClubHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PloggingClubHeaderView.identifier)
         return cv
     }()
@@ -55,12 +56,15 @@ final class MeetupDetailViewController: BaseViewController {
                       let fileData = data.fileData.first
                 else { return UICollectionViewCell() }
                 cell.configureCompoUI(time: data.required_time, people: data.recruits, date: data.due_date)
-                cell.configureProfile(profileImgData: "", nickname: data.creator.nick)
                 cell.configureUI(bgImgData: fileData, category: data.product_id, titleTxt: data.title, price: data.price)
                 return cell
             case .mapSectionItem(let data):
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetupMapCVCell.identifier, for: indexPath) as? MeetupMapCVCell else { return UICollectionViewCell() }
 //                cell.configure
+                return cell
+            case .profileSectionItem(let data):
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetupProfileCVCell.identifier, for: indexPath) as? MeetupProfileCVCell else { return UICollectionViewCell() }
+                cell.configureProfile(profileImgData: "", nickname: data.creator.nick)
                 return cell
             }
         }, configureSupplementaryView: { dataSource, collectionView, title, indexPath in
@@ -102,6 +106,8 @@ extension MeetupDetailViewController {
                 return self.createDetailSectionLayout()
             case 2:
                 return self.createMapSectionLayout()
+            case 3:
+                return self.createProfileSectionLayout()
             default:
                 return self.createMapSectionLayout()
             }
@@ -117,7 +123,7 @@ extension MeetupDetailViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(0.71)
+            heightDimension: .fractionalHeight(0.55)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
@@ -156,6 +162,24 @@ extension MeetupDetailViewController {
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
             heightDimension: .fractionalHeight(0.3)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.boundarySupplementaryItems = [createSectionHeader()]
+        return section
+    }
+    private func createProfileSectionLayout() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = .init(top: 5, leading: 5, bottom: 5, trailing: 5)
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .absolute(100)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         

@@ -36,6 +36,7 @@ final class MeetupDetailViewModel: ViewModelType {
                 section.append(.meetupInfoSection(title: "Top info", items: [DetailSectionItem.infoSectionItem(data: self.detailPost)]))
                 section.append(.meetupDetailSection(title: "모임 정보", items: [DetailSectionItem.detailSectionItem(data: self.detailPost)]))
                 section.append(.meetupMapSection(title: "위치", items: [DetailSectionItem.mapSectionItem(data: self.detailPost)]))
+                section.append(.meetupProfileSection(title: "작성자 프로필", items: [DetailSectionItem.profileSectionItem(data: self.detailPost)]))
                 return section
             }
             .bind(to: postData)

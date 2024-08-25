@@ -36,15 +36,9 @@ final class MeetupInfoCVCell: BaseCollectionViewCell {
     private let timeView = InfoComponent(infoTitle: "소요시간")
     private let participantsView = InfoComponent(infoTitle: "참여인원")
     private let gatherDateView = InfoComponent(infoTitle: "마감날짜")
-    private let profileView = MeetupProfileView()
     
-    private let secondSeperateBar: UIView = {
-        let view = UIView()
-        view.backgroundColor = Constant.Color.lightGray.withAlphaComponent(0.6)
-        return view
-    }()
     override func configureHierarchy() {
-        [bgImg, categoryLabel, contentTitleLabel, priceLabel, seperateBar, compoStackView, secondSeperateBar, profileView]
+        [bgImg, categoryLabel, contentTitleLabel, priceLabel, seperateBar, compoStackView]
             .forEach { contentView.addSubview($0) }
         [timeView, participantsView, gatherDateView]
             .forEach { compoStackView.addArrangedSubview($0) }
@@ -77,16 +71,7 @@ final class MeetupInfoCVCell: BaseCollectionViewCell {
             make.top.equalTo(seperateBar.snp.bottom).offset(8)
             make.horizontalEdges.equalToSuperview().inset(8)
             make.height.equalTo(50)
-        }
-        secondSeperateBar.snp.makeConstraints { make in
-            make.top.equalTo(compoStackView.snp.bottom).offset(12)
-            make.height.equalTo(1)
-            make.horizontalEdges.equalToSuperview().inset(8)
-        }
-        profileView.snp.makeConstraints { make in
-            make.top.equalTo(secondSeperateBar.snp.bottom).offset(8)
-            make.horizontalEdges.bottom.equalToSuperview()
-            make.height.equalTo(100)
+            make.bottom.equalToSuperview()
         }
     }
     
@@ -106,8 +91,5 @@ final class MeetupInfoCVCell: BaseCollectionViewCell {
         
         timeView.configureUI(detailInfo: time)
         participantsView.configureUI(detailInfo: people)
-    }
-    func configureProfile(profileImgData: String, nickname: String?) {
-        profileView.configureUI(nickname: nickname)
     }
 }

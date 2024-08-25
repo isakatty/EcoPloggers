@@ -13,6 +13,7 @@ enum DetailSectionModel: Comparable {
     case meetupInfoSection(title: String, items: [DetailSectionItem])
     case meetupDetailSection(title: String, items: [DetailSectionItem])
     case meetupMapSection(title: String, items: [DetailSectionItem])
+    case meetupProfileSection(title: String, items: [DetailSectionItem])
     
     // 비동기로 데이터 처리를 해주는게 아니라서 sort해줄 필요가 없는데 있어야할까?
     var sortOption: Int {
@@ -20,6 +21,7 @@ enum DetailSectionModel: Comparable {
         case .meetupInfoSection(_, _): return 0
         case .meetupDetailSection(_, _): return 1
         case .meetupMapSection(_, _): return 2
+        case .meetupProfileSection(_, _): return 3
         }
     }
     static func == (lhs: DetailSectionModel, rhs: DetailSectionModel) -> Bool {
@@ -34,6 +36,7 @@ enum DetailSectionItem {
     case infoSectionItem(data: ViewPostDetailResponse)
     case detailSectionItem(data: ViewPostDetailResponse)
     case mapSectionItem(data: ViewPostDetailResponse)
+    case profileSectionItem(data: ViewPostDetailResponse)
 }
 
 extension DetailSectionModel: SectionModelType {
@@ -44,7 +47,8 @@ extension DetailSectionModel: SectionModelType {
         switch self {
         case .meetupInfoSection(_, let items),
              .meetupDetailSection(_, let items),
-             .meetupMapSection(_, let items):
+             .meetupMapSection(_, let items),
+             .meetupProfileSection(_, let items):
             return items
         }
     }
@@ -57,6 +61,8 @@ extension DetailSectionModel: SectionModelType {
             self = .meetupDetailSection(title: title, items: items)
         case let .meetupMapSection(title, _):
             self = .meetupMapSection(title: title, items: items)
+        case let .meetupProfileSection(title, _):
+            self = .meetupProfileSection(title: title, items: items)
         }
     }
 }
@@ -65,7 +71,8 @@ extension DetailSectionModel {
         switch self {
         case .meetupInfoSection(let title, _),
              .meetupDetailSection(let title, _),
-             .meetupMapSection(let title, _):
+             .meetupMapSection(let title, _),
+             .meetupProfileSection(let title, _):
             return title
         }
     }
