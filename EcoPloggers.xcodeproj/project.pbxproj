@@ -106,6 +106,13 @@
 		C9EF5ABF2C7B253E000DD5FB /* ProfileDetailInfoCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5ABE2C7B253E000DD5FB /* ProfileDetailInfoCVCell.swift */; };
 		C9EF5AC12C7B25B8000DD5FB /* ProfileInfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5AC02C7B25B8000DD5FB /* ProfileInfoButton.swift */; };
 		C9EF5AC52C7B3F3A000DD5FB /* MyPageSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5AC42C7B3F3A000DD5FB /* MyPageSectionModel.swift */; };
+		C9EF5AC82C7B4AAE000DD5FB /* ProfileResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5AC72C7B4AAE000DD5FB /* ProfileResultType.swift */; };
+		C9EF5ACA2C7B4AC3000DD5FB /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5AC92C7B4AC3000DD5FB /* ProfileRouter.swift */; };
+		C9EF5ACC2C7B57AA000DD5FB /* SearchOtherQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5ACB2C7B57AA000DD5FB /* SearchOtherQuery.swift */; };
+		C9EF5ACE2C7B5C53000DD5FB /* ProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5ACD2C7B5C53000DD5FB /* ProfileResponse.swift */; };
+		C9EF5AD02C7B5D04000DD5FB /* OtherProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5ACF2C7B5D04000DD5FB /* OtherProfileResponse.swift */; };
+		C9EF5AD22C7B5D49000DD5FB /* UserSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5AD12C7B5D49000DD5FB /* UserSearchResponse.swift */; };
+		C9EF5AD42C7B624E000DD5FB /* ProfileNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5AD32C7B624E000DD5FB /* ProfileNetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -204,6 +211,13 @@
 		C9EF5ABE2C7B253E000DD5FB /* ProfileDetailInfoCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailInfoCVCell.swift; sourceTree = "<group>"; };
 		C9EF5AC02C7B25B8000DD5FB /* ProfileInfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoButton.swift; sourceTree = "<group>"; };
 		C9EF5AC42C7B3F3A000DD5FB /* MyPageSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSectionModel.swift; sourceTree = "<group>"; };
+		C9EF5AC72C7B4AAE000DD5FB /* ProfileResultType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResultType.swift; sourceTree = "<group>"; };
+		C9EF5AC92C7B4AC3000DD5FB /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
+		C9EF5ACB2C7B57AA000DD5FB /* SearchOtherQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOtherQuery.swift; sourceTree = "<group>"; };
+		C9EF5ACD2C7B5C53000DD5FB /* ProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponse.swift; sourceTree = "<group>"; };
+		C9EF5ACF2C7B5D04000DD5FB /* OtherProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherProfileResponse.swift; sourceTree = "<group>"; };
+		C9EF5AD12C7B5D49000DD5FB /* UserSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchResponse.swift; sourceTree = "<group>"; };
+		C9EF5AD32C7B624E000DD5FB /* ProfileNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,6 +320,7 @@
 				C9E3684B2C7627A000C0207A /* PostResultType.swift */,
 				C90FF0B62C6F466E00590563 /* UserResultType.swift */,
 				C9E368492C76278900C0207A /* CommonError.swift */,
+				C9EF5AC72C7B4AAE000DD5FB /* ProfileResultType.swift */,
 			);
 			path = NetworkResultType;
 			sourceTree = "<group>";
@@ -318,6 +333,9 @@
 				C90FF0CD2C70935800590563 /* SignUpResponse.swift */,
 				C9118ED12C71DC7200CF22ED /* ViewPostResponseDTO.swift */,
 				C9118EE02C7204F800CF22ED /* RefreshResponse.swift */,
+				C9EF5ACD2C7B5C53000DD5FB /* ProfileResponse.swift */,
+				C9EF5ACF2C7B5D04000DD5FB /* OtherProfileResponse.swift */,
+				C9EF5AD12C7B5D49000DD5FB /* UserSearchResponse.swift */,
 			);
 			path = ResponseDTO;
 			sourceTree = "<group>";
@@ -332,6 +350,7 @@
 				C9118F132C739B7500CF22ED /* UploadPostQuery.swift */,
 				C9EF5A882C7766CF000DD5FB /* FavoriteQuery.swift */,
 				C9EF5A8D2C7774B0000DD5FB /* HashtagsQuery.swift */,
+				C9EF5ACB2C7B57AA000DD5FB /* SearchOtherQuery.swift */,
 			);
 			path = Query;
 			sourceTree = "<group>";
@@ -417,10 +436,10 @@
 		C90FF0D72C70A05B00590563 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
+				C9EF5AD52C7B6D7C000DD5FB /* Model */,
 				C9EF5AB52C7B1466000DD5FB /* View */,
 				C9EF5AB42C7B145C000DD5FB /* ViewController */,
 				C9EF5AB32C7B1450000DD5FB /* ViewModel */,
-				C9EF5AC42C7B3F3A000DD5FB /* MyPageSectionModel.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -556,6 +575,7 @@
 		C99AA8572C6DF98300C07BC2 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				C9EF5AC62C7B4A9D000DD5FB /* Profile */,
 				C9EF5A8C2C777450000DD5FB /* Hashtag */,
 				C90FF0B52C6F466500590563 /* NetworkResultType */,
 				C99AA85D2C6DFBE200C07BC2 /* Post */,
@@ -741,6 +761,23 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		C9EF5AC62C7B4A9D000DD5FB /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				C9EF5AC92C7B4AC3000DD5FB /* ProfileRouter.swift */,
+				C9EF5AD32C7B624E000DD5FB /* ProfileNetworkService.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		C9EF5AD52C7B6D7C000DD5FB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C9EF5AC42C7B3F3A000DD5FB /* MyPageSectionModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -905,6 +942,7 @@
 				C9118F072C737C6100CF22ED /* TargetType.swift in Sources */,
 				C90FF0852C6E187B00590563 /* LogInQuery.swift in Sources */,
 				C9118ED22C71DC7200CF22ED /* ViewPostResponseDTO.swift in Sources */,
+				C9EF5AD22C7B5D49000DD5FB /* UserSearchResponse.swift in Sources */,
 				C9D68BDB2C6CD154002AF632 /* LogInViewController.swift in Sources */,
 				C9E368482C7626F700C0207A /* PostNetworkService.swift in Sources */,
 				C90FF0DD2C70C60800590563 /* RegionCollectionViewCell.swift in Sources */,
@@ -912,23 +950,28 @@
 				C9E3684C2C7627A000C0207A /* PostResultType.swift in Sources */,
 				C90FF0CC2C70766500590563 /* ValidateEmailQuery.swift in Sources */,
 				C90FF0D62C70A04000590563 /* SearchViewController.swift in Sources */,
+				C9EF5AC82C7B4AAE000DD5FB /* ProfileResultType.swift in Sources */,
 				C9118ECB2C71B1DB00CF22ED /* BannerCollectionViewCell.swift in Sources */,
 				C90FF0CE2C70935800590563 /* SignUpResponse.swift in Sources */,
 				C99AA86C2C6E001100C07BC2 /* BaseView.swift in Sources */,
+				C9EF5AD42C7B624E000DD5FB /* ProfileNetworkService.swift in Sources */,
 				C90FF0892C6E20B300590563 /* RoundedButton.swift in Sources */,
 				C90FF0D32C709DBC00590563 /* PloggerTabBarController.swift in Sources */,
 				C90FF0B72C6F466E00590563 /* UserResultType.swift in Sources */,
 				C9EF5AA72C79DF3B000DD5FB /* MeetupDetailCVCell.swift in Sources */,
 				C90FF0832C6E186E00590563 /* Reusables.swift in Sources */,
 				C9EF5A8B2C776968000DD5FB /* NetworkKey.swift in Sources */,
+				C9EF5AD02C7B5D04000DD5FB /* OtherProfileResponse.swift in Sources */,
 				C9118ED42C71DFAA00CF22ED /* ViewPostQuery.swift in Sources */,
 				C9EF5AA32C79B38A000DD5FB /* InfoComponent.swift in Sources */,
 				C9118F142C739B7500CF22ED /* UploadPostQuery.swift in Sources */,
+				C9EF5ACC2C7B57AA000DD5FB /* SearchOtherQuery.swift in Sources */,
 				C90FF0DF2C70C64C00590563 /* BaseCollectionViewCell.swift in Sources */,
 				C90FF0E12C70CAC400590563 /* PloggersViewModel.swift in Sources */,
 				C9E3682C2C74F52200C0207A /* UserNetworkService.swift in Sources */,
 				C90FF0C12C6FBC6A00590563 /* UserDefaultsManager.swift in Sources */,
 				C9118EDB2C71E42D00CF22ED /* PloggingClubHeaderView.swift in Sources */,
+				C9EF5ACA2C7B4AC3000DD5FB /* ProfileRouter.swift in Sources */,
 				C9118F052C737C5B00CF22ED /* UserRouter.swift in Sources */,
 				C9118ED72C71E11000CF22ED /* ViewPostResponse.swift in Sources */,
 				C90FF09B2C6E311E00590563 /* ViewModelType.swift in Sources */,
@@ -937,6 +980,7 @@
 				C9E3684A2C76278900C0207A /* CommonError.swift in Sources */,
 				C976FB1F2C77438D00E433CA /* HashtagLabel.swift in Sources */,
 				C9EF5A872C7760DC000DD5FB /* UIViewController+Rx.swift in Sources */,
+				C9EF5ACE2C7B5C53000DD5FB /* ProfileResponse.swift in Sources */,
 				C9D68BD72C6CD154002AF632 /* AppDelegate.swift in Sources */,
 				C9EF5A8E2C7774B0000DD5FB /* HashtagsQuery.swift in Sources */,
 				C90FF0BF2C6FB2DA00590563 /* String+.swift in Sources */,

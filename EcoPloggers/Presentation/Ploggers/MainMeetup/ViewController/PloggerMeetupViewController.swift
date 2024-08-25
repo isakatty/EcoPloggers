@@ -7,7 +7,6 @@
 
 import UIKit
 
-import Kingfisher
 import RxDataSources
 import RxSwift
 import RxCocoa
@@ -73,18 +72,18 @@ final class PloggerMeetupViewController: BaseViewController {
                 cell.configureUI(count: String(indexPath.item + 1), img: UIImage(data: data))
                 
                 return cell
-            case .regionSectionItem(data: let data):
+            case .regionSectionItem(let data):
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RegionCollectionViewCell.identifier, for: indexPath) as? RegionCollectionViewCell else { return UICollectionViewCell() }
                 cell.configureLabel(regionName: data)
                 return cell
-            case .favoriteSectionItem(data: let data):
+            case .favoriteSectionItem(let data):
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PloggingClubCollectionViewCell.identifier, for: indexPath) as? PloggingClubCollectionViewCell,
                       let fileData = data.fileData.first
                 else { return UICollectionViewCell() }
                 
                 cell.configureUI(imageFile: UIImage(data: fileData), creator: data.creator.nick, title: data.title, location: "영등포")
                 return cell
-            case .latestSectionItem(data: let data):
+            case .latestSectionItem(let data):
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PloggingClubCollectionViewCell.identifier, for: indexPath) as? PloggingClubCollectionViewCell,
                       let fileData = data.fileData.first
                 else { return UICollectionViewCell() }

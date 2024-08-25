@@ -10,8 +10,8 @@ import UIKit
 import SnapKit
 
 final class ProfileInfoButton: UIButton {
-    private let countLabel = PlainLabel(fontSize: Constant.Font.medium20, txtColor: Constant.Color.black.withAlphaComponent(0.7))
-    private let categoryLabel = PlainLabel(fontSize: Constant.Font.medium20, txtColor: Constant.Color.black.withAlphaComponent(0.7))
+    private let countLabel = PlainLabel(fontSize: Constant.Font.medium17, txtColor: Constant.Color.black.withAlphaComponent(0.7))
+    private let categoryLabel = PlainLabel(fontSize: Constant.Font.medium17, txtColor: Constant.Color.black.withAlphaComponent(0.7))
     
     init(category: String) {
         super.init(frame: .zero)
@@ -40,12 +40,13 @@ final class ProfileInfoButton: UIButton {
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(8)
             make.horizontalEdges.equalToSuperview().inset(8)
+            make.height.equalTo(22)
         }
         categoryLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
             make.top.equalTo(countLabel.snp.bottom).offset(4)
+            make.centerX.equalToSuperview()
             make.horizontalEdges.equalToSuperview().inset(8)
-            make.bottom.equalToSuperview().inset(4)
+            make.bottom.equalToSuperview()
         }
     }
     

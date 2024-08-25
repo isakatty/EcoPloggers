@@ -14,6 +14,7 @@ final class ProfileImgView: BaseView {
         let img = UIImageView()
         img.contentMode = .scaleAspectFill
         img.clipsToBounds = true
+        img.image = UIImage(systemName: "star.fill")
         return img
     }()
     private let nameLabel = PlainLabel(fontSize: Constant.Font.medium20, txtColor: Constant.Color.black.withAlphaComponent(0.7))
@@ -35,10 +36,15 @@ final class ProfileImgView: BaseView {
             make.leading.equalTo(profileImg.snp.trailing).inset(-12)
             make.trailing.equalToSuperview()
         }
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.profileImg.layer.cornerRadius = self.profileImg.bounds.height / 2
+        }
     }
     
-    func configureUI(imgData: Data, nickname: String) {
-        profileImg.image = UIImage(data: imgData)
+    func configureUI(imgData: Data?, nickname: String) {
+//        profileImg.image = UIImage(data: imgData)
         nameLabel.text = nickname
     }
 }

@@ -12,31 +12,72 @@ import SnapKit
 
 final class MyPageProfileCVCell: BaseCollectionViewCell {
     private let profileImgView = ProfileImgView()
-    private let followBtn = FollowingButton(title: "팔로우")
-    private let followerBtn = FollowingButton(title: "팔로잉")
+    
+    private let horizontalBar: UIView = {
+        let view = UIView()
+        view.backgroundColor = Constant.Color.lightGray.withAlphaComponent(0.6)
+        return view
+    }()
+    let postButton = ProfileInfoButton(category: "게시글")
+    let followersBtn = ProfileInfoButton(category: "팔로워")
+    let followingsBtn = ProfileInfoButton(category: "팔로잉")
+    
+    private let seperateBar: UIView = {
+        let view = UIView()
+        view.backgroundColor = Constant.Color.lightGray.withAlphaComponent(0.6)
+        return view
+    }()
+    private let secondBar: UIView = {
+        let view = UIView()
+        view.backgroundColor = Constant.Color.lightGray.withAlphaComponent(0.6)
+        return view
+    }()
     
     override func configureHierarchy() {
-        [profileImgView, followBtn, followBtn]
+        [profileImgView, horizontalBar, postButton, seperateBar, followersBtn, secondBar, followingsBtn]
             .forEach { contentView.addSubview($0) }
     }
     override func configureLayout() {
         profileImgView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalToSuperview()
-            make.height.equalTo(120)
+            make.height.equalTo(80)
         }
-        followBtn.snp.makeConstraints { make in
+        horizontalBar.snp.makeConstraints { make in
             make.top.equalTo(profileImgView.snp.bottom).offset(8)
-            make.leading.equalToSuperview().inset(12)
-            make.bottom.equalToSuperview().inset(4)
+            make.horizontalEdges.equalToSuperview().inset(4)
+            make.height.equalTo(1)
         }
-        followerBtn.snp.makeConstraints { make in
-            make.top.equalTo(profileImgView.snp.bottom).offset(8)
-            make.leading.equalTo(followBtn.snp.trailing).inset(-12)
-            make.bottom.equalToSuperview().inset(4)
+        postButton.snp.makeConstraints { make in
+            make.top.equalTo(horizontalBar.snp.bottom).offset(4)
+            make.leading.bottom.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.33)
+        }
+        seperateBar.snp.makeConstraints { make in
+            make.leading.equalTo(postButton.snp.trailing)
+            make.top.bottom.equalTo(postButton).inset(12)
+            make.width.equalTo(1)
+        }
+        followersBtn.snp.makeConstraints { make in
+            make.leading.equalTo(seperateBar.snp.trailing)
+            make.top.bottom.equalTo(postButton)
+            make.width.equalTo(postButton.snp.width)
+        }
+        secondBar.snp.makeConstraints { make in
+            make.leading.equalTo(followersBtn.snp.trailing)
+            make.top.bottom.equalTo(followersBtn).inset(12)
+            make.width.equalTo(1)
+        }
+        followingsBtn.snp.makeConstraints { make in
+            make.leading.equalTo(secondBar.snp.trailing)
+            make.trailing.equalToSuperview()
+            make.top.bottom.equalTo(postButton)
         }
     }
     
-    func configureUI() {
-        
+    func configureUI(profile: ProfileResponse) {
+        profileImgView.configureUI(imgData: nil, nickname: profile.nick)
+        postButton.configureUI(count: String(profile.posts.count))
+        followersBtn.configureUI(count: String(profile.followers.count))
+        followingsBtn.configureUI(count: String(profile.following.count))
     }
 }
