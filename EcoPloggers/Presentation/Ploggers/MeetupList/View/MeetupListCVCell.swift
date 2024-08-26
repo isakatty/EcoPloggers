@@ -91,13 +91,13 @@ final class MeetupListCVCell: BaseCollectionViewCell {
     func configureUI(data: ViewPostDetailResponse) {
         regionLabel.text = RegionBorough(rawValue: data.product_id ?? "eco_111231")?.toTitle
         contentTitleLabel.text = data.title
-        hashtagLabel.text = data.hashtags.filter({ $0 != "eco_랜덤" }).map { "#\($0)"}.joined(separator: " ")
+        hashtagLabel.text = data.hashtags.filter({ $0 != "eco_랜덤" }).map { "#\($0)"}.first
         if let priceTxt = data.price {
             priceLabel.text = "참가비 " + "\(priceTxt)원"
         } else {
             priceLabel.text = "무료"
         }
-        
+        contentImg.setImgWithHeaders(path: data.files.first)
         guard let imgData = data.fileData.first else { return }
         contentImg.image = UIImage(data: imgData)
     }

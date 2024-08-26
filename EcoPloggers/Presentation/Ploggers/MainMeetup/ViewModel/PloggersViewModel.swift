@@ -18,12 +18,14 @@ final class PloggersViewModel: ViewModelType {
         let headerTapEvent: PublishRelay<IndexPath>
         let headerText: PublishRelay<String>
         let meetupCellTap: PublishRelay<ViewPostDetailResponse>
+        let regionCellTap: PublishRelay<Region>
     }
     struct Output {
         let sections: BehaviorRelay<[MultiSectionModel]>
         let postRouter: PublishRelay<PostRouter>
         let naviTitle: PublishRelay<String>
         let meetupCellTap: PublishRelay<ViewPostDetailResponse>
+        let regionCellTap: PublishRelay<Region>
     }
     func transform(input: Input) -> Output {
         let sectionData = BehaviorRelay<[MultiSectionModel]>(value: [])
@@ -65,7 +67,8 @@ final class PloggersViewModel: ViewModelType {
             sections: sectionData,
             postRouter: postRouter,
             naviTitle: input.headerText,
-            meetupCellTap: input.meetupCellTap
+            meetupCellTap: input.meetupCellTap,
+            regionCellTap: input.regionCellTap
         )
     }
 }
@@ -83,7 +86,7 @@ extension PloggersViewModel {
             dispatchGroup.leave()
         }
 
-        let regionSection = MultiSectionModel.regionSection(title: "지역", items: Region.allCases.map { SectionItem.regionSectionItem(data: $0.toTitle)})
+        let regionSection = MultiSectionModel.regionSection(title: "지역", items: Region.allCases.map { SectionItem.regionSectionItem(data: $0)})
         fetchedSections.append(regionSection)
 
         dispatchGroup.enter()

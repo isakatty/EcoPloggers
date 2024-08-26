@@ -119,6 +119,9 @@
 		C9EF5AE42C7C1304000DD5FB /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5AE32C7C1304000DD5FB /* UIImageView+.swift */; };
 		C9EF5AE92C7C481D000DD5FB /* MeetupProfileInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5AE82C7C481D000DD5FB /* MeetupProfileInfoView.swift */; };
 		C9EF5AED2C7C58D5000DD5FB /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5AEC2C7C58D5000DD5FB /* Region.swift */; };
+		C9EF5AF62C7C73FC000DD5FB /* SpecificRegionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5AF52C7C73FC000DD5FB /* SpecificRegionViewController.swift */; };
+		C9EF5AF82C7C8BDA000DD5FB /* SpecificRegionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5AF72C7C8BDA000DD5FB /* SpecificRegionViewModel.swift */; };
+		C9EF5AFA2C7C92C3000DD5FB /* BoroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5AF92C7C92C3000DD5FB /* BoroughView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -229,6 +232,9 @@
 		C9EF5AE32C7C1304000DD5FB /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		C9EF5AE82C7C481D000DD5FB /* MeetupProfileInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupProfileInfoView.swift; sourceTree = "<group>"; };
 		C9EF5AEC2C7C58D5000DD5FB /* Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
+		C9EF5AF52C7C73FC000DD5FB /* SpecificRegionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificRegionViewController.swift; sourceTree = "<group>"; };
+		C9EF5AF72C7C8BDA000DD5FB /* SpecificRegionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificRegionViewModel.swift; sourceTree = "<group>"; };
+		C9EF5AF92C7C92C3000DD5FB /* BoroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoroughView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -371,6 +377,7 @@
 		C90FF0C22C6FBF6A00590563 /* Ploggers */ = {
 			isa = PBXGroup;
 			children = (
+				C9EF5AF02C7C73D4000DD5FB /* SpecificRegion */,
 				C9EF5A942C789A62000DD5FB /* MeetupList */,
 				C976FB172C77333300E433CA /* MainMeetup */,
 				C976FB132C7732F000E433CA /* MeetupDetail */,
@@ -843,6 +850,40 @@
 			path = Kingfisher;
 			sourceTree = "<group>";
 		};
+		C9EF5AF02C7C73D4000DD5FB /* SpecificRegion */ = {
+			isa = PBXGroup;
+			children = (
+				C9EF5AF32C7C73E8000DD5FB /* View */,
+				C9EF5AF22C7C73E2000DD5FB /* ViewController */,
+				C9EF5AF12C7C73DD000DD5FB /* ViewModel */,
+			);
+			path = SpecificRegion;
+			sourceTree = "<group>";
+		};
+		C9EF5AF12C7C73DD000DD5FB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C9EF5AF72C7C8BDA000DD5FB /* SpecificRegionViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C9EF5AF22C7C73E2000DD5FB /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C9EF5AF52C7C73FC000DD5FB /* SpecificRegionViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		C9EF5AF32C7C73E8000DD5FB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C9EF5AF92C7C92C3000DD5FB /* BoroughView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -990,6 +1031,7 @@
 				C9EF5AED2C7C58D5000DD5FB /* Region.swift in Sources */,
 				C99AA8682C6DFF6900C07BC2 /* BaseViewController.swift in Sources */,
 				C9EF5AA92C79F76B000DD5FB /* MeetupMapCVCell.swift in Sources */,
+				C9EF5AFA2C7C92C3000DD5FB /* BoroughView.swift in Sources */,
 				C9EF5AA52C79BD06000DD5FB /* MeetupProfileView.swift in Sources */,
 				C9EF5AE92C7C481D000DD5FB /* MeetupProfileInfoView.swift in Sources */,
 				C9118F102C738C9E00CF22ED /* NetworkInterceptor.swift in Sources */,
@@ -1016,6 +1058,7 @@
 				C9EF5AD22C7B5D49000DD5FB /* UserSearchResponse.swift in Sources */,
 				C9D68BDB2C6CD154002AF632 /* LogInViewController.swift in Sources */,
 				C9E368482C7626F700C0207A /* PostNetworkService.swift in Sources */,
+				C9EF5AF82C7C8BDA000DD5FB /* SpecificRegionViewModel.swift in Sources */,
 				C9EF5ADF2C7C0E8D000DD5FB /* KingfisherManager.swift in Sources */,
 				C90FF0DD2C70C60800590563 /* RegionCollectionViewCell.swift in Sources */,
 				C976FB1B2C7740B400E433CA /* LatestCollectionViewCell.swift in Sources */,
@@ -1048,6 +1091,7 @@
 				C9118ED72C71E11000CF22ED /* ViewPostResponse.swift in Sources */,
 				C90FF09B2C6E311E00590563 /* ViewModelType.swift in Sources */,
 				C9EF5AAE2C79FE00000DD5FB /* MeetupDetailViewModel.swift in Sources */,
+				C9EF5AF62C7C73FC000DD5FB /* SpecificRegionViewController.swift in Sources */,
 				C90FF0D92C70A06600590563 /* MyPageViewController.swift in Sources */,
 				C9E3684A2C76278900C0207A /* CommonError.swift in Sources */,
 				C976FB1F2C77438D00E433CA /* HashtagLabel.swift in Sources */,

@@ -73,11 +73,10 @@ final class PloggerMeetupViewController: BaseViewController {
                 return cell
             case .regionSectionItem(let data):
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RegionCollectionViewCell.identifier, for: indexPath) as? RegionCollectionViewCell else { return UICollectionViewCell() }
-                cell.configureLabel(regionName: data)
+                cell.configureLabel(regionName: data.toTitle)
                 return cell
             case .favoriteSectionItem(let data):
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PloggingClubCollectionViewCell.identifier, for: indexPath) as? PloggingClubCollectionViewCell,
-                      let fileData = data.fileData.first
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PloggingClubCollectionViewCell.identifier, for: indexPath) as? PloggingClubCollectionViewCell
                 else { return UICollectionViewCell() }
                 
                 cell.configureData(imageFilePath: data.files.first, creator: data.creator.nick, title: data.title, location: "영등포")
@@ -114,11 +113,13 @@ final class PloggerMeetupViewController: BaseViewController {
     }
     private func bind() {
         let meetupCellTap = PublishRelay<ViewPostDetailResponse>()
+        let regionCellTap = PublishRelay<Region>()
         let input = PloggersViewModel.Input(
             viewWillAppear: rx.methodInvoked(#selector(viewWillAppear)).map { _ in },
             headerTapEvent: headerTapEvent,
             headerText: headerText,
-            meetupCellTap: meetupCellTap
+            meetupCellTap: meetupCellTap,
+            regionCellTap: regionCellTap
         )
         let output = viewModel.transform(input: input)
         
@@ -134,7 +135,7 @@ final class PloggerMeetupViewController: BaseViewController {
                 case .bannerSectionItem(let data):
                     print(data, indexPath)
                 case .regionSectionItem(let data):
-                    print(data, indexPath)
+                    regionCellTap.accept(data)
                 case .favoriteSectionItem(let data), .latestSectionItem(let data):
                     meetupCellTap.accept(data)
                 }
@@ -157,6 +158,14 @@ final class PloggerMeetupViewController: BaseViewController {
                 let navi = UINavigationController(rootViewController: vc)
                 navi.modalPresentationStyle = .fullScreen
                 owner.present(navi, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        output.regionCellTap
+            .bind(with: self) { owner, region in
+                print(region.toTitle, "화면 이동 해야함.")
+                let vc = SpecificRegionViewController(viewModel: .init(region: region))
+                owner.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: disposeBag)
     }

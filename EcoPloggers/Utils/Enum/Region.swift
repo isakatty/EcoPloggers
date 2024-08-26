@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Region: CaseIterable {
+enum Region: CaseIterable, Hashable {
     case eco_seoul
     case eco_kyeongi
     case eco_incheon
@@ -37,9 +37,13 @@ enum Region: CaseIterable {
         case .eco_jeju: return "제주"
         }
     }
+    var seoulBorough: [Region: [RegionBorough]] {
+        return [.eco_seoul: RegionBorough.allCases]
+    }
 }
 
 enum RegionBorough: String, CaseIterable {
+    case eco_111261
     case eco_111151
     case eco_111311
     case eco_111181
@@ -64,7 +68,6 @@ enum RegionBorough: String, CaseIterable {
     case eco_111171
     case eco_111251
     case eco_111262
-    case eco_111261
     
     var toTitle: String {
         switch self {
