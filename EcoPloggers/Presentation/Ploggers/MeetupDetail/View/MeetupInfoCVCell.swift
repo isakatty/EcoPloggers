@@ -75,8 +75,8 @@ final class MeetupInfoCVCell: BaseCollectionViewCell {
         }
     }
     
-    func configureUI(bgImgData: Data, category: String?, titleTxt: String?, price: String?) {
-        bgImg.image = UIImage(data: bgImgData)
+    func configureUI(bgImgFilePath: String?, category: String?, titleTxt: String?, price: String?) {
+        bgImg.setImgWithHeaders(path: bgImgFilePath)
         categoryLabel.text = category
         contentTitleLabel.text = titleTxt
         if let price {

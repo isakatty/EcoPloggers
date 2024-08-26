@@ -42,11 +42,10 @@ final class MyPageViewController: BaseViewController {
                 cell.configureUI(profile: data)
                 return cell
             case .favoriteSectionItem(let data):
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PloggingClubCollectionViewCell.identifier, for: indexPath) as? PloggingClubCollectionViewCell,
-                      let fileData = data.fileData.first
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PloggingClubCollectionViewCell.identifier, for: indexPath) as? PloggingClubCollectionViewCell
                 else { return UICollectionViewCell() }
                 
-                cell.configureUI(imageFile: UIImage(data: fileData), creator: data.creator.nick, title: data.title, location: "영등포")
+                cell.configureData(imageFilePath: data.files.first, creator: data.creator.nick, title: data.title, location: "영등포")
                 return cell
             }
         }, configureSupplementaryView: { dataSource, collectionView, headerText, indexPath in

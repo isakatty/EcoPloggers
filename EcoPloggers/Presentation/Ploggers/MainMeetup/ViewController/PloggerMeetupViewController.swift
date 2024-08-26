@@ -68,7 +68,7 @@ final class PloggerMeetupViewController: BaseViewController {
             case .bannerSectionItem(let data):
                 guard let cell: BannerCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: BannerCollectionViewCell.identifier, for: indexPath) as? BannerCollectionViewCell
                 else { return UICollectionViewCell() }
-                
+//                cell.configureData(count: String(indexPath.item + 1), imgPath: data)
                 cell.configureUI(count: String(indexPath.item + 1), img: UIImage(data: data))
                 
                 return cell
@@ -81,14 +81,13 @@ final class PloggerMeetupViewController: BaseViewController {
                       let fileData = data.fileData.first
                 else { return UICollectionViewCell() }
                 
-                cell.configureUI(imageFile: UIImage(data: fileData), creator: data.creator.nick, title: data.title, location: "영등포")
+                cell.configureData(imageFilePath: data.files.first, creator: data.creator.nick, title: data.title, location: "영등포")
                 return cell
             case .latestSectionItem(let data):
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PloggingClubCollectionViewCell.identifier, for: indexPath) as? PloggingClubCollectionViewCell,
-                      let fileData = data.fileData.first
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PloggingClubCollectionViewCell.identifier, for: indexPath) as? PloggingClubCollectionViewCell
                 else { return UICollectionViewCell() }
                 
-                cell.configureUI(imageFile: UIImage(data: fileData), creator: data.creator.nick, title: data.title, location: "영등포")
+                cell.configureData(imageFilePath: data.files.first, creator: data.creator.nick, title: data.title, location: "영등포")
                 return cell
             }
         }, configureSupplementaryView: { dataSource, collectionView, headerText, indexPath in
@@ -126,16 +125,18 @@ final class PloggerMeetupViewController: BaseViewController {
             .bind(to: ploggingCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
+        // MARK: Cell Tap Event -> VM -> output -> View 이동
+        // Detail VC에 likes2 버튼 넣어야함.
         Observable.zip(ploggingCollectionView.rx.modelSelected(SectionItem.self), ploggingCollectionView.rx.itemSelected)
             .bind { model, indexPath in
                 switch model {
                 case .bannerSectionItem(let data):
                     print(data, indexPath)
-                case .regionSectionItem(data: let data):
+                case .regionSectionItem(let data):
                     print(data, indexPath)
-                case .favoriteSectionItem(data: let data):
+                case .favoriteSectionItem(let data):
                     print(data, indexPath)
-                case .latestSectionItem(data: let data):
+                case .latestSectionItem(let data):
                     print(data, indexPath)
                 }
             }

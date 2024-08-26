@@ -52,11 +52,10 @@ final class MeetupDetailViewController: BaseViewController {
                 cell.configureUI(content: data.content)
                 return cell
             case .infoSectionItem(let data):
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetupInfoCVCell.identifier, for: indexPath) as? MeetupInfoCVCell,
-                      let fileData = data.fileData.first
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetupInfoCVCell.identifier, for: indexPath) as? MeetupInfoCVCell
                 else { return UICollectionViewCell() }
                 cell.configureCompoUI(time: data.required_time, people: data.recruits, date: data.due_date)
-                cell.configureUI(bgImgData: fileData, category: data.product_id, titleTxt: data.title, price: data.price)
+                cell.configureUI(bgImgFilePath: data.files.first, category: data.product_id, titleTxt: data.title, price: data.price)
                 return cell
             case .mapSectionItem(let data):
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetupMapCVCell.identifier, for: indexPath) as? MeetupMapCVCell else { return UICollectionViewCell() }

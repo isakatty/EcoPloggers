@@ -64,8 +64,8 @@ final class PloggingClubCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
-    func configureUI(imageFile: UIImage?, creator: String, title: String, location: String) {
-        img.image = imageFile
+    func configureData(imageFilePath: String?, creator: String, title: String, location: String) {
+        img.setImgWithHeaders(path: imageFilePath)
         creatorLabel.text = creator
         contentTitleLabel.text = title
         locationLabel.text = location

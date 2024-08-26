@@ -74,6 +74,12 @@ final class BannerCollectionViewCell: BaseCollectionViewCell {
         bannerImg.image = img
         imgCountLabel.text = count
     }
+    
+    func configureData(count: String, imgPath: String?) {
+        bannerImg.setImgWithHeaders(path: imgPath)
+        imgCountLabel.text = count
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         
