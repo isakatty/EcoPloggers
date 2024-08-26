@@ -128,6 +128,7 @@
 		C9EF5B052C7CBFE5000DD5FB /* FollowResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5B042C7CBFE5000DD5FB /* FollowResultType.swift */; };
 		C9EF5B072C7CC00C000DD5FB /* FollowResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5B062C7CC00C000DD5FB /* FollowResponse.swift */; };
 		C9EF5B092C7CC10C000DD5FB /* FollowNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5B082C7CC10C000DD5FB /* FollowNetworkService.swift */; };
+		C9EF5B0B2C7CC911000DD5FB /* MeetupCommentsCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5B0A2C7CC911000DD5FB /* MeetupCommentsCVCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -247,6 +248,7 @@
 		C9EF5B042C7CBFE5000DD5FB /* FollowResultType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowResultType.swift; sourceTree = "<group>"; };
 		C9EF5B062C7CC00C000DD5FB /* FollowResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowResponse.swift; sourceTree = "<group>"; };
 		C9EF5B082C7CC10C000DD5FB /* FollowNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowNetworkService.swift; sourceTree = "<group>"; };
+		C9EF5B0A2C7CC911000DD5FB /* MeetupCommentsCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupCommentsCVCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -521,6 +523,7 @@
 				C9EF5AA82C79F76B000DD5FB /* MeetupMapCVCell.swift */,
 				C9EF5AB12C7B11AF000DD5FB /* MeetupProfileCVCell.swift */,
 				C9EF5AE82C7C481D000DD5FB /* MeetupProfileInfoView.swift */,
+				C9EF5B0A2C7CC911000DD5FB /* MeetupCommentsCVCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1065,6 +1068,7 @@
 				C9EF5AFC2C7CB0C4000DD5FB /* ProfileSectionModel.swift in Sources */,
 				C9118F102C738C9E00CF22ED /* NetworkInterceptor.swift in Sources */,
 				C9EF5A9D2C78AAAB000DD5FB /* MeetupViewModel.swift in Sources */,
+				C9EF5B0B2C7CC911000DD5FB /* MeetupCommentsCVCell.swift in Sources */,
 				C9118F122C73940100CF22ED /* PostRouter.swift in Sources */,
 				C976FB222C774FA800E433CA /* MeetupSectionModel.swift in Sources */,
 				C90FF09D2C6E38E000590563 /* SignUpViewController.swift in Sources */,

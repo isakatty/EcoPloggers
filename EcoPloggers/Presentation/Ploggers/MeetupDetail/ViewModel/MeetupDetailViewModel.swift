@@ -41,7 +41,7 @@ final class MeetupDetailViewModel: ViewModelType {
                 var section = [DetailSectionModel]()
                 section.append(.meetupInfoSection(title: "Top info", items: [DetailSectionItem.infoSectionItem(data: owner.detailPost)]))
                 section.append(.meetupDetailSection(title: "모임 정보", items: [DetailSectionItem.detailSectionItem(data: owner.detailPost)]))
-                section.append(.meetupMapSection(title: "위치", items: [DetailSectionItem.mapSectionItem(data: owner.detailPost)]))
+                section.append(.meetupCommentsSection(title: "댓글", items: [DetailSectionItem.commentSectionItem(data: owner.detailPost)]))
                 switch result {
                 case .success(let response):
                     section.append(.meetupProfileSection(title: "작성자 프로필", items: [DetailSectionItem.profileSectionItem(data: .init(post: owner.detailPost, creator: response))]))

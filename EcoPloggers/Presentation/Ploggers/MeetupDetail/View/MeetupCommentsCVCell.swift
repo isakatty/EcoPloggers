@@ -1,0 +1,55 @@
+//
+//  MeetupCommentsCVCell.swift
+//  EcoPloggers
+//
+//  Created by Jisoo Ham on 8/26/24.
+//
+
+import UIKit
+
+import SnapKit
+
+final class MeetupCommentsCVCell: BaseCollectionViewCell {
+    private let profileImg: UIImageView = {
+        let img = UIImageView()
+        img.contentMode = .scaleAspectFill
+        img.backgroundColor = Constant.Color.white
+        img.clipsToBounds = true
+        return img
+    }()
+    private let nickname = PlainLabel(fontSize: Constant.Font.regular12, txtColor: Constant.Color.lightGray.withAlphaComponent(0.7))
+    private let comments = PlainLabel(fontSize: Constant.Font.regular14, txtColor: Constant.Color.black.withAlphaComponent(0.6))
+    
+    override func configureHierarchy() {
+        [profileImg, nickname, comments]
+            .forEach { contentView.addSubview($0) }
+    }
+    override func configureLayout() {
+        profileImg.snp.makeConstraints { make in
+            make.verticalEdges.equalToSuperview().inset(8)
+            make.leading.equalToSuperview().inset(12)
+        }
+        nickname.snp.makeConstraints { make in
+            make.top.equalTo(profileImg)
+            make.leading.equalTo(profileImg.snp.trailing).inset(-12)
+            make.trailing.equalToSuperview()
+        }
+        comments.snp.makeConstraints { make in
+            make.top.equalTo(nickname.snp.bottom).offset(4)
+            make.horizontalEdges.equalTo(nickname)
+            make.bottom.equalTo(profileImg)
+        }
+    }
+    
+    func configureUI(filePath: String?, nick: String, comment: String) {
+        if let filePath {
+            profileImg.setImgWithHeaders(path: filePath)
+        } else {
+            
+            profileImg.image = UIImage(systemName: "person.fill")
+        }
+        nickname.text = nick
+        comments.text = comment
+    }
+    
+}

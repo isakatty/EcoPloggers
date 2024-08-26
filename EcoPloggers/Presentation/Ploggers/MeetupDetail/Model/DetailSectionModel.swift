@@ -12,7 +12,7 @@ import RxDataSources
 enum DetailSectionModel: Comparable {
     case meetupInfoSection(title: String, items: [DetailSectionItem])
     case meetupDetailSection(title: String, items: [DetailSectionItem])
-    case meetupMapSection(title: String, items: [DetailSectionItem])
+    case meetupCommentsSection(title: String, items: [DetailSectionItem])
     case meetupProfileSection(title: String, items: [DetailSectionItem])
     
     // 비동기로 데이터 처리를 해주는게 아니라서 sort해줄 필요가 없는데 있어야할까?
@@ -20,7 +20,7 @@ enum DetailSectionModel: Comparable {
         switch self {
         case .meetupInfoSection(_, _): return 0
         case .meetupDetailSection(_, _): return 1
-        case .meetupMapSection(_, _): return 2
+        case .meetupCommentsSection(_, _): return 2
         case .meetupProfileSection(_, _): return 3
         }
     }
@@ -35,7 +35,7 @@ enum DetailSectionModel: Comparable {
 enum DetailSectionItem {
     case infoSectionItem(data: ViewPostDetailResponse)
     case detailSectionItem(data: ViewPostDetailResponse)
-    case mapSectionItem(data: ViewPostDetailResponse)
+    case commentSectionItem(data: ViewPostDetailResponse)
     case profileSectionItem(data: ProfileSectionModel)
 }
 
@@ -47,7 +47,7 @@ extension DetailSectionModel: SectionModelType {
         switch self {
         case .meetupInfoSection(_, let items),
              .meetupDetailSection(_, let items),
-             .meetupMapSection(_, let items),
+             .meetupCommentsSection(_, let items),
              .meetupProfileSection(_, let items):
             return items
         }
@@ -59,8 +59,8 @@ extension DetailSectionModel: SectionModelType {
             self = .meetupInfoSection(title: title, items: items)
         case let .meetupDetailSection(title, _):
             self = .meetupDetailSection(title: title, items: items)
-        case let .meetupMapSection(title, _):
-            self = .meetupMapSection(title: title, items: items)
+        case let .meetupCommentsSection(title, _):
+            self = .meetupCommentsSection(title: title, items: items)
         case let .meetupProfileSection(title, _):
             self = .meetupProfileSection(title: title, items: items)
         }
@@ -71,7 +71,7 @@ extension DetailSectionModel {
         switch self {
         case .meetupInfoSection(let title, _),
              .meetupDetailSection(let title, _),
-             .meetupMapSection(let title, _),
+             .meetupCommentsSection(let title, _),
              .meetupProfileSection(let title, _):
             return title
         }

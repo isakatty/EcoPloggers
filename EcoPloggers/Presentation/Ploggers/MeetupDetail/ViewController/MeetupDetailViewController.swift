@@ -21,7 +21,7 @@ final class MeetupDetailViewController: BaseViewController {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: configureCVLayout())
         cv.register(MeetupInfoCVCell.self, forCellWithReuseIdentifier: MeetupInfoCVCell.identifier)
         cv.register(MeetupDetailCVCell.self, forCellWithReuseIdentifier: MeetupDetailCVCell.identifier)
-        cv.register(MeetupMapCVCell.self, forCellWithReuseIdentifier: MeetupMapCVCell.identifier)
+        cv.register(MeetupCommentsCVCell.self, forCellWithReuseIdentifier: MeetupCommentsCVCell.identifier)
         cv.register(MeetupProfileCVCell.self, forCellWithReuseIdentifier: MeetupProfileCVCell.identifier)
         cv.register(PloggingClubHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PloggingClubHeaderView.identifier)
         return cv
@@ -61,9 +61,11 @@ final class MeetupDetailViewController: BaseViewController {
                 cell.configureCompoUI(time: data.required_time, people: data.recruits, date: data.due_date)
                 cell.configureUI(bgImgFilePath: data.files.first, category: RegionBorough(rawValue: data.product_id ?? "eco_111231")?.toTitle, titleTxt: data.title, price: data.price)
                 return cell
-            case .mapSectionItem(let data):
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetupMapCVCell.identifier, for: indexPath) as? MeetupMapCVCell else { return UICollectionViewCell() }
-//                cell.configure
+            case .commentSectionItem(let data):
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetupCommentsCVCell.identifier, for: indexPath) as? MeetupCommentsCVCell else { return UICollectionViewCell() }
+                if let firstComment = data.comments.first {
+                    cell.configureUI(filePath: firstComment.creator.profileImage, nick: firstComment.creator.nick, comment: firstComment.content)
+                }
                 return cell
             case .profileSectionItem(let data):
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetupProfileCVCell.identifier, for: indexPath) as? MeetupProfileCVCell else { return UICollectionViewCell() }
@@ -165,14 +167,13 @@ extension MeetupDetailViewController {
     private func createMapSectionLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0)
+            heightDimension: .estimated(100)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 5, leading: 5, bottom: 5, trailing: 5)
         
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(0.3)
+            heightDimension: .estimated(100)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
