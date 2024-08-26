@@ -86,7 +86,8 @@ final class MeetupDetailViewController: BaseViewController {
             .forEach { view.addSubview($0) }
     }
     override func configureLayout() {
-        super.configureLayout()
+//        super.configureLayout()
+        view.backgroundColor = Constant.Color.white
         
         detailCollectionView.snp.makeConstraints { make in
             make.edges.equalTo(safeArea)

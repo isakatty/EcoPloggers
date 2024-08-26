@@ -18,8 +18,8 @@ final class MeetupInfoCVCell: BaseCollectionViewCell {
         return img
     }()
     private let categoryLabel = PlainLabel(fontSize: Constant.Font.medium13, txtColor: Constant.Color.lightGray)
-    private let contentTitleLabel = PlainLabel(fontSize: Constant.Font.regular18, txtColor: Constant.Color.black)
-    private let priceLabel = PlainLabel(fontSize: Constant.Font.bold16, txtColor: Constant.Color.black)
+    private let contentTitleLabel = PlainLabel(fontSize: Constant.Font.medium18, txtColor: Constant.Color.black)
+    private let priceLabel = PlainLabel(fontSize: Constant.Font.regular15, txtColor: Constant.Color.black)
     private let seperateBar: UIView = {
         let view = UIView()
         view.backgroundColor = Constant.Color.lightGray.withAlphaComponent(0.6)

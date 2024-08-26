@@ -68,7 +68,6 @@ final class PloggerMeetupViewController: BaseViewController {
             case .bannerSectionItem(let data):
                 guard let cell: BannerCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: BannerCollectionViewCell.identifier, for: indexPath) as? BannerCollectionViewCell
                 else { return UICollectionViewCell() }
-//                cell.configureData(count: String(indexPath.item + 1), imgPath: data)
                 cell.configureUI(count: String(indexPath.item + 1), img: UIImage(data: data))
                 
                 return cell
@@ -114,10 +113,12 @@ final class PloggerMeetupViewController: BaseViewController {
         
     }
     private func bind() {
+        let meetupCellTap = PublishRelay<ViewPostDetailResponse>()
         let input = PloggersViewModel.Input(
             viewWillAppear: rx.methodInvoked(#selector(viewWillAppear)).map { _ in },
             headerTapEvent: headerTapEvent,
-            headerText: headerText
+            headerText: headerText,
+            meetupCellTap: meetupCellTap
         )
         let output = viewModel.transform(input: input)
         
@@ -134,10 +135,8 @@ final class PloggerMeetupViewController: BaseViewController {
                     print(data, indexPath)
                 case .regionSectionItem(let data):
                     print(data, indexPath)
-                case .favoriteSectionItem(let data):
-                    print(data, indexPath)
-                case .latestSectionItem(let data):
-                    print(data, indexPath)
+                case .favoriteSectionItem(let data), .latestSectionItem(let data):
+                    meetupCellTap.accept(data)
                 }
             }
             .disposed(by: disposeBag)
@@ -145,11 +144,17 @@ final class PloggerMeetupViewController: BaseViewController {
         Observable.zip(output.postRouter, output.naviTitle)
             .bind(with: self) { owner, arg1 in
                 let vc = MeetupListViewController(viewModel: MeetupViewModel(router: arg1.0))
-                vc.navigationController?.title = arg1.1
                 owner.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: disposeBag)
         
+        output.meetupCellTap
+            .bind(with: self) { owner, response in
+                let detailVM = MeetupDetailViewModel(detailPost: response)
+                let vc = MeetupDetailViewController(viewModel: detailVM)
+                owner.navigationController?.pushViewController(vc, animated: true)
+            }
+            .disposed(by: disposeBag)
     }
     
     override func configureHierarchy() {

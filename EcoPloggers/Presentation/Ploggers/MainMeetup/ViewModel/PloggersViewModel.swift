@@ -17,11 +17,13 @@ final class PloggersViewModel: ViewModelType {
         let viewWillAppear: Observable<Void>
         let headerTapEvent: PublishRelay<IndexPath>
         let headerText: PublishRelay<String>
+        let meetupCellTap: PublishRelay<ViewPostDetailResponse>
     }
     struct Output {
         let sections: BehaviorRelay<[MultiSectionModel]>
         let postRouter: PublishRelay<PostRouter>
         let naviTitle: PublishRelay<String>
+        let meetupCellTap: PublishRelay<ViewPostDetailResponse>
     }
     func transform(input: Input) -> Output {
         let sectionData = BehaviorRelay<[MultiSectionModel]>(value: [])
@@ -62,7 +64,8 @@ final class PloggersViewModel: ViewModelType {
         return Output(
             sections: sectionData,
             postRouter: postRouter,
-            naviTitle: input.headerText
+            naviTitle: input.headerText,
+            meetupCellTap: input.meetupCellTap
         )
     }
 }
