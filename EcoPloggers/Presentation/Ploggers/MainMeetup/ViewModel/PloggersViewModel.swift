@@ -49,7 +49,7 @@ final class PloggersViewModel: ViewModelType {
                 case 2: // 찜한 모임 -> Router 만들어서 내보내줘야함
                     print("2")
                     let query = FavoriteQuery(next: nil, limit: "20")
-                    let favRouter = PostRouter.favoritePost(query: query)
+                    let favRouter = PostRouter.fetchFavoritePost(query: query)
                     postRouter.accept(favRouter)
                 case 3: // 최신글 ->
                     print("3")

@@ -124,6 +124,10 @@
 		C9EF5AFA2C7C92C3000DD5FB /* BoroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5AF92C7C92C3000DD5FB /* BoroughView.swift */; };
 		C9EF5AFC2C7CB0C4000DD5FB /* ProfileSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5AFB2C7CB0C4000DD5FB /* ProfileSectionModel.swift */; };
 		C9EF5B002C7CB236000DD5FB /* SearchUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5AFF2C7CB236000DD5FB /* SearchUserResponse.swift */; };
+		C9EF5B032C7CBCF7000DD5FB /* FollowRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5B022C7CBCF7000DD5FB /* FollowRouter.swift */; };
+		C9EF5B052C7CBFE5000DD5FB /* FollowResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5B042C7CBFE5000DD5FB /* FollowResultType.swift */; };
+		C9EF5B072C7CC00C000DD5FB /* FollowResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5B062C7CC00C000DD5FB /* FollowResponse.swift */; };
+		C9EF5B092C7CC10C000DD5FB /* FollowNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5B082C7CC10C000DD5FB /* FollowNetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -239,6 +243,10 @@
 		C9EF5AF92C7C92C3000DD5FB /* BoroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoroughView.swift; sourceTree = "<group>"; };
 		C9EF5AFB2C7CB0C4000DD5FB /* ProfileSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSectionModel.swift; sourceTree = "<group>"; };
 		C9EF5AFF2C7CB236000DD5FB /* SearchUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserResponse.swift; sourceTree = "<group>"; };
+		C9EF5B022C7CBCF7000DD5FB /* FollowRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowRouter.swift; sourceTree = "<group>"; };
+		C9EF5B042C7CBFE5000DD5FB /* FollowResultType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowResultType.swift; sourceTree = "<group>"; };
+		C9EF5B062C7CC00C000DD5FB /* FollowResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowResponse.swift; sourceTree = "<group>"; };
+		C9EF5B082C7CC10C000DD5FB /* FollowNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowNetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -344,6 +352,7 @@
 				C90FF0B62C6F466E00590563 /* UserResultType.swift */,
 				C9E368492C76278900C0207A /* CommonError.swift */,
 				C9EF5AC72C7B4AAE000DD5FB /* ProfileResultType.swift */,
+				C9EF5B042C7CBFE5000DD5FB /* FollowResultType.swift */,
 			);
 			path = NetworkResultType;
 			sourceTree = "<group>";
@@ -360,6 +369,7 @@
 				C9EF5ACF2C7B5D04000DD5FB /* OtherProfileResponse.swift */,
 				C9EF5AD12C7B5D49000DD5FB /* UserSearchResponse.swift */,
 				C9EF5AFF2C7CB236000DD5FB /* SearchUserResponse.swift */,
+				C9EF5B062C7CC00C000DD5FB /* FollowResponse.swift */,
 			);
 			path = ResponseDTO;
 			sourceTree = "<group>";
@@ -599,6 +609,7 @@
 		C99AA8572C6DF98300C07BC2 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				C9EF5B012C7CBCE6000DD5FB /* Follow */,
 				C9EF5ADD2C7C0E7C000DD5FB /* Kingfisher */,
 				C9EF5AC62C7B4A9D000DD5FB /* Profile */,
 				C9EF5A8C2C777450000DD5FB /* Hashtag */,
@@ -890,6 +901,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		C9EF5B012C7CBCE6000DD5FB /* Follow */ = {
+			isa = PBXGroup;
+			children = (
+				C9EF5B022C7CBCF7000DD5FB /* FollowRouter.swift */,
+				C9EF5B082C7CC10C000DD5FB /* FollowNetworkService.swift */,
+			);
+			path = Follow;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1034,6 +1054,7 @@
 				C90FF09F2C6E3BD400590563 /* SignUpViewModel.swift in Sources */,
 				C9EF5AA12C78EA62000DD5FB /* MeetupInfoCVCell.swift in Sources */,
 				C976FB1D2C77420300E433CA /* CornerRadiusImage.swift in Sources */,
+				C9EF5B052C7CBFE5000DD5FB /* FollowResultType.swift in Sources */,
 				C9EF5AED2C7C58D5000DD5FB /* Region.swift in Sources */,
 				C99AA8682C6DFF6900C07BC2 /* BaseViewController.swift in Sources */,
 				C9EF5AA92C79F76B000DD5FB /* MeetupMapCVCell.swift in Sources */,
@@ -1054,6 +1075,7 @@
 				C9EF5AB02C7A3CEF000DD5FB /* DateFormatter.swift in Sources */,
 				C9EF5AAC2C79F92A000DD5FB /* DetailSectionModel.swift in Sources */,
 				C90FF0B32C6F394000590563 /* NetworkManager.swift in Sources */,
+				C9EF5B032C7CBCF7000DD5FB /* FollowRouter.swift in Sources */,
 				C9EF5A9F2C78E6D2000DD5FB /* MeetupDetailViewController.swift in Sources */,
 				C99AA86A2C6DFF9600C07BC2 /* UIViewController+.swift in Sources */,
 				C9118ED92C71E3BF00CF22ED /* PloggingClubCollectionViewCell.swift in Sources */,
@@ -1068,10 +1090,12 @@
 				C9E368482C7626F700C0207A /* PostNetworkService.swift in Sources */,
 				C9EF5AF82C7C8BDA000DD5FB /* SpecificRegionViewModel.swift in Sources */,
 				C9EF5ADF2C7C0E8D000DD5FB /* KingfisherManager.swift in Sources */,
+				C9EF5B092C7CC10C000DD5FB /* FollowNetworkService.swift in Sources */,
 				C90FF0DD2C70C60800590563 /* RegionCollectionViewCell.swift in Sources */,
 				C976FB1B2C7740B400E433CA /* LatestCollectionViewCell.swift in Sources */,
 				C9E3684C2C7627A000C0207A /* PostResultType.swift in Sources */,
 				C90FF0CC2C70766500590563 /* ValidateEmailQuery.swift in Sources */,
+				C9EF5B072C7CC00C000DD5FB /* FollowResponse.swift in Sources */,
 				C90FF0D62C70A04000590563 /* SearchViewController.swift in Sources */,
 				C9EF5AC82C7B4AAE000DD5FB /* ProfileResultType.swift in Sources */,
 				C9118ECB2C71B1DB00CF22ED /* BannerCollectionViewCell.swift in Sources */,

@@ -11,7 +11,9 @@ import RxSwift
 import SnapKit
 
 final class MeetupProfileCVCell: BaseCollectionViewCell {
-    private let profileView = MeetupProfileView()
+    var disposeBag = DisposeBag()
+    
+    let profileView = MeetupProfileView()
     
     override func configureHierarchy() {
         contentView.addSubview(profileView)
@@ -29,5 +31,11 @@ final class MeetupProfileCVCell: BaseCollectionViewCell {
             postCount: profile.creator.posts.count,
             followerCount: profile.creator.followers.count
         )
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        disposeBag = DisposeBag()
     }
 }

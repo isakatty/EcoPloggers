@@ -18,7 +18,7 @@ final class MeetupProfileView: BaseView {
         return img
     }()
     private let nicknameLabel = PlainLabel(fontSize: Constant.Font.medium15, txtColor: Constant.Color.black)
-    private let followBtn: UIButton = {
+    let followBtn: UIButton = {
         var config = UIButton.Configuration.filled()
         config.baseBackgroundColor = Constant.Color.secondaryBG?.withAlphaComponent(0.4)
         var titleAttribute = AttributedString("팔로우")

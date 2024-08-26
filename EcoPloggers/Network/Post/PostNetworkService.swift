@@ -46,7 +46,7 @@ struct PostNetworkService {
     static func fetchFavPost(query: FavoriteQuery) -> Single<FetchFavResult> {
         return Single.create { single in
             do {
-                let urlRequest = try PostRouter.favoritePost(query: query).asURLRequest()
+                let urlRequest = try PostRouter.fetchFavoritePost(query: query).asURLRequest()
                 
                 AF.request(urlRequest, interceptor: NetworkInterceptor())
                     .responseDecodable(of: ViewPostResponseDTO.self) { response in

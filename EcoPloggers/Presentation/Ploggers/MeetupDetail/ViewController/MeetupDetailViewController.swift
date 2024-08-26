@@ -16,6 +16,7 @@ final class MeetupDetailViewController: BaseViewController {
     private var disposeBag = DisposeBag()
     private let viewModel: MeetupDetailViewModel
     
+    private let followBtnTapEvent = PublishRelay<String>()
     private lazy var detailCollectionView: UICollectionView = {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: configureCVLayout())
         cv.register(MeetupInfoCVCell.self, forCellWithReuseIdentifier: MeetupInfoCVCell.identifier)
@@ -37,7 +38,10 @@ final class MeetupDetailViewController: BaseViewController {
     }
     
     private func bind() {
-        let input = MeetupDetailViewModel.Input(viewWillAppear: rx.methodInvoked(#selector(viewWillAppear)).map { _ in })
+        let input = MeetupDetailViewModel.Input(
+            viewWillAppear: rx.methodInvoked(#selector(viewWillAppear)).map { _ in },
+            followTapEvent: followBtnTapEvent
+        )
         let output = viewModel.transform(input: input)
         
         output.postData
@@ -64,6 +68,12 @@ final class MeetupDetailViewController: BaseViewController {
             case .profileSectionItem(let data):
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetupProfileCVCell.identifier, for: indexPath) as? MeetupProfileCVCell else { return UICollectionViewCell() }
                 cell.configureProfile(profile: data)
+                cell.profileView.followBtn.rx.tap
+                    .map { data.creator.user_id }
+                    .bind(with: self, onNext: { owner, user_id in
+                        owner.followBtnTapEvent.accept(user_id)
+                    })
+                    .disposed(by: cell.disposeBag)
                 return cell
             }
         }, configureSupplementaryView: { dataSource, collectionView, title, indexPath in

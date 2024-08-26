@@ -33,7 +33,7 @@ final class MeetupViewModel: ViewModelType {
             .withUnretained(self)
             .flatMap { owner, _ in
                 switch owner.router {
-                case .favoritePost(let query):
+                case .fetchFavoritePost(let query):
                     return PostNetworkService.fetchFavPost(query: query)
                         .map { $0.toCommonResult() }
                         .flatMap { result in

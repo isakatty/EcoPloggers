@@ -17,7 +17,7 @@ enum PostRouter {
     case editPost(postID: String, query: UploadPostQuery)
     case deletePost(postID: String)
     case userPost(postID: String, query: ViewPostQuery)
-    case favoritePost(query: FavoriteQuery)
+    case fetchFavoritePost(query: FavoriteQuery)
     case hashtags(query: HashtagsQuery)
     case fetchImage(query: String)
 }
@@ -31,7 +31,7 @@ extension PostRouter: TargetType {
         switch self {
         case .uploadImg, .uploadPost:
                 .post
-        case .viewPost, .specificPost, .userPost, .favoritePost, .hashtags, .fetchImage:
+        case .viewPost, .specificPost, .userPost, .fetchFavoritePost, .hashtags, .fetchImage:
                 .get
         case .editPost:
                 .put
@@ -56,7 +56,7 @@ extension PostRouter: TargetType {
             return "/v1/pots/\(postID)"
         case .userPost(let postID, _):
             return "/v1/posts/users/\(postID)"
-        case .favoritePost:
+        case .fetchFavoritePost:
             return "/v1/posts/likes-2/me"
         case .hashtags:
             return "/v1/posts/hashtags"
@@ -90,7 +90,7 @@ extension PostRouter: TargetType {
             return baseHeaders.merging(jsonHeader) { value1, _ in
                 value1
             }
-        case .viewPost, .specificPost, .deletePost, .userPost, .favoritePost, .hashtags, .fetchImage:
+        case .viewPost, .specificPost, .deletePost, .userPost, .fetchFavoritePost, .hashtags, .fetchImage:
             return baseHeaders
         }
     }
@@ -113,7 +113,7 @@ extension PostRouter: TargetType {
                 URLQueryItem(name: "limit", value: viewPostQuery.limit ?? "10"),
                 URLQueryItem(name: "product_id", value: viewPostQuery.product_id)
             ]
-        case .favoritePost(let favoriteQuery):
+        case .fetchFavoritePost(let favoriteQuery):
             return [
                 URLQueryItem(name: "next", value: favoriteQuery.next),
                 URLQueryItem(name: "limit", value: favoriteQuery.limit ?? "10")
@@ -144,7 +144,7 @@ extension PostRouter: TargetType {
             return try? encoder.encode(post)
         case .deletePost:
             return nil
-        case .userPost, .favoritePost, .hashtags, .fetchImage:
+        case .userPost, .fetchFavoritePost, .hashtags, .fetchImage:
             return nil
         }
     }
