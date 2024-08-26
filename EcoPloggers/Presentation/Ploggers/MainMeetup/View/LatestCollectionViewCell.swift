@@ -69,7 +69,7 @@ final class LatestCollectionViewCell: BaseCollectionViewCell {
     
     func configureUI(data: ViewPostDetailResponse) {
 //        postImgView.image = data.files.first
-        categoryLabel.text = Region(rawValue: data.product_id ?? "eco_seoul")?.rawValue ?? Region.eco_seoul.rawValue
+        categoryLabel.text = RegionBorough(rawValue: data.product_id ?? "eco_111231")?.toTitle
         postTitleLabel.text = data.title
         creatorNameLabel.text = data.creator.nick
         priceLabel.text = data.price

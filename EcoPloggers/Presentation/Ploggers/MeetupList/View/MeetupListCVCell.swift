@@ -89,9 +89,9 @@ final class MeetupListCVCell: BaseCollectionViewCell {
     }
     
     func configureUI(data: ViewPostDetailResponse) {
-        regionLabel.text = data.product_id // 이거 찾아야함
+        regionLabel.text = RegionBorough(rawValue: data.product_id ?? "eco_111231")?.toTitle
         contentTitleLabel.text = data.title
-        hashtagLabel.text = data.hashtags.map { "#\($0)"}.joined(separator: " ")
+        hashtagLabel.text = data.hashtags.filter({ $0 != "eco_랜덤" }).map { "#\($0)"}.joined(separator: " ")
         if let priceTxt = data.price {
             priceLabel.text = "참가비 " + "\(priceTxt)원"
         } else {

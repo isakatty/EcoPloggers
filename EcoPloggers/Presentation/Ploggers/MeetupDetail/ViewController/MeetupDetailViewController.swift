@@ -63,7 +63,7 @@ final class MeetupDetailViewController: BaseViewController {
                 return cell
             case .profileSectionItem(let data):
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetupProfileCVCell.identifier, for: indexPath) as? MeetupProfileCVCell else { return UICollectionViewCell() }
-                cell.configureProfile(profileImgData: "", nickname: data.creator.nick)
+                cell.configureProfile(profile: data)
                 return cell
             }
         }, configureSupplementaryView: { dataSource, collectionView, title, indexPath in
@@ -82,6 +82,8 @@ final class MeetupDetailViewController: BaseViewController {
     }
     
     override func configureHierarchy() {
+        configureNavigationLeftBar(action: nil)
+        
         [detailCollectionView]
             .forEach { view.addSubview($0) }
     }
@@ -135,14 +137,13 @@ extension MeetupDetailViewController {
     private func createDetailSectionLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0)
+            heightDimension: .estimated(100)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 5, leading: 4, bottom: 5, trailing: 4)
         
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(0.5)
+            heightDimension: .estimated(100)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
@@ -179,7 +180,7 @@ extension MeetupDetailViewController {
         
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(100)
+            heightDimension: .fractionalHeight(0.25)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         

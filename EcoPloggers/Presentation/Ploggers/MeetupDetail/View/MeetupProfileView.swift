@@ -17,8 +17,18 @@ final class MeetupProfileView: BaseView {
         img.image = UIImage(systemName: "person.fill")
         return img
     }()
-    
     private let nicknameLabel = PlainLabel(fontSize: Constant.Font.medium15, txtColor: Constant.Color.black)
+    
+    private let postView = MeetupProfileInfoView(content: "게시글")
+    private let followersView = MeetupProfileInfoView(content: "팔로워")
+    private let viewStack: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.distribution = .equalSpacing
+        stack.alignment = .fill
+        stack.spacing = 10
+        return stack
+    }()
     
     let followBtn: UIButton = {
         var config = UIButton.Configuration.filled()
@@ -46,21 +56,30 @@ final class MeetupProfileView: BaseView {
     }()
     
     override func configureHierarchy() {
-        [profileImg, nicknameLabel, btnStackView]
+        [profileImg, nicknameLabel, viewStack, btnStackView]
             .forEach { addSubview($0) }
         [followBtn, questionBtn]
             .forEach { btnStackView.addArrangedSubview($0) }
+        [postView, followersView]
+            .forEach { viewStack.addArrangedSubview($0) }
     }
     override func configureLayout() {
         profileImg.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(8)
             make.leading.equalToSuperview().inset(16)
-            make.width.height.equalTo(40)
+            make.width.height.equalTo(65)
         }
         nicknameLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(profileImg)
+            make.top.equalTo(profileImg)
             make.leading.equalTo(profileImg.snp.trailing).inset(-16)
             make.trailing.equalToSuperview().inset(8)
+            make.height.greaterThanOrEqualTo(17)
+        }
+        viewStack.snp.makeConstraints { make in
+            make.top.equalTo(nicknameLabel.snp.bottom).offset(8)
+            make.leading.equalTo(nicknameLabel)
+            make.width.equalTo(130)
+            make.bottom.equalTo(profileImg)
         }
         btnStackView.snp.makeConstraints { make in
             make.top.equalTo(profileImg.snp.bottom).offset(12)
@@ -74,7 +93,9 @@ final class MeetupProfileView: BaseView {
         }
     }
     
-    func configureUI(nickname: String?) {
+    func configureUI(nickname: String?, postCount: Int, followerCount: Int) {
         nicknameLabel.text = nickname
+        postView.configureUI(count: postCount)
+        followersView.configureUI(count: followerCount)
     }
 }

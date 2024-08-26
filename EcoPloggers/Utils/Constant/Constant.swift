@@ -13,6 +13,7 @@ enum Constant {
         static let light12 = UIFont(name: FontWeight.light.rawValue, size: 12)
         static let light13 = UIFont(name: FontWeight.light.rawValue, size: 13)
         
+        static let regular12 = UIFont(name: FontWeight.regular.rawValue, size: 12)
         static let regular13 = UIFont(name: FontWeight.regular.rawValue, size: 13)
         static let regular14 = UIFont(name: FontWeight.regular.rawValue, size: 14)
         static let regular15 = UIFont(name: FontWeight.regular.rawValue, size: 15)

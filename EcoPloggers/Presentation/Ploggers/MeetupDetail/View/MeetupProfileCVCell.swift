@@ -22,7 +22,11 @@ final class MeetupProfileCVCell: BaseCollectionViewCell {
         }
     }
     
-    func configureProfile(profileImgData: String, nickname: String?) {
-        profileView.configureUI(nickname: nickname)
+    func configureProfile(profile: ProfileResponse) {
+        profileView.configureUI(
+            nickname: profile.nick,
+            postCount: profile.posts.count,
+            followerCount: profile.followers.count
+        )
     }
 }
