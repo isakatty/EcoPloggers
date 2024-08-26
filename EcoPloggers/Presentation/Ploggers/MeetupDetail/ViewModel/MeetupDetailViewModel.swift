@@ -30,18 +30,22 @@ final class MeetupDetailViewModel: ViewModelType {
         let postData = PublishRelay<[DetailSectionModel]>()
         
         input.viewWillAppear
-            .flatMap { _ in
-                return ProfileNetworkService.fetchMyProfile()
-            }
+            .map({ _ in
+                self.detailPost
+            })
+            .flatMap({ post in
+                return ProfileNetworkService.fetchOtherProfile(userId: post.creator.user_id)
+            })
             .subscribe(with: self) { owner, result in
+                print(result)
                 switch result {
                 case .success(let response):
-                    
+                    print("🅾️", response)
                     var section = [DetailSectionModel]()
                     section.append(.meetupInfoSection(title: "Top info", items: [DetailSectionItem.infoSectionItem(data: owner.detailPost)]))
                     section.append(.meetupDetailSection(title: "모임 정보", items: [DetailSectionItem.detailSectionItem(data: owner.detailPost)]))
                     section.append(.meetupMapSection(title: "위치", items: [DetailSectionItem.mapSectionItem(data: owner.detailPost)]))
-                    section.append(.meetupProfileSection(title: "작성자 프로필", items: [DetailSectionItem.profileSectionItem(data: response)]))
+                    section.append(.meetupProfileSection(title: "작성자 프로필", items: [DetailSectionItem.profileSectionItem(data: .init(post: owner.detailPost, creator: response))]))
                     postData.accept(section)
                 default:
                     print("에러")
@@ -50,9 +54,6 @@ final class MeetupDetailViewModel: ViewModelType {
                 print(error)
             }
             .disposed(by: disposeBag)
-
-        
-        
         return Output(postData: postData)
     }
 }

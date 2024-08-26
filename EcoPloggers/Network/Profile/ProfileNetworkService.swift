@@ -40,4 +40,32 @@ struct ProfileNetworkService {
             return Disposables.create()
         }
     }
+    static func fetchOtherProfile(userId: String) -> Single<SearchOtherProfileResultType> {
+        return Single.create { single in
+            do {
+                let router = try ProfileRouter.otherProfile(otherID: userId).asURLRequest()
+                AF.request(router, interceptor: NetworkInterceptor())
+                    .responseDecodable(of: SearchUserResponse.self) { response in
+                        switch response.result {
+                        case .success(let data):
+                            single(.success(.success(data)))
+                        case .failure(_):
+                            switch response.response?.statusCode {
+                            case 401:
+                                single(.success(.invalidToken))
+                            case 403:
+                                single(.success(.forbidden))
+                            case 419:
+                                single(.success(.invalidToken))
+                            default:
+                                single(.success(.error(.unknown)))
+                            }
+                        }
+                    }
+            } catch {
+                single(.failure(error))
+            }
+            return Disposables.create()
+        }
+    }
 }

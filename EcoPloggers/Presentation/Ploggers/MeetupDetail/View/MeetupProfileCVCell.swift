@@ -22,11 +22,12 @@ final class MeetupProfileCVCell: BaseCollectionViewCell {
         }
     }
     
-    func configureProfile(profile: ProfileResponse) {
+    func configureProfile(profile: ProfileSectionModel) {
         profileView.configureUI(
-            nickname: profile.nick,
-            postCount: profile.posts.count,
-            followerCount: profile.followers.count
+            filePath: profile.post.creator.profileImage,
+            nickname: profile.post.creator.nick,
+            postCount: profile.creator.posts.count,
+            followerCount: profile.creator.followers.count
         )
     }
 }

@@ -105,7 +105,8 @@ final class MeetupProfileView: BaseView {
         }
     }
     
-    func configureUI(nickname: String?, postCount: Int, followerCount: Int) {
+    func configureUI(filePath: String?, nickname: String?, postCount: Int, followerCount: Int) {
+        profileImg.setImgWithHeaders(path: filePath)
         nicknameLabel.text = nickname
         postView.configureUI(count: postCount)
         followersView.configureUI(count: followerCount)

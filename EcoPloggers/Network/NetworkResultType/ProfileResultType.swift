@@ -14,3 +14,10 @@ enum ProfileResultType {
     case expiredToken
     case error(CommonError)
 }
+enum SearchOtherProfileResultType {
+    case success(SearchUserResponse)
+    case invalidToken
+    case forbidden
+    case expiredToken
+    case error(CommonError)
+}

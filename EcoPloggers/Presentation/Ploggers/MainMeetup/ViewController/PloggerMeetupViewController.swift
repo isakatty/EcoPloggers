@@ -79,13 +79,13 @@ final class PloggerMeetupViewController: BaseViewController {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PloggingClubCollectionViewCell.identifier, for: indexPath) as? PloggingClubCollectionViewCell
                 else { return UICollectionViewCell() }
                 
-                cell.configureData(imageFilePath: data.files.first, creator: data.creator.nick, title: data.title, location: "영등포")
+                cell.configureData(imageFilePath: data.files.first, creator: data.creator.nick, title: data.title, location: data.product_id)
                 return cell
             case .latestSectionItem(let data):
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PloggingClubCollectionViewCell.identifier, for: indexPath) as? PloggingClubCollectionViewCell
                 else { return UICollectionViewCell() }
                 
-                cell.configureData(imageFilePath: data.files.first, creator: data.creator.nick, title: data.title, location: "영등포")
+                cell.configureData(imageFilePath: data.files.first, creator: data.creator.nick, title: data.title, location: data.product_id)
                 return cell
             }
         }, configureSupplementaryView: { dataSource, collectionView, headerText, indexPath in

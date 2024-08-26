@@ -122,6 +122,8 @@
 		C9EF5AF62C7C73FC000DD5FB /* SpecificRegionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5AF52C7C73FC000DD5FB /* SpecificRegionViewController.swift */; };
 		C9EF5AF82C7C8BDA000DD5FB /* SpecificRegionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5AF72C7C8BDA000DD5FB /* SpecificRegionViewModel.swift */; };
 		C9EF5AFA2C7C92C3000DD5FB /* BoroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5AF92C7C92C3000DD5FB /* BoroughView.swift */; };
+		C9EF5AFC2C7CB0C4000DD5FB /* ProfileSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5AFB2C7CB0C4000DD5FB /* ProfileSectionModel.swift */; };
+		C9EF5B002C7CB236000DD5FB /* SearchUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5AFF2C7CB236000DD5FB /* SearchUserResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -235,6 +237,8 @@
 		C9EF5AF52C7C73FC000DD5FB /* SpecificRegionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificRegionViewController.swift; sourceTree = "<group>"; };
 		C9EF5AF72C7C8BDA000DD5FB /* SpecificRegionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificRegionViewModel.swift; sourceTree = "<group>"; };
 		C9EF5AF92C7C92C3000DD5FB /* BoroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoroughView.swift; sourceTree = "<group>"; };
+		C9EF5AFB2C7CB0C4000DD5FB /* ProfileSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSectionModel.swift; sourceTree = "<group>"; };
+		C9EF5AFF2C7CB236000DD5FB /* SearchUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -355,6 +359,7 @@
 				C9EF5ACD2C7B5C53000DD5FB /* ProfileResponse.swift */,
 				C9EF5ACF2C7B5D04000DD5FB /* OtherProfileResponse.swift */,
 				C9EF5AD12C7B5D49000DD5FB /* UserSearchResponse.swift */,
+				C9EF5AFF2C7CB236000DD5FB /* SearchUserResponse.swift */,
 			);
 			path = ResponseDTO;
 			sourceTree = "<group>";
@@ -751,6 +756,7 @@
 			isa = PBXGroup;
 			children = (
 				C9EF5AAB2C79F92A000DD5FB /* DetailSectionModel.swift */,
+				C9EF5AFB2C7CB0C4000DD5FB /* ProfileSectionModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1033,7 +1039,9 @@
 				C9EF5AA92C79F76B000DD5FB /* MeetupMapCVCell.swift in Sources */,
 				C9EF5AFA2C7C92C3000DD5FB /* BoroughView.swift in Sources */,
 				C9EF5AA52C79BD06000DD5FB /* MeetupProfileView.swift in Sources */,
+				C9EF5B002C7CB236000DD5FB /* SearchUserResponse.swift in Sources */,
 				C9EF5AE92C7C481D000DD5FB /* MeetupProfileInfoView.swift in Sources */,
+				C9EF5AFC2C7CB0C4000DD5FB /* ProfileSectionModel.swift in Sources */,
 				C9118F102C738C9E00CF22ED /* NetworkInterceptor.swift in Sources */,
 				C9EF5A9D2C78AAAB000DD5FB /* MeetupViewModel.swift in Sources */,
 				C9118F122C73940100CF22ED /* PostRouter.swift in Sources */,

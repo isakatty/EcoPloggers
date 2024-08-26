@@ -64,11 +64,11 @@ final class PloggingClubCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
-    func configureData(imageFilePath: String?, creator: String, title: String, location: String) {
+    func configureData(imageFilePath: String?, creator: String, title: String, location: String?) {
         img.setImgWithHeaders(path: imageFilePath)
         creatorLabel.text = creator
         contentTitleLabel.text = title
-        locationLabel.text = location
+        locationLabel.text = RegionBorough(rawValue: location ?? "eco_111261")?.toTitle
     }
     
     override func prepareForReuse() {

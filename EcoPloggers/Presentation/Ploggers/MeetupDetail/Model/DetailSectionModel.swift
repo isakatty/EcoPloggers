@@ -36,7 +36,7 @@ enum DetailSectionItem {
     case infoSectionItem(data: ViewPostDetailResponse)
     case detailSectionItem(data: ViewPostDetailResponse)
     case mapSectionItem(data: ViewPostDetailResponse)
-    case profileSectionItem(data: ProfileResponse)
+    case profileSectionItem(data: ProfileSectionModel)
 }
 
 extension DetailSectionModel: SectionModelType {
