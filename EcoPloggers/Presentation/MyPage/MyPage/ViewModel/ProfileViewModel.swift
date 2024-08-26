@@ -13,14 +13,19 @@ import RxCocoa
 final class ProfileViewModel: ViewModelType {
     var disposeBag: DisposeBag = DisposeBag()
     
+    private var cacheProfile: [ProfileResponse] = []
+    
     struct Input {
         let viewWillAppear: Observable<Void>
+        let postBtnTap: PublishRelay<Void>
     }
     struct Output {
         let profileData: PublishRelay<[MyPageSectionModel]>
+        let userPosted: PublishRelay<[String]>
     }
     func transform(input: Input) -> Output {
         let profileData = PublishRelay<[MyPageSectionModel]>()
+        let userPosted = PublishRelay<[String]>()
         
         input.viewWillAppear
             .subscribe(with: self) { owner, _ in
@@ -31,9 +36,23 @@ final class ProfileViewModel: ViewModelType {
                 print(error, "ProfileVM - viewWillAppear")
             }
             .disposed(by: disposeBag)
-
         
-        return Output(profileData: profileData)
+        input.postBtnTap
+            .withUnretained(self)
+            .map { owner, _ in
+                owner.cacheProfile.first
+            }
+            .bind { response in
+                if let response {
+                    userPosted.accept(response.posts)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        return Output(
+            profileData: profileData,
+            userPosted: userPosted
+        )
     }
 }
 extension ProfileViewModel {
@@ -63,11 +82,12 @@ extension ProfileViewModel {
     }
     private func fetchProfile(title: String, completion: @escaping ([MyPageSectionModel]?) -> Void) {
         ProfileNetworkService.fetchMyProfile()
-            .subscribe { result in
+            .subscribe(with: self) { owner, result  in
                 switch result {
                 case .success(let response):
                     var sectionItems: [MyPageSectionModel] = []
                     sectionItems.append(.profileSection(title: title, items: [MyPageSectionItem.profileSectionItem(data: response)]))
+                    owner.cacheProfile.append(response)
                     completion(sectionItems)
                 case .invalidToken:
                     print("invalidToken - ProfileVM - Fetch Profile")
@@ -82,7 +102,7 @@ extension ProfileViewModel {
                     print("에러 \(error.localizedDescription) - ProfileVM - Fetch Profile")
                     completion(nil)
                 }
-            } onFailure: { error in
+            } onFailure: { onwer, error in
                 print("My Profile fetch 실패: \(error)")
                 completion(nil)
             }

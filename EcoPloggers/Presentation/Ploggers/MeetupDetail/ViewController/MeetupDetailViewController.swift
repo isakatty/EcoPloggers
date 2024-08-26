@@ -55,7 +55,7 @@ final class MeetupDetailViewController: BaseViewController {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetupInfoCVCell.identifier, for: indexPath) as? MeetupInfoCVCell
                 else { return UICollectionViewCell() }
                 cell.configureCompoUI(time: data.required_time, people: data.recruits, date: data.due_date)
-                cell.configureUI(bgImgFilePath: data.files.first, category: data.product_id, titleTxt: data.title, price: data.price)
+                cell.configureUI(bgImgFilePath: data.files.first, category: RegionBorough(rawValue: data.product_id ?? "eco_111231")?.toTitle, titleTxt: data.title, price: data.price)
                 return cell
             case .mapSectionItem(let data):
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetupMapCVCell.identifier, for: indexPath) as? MeetupMapCVCell else { return UICollectionViewCell() }
@@ -82,7 +82,7 @@ final class MeetupDetailViewController: BaseViewController {
     }
     
     override func configureHierarchy() {
-        configureNavigationLeftBar(action: nil)
+        configureModalBackBtn()
         
         [detailCollectionView]
             .forEach { view.addSubview($0) }
@@ -125,7 +125,7 @@ extension MeetupDetailViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(0.55)
+            heightDimension: .fractionalHeight(0.81)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         

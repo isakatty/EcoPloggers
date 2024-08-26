@@ -11,6 +11,7 @@ import RxSwift
 import SnapKit
 
 final class MyPageProfileCVCell: BaseCollectionViewCell {
+    var disposeBag = DisposeBag()
     private let profileImgView = ProfileImgView()
     
     private let horizontalBar: UIView = {
@@ -79,5 +80,11 @@ final class MyPageProfileCVCell: BaseCollectionViewCell {
         postButton.configureUI(count: String(profile.posts.count))
         followersBtn.configureUI(count: String(profile.followers.count))
         followingsBtn.configureUI(count: String(profile.following.count))
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        disposeBag = DisposeBag()
     }
 }

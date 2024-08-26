@@ -18,7 +18,16 @@ final class MeetupProfileView: BaseView {
         return img
     }()
     private let nicknameLabel = PlainLabel(fontSize: Constant.Font.medium15, txtColor: Constant.Color.black)
-    
+    private let followBtn: UIButton = {
+        var config = UIButton.Configuration.filled()
+        config.baseBackgroundColor = Constant.Color.secondaryBG?.withAlphaComponent(0.4)
+        var titleAttribute = AttributedString("팔로우")
+        titleAttribute.font = Constant.Font.regular12
+        titleAttribute.foregroundColor = Constant.Color.lightGray.withAlphaComponent(0.7)
+        config.attributedTitle = titleAttribute
+        let btn = UIButton(configuration: config)
+        return btn
+    }()
     private let postView = MeetupProfileInfoView(content: "게시글")
     private let followersView = MeetupProfileInfoView(content: "팔로워")
     private let viewStack: UIStackView = {
@@ -30,12 +39,10 @@ final class MeetupProfileView: BaseView {
         return stack
     }()
     
-    let followBtn: UIButton = {
+    let engageBtn: UIButton = {
         var config = UIButton.Configuration.filled()
-        config.baseBackgroundColor = Constant.Color.lightGray.withAlphaComponent(0.5)
-        config.title = "팔로우"
-        config.image = UIImage(systemName: "plus")?.withRenderingMode(.alwaysTemplate).withTintColor(Constant.Color.black)
-        config.imagePlacement = .leading
+        config.title = "참여하기"
+        config.baseBackgroundColor = Constant.Color.core?.withAlphaComponent(0.7)
         let btn = UIButton(configuration: config)
         return btn
     }()
@@ -56,9 +63,9 @@ final class MeetupProfileView: BaseView {
     }()
     
     override func configureHierarchy() {
-        [profileImg, nicknameLabel, viewStack, btnStackView]
+        [profileImg, nicknameLabel, followBtn, viewStack, btnStackView]
             .forEach { addSubview($0) }
-        [followBtn, questionBtn]
+        [engageBtn, questionBtn]
             .forEach { btnStackView.addArrangedSubview($0) }
         [postView, followersView]
             .forEach { viewStack.addArrangedSubview($0) }
@@ -72,17 +79,22 @@ final class MeetupProfileView: BaseView {
         nicknameLabel.snp.makeConstraints { make in
             make.top.equalTo(profileImg)
             make.leading.equalTo(profileImg.snp.trailing).inset(-16)
-            make.trailing.equalToSuperview().inset(8)
             make.height.greaterThanOrEqualTo(17)
+        }
+        followBtn.snp.makeConstraints { make in
+            make.leading.equalTo(nicknameLabel.snp.trailing).inset(-8)
+            make.centerY.equalTo(nicknameLabel)
+            make.verticalEdges.equalTo(nicknameLabel).inset(2)
+            make.width.equalTo(followBtn.snp.height).multipliedBy(2.5)
         }
         viewStack.snp.makeConstraints { make in
             make.top.equalTo(nicknameLabel.snp.bottom).offset(8)
             make.leading.equalTo(nicknameLabel)
             make.width.equalTo(130)
-            make.bottom.equalTo(profileImg)
+            make.bottom.equalTo(profileImg.snp.bottom).offset(4)
         }
         btnStackView.snp.makeConstraints { make in
-            make.top.equalTo(profileImg.snp.bottom).offset(12)
+            make.top.equalTo(viewStack.snp.bottom).offset(8)
             make.horizontalEdges.equalToSuperview().inset(16)
             make.bottom.equalToSuperview().inset(4)
         }

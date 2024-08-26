@@ -46,9 +46,13 @@ final class MeetupInfoCVCell: BaseCollectionViewCell {
     override func configureLayout() {
 //        super.configureLayout()
         
+        categoryLabel.textAlignment = .center
+        contentTitleLabel.textAlignment = .center
+        priceLabel.textAlignment = .center
+        
         bgImg.snp.makeConstraints { make in
             make.top.horizontalEdges.equalToSuperview()
-            make.height.equalTo(bgImg.snp.width).multipliedBy(0.5)
+            make.height.equalTo(bgImg.snp.width)
         }
         categoryLabel.snp.makeConstraints { make in
             make.top.equalTo(bgImg.snp.bottom).offset(8)
@@ -60,7 +64,7 @@ final class MeetupInfoCVCell: BaseCollectionViewCell {
         }
         priceLabel.snp.makeConstraints { make in
             make.top.equalTo(contentTitleLabel.snp.bottom).offset(12)
-            make.leading.equalTo(contentTitleLabel)
+            make.horizontalEdges.equalToSuperview().inset(8)
         }
         seperateBar.snp.makeConstraints { make in
             make.top.equalTo(priceLabel.snp.bottom).offset(12)

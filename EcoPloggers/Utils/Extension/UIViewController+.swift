@@ -43,6 +43,17 @@ extension UIViewController {
         navigationController?
             .interactivePopGestureRecognizer?.delegate = nil
     }
+    func configureModalBackBtn() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "chevron.left"),
+            style: .plain,
+            target: self,
+            action: #selector(dismissBtnTapped)
+        )
+    }
+    @objc func dismissBtnTapped() {
+        dismiss(animated: true)
+    }
     @objc func backBtnTapped() {
         navigationController?.popViewController(animated: true)
     }

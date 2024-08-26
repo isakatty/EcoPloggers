@@ -15,6 +15,7 @@ import SnapKit
 final class MyPageViewController: BaseViewController {
     private let disposeBag = DisposeBag()
     private let viewModel = ProfileViewModel()
+    private let postBtnTapEvent = PublishRelay<Void>()
     
     private lazy var profileCollectionView: UICollectionView = {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: configureCVLayout())
@@ -34,12 +35,26 @@ final class MyPageViewController: BaseViewController {
         bind()
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        navigationItem.title = "마이페이지"
+        navigationController?.navigationBar.titleTextAttributes = [.font: Constant.Font.medium20]
+    }
+    
     private func configureDataSource() {
         dataSource = RxCollectionViewSectionedReloadDataSource<MyPageSectionModel>(configureCell: { dataSource, collectionView, indexPath, item in
             switch item {
             case .profileSectionItem(let data):
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPageProfileCVCell.identifier, for: indexPath) as? MyPageProfileCVCell else { return UICollectionViewCell() }
                 cell.configureUI(profile: data)
+                
+                cell.postButton.rx.tap
+                    .bind(with: self) { owner, _ in
+                        owner.postBtnTapEvent.accept(())
+                    }
+                    .disposed(by: cell.disposeBag)
+                
                 return cell
             case .favoriteSectionItem(let data):
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PloggingClubCollectionViewCell.identifier, for: indexPath) as? PloggingClubCollectionViewCell
@@ -72,11 +87,32 @@ final class MyPageViewController: BaseViewController {
     }
     
     private func bind() {
-        let input = ProfileViewModel.Input(viewWillAppear: rx.methodInvoked(#selector(viewWillAppear)).map { _ in })
+        let input = ProfileViewModel.Input(
+            viewWillAppear: rx.methodInvoked(#selector(viewWillAppear)).map { _ in },
+            postBtnTap: postBtnTapEvent
+        )
         let output = viewModel.transform(input: input)
         
         output.profileData
             .bind(to: profileCollectionView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+        
+        profileCollectionView.rx.modelSelected(MyPageSectionItem.self)
+            .bind { section in
+                switch section {
+                case .profileSectionItem(let data):
+                    print(data)
+                case .favoriteSectionItem(let data):
+                    print(data)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        output.userPosted
+            .bind(with: self) { owner, posts in
+                print(posts)
+
+            }
             .disposed(by: disposeBag)
     }
     
@@ -114,7 +150,7 @@ extension MyPageViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(0.25)
+            heightDimension: .fractionalHeight(0.22)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         

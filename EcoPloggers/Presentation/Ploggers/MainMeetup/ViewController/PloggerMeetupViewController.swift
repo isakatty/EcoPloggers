@@ -144,6 +144,7 @@ final class PloggerMeetupViewController: BaseViewController {
         Observable.zip(output.postRouter, output.naviTitle)
             .bind(with: self) { owner, arg1 in
                 let vc = MeetupListViewController(viewModel: MeetupViewModel(router: arg1.0))
+                vc.navigationItem.title = arg1.1
                 owner.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: disposeBag)
@@ -152,7 +153,10 @@ final class PloggerMeetupViewController: BaseViewController {
             .bind(with: self) { owner, response in
                 let detailVM = MeetupDetailViewModel(detailPost: response)
                 let vc = MeetupDetailViewController(viewModel: detailVM)
-                owner.navigationController?.pushViewController(vc, animated: true)
+                vc.navigationItem.title = response.title
+                let navi = UINavigationController(rootViewController: vc)
+                navi.modalPresentationStyle = .fullScreen
+                owner.present(navi, animated: true)
             }
             .disposed(by: disposeBag)
     }

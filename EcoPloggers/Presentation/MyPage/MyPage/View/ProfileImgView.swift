@@ -27,7 +27,7 @@ final class ProfileImgView: BaseView {
     }
     override func configureLayout() {
         profileImg.snp.makeConstraints { make in
-            make.verticalEdges.equalToSuperview().inset(12)
+            make.verticalEdges.equalToSuperview().inset(8)
             make.leading.equalToSuperview().inset(16)
             make.width.equalTo(profileImg.snp.height)
         }
