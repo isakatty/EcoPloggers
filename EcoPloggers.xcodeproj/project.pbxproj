@@ -129,6 +129,9 @@
 		C9EF5B072C7CC00C000DD5FB /* FollowResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5B062C7CC00C000DD5FB /* FollowResponse.swift */; };
 		C9EF5B092C7CC10C000DD5FB /* FollowNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5B082C7CC10C000DD5FB /* FollowNetworkService.swift */; };
 		C9EF5B0B2C7CC911000DD5FB /* MeetupCommentsCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5B0A2C7CC911000DD5FB /* MeetupCommentsCVCell.swift */; };
+		C9EF5B112C7CCFBB000DD5FB /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5B102C7CCFBB000DD5FB /* CommentsViewController.swift */; };
+		C9EF5B132C7CCFC0000DD5FB /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5B122C7CCFC0000DD5FB /* CommentsViewModel.swift */; };
+		C9EF5B152C7CD096000DD5FB /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5B142C7CD096000DD5FB /* CommentsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -249,6 +252,9 @@
 		C9EF5B062C7CC00C000DD5FB /* FollowResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowResponse.swift; sourceTree = "<group>"; };
 		C9EF5B082C7CC10C000DD5FB /* FollowNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowNetworkService.swift; sourceTree = "<group>"; };
 		C9EF5B0A2C7CC911000DD5FB /* MeetupCommentsCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupCommentsCVCell.swift; sourceTree = "<group>"; };
+		C9EF5B102C7CCFBB000DD5FB /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
+		C9EF5B122C7CCFC0000DD5FB /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = "<group>"; };
+		C9EF5B142C7CD096000DD5FB /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -394,6 +400,7 @@
 		C90FF0C22C6FBF6A00590563 /* Ploggers */ = {
 			isa = PBXGroup;
 			children = (
+				C9EF5B0C2C7CCF9F000DD5FB /* Comments */,
 				C9EF5AF02C7C73D4000DD5FB /* SpecificRegion */,
 				C9EF5A942C789A62000DD5FB /* MeetupList */,
 				C976FB172C77333300E433CA /* MainMeetup */,
@@ -913,6 +920,40 @@
 			path = Follow;
 			sourceTree = "<group>";
 		};
+		C9EF5B0C2C7CCF9F000DD5FB /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				C9EF5B0F2C7CCFB3000DD5FB /* View */,
+				C9EF5B0E2C7CCFAC000DD5FB /* ViewController */,
+				C9EF5B0D2C7CCFA7000DD5FB /* ViewModel */,
+			);
+			path = Comments;
+			sourceTree = "<group>";
+		};
+		C9EF5B0D2C7CCFA7000DD5FB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C9EF5B122C7CCFC0000DD5FB /* CommentsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C9EF5B0E2C7CCFAC000DD5FB /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C9EF5B102C7CCFBB000DD5FB /* CommentsViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		C9EF5B0F2C7CCFB3000DD5FB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C9EF5B142C7CD096000DD5FB /* CommentsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1079,6 +1120,7 @@
 				C9EF5AB02C7A3CEF000DD5FB /* DateFormatter.swift in Sources */,
 				C9EF5AAC2C79F92A000DD5FB /* DetailSectionModel.swift in Sources */,
 				C90FF0B32C6F394000590563 /* NetworkManager.swift in Sources */,
+				C9EF5B152C7CD096000DD5FB /* CommentsView.swift in Sources */,
 				C9EF5B032C7CBCF7000DD5FB /* FollowRouter.swift in Sources */,
 				C9EF5A9F2C78E6D2000DD5FB /* MeetupDetailViewController.swift in Sources */,
 				C99AA86A2C6DFF9600C07BC2 /* UIViewController+.swift in Sources */,
@@ -1124,6 +1166,7 @@
 				C9118EDB2C71E42D00CF22ED /* PloggingClubHeaderView.swift in Sources */,
 				C9EF5ACA2C7B4AC3000DD5FB /* ProfileRouter.swift in Sources */,
 				C9118F052C737C5B00CF22ED /* UserRouter.swift in Sources */,
+				C9EF5B132C7CCFC0000DD5FB /* CommentsViewModel.swift in Sources */,
 				C9118ED72C71E11000CF22ED /* ViewPostResponse.swift in Sources */,
 				C90FF09B2C6E311E00590563 /* ViewModelType.swift in Sources */,
 				C9EF5AAE2C79FE00000DD5FB /* MeetupDetailViewModel.swift in Sources */,
@@ -1132,6 +1175,7 @@
 				C9E3684A2C76278900C0207A /* CommonError.swift in Sources */,
 				C976FB1F2C77438D00E433CA /* HashtagLabel.swift in Sources */,
 				C9EF5A872C7760DC000DD5FB /* UIViewController+Rx.swift in Sources */,
+				C9EF5B112C7CCFBB000DD5FB /* CommentsViewController.swift in Sources */,
 				C9EF5ACE2C7B5C53000DD5FB /* ProfileResponse.swift in Sources */,
 				C9D68BD72C6CD154002AF632 /* AppDelegate.swift in Sources */,
 				C9EF5A8E2C7774B0000DD5FB /* HashtagsQuery.swift in Sources */,

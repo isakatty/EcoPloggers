@@ -17,6 +17,7 @@ final class MeetupDetailViewController: BaseViewController {
     private let viewModel: MeetupDetailViewModel
     
     private let followBtnTapEvent = PublishRelay<String>()
+    private let commentsHeaderTapEvent = PublishRelay<Void>()
     private lazy var detailCollectionView: UICollectionView = {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: configureCVLayout())
         cv.register(MeetupInfoCVCell.self, forCellWithReuseIdentifier: MeetupInfoCVCell.identifier)
@@ -40,12 +41,20 @@ final class MeetupDetailViewController: BaseViewController {
     private func bind() {
         let input = MeetupDetailViewModel.Input(
             viewWillAppear: rx.methodInvoked(#selector(viewWillAppear)).map { _ in },
-            followTapEvent: followBtnTapEvent
+            followTapEvent: followBtnTapEvent,
+            commentHeaderTap: commentsHeaderTapEvent
         )
         let output = viewModel.transform(input: input)
         
         output.postData
             .bind(to: detailCollectionView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+        
+        output.detailPost
+            .bind(with: self) { owner, post in
+                let vc = CommentsViewController(viewModel: .init(post: post))
+                owner.navigationController?.pushViewController(vc, animated: true)
+            }
             .disposed(by: disposeBag)
     }
     private func configureDataSource() {
@@ -65,6 +74,8 @@ final class MeetupDetailViewController: BaseViewController {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetupCommentsCVCell.identifier, for: indexPath) as? MeetupCommentsCVCell else { return UICollectionViewCell() }
                 if let firstComment = data.comments.first {
                     cell.configureUI(filePath: firstComment.creator.profileImage, nick: firstComment.creator.nick, comment: firstComment.content)
+                } else {
+                    cell.configureEmptyComments(noComments: true)
                 }
                 return cell
             case .profileSectionItem(let data):
@@ -82,6 +93,19 @@ final class MeetupDetailViewController: BaseViewController {
             switch indexPath.section {
             case 0:
                 return UICollectionReusableView()
+            case 2:
+                guard let header: PloggingClubHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PloggingClubHeaderView.identifier, for: indexPath) as? PloggingClubHeaderView else { return UICollectionReusableView() }
+                
+                let section = dataSource.sectionModels[indexPath.section]
+                header.configureMeetupUI(headerText: section.title)
+                
+                header.clearBtn.rx.tap
+                    .bind(with: self) { owner, _ in
+                        owner.commentsHeaderTapEvent.accept(())
+                    }
+                    .disposed(by: header.disposeBag)
+                
+                return header
             default:
                 guard let header: PloggingClubHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PloggingClubHeaderView.identifier, for: indexPath) as? PloggingClubHeaderView else { return UICollectionReusableView() }
                 
@@ -161,6 +185,7 @@ extension MeetupDetailViewController {
         
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [createSectionHeader()]
+        section.contentInsets = .init(top: 0, leading: 8, bottom: 0, trailing: 8)
         return section
     }
     /// Map layout
@@ -179,6 +204,7 @@ extension MeetupDetailViewController {
         
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [createSectionHeader()]
+        section.contentInsets = .init(top: 0, leading: 8, bottom: 0, trailing: 8)
         return section
     }
     private func createProfileSectionLayout() -> NSCollectionLayoutSection {
@@ -197,12 +223,13 @@ extension MeetupDetailViewController {
         
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [createSectionHeader()]
+        section.contentInsets = .init(top: 0, leading: 8, bottom: 0, trailing: 8)
         return section
     }
     private func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(40)
+            heightDimension: .absolute(35)
         )
         return NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,

@@ -13,7 +13,7 @@ import SnapKit
 final class PloggingClubHeaderView: BaseCollectionViewCell {
     var disposeBag = DisposeBag()
     
-    private let headerTitle = PlainLabel(fontSize: Constant.Font.medium20)
+    private let headerTitle = PlainLabel(fontSize: Constant.Font.medium18)
     private let addLabel = PlainLabel(fontSize: Constant.Font.regular13)
     
     let clearBtn: UIButton = {
@@ -27,7 +27,7 @@ final class PloggingClubHeaderView: BaseCollectionViewCell {
             .forEach { contentView.addSubview($0) }
     }
     override func configureLayout() {
-        super.configureLayout()
+//        super.configureLayout()
         
         headerTitle.snp.makeConstraints { make in
             make.leading.equalToSuperview()

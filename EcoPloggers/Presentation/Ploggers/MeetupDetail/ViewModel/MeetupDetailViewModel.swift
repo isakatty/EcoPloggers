@@ -23,12 +23,15 @@ final class MeetupDetailViewModel: ViewModelType {
     struct Input {
         let viewWillAppear: Observable<Void>
         let followTapEvent: PublishRelay<String>
+        let commentHeaderTap: PublishRelay<Void>
     }
     struct Output {
         let postData: PublishRelay<[DetailSectionModel]>
+        let detailPost: PublishRelay<ViewPostDetailResponse>
     }
     func transform(input: Input) -> Output {
         let postData = PublishRelay<[DetailSectionModel]>()
+        let detailPost = PublishRelay<ViewPostDetailResponse>()
         
         input.viewWillAppear
             .map({ _ in
@@ -72,6 +75,17 @@ final class MeetupDetailViewModel: ViewModelType {
 //                print("error: \(err)")
 //            }
 //            .disposed(by: disposeBag)
-        return Output(postData: postData)
+        
+        input.commentHeaderTap
+            .bind(with: self) { owner, _ in
+                detailPost.accept(owner.detailPost)
+            }
+            .disposed(by: disposeBag)
+        
+        
+        return Output(
+            postData: postData,
+            detailPost: detailPost
+        )
     }
 }

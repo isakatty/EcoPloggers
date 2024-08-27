@@ -36,7 +36,8 @@ final class PloggerMeetupViewController: BaseViewController {
         cv.register(RegionCollectionViewCell.self, forCellWithReuseIdentifier: RegionCollectionViewCell.identifier)
         cv.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         cv.layer.cornerRadius = 40
-        cv.backgroundColor = Constant.Color.secondaryBG
+        cv.backgroundColor = Constant.Color.white
+//        cv.backgroundColor = Constant.Color.secondaryBG
         return cv
     }()
     
@@ -291,7 +292,7 @@ extension PloggerMeetupViewController {
     private func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(40)
+            heightDimension: .absolute(35)
         )
         return NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
