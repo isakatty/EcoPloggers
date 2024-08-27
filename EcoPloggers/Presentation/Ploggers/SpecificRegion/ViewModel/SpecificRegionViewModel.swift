@@ -44,7 +44,6 @@ final class SpecificRegionViewModel: ViewModelType {
             .subscribe { result in
                 switch result {
                 case .success(let responseDTO):
-                    print(responseDTO.toDomainProperty.data.first)
                     regionPost.accept(responseDTO.toDomainProperty.data)
                 case .forbidden:
                     print("엥")

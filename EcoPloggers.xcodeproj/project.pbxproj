@@ -132,6 +132,11 @@
 		C9EF5B112C7CCFBB000DD5FB /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5B102C7CCFBB000DD5FB /* CommentsViewController.swift */; };
 		C9EF5B132C7CCFC0000DD5FB /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5B122C7CCFC0000DD5FB /* CommentsViewModel.swift */; };
 		C9EF5B152C7CD096000DD5FB /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5B142C7CD096000DD5FB /* CommentsView.swift */; };
+		C9EF5B2A2C7DB8E9000DD5FB /* PostMeetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5B292C7DB8E9000DD5FB /* PostMeetupViewController.swift */; };
+		C9EF5B2C2C7DBD80000DD5FB /* TitleTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5B2B2C7DBD80000DD5FB /* TitleTextFieldView.swift */; };
+		C9EF5B302C7DCACD000DD5FB /* DetailPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5B2F2C7DCACD000DD5FB /* DetailPickerView.swift */; };
+		C9EF5B322C7DCB98000DD5FB /* TitleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5B312C7DCB98000DD5FB /* TitleContentView.swift */; };
+		C9EF5B342C7DCE35000DD5FB /* BoroughCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EF5B332C7DCE35000DD5FB /* BoroughCVCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -255,6 +260,11 @@
 		C9EF5B102C7CCFBB000DD5FB /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		C9EF5B122C7CCFC0000DD5FB /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = "<group>"; };
 		C9EF5B142C7CD096000DD5FB /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
+		C9EF5B292C7DB8E9000DD5FB /* PostMeetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMeetupViewController.swift; sourceTree = "<group>"; };
+		C9EF5B2B2C7DBD80000DD5FB /* TitleTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTextFieldView.swift; sourceTree = "<group>"; };
+		C9EF5B2F2C7DCACD000DD5FB /* DetailPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPickerView.swift; sourceTree = "<group>"; };
+		C9EF5B312C7DCB98000DD5FB /* TitleContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleContentView.swift; sourceTree = "<group>"; };
+		C9EF5B332C7DCE35000DD5FB /* BoroughCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoroughCVCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -400,6 +410,7 @@
 		C90FF0C22C6FBF6A00590563 /* Ploggers */ = {
 			isa = PBXGroup;
 			children = (
+				C9EF5B252C7DB8C6000DD5FB /* PostMeetup */,
 				C9EF5B0C2C7CCF9F000DD5FB /* Comments */,
 				C9EF5AF02C7C73D4000DD5FB /* SpecificRegion */,
 				C9EF5A942C789A62000DD5FB /* MeetupList */,
@@ -954,6 +965,42 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		C9EF5B252C7DB8C6000DD5FB /* PostMeetup */ = {
+			isa = PBXGroup;
+			children = (
+				C9EF5B282C7DB8DB000DD5FB /* View */,
+				C9EF5B272C7DB8D4000DD5FB /* ViewController */,
+				C9EF5B262C7DB8D0000DD5FB /* ViewModel */,
+			);
+			path = PostMeetup;
+			sourceTree = "<group>";
+		};
+		C9EF5B262C7DB8D0000DD5FB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C9EF5B272C7DB8D4000DD5FB /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C9EF5B292C7DB8E9000DD5FB /* PostMeetupViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		C9EF5B282C7DB8DB000DD5FB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C9EF5B2B2C7DBD80000DD5FB /* TitleTextFieldView.swift */,
+				C9EF5B2F2C7DCACD000DD5FB /* DetailPickerView.swift */,
+				C9EF5B312C7DCB98000DD5FB /* TitleContentView.swift */,
+				C9EF5B332C7DCE35000DD5FB /* BoroughCVCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1113,6 +1160,7 @@
 				C9118F122C73940100CF22ED /* PostRouter.swift in Sources */,
 				C976FB222C774FA800E433CA /* MeetupSectionModel.swift in Sources */,
 				C90FF09D2C6E38E000590563 /* SignUpViewController.swift in Sources */,
+				C9EF5B2C2C7DBD80000DD5FB /* TitleTextFieldView.swift in Sources */,
 				C90FF0BD2C6F9A9B00590563 /* LoginResponse.swift in Sources */,
 				C9EF5ABB2C7B1C7F000DD5FB /* ProfileImgView.swift in Sources */,
 				C90FF0BB2C6F4B4000590563 /* ValidateEmailResponse.swift in Sources */,
@@ -1123,6 +1171,7 @@
 				C9EF5B152C7CD096000DD5FB /* CommentsView.swift in Sources */,
 				C9EF5B032C7CBCF7000DD5FB /* FollowRouter.swift in Sources */,
 				C9EF5A9F2C78E6D2000DD5FB /* MeetupDetailViewController.swift in Sources */,
+				C9EF5B322C7DCB98000DD5FB /* TitleContentView.swift in Sources */,
 				C99AA86A2C6DFF9600C07BC2 /* UIViewController+.swift in Sources */,
 				C9118ED92C71E3BF00CF22ED /* PloggingClubCollectionViewCell.swift in Sources */,
 				C9EF5AB92C7B1A64000DD5FB /* MyPageProfileCVCell.swift in Sources */,
@@ -1143,6 +1192,7 @@
 				C90FF0CC2C70766500590563 /* ValidateEmailQuery.swift in Sources */,
 				C9EF5B072C7CC00C000DD5FB /* FollowResponse.swift in Sources */,
 				C90FF0D62C70A04000590563 /* SearchViewController.swift in Sources */,
+				C9EF5B302C7DCACD000DD5FB /* DetailPickerView.swift in Sources */,
 				C9EF5AC82C7B4AAE000DD5FB /* ProfileResultType.swift in Sources */,
 				C9118ECB2C71B1DB00CF22ED /* BannerCollectionViewCell.swift in Sources */,
 				C90FF0CE2C70935800590563 /* SignUpResponse.swift in Sources */,
@@ -1183,6 +1233,8 @@
 				C9EF5AB22C7B11AF000DD5FB /* MeetupProfileCVCell.swift in Sources */,
 				C9EF5A992C789A8B000DD5FB /* MeetupListViewController.swift in Sources */,
 				C9EF5AC52C7B3F3A000DD5FB /* MyPageSectionModel.swift in Sources */,
+				C9EF5B342C7DCE35000DD5FB /* BoroughCVCell.swift in Sources */,
+				C9EF5B2A2C7DB8E9000DD5FB /* PostMeetupViewController.swift in Sources */,
 				C9D68BD92C6CD154002AF632 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

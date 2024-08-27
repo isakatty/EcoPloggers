@@ -37,8 +37,15 @@ final class PloggerMeetupViewController: BaseViewController {
         cv.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         cv.layer.cornerRadius = 40
         cv.backgroundColor = Constant.Color.white
-//        cv.backgroundColor = Constant.Color.secondaryBG
         return cv
+    }()
+    private lazy var postBtn: UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(systemName: "plus"), for: .normal)
+        btn.backgroundColor = Constant.Color.blueGreen
+        btn.imageView?.clipsToBounds = true
+        btn.tintColor = Constant.Color.white
+        return btn
     }()
     
     private var dataSource: RxCollectionViewSectionedReloadDataSource<MultiSectionModel>!
@@ -120,7 +127,8 @@ final class PloggerMeetupViewController: BaseViewController {
             headerTapEvent: headerTapEvent,
             headerText: headerText,
             meetupCellTap: meetupCellTap,
-            regionCellTap: regionCellTap
+            regionCellTap: regionCellTap,
+            plusBtnTap: postBtn.rx.tap
         )
         let output = viewModel.transform(input: input)
         
@@ -169,6 +177,16 @@ final class PloggerMeetupViewController: BaseViewController {
                 owner.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: disposeBag)
+        
+        output.plusBtnTap
+            .bind(with: self) { owner, _ in
+                print("네?")
+                let vc = PostMeetupViewController()
+                let navi = UINavigationController(rootViewController: vc)
+                navi.modalPresentationStyle = .fullScreen
+                owner.present(navi, animated: true)
+            }
+            .disposed(by: disposeBag)
     }
     
     override func configureHierarchy() {
@@ -178,7 +196,7 @@ final class PloggerMeetupViewController: BaseViewController {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = true
         
-        [ploggingCollectionView]
+        [ploggingCollectionView, postBtn]
             .forEach { view.addSubview($0) }
     }
     override func configureLayout() {
@@ -186,6 +204,15 @@ final class PloggerMeetupViewController: BaseViewController {
         
         ploggingCollectionView.snp.makeConstraints { make in
             make.edges.equalTo(safeArea)
+        }
+        postBtn.snp.makeConstraints { make in
+            make.width.height.equalTo(60)
+            make.trailing.bottom.equalTo(safeArea).inset(18)
+        }
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.postBtn.layer.cornerRadius = self.postBtn.bounds.height / 2
         }
     }
 }
