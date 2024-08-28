@@ -101,22 +101,22 @@ enum RegionBorough: String, CaseIterable {
 }
 
 enum RegionBorough2: String, CaseIterable {
-    case eco_111261
-    case eco_111231
-    case eco_111262
-    case eco_111311
-    case eco_111152
     case eco_111121
+    case eco_111261
+    case eco_111262
+    case eco_111273
+    case eco_111231
+    case eco_111152
     case eco_111201
     
     var toTitle: String {
         switch self {
-        case .eco_111261: return "강남구"
-        case .eco_111231: return "영등포구"
-        case .eco_111262: return "서초구"
-        case .eco_111311: return "노원구"
-        case .eco_111152: return "동대문구"
         case .eco_111121: return "중구"
+        case .eco_111261: return "강남구"
+        case .eco_111262: return "서초구"
+        case .eco_111273: return "송파구"
+        case .eco_111231: return "영등포구"
+        case .eco_111152: return "동대문구"
         case .eco_111201: return "마포구"
         }
     }

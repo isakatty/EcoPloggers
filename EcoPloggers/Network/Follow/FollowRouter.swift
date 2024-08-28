@@ -34,12 +34,12 @@ extension FollowRouter: TargetType {
             return "/v1/follow/\(userID)"
         }
     }
-    var header: [String : String] {
+    var header: HTTPHeaders {
         guard let apiKey = Constant.NetworkComponents.apiKey else {
             print("🔑 API Key error")
             return ["": ""]
         }
-        let baseHeaders = [
+        let baseHeaders: HTTPHeaders = [
             Constant.NetworkHeader.authorization.rawValue: UserDefaultsManager.shared.accessToken,
             Constant.NetworkHeader.sesacKey.rawValue: apiKey
         ]

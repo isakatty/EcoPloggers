@@ -43,7 +43,7 @@ extension UserRouter: TargetType {
             "/v1/users/withdraw"
         }
     }
-    var header: [String : String] {
+    var header: HTTPHeaders {
         guard let apiKey = Constant.NetworkComponents.apiKey else {
             print("🔑 API Key error")
             return ["": ""]

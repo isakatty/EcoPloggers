@@ -46,4 +46,12 @@ final class BoroughCVCell: BaseCollectionViewCell {
     func configureUI(categoryTxt: String) {
         categoryLabel.text = categoryTxt
     }
+    func selectedUI() {
+        containersView.backgroundColor = Constant.Color.secondaryBG
+        containersView.layer.borderColor = Constant.Color.secondaryBG?.cgColor
+    }
+    func unSelectedUI() {
+        containersView.layer.borderColor = Constant.Color.lightGray.cgColor
+        containersView.backgroundColor = Constant.Color.white
+    }
 }

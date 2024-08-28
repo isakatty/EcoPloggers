@@ -128,4 +128,70 @@ struct PostNetworkService {
             return Disposables.create()
         }
     }
+    static func uploadImg(uploadQuery: Data) -> Single<UploadImageResponse> {
+        return Single.create { single in
+            let urlRequest: URLRequest
+            do {
+                // URLRequest 생성
+                urlRequest = try PostRouter.uploadImg(query: uploadQuery).asURLRequest()
+            } catch {
+                single(.failure(error))
+                return Disposables.create()
+            }
+            
+            AF.upload(multipartFormData: { multipartFormData in
+                multipartFormData.append(uploadQuery, withName: "files", fileName: "image.png", mimeType: "image/png")
+            }, with: urlRequest)
+            .responseDecodable(of: UploadImageResponse.self) { response in
+                switch response.result {
+                case .success(let uploadModel):
+                    dump(uploadModel)
+                    single(.success(uploadModel))
+                case .failure(let error):
+                    single(.failure(error))
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    static func uploadPost(postQuery: UploadPostQuery) -> Single<UploadPostResultType> {
+        return Single.create { single in
+            let urlRequest: URLRequest
+            do {
+                urlRequest = try PostRouter.uploadPost(query: postQuery).asURLRequest()
+            } catch {
+                single(.failure(error))
+                return Disposables.create()
+            }
+            AF.request(urlRequest, interceptor: NetworkInterceptor())
+                .responseData { dataResponse in
+                    if let data = dataResponse.data {
+                        print("Raw response data: \(String(data: data, encoding: .utf8) ?? "No data")")
+                    }
+                }
+                .responseDecodable(of: ViewPostResponseDTO.self) { response in
+                    switch response.result {
+                    case .success(let response):
+                        single(.success(.success(response)))
+                    case .failure(_):
+                        switch response.response?.statusCode {
+                        case 400:
+                            single(.success(.badRequest))
+                        case 401:
+                            single(.success(.invalidToken))
+                        case 403:
+                            single(.success(.forbidden))
+                        case 410:
+                            single(.success(.emptyPost))
+                        case 419:
+                            single(.success(.expiredToken))
+                        default:
+                            single(.success(.error(CommonError(rawValue: response.response?.statusCode ?? 999) ?? .unknown)))
+                        }
+                    }
+                }
+            
+            return Disposables.create()
+        }
+    }
 }

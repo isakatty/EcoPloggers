@@ -29,4 +29,5 @@ struct ViewPostDetailResponse: Decodable {
     let comments: [Comment]
     let hashtags: [String]
     let fileData: [Data]
+    let prices: Int?
 }

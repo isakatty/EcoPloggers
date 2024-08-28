@@ -35,7 +35,8 @@ extension ViewPostResponseDTO {
                     likes2: $0.likes2,
                     comments: $0.comments,
                     hashtags: $0.hashTags,
-                    fileData: []
+                    fileData: [],
+                    prices: $0.price
                 )
             },
             next_cursor: next_cursor
@@ -65,7 +66,8 @@ extension ViewPostResponseDTO {
                     likes2: dto.likes2,
                     comments: dto.comments,
                     hashtags: dto.hashTags,
-                    fileData: files
+                    fileData: files,
+                    prices: dto.price
                 )
             }
         }
@@ -79,6 +81,7 @@ struct ViewPostDetailResponseDTO: Decodable {
     let post_id: String
     let product_id: String?
     let title: String
+    let price: Int?
     let content: String
     let content1: String?
     let content2: String?

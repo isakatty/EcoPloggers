@@ -17,6 +17,16 @@ enum CommonResult {
     case error(CommonError)
 }
 
+enum UploadPostResultType {
+    case success(ViewPostResponseDTO)
+    case badRequest
+    case invalidToken
+    case forbidden
+    case emptyPost
+    case expiredToken
+    case error(CommonError)
+}
+
 enum FetchPostResult {
     case success(ViewPostResponseDTO)
     case badRequest

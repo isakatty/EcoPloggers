@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 enum PostRouter {
-    case uploadImg
+    case uploadImg(query: Data)
     case uploadPost(query: UploadPostQuery)
     case viewPost(query: ViewPostQuery)
     case specificPost(postID: String)
@@ -65,31 +65,28 @@ extension PostRouter: TargetType {
         }
     }
     
-    var header: [String : String] {
+    var header: HTTPHeaders {
         guard let apiKey = Constant.NetworkComponents.apiKey else {
             print("🔑 API Key error")
             return ["": ""]
         }
-        let baseHeaders = [
+        let baseHeaders: HTTPHeaders = [
             Constant.NetworkHeader.authorization.rawValue: UserDefaultsManager.shared.accessToken,
             Constant.NetworkHeader.sesacKey.rawValue: apiKey
         ]
-        let jsonHeader = [
-            Constant.NetworkHeader.contentType.rawValue: Constant.NetworkHeader.json.rawValue
-        ]
-        let multipartHeader = [
-            Constant.NetworkHeader.contentType.rawValue: Constant.NetworkHeader.multipart.rawValue
-        ]
-        
         switch self {
         case .uploadImg:
-            return baseHeaders.merging(multipartHeader) { value1, _ in
-                value1
-            }
+            return [
+                Constant.NetworkHeader.authorization.rawValue: UserDefaultsManager.shared.accessToken,
+                Constant.NetworkHeader.sesacKey.rawValue: apiKey,
+                Constant.NetworkHeader.contentType.rawValue: Constant.NetworkHeader.multipart.rawValue
+            ]
         case .uploadPost, .editPost:
-            return baseHeaders.merging(jsonHeader) { value1, _ in
-                value1
-            }
+            return [
+                Constant.NetworkHeader.authorization.rawValue: UserDefaultsManager.shared.accessToken,
+                Constant.NetworkHeader.sesacKey.rawValue: apiKey,
+                Constant.NetworkHeader.contentType.rawValue: Constant.NetworkHeader.json.rawValue
+            ]
         case .viewPost, .specificPost, .deletePost, .userPost, .fetchFavoritePost, .hashtags, .fetchImage:
             return baseHeaders
         }
@@ -145,6 +142,15 @@ extension PostRouter: TargetType {
         case .deletePost:
             return nil
         case .userPost, .fetchFavoritePost, .hashtags, .fetchImage:
+            return nil
+        }
+    }
+    
+    var multipartBody: Data? {
+        switch self {
+        case .uploadImg(let query):
+            return query
+        default:
             return nil
         }
     }

@@ -13,7 +13,7 @@ protocol TargetType: URLRequestConvertible {
     var baseURL: String { get }
     var method: HTTPMethod { get }
     var path: String { get }
-    var header: [String: String] { get }
+    var header: HTTPHeaders { get }
     var query: [URLQueryItem]? { get }
     var body: Data? { get }
 }
@@ -25,7 +25,7 @@ extension TargetType {
             url.append(queryItems: query)
         }
         var urlRequest = try URLRequest(url: url, method: method)
-        urlRequest.allHTTPHeaderFields = header
+        urlRequest.headers = header
         urlRequest.httpBody = body
         return urlRequest
     }

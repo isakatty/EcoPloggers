@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PhotosUI
 
 import RxSwift
 import RxCocoa
@@ -28,6 +29,7 @@ import SnapKit
 final class PostMeetupViewController: BaseViewController {
     private var disposeBag = DisposeBag()
     
+    private let viewModel = PostViewModel()
     private let scrollView = UIScrollView()
     private let scrollContainerView: UIView = {
         let view = UIView()
@@ -86,20 +88,82 @@ final class PostMeetupViewController: BaseViewController {
         let btn = UIButton(configuration: config)
         return btn
     }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    private let chosedImg = BehaviorRelay<NSItemProviderReading?>(value: nil)
+
+    override init() {
+        super.init()
         
         bind()
     }
-    private func bind() {
-        Observable.just(RegionBorough2.allCases)
-            .bind(to: categoryCV.rx.items(cellIdentifier: BoroughCVCell.identifier, cellType: BoroughCVCell.self)) { row, element, cell in
-                cell.configureUI(categoryTxt: element.toTitle)
+    private func bindPHPicker() {
+        addImgBtn.rx.tap
+            .bind(with: self) { owner, _ in
+                var configuration = PHPickerConfiguration()
+                configuration.filter = .any(of: [.images])
+                configuration.selectionLimit = 1
+                
+                let picker = PHPickerViewController(configuration: configuration)
+                picker.delegate = owner
+                owner.present(picker, animated: true)
             }
             .disposed(by: disposeBag)
     }
     
+    private func bind() {
+        bindPHPicker()
+        let selectedCategory = BehaviorRelay<Int>(value: 0)
+        let input = PostViewModel.Input(
+            selectedImg: chosedImg,
+            viewWillAppear: rx.methodInvoked(#selector(viewWillAppear)).map { _ in },
+            postBtnTapEvent: uploadBtn.rx.tap,
+            titleText: titleTFView.textField.rx.text.orEmpty,
+            contentText: commentTFView.textView.rx.text.orEmpty,
+            priceText: priceTFView.textField.rx.text.orEmpty,
+            selectedCategory: selectedCategory
+        )
+        let output = viewModel.transform(input: input)
+        
+        output.category
+            .bind(to: categoryCV.rx.items(cellIdentifier: BoroughCVCell.identifier, cellType: BoroughCVCell.self)) { row, element, cell in
+                cell.configureUI(categoryTxt: element.toTitle)
+                
+                if row == output.selectedCategory.value {
+                    cell.selectedUI()
+                } else {
+                    cell.unSelectedUI()
+                }
+                
+            }
+            .disposed(by: disposeBag)
+        
+        output.avaliablPostBtn
+            .bind(with: self) { owner, boolean in
+                owner.uploadBtn.isEnabled = boolean
+            }
+            .disposed(by: disposeBag)
+        
+        output.selectedCategory
+            .bind(with: self) { owner, _ in
+                owner.categoryCV.reloadData()
+            }
+            .disposed(by: disposeBag)
+        
+        categoryCV.rx.itemSelected
+            .bind(onNext: { indexPath in
+                print(indexPath.item)
+                selectedCategory.accept(indexPath.item)
+            })
+            .disposed(by: disposeBag)
+        
+        output.successUpload
+            .bind(with: self) { owner, isUploaded in
+                if isUploaded {
+                    owner.dismiss(animated: true)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+    }
     override func configureHierarchy() {
         [scrollView, uploadBtn]
             .forEach { view.addSubview($0) }
@@ -125,11 +189,11 @@ final class PostMeetupViewController: BaseViewController {
         }
         addImgBtn.snp.makeConstraints { make in
             make.top.leading.equalToSuperview().offset(12)
-            make.width.height.equalTo(50)
+            make.width.height.equalTo(100)
         }
         selectedImg.snp.makeConstraints { make in
             make.verticalEdges.equalTo(addImgBtn)
-            make.width.height.equalTo(50)
+            make.width.height.equalTo(addImgBtn)
             make.leading.equalTo(addImgBtn.snp.trailing).inset(-12)
         }
         titleTFView.snp.makeConstraints { make in
@@ -160,8 +224,43 @@ final class PostMeetupViewController: BaseViewController {
             make.bottom.equalTo(scrollContainerView).inset(60)
         }
         selectedImg.isHidden = true
+        
+        configureModalBackBtn()
     }
     
+}
+
+extension PostMeetupViewController: PHPickerViewControllerDelegate {
+    func picker(
+        _ picker: PHPickerViewController,
+        didFinishPicking results: [PHPickerResult]
+    ) {
+        dismiss(animated: true)
+        let itemProvider = results.last?.itemProvider
+        
+        guard let itemProvider,
+              itemProvider.canLoadObject(ofClass: UIImage.self)
+        else {
+            print("로드할 수 없는 상태이거나, results가 없거나")
+            return
+        }
+        
+        itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
+            guard let self else { return }
+            if let image {
+                print(image)
+                DispatchQueue.main.async {
+                    self.selectedImg.image = image as? UIImage
+                    self.selectedImg.isHidden = false
+                    
+                    // VC -> VM 이미지 전달
+                    self.chosedImg.accept(image)
+                }
+            } else {
+                print("여기로 빠지나?")
+            }
+        }
+    }
 }
 extension PostMeetupViewController {
     private func collectionViewLayout() -> UICollectionViewLayout {

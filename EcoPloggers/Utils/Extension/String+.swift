@@ -26,4 +26,11 @@ extension String{
         
         return hashtags
     }
+    
+    var addContentHashTag: String {
+        var totalContent: [String] = []
+        totalContent.append(self)
+        totalContent.append("#\(NetworkKey.hashtag.rawValue)")
+        return totalContent.joined()
+    }
 }
