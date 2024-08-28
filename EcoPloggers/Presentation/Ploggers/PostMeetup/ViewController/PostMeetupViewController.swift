@@ -57,8 +57,8 @@ final class PostMeetupViewController: BaseViewController {
         lb.text = "지역"
         return lb
     }()
-    private lazy var categoryCV: UICollectionView = {
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
+    private let categoryCV: UICollectionView = {
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: categoryCVLayout())
         cv.register(BoroughCVCell.self, forCellWithReuseIdentifier: BoroughCVCell.identifier)
         cv.backgroundColor = Constant.Color.white
 //        cv.alwaysBounceVertical = false
@@ -262,8 +262,8 @@ extension PostMeetupViewController: PHPickerViewControllerDelegate {
         }
     }
 }
-extension PostMeetupViewController {
-    private func collectionViewLayout() -> UICollectionViewLayout {
+extension UIViewController {
+    static func categoryCVLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .estimated(100),
             heightDimension: .fractionalHeight(1.0)

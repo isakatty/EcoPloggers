@@ -15,16 +15,19 @@ final class SpecificRegionViewController: BaseViewController {
     private let disposeBag = DisposeBag()
     private let viewModel: SpecificRegionViewModel
     
-    private let regionView = BoroughView()
-    private let clearBtn: UIButton = {
-        let btn = UIButton()
-        btn.backgroundColor = Constant.Color.clear
-        return btn
+    private lazy var categoryCV: UICollectionView = {
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: categoryCollectionViewLayout())
+        cv.register(
+            BoroughCVCell.self,
+            forCellWithReuseIdentifier: BoroughCVCell.identifier
+        )
+        cv.backgroundColor = Constant.Color.white
+        return cv
     }()
     private lazy var regionCV: UICollectionView = {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
         cv.backgroundColor = Constant.Color.mainBG
-        cv.register(MeetupListCVCell.self, forCellWithReuseIdentifier: MeetupListCVCell.identifier)
+        cv.register(MeetupListCollectionViewCell.self, forCellWithReuseIdentifier: MeetupListCollectionViewCell.identifier)
         return cv
     }()
     
@@ -36,24 +39,22 @@ final class SpecificRegionViewController: BaseViewController {
     }
     
     override func configureHierarchy() {
-        [regionView, clearBtn, regionCV]
+        [categoryCV, regionCV]
             .forEach { view.addSubview($0) }
     }
     override func configureLayout() {
-        super.configureLayout()
+//        super.configureLayout()
+        configureNavigationLeftBar(action: nil)
+        view.backgroundColor = Constant.Color.white
         
-        regionView.snp.makeConstraints { make in
-            make.top.equalTo(safeArea).offset(8)
-            make.leading.equalTo(safeArea).inset(12)
-            make.width.equalTo(120)
-            make.height.equalTo(50)
-        }
-        clearBtn.snp.makeConstraints { make in
-            make.edges.equalTo(regionView)
+        categoryCV.snp.makeConstraints { make in
+            make.top.equalTo(safeArea)
+            make.horizontalEdges.equalTo(safeArea)
+            make.height.equalTo(40)
         }
         regionCV.snp.makeConstraints { make in
             make.horizontalEdges.bottom.equalTo(safeArea)
-            make.top.equalTo(clearBtn.snp.bottom)
+            make.top.equalTo(categoryCV.snp.bottom)
         }
     }
     private func bind() {
@@ -64,14 +65,14 @@ final class SpecificRegionViewController: BaseViewController {
         )
         let output = viewModel.transform(input: input)
         
-        output.regionName
-            .bind(with: self) { owner, regionName in
-                owner.regionView.configureUI(regionName: regionName)
+        output.categoryRegion
+            .bind(to: categoryCV.rx.items(cellIdentifier: BoroughCVCell.identifier, cellType: BoroughCVCell.self)) { row, element, cell in
+                cell.configureUI(categoryTxt: element.toTitle)
             }
             .disposed(by: disposeBag)
         
         output.regionPost
-            .bind(to: regionCV.rx.items(cellIdentifier: MeetupListCVCell.identifier, cellType: MeetupListCVCell.self)) { row, element, cell in
+            .bind(to: regionCV.rx.items(cellIdentifier: MeetupListCollectionViewCell.identifier, cellType: MeetupListCollectionViewCell.self)) { row, element, cell in
                 cell.configureUI(data: element)
             }
             .disposed(by: disposeBag)
@@ -91,27 +92,39 @@ final class SpecificRegionViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
         
-//        clearBtn.rx.tap
-//            .map {
-//                
-//            }
     }
 }
 extension SpecificRegionViewController {
     private func collectionViewLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0)
+            heightDimension: .estimated(400)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(0.4)
+            heightDimension: .estimated(400)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
+        return UICollectionViewCompositionalLayout(section: section)
+    }
+    func categoryCollectionViewLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .estimated(150),
+            heightDimension: .fractionalHeight(1.0)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .estimated(300),
+            heightDimension: .fractionalHeight(1.0)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        group.interItemSpacing = .fixed(15)
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
         return UICollectionViewCompositionalLayout(section: section)
     }
 }

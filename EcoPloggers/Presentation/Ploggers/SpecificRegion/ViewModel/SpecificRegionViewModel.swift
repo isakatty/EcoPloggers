@@ -26,19 +26,19 @@ final class SpecificRegionViewModel: ViewModelType {
 
     }
     struct Output {
-        let regionName: PublishRelay<String>
+        let categoryRegion: PublishRelay<[RegionBorough2]>
         let regionPost: PublishRelay<[ViewPostDetailResponse]>
         let cellTapEvent: PublishRelay<ViewPostDetailResponse>
     }
     func transform(input: Input) -> Output {
-        let regionName: PublishRelay<String> = .init()
+        let categoryRegion: PublishRelay<[RegionBorough2]> = .init()
         let regionPost: PublishRelay<[ViewPostDetailResponse]> = .init()
         
         input.viewWillAppear
-            .flatMap { [weak self] _ -> Single<FetchPostResult> in
-                guard let self, let seoulBorough = region.seoulBorough.values.first?.first else { return .just(.error(.unknown))}
-                regionName.accept(seoulBorough.toTitle)
-                let query = ViewPostQuery(next: nil, limit: "20", product_id: seoulBorough.rawValue)
+            .flatMap { _ -> Single<FetchPostResult> in
+                let regions = RegionBorough2.allCases
+                categoryRegion.accept(RegionBorough2.allCases)
+                let query = ViewPostQuery(next: nil, limit: "20", product_id: regions[0].rawValue)
                 return PostNetworkService.fetchPost(postQuery: query)
             }
             .subscribe { result in
@@ -58,7 +58,7 @@ final class SpecificRegionViewModel: ViewModelType {
         
         
         return Output(
-            regionName: regionName,
+            categoryRegion: categoryRegion,
             regionPost: regionPost,
             cellTapEvent: input.cellTapEvent
         )
