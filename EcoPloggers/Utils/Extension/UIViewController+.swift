@@ -50,6 +50,7 @@ extension UIViewController {
             target: self,
             action: #selector(dismissBtnTapped)
         )
+        navigationController?.navigationBar.tintColor = Constant.Color.core
     }
     @objc func dismissBtnTapped() {
         dismiss(animated: true)

@@ -17,7 +17,7 @@ final class MeetupListViewController: BaseViewController {
     
     private lazy var listCollectionView: UICollectionView = {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
-        cv.register(MeetupListCVCell.self, forCellWithReuseIdentifier: MeetupListCVCell.identifier)
+        cv.register(MeetupListCollectionViewCell.self, forCellWithReuseIdentifier: MeetupListCollectionViewCell.identifier)
         cv.backgroundColor = Constant.Color.mainBG
         return cv
     }()
@@ -44,7 +44,7 @@ final class MeetupListViewController: BaseViewController {
         
         output.meetupList
             .asDriver()
-            .drive(listCollectionView.rx.items(cellIdentifier: MeetupListCVCell.identifier, cellType: MeetupListCVCell.self)) { row, element, cell in
+            .drive(listCollectionView.rx.items(cellIdentifier: MeetupListCollectionViewCell.identifier, cellType: MeetupListCollectionViewCell.self)) { row, element, cell in
                 cell.configureUI(data: element)
             }
             .disposed(by: disposeBag)
@@ -79,19 +79,16 @@ extension MeetupListViewController {
     private func collectionViewLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0)
+            heightDimension: .estimated(400)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 5, leading: 0, bottom: 5, trailing: 0)
-        
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(0.28)
+            heightDimension: .estimated(400)
         )
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: 10, leading: 0, bottom: 0, trailing: 0)
         return UICollectionViewCompositionalLayout(section: section)
     }
 }

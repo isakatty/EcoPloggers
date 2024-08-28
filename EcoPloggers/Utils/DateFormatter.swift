@@ -27,4 +27,8 @@ final class EcoDateFormatter {
         }
         return nil
     }
+    
+    func changeToDate(from date: String) -> Date? {
+        return viewDateString.date(from: date)
+    }
 }
