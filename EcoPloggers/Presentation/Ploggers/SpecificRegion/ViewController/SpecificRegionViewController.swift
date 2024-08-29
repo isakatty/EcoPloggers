@@ -24,12 +24,27 @@ final class SpecificRegionViewController: BaseViewController {
         cv.backgroundColor = Constant.Color.white
         return cv
     }()
+    
+    private var seoulLabel: PlainLabel = {
+        let label = PlainLabel(fontSize: Constant.Font.medium17, txtColor: Constant.Color.black)
+        label.text = "서울"
+        label.textAlignment = .center
+        label.backgroundColor = Constant.Color.white
+        return label
+    }()
     private lazy var regionCV: UICollectionView = {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
-        cv.backgroundColor = Constant.Color.mainBG
+        cv.backgroundColor = Constant.Color.white
         cv.register(MeetupListCollectionViewCell.self, forCellWithReuseIdentifier: MeetupListCollectionViewCell.identifier)
         return cv
     }()
+    private let seperateBar: UIView = {
+        let view = UIView()
+        view.backgroundColor = Constant.Color.lightGray
+        return view
+    }()
+    
+    private let selectedBorough = BehaviorRelay<Int>(value: 0)
     
     init(viewModel: SpecificRegionViewModel) {
         self.viewModel = viewModel
@@ -39,16 +54,27 @@ final class SpecificRegionViewController: BaseViewController {
     }
     
     override func configureHierarchy() {
-        [categoryCV, regionCV]
+        [categoryCV, regionCV, seoulLabel, seperateBar]
             .forEach { view.addSubview($0) }
     }
     override func configureLayout() {
-//        super.configureLayout()
-        configureNavigationLeftBar(action: nil)
         view.backgroundColor = Constant.Color.white
         
-        categoryCV.snp.makeConstraints { make in
+        configureNavigationLeftBar(action: nil)
+        
+        seoulLabel.snp.makeConstraints { make in
+            make.top.leading.equalTo(safeArea)
+            make.height.equalTo(45)
+            make.width.equalTo(60)
+        }
+        seperateBar.snp.makeConstraints { make in
+            make.width.equalTo(1)
+            make.height.equalTo(45)
+            make.leading.equalTo(seoulLabel.snp.trailing)
             make.top.equalTo(safeArea)
+        }
+        categoryCV.snp.makeConstraints { make in
+            make.top.equalTo(safeArea).offset(4)
             make.horizontalEdges.equalTo(safeArea)
             make.height.equalTo(40)
         }
@@ -60,6 +86,7 @@ final class SpecificRegionViewController: BaseViewController {
     private func bind() {
         let cellTapEvent = PublishRelay<ViewPostDetailResponse>()
         let input = SpecificRegionViewModel.Input(
+            selectedBorough: selectedBorough,
             viewWillAppear: rx.methodInvoked(#selector(viewWillAppear)).map { _ in },
             cellTapEvent: cellTapEvent
         )
@@ -68,6 +95,18 @@ final class SpecificRegionViewController: BaseViewController {
         output.categoryRegion
             .bind(to: categoryCV.rx.items(cellIdentifier: BoroughCVCell.identifier, cellType: BoroughCVCell.self)) { row, element, cell in
                 cell.configureUI(categoryTxt: element.toTitle)
+                
+                if output.selectedBorough.value == row {
+                    cell.selectedUI()
+                } else {
+                    cell.unSelectedUI()
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        output.selectedBorough
+            .bind(with: self) { owner, _ in
+                owner.categoryCV.reloadData()
             }
             .disposed(by: disposeBag)
         
@@ -89,6 +128,12 @@ final class SpecificRegionViewController: BaseViewController {
                 let navi = UINavigationController(rootViewController: vc)
                 navi.modalPresentationStyle = .fullScreen
                 owner.present(navi, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        categoryCV.rx.itemSelected
+            .bind(with: self) { owner, indexPath in
+                owner.selectedBorough.accept(indexPath.item)
             }
             .disposed(by: disposeBag)
         
@@ -124,6 +169,7 @@ extension SpecificRegionViewController {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.interItemSpacing = .fixed(15)
         let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = .init(top: 0, leading: 65, bottom: 0, trailing: 0)
         section.orthogonalScrollingBehavior = .continuous
         return UICollectionViewCompositionalLayout(section: section)
     }

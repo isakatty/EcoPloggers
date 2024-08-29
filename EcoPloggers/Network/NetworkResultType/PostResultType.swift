@@ -18,7 +18,7 @@ enum CommonResult {
 }
 
 enum UploadPostResultType {
-    case success(ViewPostResponseDTO)
+    case success(ViewPostDetailResponseDTO)
     case badRequest
     case invalidToken
     case forbidden

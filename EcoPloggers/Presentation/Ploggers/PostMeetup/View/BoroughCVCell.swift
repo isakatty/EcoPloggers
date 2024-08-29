@@ -54,4 +54,13 @@ final class BoroughCVCell: BaseCollectionViewCell {
         containersView.layer.borderColor = Constant.Color.lightGray.cgColor
         containersView.backgroundColor = Constant.Color.white
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.containersView.layer.cornerRadius = self.containersView.bounds.height / 2
+        }
+    }
 }

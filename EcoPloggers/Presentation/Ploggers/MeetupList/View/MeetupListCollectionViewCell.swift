@@ -14,6 +14,8 @@ final class MeetupListCollectionViewCell: BaseCollectionViewCell {
         let view = UIImageView()
         view.clipsToBounds = true
         view.layer.cornerRadius = 15
+        view.layer.borderWidth = 1
+        view.layer.borderColor = Constant.Color.lightGray.withAlphaComponent(0.5).cgColor
         return view
     }()
     private let titleLB = PlainLabel(fontSize: Constant.Font.medium16, txtColor: Constant.Color.black)
@@ -29,7 +31,7 @@ final class MeetupListCollectionViewCell: BaseCollectionViewCell {
         let lb = PaddingLabel(inset: .init(top: 2, left: 8, bottom: 2, right: 8))
         lb.text = "모집중"
         lb.textColor = Constant.Color.carrotOrange
-        lb.backgroundColor = Constant.Color.white.withAlphaComponent(0.5)
+        lb.backgroundColor = Constant.Color.white
         lb.textAlignment = .center
         lb.clipsToBounds = true
         return lb

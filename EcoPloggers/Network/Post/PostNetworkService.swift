@@ -164,16 +164,12 @@ struct PostNetworkService {
                 return Disposables.create()
             }
             AF.request(urlRequest, interceptor: NetworkInterceptor())
-                .responseData { dataResponse in
-                    if let data = dataResponse.data {
-                        print("Raw response data: \(String(data: data, encoding: .utf8) ?? "No data")")
-                    }
-                }
-                .responseDecodable(of: ViewPostResponseDTO.self) { response in
+                .responseDecodable(of: ViewPostDetailResponseDTO.self) { response in
                     switch response.result {
                     case .success(let response):
                         single(.success(.success(response)))
-                    case .failure(_):
+                    case .failure(let error):
+                        print(error)
                         switch response.response?.statusCode {
                         case 400:
                             single(.success(.badRequest))

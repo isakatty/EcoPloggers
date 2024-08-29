@@ -18,7 +18,7 @@ final class MeetupListViewController: BaseViewController {
     private lazy var listCollectionView: UICollectionView = {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
         cv.register(MeetupListCollectionViewCell.self, forCellWithReuseIdentifier: MeetupListCollectionViewCell.identifier)
-        cv.backgroundColor = Constant.Color.mainBG
+        cv.backgroundColor = Constant.Color.white
         return cv
     }()
     
@@ -68,7 +68,8 @@ final class MeetupListViewController: BaseViewController {
         view.addSubview(listCollectionView)
     }
     override func configureLayout() {
-        super.configureLayout()
+//        super.configureLayout()
+        view.backgroundColor = Constant.Color.white
         
         listCollectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
