@@ -37,9 +37,9 @@ final class SpecificRegionViewModel: ViewModelType {
         let regionPost: PublishRelay<[ViewPostDetailResponse]> = .init()
         
         input.viewWillAppear
+            .withLatestFrom(input.selectedBorough)
             .withUnretained(self)
-            .flatMap { owner, _ in
-                print("ViewWillApear - call 1 🔥")
+            .flatMap { owner, value in
                 return owner.fetchRegionPost(index:input.selectedBorough.value, categoryRegion: categoryRegion)
             }
             .subscribe { result in
@@ -53,11 +53,12 @@ final class SpecificRegionViewModel: ViewModelType {
                 print(error, "Specific ViewModel fetch 에러")
             }
             .disposed(by: disposeBag)
-
+        
         input.selectedBorough
+            .skip(1)
+            .distinctUntilChanged()
             .withUnretained(self)
             .flatMap { owner, value in
-                print("ViewWillApear - call 2 🔥")
                 return owner.fetchRegionPost(index: value, categoryRegion: categoryRegion)
             }
             .subscribe { result in
