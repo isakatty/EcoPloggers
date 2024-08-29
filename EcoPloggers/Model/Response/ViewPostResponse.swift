@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct ViewPostResponse: Decodable {
+struct ViewPostResponse: Codable {
     let data: [ViewPostDetailResponse]
     let next_cursor: String
 }
-struct ViewPostDetailResponse: Decodable {
+struct ViewPostDetailResponse: Codable {
     let post_id: String
     let product_id: String?
     let title: String

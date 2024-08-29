@@ -35,7 +35,7 @@ final class MeetupListViewController: BaseViewController {
         configureNavigationLeftBar(action: nil)
     }
     
-    func bind() {
+    private func bind() {
         let selectedData = PublishRelay<ViewPostDetailResponse>()
         let input = MeetupViewModel.Input(
             viewWillAppear: rx.methodInvoked(#selector(viewWillAppear)).map { _ in },

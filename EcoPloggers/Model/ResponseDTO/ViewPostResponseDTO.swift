@@ -9,7 +9,7 @@ import Foundation
 
 import RxSwift
 
-struct ViewPostResponseDTO: Decodable {
+struct ViewPostResponseDTO: Codable {
     let data: [ViewPostDetailResponseDTO]
     let next_cursor: String
 }
@@ -77,7 +77,7 @@ extension ViewPostResponseDTO {
         }
     }
 }
-struct ViewPostDetailResponseDTO: Decodable {
+struct ViewPostDetailResponseDTO: Codable {
     let post_id: String
     let product_id: String?
     let title: String
@@ -97,12 +97,12 @@ struct ViewPostDetailResponseDTO: Decodable {
     let hashTags: [String]
     let comments: [Comment]
 }
-struct Creator: Decodable {
+struct Creator: Codable {
     let user_id: String
     let nick: String
     let profileImage: String?
 }
-struct Comment: Decodable {
+struct Comment: Codable {
     let comment_id: String
     let content: String
     let createdAt: String

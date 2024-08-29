@@ -41,10 +41,16 @@ final class MeetupDetailViewModel: ViewModelType {
                 return ProfileNetworkService.fetchOtherProfile(userId: post.creator.user_id)
             })
             .subscribe(with: self) { owner, result in
+                
+                var posts = UserDefaultsManager.shared.postLists
+                posts.append(owner.detailPost)
+                UserDefaultsManager.shared.postLists = posts
+                
                 var section = [DetailSectionModel]()
                 section.append(.meetupInfoSection(title: "Top info", items: [DetailSectionItem.infoSectionItem(data: owner.detailPost)]))
                 section.append(.meetupDetailSection(title: "모임 정보", items: [DetailSectionItem.detailSectionItem(data: owner.detailPost)]))
                 section.append(.meetupCommentsSection(title: "댓글", items: [DetailSectionItem.commentSectionItem(data: owner.detailPost)]))
+                
                 switch result {
                 case .success(let response):
                     section.append(.meetupProfileSection(title: "작성자 프로필", items: [DetailSectionItem.profileSectionItem(data: .init(post: owner.detailPost, creator: response))]))

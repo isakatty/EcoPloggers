@@ -128,7 +128,8 @@ final class PloggerMeetupViewController: BaseViewController {
             headerText: headerText,
             meetupCellTap: meetupCellTap,
             regionCellTap: regionCellTap,
-            plusBtnTap: postBtn.rx.tap
+            plusBtnTap: postBtn.rx.tap,
+            searchBarTap: searchController.searchBar.rx.textDidBeginEditing
         )
         let output = viewModel.transform(input: input)
         
@@ -172,19 +173,26 @@ final class PloggerMeetupViewController: BaseViewController {
         
         output.regionCellTap
             .bind(with: self) { owner, region in
-                print(region.toTitle, "화면 이동 해야함.")
                 let vc = SpecificRegionViewController(viewModel: .init(region: region))
+                vc.navigationItem.title = region.toTitle
                 owner.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: disposeBag)
         
         output.plusBtnTap
             .bind(with: self) { owner, _ in
-                print("네?")
                 let vc = PostMeetupViewController()
                 let navi = UINavigationController(rootViewController: vc)
                 navi.modalPresentationStyle = .fullScreen
                 owner.present(navi, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        output.searchBarTap
+            .bind(with: self) { owner, _ in
+                let vc = SearchViewController()
+                vc.navigationItem.title = "Search"
+                owner.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: disposeBag)
     }

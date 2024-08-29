@@ -20,6 +20,7 @@ final class PloggersViewModel: ViewModelType {
         let meetupCellTap: PublishRelay<ViewPostDetailResponse>
         let regionCellTap: PublishRelay<Region>
         let plusBtnTap: ControlEvent<Void>
+        let searchBarTap: ControlEvent<Void>
     }
     struct Output {
         let sections: BehaviorRelay<[MultiSectionModel]>
@@ -28,6 +29,7 @@ final class PloggersViewModel: ViewModelType {
         let meetupCellTap: PublishRelay<ViewPostDetailResponse>
         let regionCellTap: PublishRelay<Region>
         let plusBtnTap: ControlEvent<Void>
+        let searchBarTap: ControlEvent<Void>
     }
     func transform(input: Input) -> Output {
         let sectionData = BehaviorRelay<[MultiSectionModel]>(value: [])
@@ -71,7 +73,8 @@ final class PloggersViewModel: ViewModelType {
             naviTitle: input.headerText,
             meetupCellTap: input.meetupCellTap,
             regionCellTap: input.regionCellTap,
-            plusBtnTap: input.plusBtnTap
+            plusBtnTap: input.plusBtnTap,
+            searchBarTap: input.searchBarTap
         )
     }
 }

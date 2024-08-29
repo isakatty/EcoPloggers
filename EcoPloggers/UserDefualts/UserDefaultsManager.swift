@@ -12,6 +12,8 @@ final class UserDefaultsManager {
     private enum UserDefaultsKey: String {
         case access
         case refresh
+        case userId
+        case alreadySeen
     }
     static let shared = UserDefaultsManager()
     private init() { }
@@ -30,6 +32,29 @@ final class UserDefaultsManager {
         }
         set {
             UserDefaults.standard.setValue(newValue, forKey: UserDefaultsKey.refresh.rawValue)
+        }
+    }
+    var myUserID: String {
+        get {
+            UserDefaults.standard.string(forKey: UserDefaultsKey.userId.rawValue) ?? ""
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: UserDefaultsKey.userId.rawValue)
+        }
+    }
+    var postLists: [ViewPostDetailResponse] {
+        get {
+            guard let data = UserDefaults.standard.data(forKey: UserDefaultsKey.alreadySeen.rawValue),
+                  let posts = try? JSONDecoder().decode([ViewPostDetailResponse].self, from: data) else {
+                return []
+            }
+            return posts
+        }
+        set {
+            let encoder = JSONEncoder()
+            if let encoded = try? encoder.encode(newValue) {
+                UserDefaults.standard.setValue(encoded, forKey: UserDefaultsKey.alreadySeen.rawValue)
+            }
         }
     }
     
