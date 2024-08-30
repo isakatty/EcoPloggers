@@ -30,7 +30,7 @@ final class PloggingClubHeaderView: BaseCollectionViewCell {
 //        super.configureLayout()
         
         headerTitle.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
+            make.leading.equalToSuperview().inset(18)
             make.top.bottom.equalToSuperview().inset(10)
         }
         addLabel.snp.makeConstraints { make in

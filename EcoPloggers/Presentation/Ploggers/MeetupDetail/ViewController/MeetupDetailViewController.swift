@@ -25,6 +25,8 @@ final class MeetupDetailViewController: BaseViewController {
         cv.register(MeetupCommentsCVCell.self, forCellWithReuseIdentifier: MeetupCommentsCVCell.identifier)
         cv.register(MeetupProfileCVCell.self, forCellWithReuseIdentifier: MeetupProfileCVCell.identifier)
         cv.register(PloggingClubHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PloggingClubHeaderView.identifier)
+        cv.backgroundColor = Constant.Color.lightGray.withAlphaComponent(0.3)
+        cv.showsVerticalScrollIndicator = false
         return cv
     }()
     private var dataSource: RxCollectionViewSectionedReloadDataSource<DetailSectionModel>!
@@ -96,6 +98,8 @@ final class MeetupDetailViewController: BaseViewController {
             case 2:
                 guard let header: PloggingClubHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PloggingClubHeaderView.identifier, for: indexPath) as? PloggingClubHeaderView else { return UICollectionReusableView() }
                 
+                header.backgroundColor = Constant.Color.white
+                
                 let section = dataSource.sectionModels[indexPath.section]
                 header.configureMeetupUI(headerText: section.title)
                 
@@ -108,6 +112,8 @@ final class MeetupDetailViewController: BaseViewController {
                 return header
             default:
                 guard let header: PloggingClubHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PloggingClubHeaderView.identifier, for: indexPath) as? PloggingClubHeaderView else { return UICollectionReusableView() }
+                
+                header.backgroundColor = Constant.Color.white
                 
                 let section = dataSource.sectionModels[indexPath.section]
                 header.configureMeetupUI(headerText: section.title)
@@ -124,7 +130,6 @@ final class MeetupDetailViewController: BaseViewController {
             .forEach { view.addSubview($0) }
     }
     override func configureLayout() {
-//        super.configureLayout()
         view.backgroundColor = Constant.Color.white
         
         detailCollectionView.snp.makeConstraints { make in
@@ -185,7 +190,7 @@ extension MeetupDetailViewController {
         
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [createSectionHeader()]
-        section.contentInsets = .init(top: 10, leading: 8, bottom: 0, trailing: 8)
+        section.contentInsets = .init(top: 10, leading: 0, bottom: 0, trailing: 0)
         return section
     }
     /// Map layout
@@ -204,7 +209,7 @@ extension MeetupDetailViewController {
         
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [createSectionHeader()]
-        section.contentInsets = .init(top: 0, leading: 8, bottom: 0, trailing: 8)
+        section.contentInsets = .init(top: 10, leading: 0, bottom: 0, trailing: 0)
         return section
     }
     private func createProfileSectionLayout() -> NSCollectionLayoutSection {
@@ -213,7 +218,6 @@ extension MeetupDetailViewController {
             heightDimension: .fractionalHeight(1.0)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 5, leading: 5, bottom: 5, trailing: 5)
         
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
@@ -223,7 +227,7 @@ extension MeetupDetailViewController {
         
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [createSectionHeader()]
-        section.contentInsets = .init(top: 10, leading: 8, bottom: 0, trailing: 8)
+        section.contentInsets = .init(top: 10, leading: 0, bottom: 0, trailing: 0)
         return section
     }
     private func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {

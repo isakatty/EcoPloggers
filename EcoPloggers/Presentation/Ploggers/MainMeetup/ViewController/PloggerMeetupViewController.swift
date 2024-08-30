@@ -281,7 +281,7 @@ extension PloggerMeetupViewController {
         
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [createSectionHeader()]
-        section.contentInsets = .init(top: 5, leading: 15, bottom: 15, trailing: 15)
+        section.contentInsets = .init(top: 5, leading: 0, bottom: 15, trailing: 0)
         section.orthogonalScrollingBehavior = .continuous
         return section
     }
@@ -302,7 +302,7 @@ extension PloggerMeetupViewController {
         
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [createSectionHeader()]
-        section.contentInsets = .init(top: 10, leading: 15, bottom: 10, trailing: 15)
+        section.contentInsets = .init(top: 10, leading: 0, bottom: 10, trailing: 0)
         section.orthogonalScrollingBehavior = .continuous
         return section
     }

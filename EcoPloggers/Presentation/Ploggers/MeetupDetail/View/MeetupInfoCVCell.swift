@@ -19,8 +19,8 @@ final class MeetupInfoCVCell: BaseCollectionViewCell {
     }()
     private let capsuleCategory = CapsuleLbView()
     private let capsuleGathering = CapsuleLbView()
-    private let contentTitleLabel = PlainLabel(fontSize: Constant.Font.medium20, txtColor: Constant.Color.black)
-    private let priceLabel = PlainLabel(fontSize: Constant.Font.regular15, txtColor: Constant.Color.black)
+    private let contentTitleLabel = PlainLabel(fontSize: Constant.Font.medium16, txtColor: Constant.Color.black)
+    private let priceLabel = PlainLabel(fontSize: Constant.Font.bold13, txtColor: Constant.Color.black)
     private let seperateBar: UIView = {
         let view = UIView()
         view.backgroundColor = Constant.Color.lightGray.withAlphaComponent(0.6)
@@ -41,10 +41,11 @@ final class MeetupInfoCVCell: BaseCollectionViewCell {
     private let titleContainerView: UIView = {
         let view = UIView()
         view.backgroundColor = Constant.Color.white
-        view.layer.shadowRadius = 10
+        view.layer.shadowRadius = 5
         view.layer.shadowOpacity = 1
-        view.layer.shadowColor = Constant.Color.black.cgColor
+        view.layer.shadowColor = Constant.Color.black.withAlphaComponent(0.6).cgColor
         view.layer.shadowOffset = CGSize(width: 0, height: 0)
+        view.layer.cornerRadius = 20
         return view
     }()
     

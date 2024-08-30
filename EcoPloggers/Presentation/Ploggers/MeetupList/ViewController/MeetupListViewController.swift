@@ -15,9 +15,12 @@ final class MeetupListViewController: BaseViewController {
     private var disposeBag = DisposeBag()
     private var viewModel: MeetupViewModel
     
-    private lazy var listCollectionView: UICollectionView = {
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
-        cv.register(MeetupListCollectionViewCell.self, forCellWithReuseIdentifier: MeetupListCollectionViewCell.identifier)
+    private let listCollectionView: UICollectionView = {
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: listCVLayout())
+        cv.register(
+            MeetupListSndCVCell.self,
+            forCellWithReuseIdentifier: MeetupListSndCVCell.identifier
+        )
         cv.backgroundColor = Constant.Color.white
         return cv
     }()
@@ -47,7 +50,7 @@ final class MeetupListViewController: BaseViewController {
         
         output.meetupList
             .asDriver()
-            .drive(listCollectionView.rx.items(cellIdentifier: MeetupListCollectionViewCell.identifier, cellType: MeetupListCollectionViewCell.self)) { row, element, cell in
+            .drive(listCollectionView.rx.items(cellIdentifier: MeetupListSndCVCell.identifier, cellType: MeetupListSndCVCell.self)) { row, element, cell in
                 cell.configureUI(data: element)
             }
             .disposed(by: disposeBag)
@@ -69,7 +72,7 @@ final class MeetupListViewController: BaseViewController {
         listCollectionView.rx.prefetchItems
             .bind(with: self) { owner, indexPathArray in
                 if let indexPath = indexPathArray.first {
-                    if output.meetupList.value.count - 4 == indexPath.item {
+                    if output.meetupList.value.count - 6 == indexPath.item {
                         paginationTrigger.accept(true)
                     }
                 } else {
@@ -90,19 +93,19 @@ final class MeetupListViewController: BaseViewController {
         }
     }
 }
-extension MeetupListViewController {
-    private func collectionViewLayout() -> UICollectionViewLayout {
+extension UIViewController {
+    static func listCVLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(400)
+            heightDimension: .estimated(200)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(400)
+            heightDimension: .estimated(200)
         )
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-        
         let section = NSCollectionLayoutSection(group: group)
         return UICollectionViewCompositionalLayout(section: section)
     }

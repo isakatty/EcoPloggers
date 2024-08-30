@@ -32,10 +32,10 @@ final class SpecificRegionViewController: BaseViewController {
         label.backgroundColor = Constant.Color.white
         return label
     }()
-    private lazy var regionCV: UICollectionView = {
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
+    private let regionCV: UICollectionView = {
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: listCVLayout())
         cv.backgroundColor = Constant.Color.white
-        cv.register(MeetupListCollectionViewCell.self, forCellWithReuseIdentifier: MeetupListCollectionViewCell.identifier)
+        cv.register(MeetupListSndCVCell.self, forCellWithReuseIdentifier: MeetupListSndCVCell.identifier)
         return cv
     }()
     private let seperateBar: UIView = {
@@ -111,7 +111,7 @@ final class SpecificRegionViewController: BaseViewController {
             .disposed(by: disposeBag)
         
         output.regionPost
-            .bind(to: regionCV.rx.items(cellIdentifier: MeetupListCollectionViewCell.identifier, cellType: MeetupListCollectionViewCell.self)) { row, element, cell in
+            .bind(to: regionCV.rx.items(cellIdentifier: MeetupListSndCVCell.identifier, cellType: MeetupListSndCVCell.self)) { row, element, cell in
                 cell.configureUI(data: element)
             }
             .disposed(by: disposeBag)
@@ -140,22 +140,6 @@ final class SpecificRegionViewController: BaseViewController {
     }
 }
 extension SpecificRegionViewController {
-    private func collectionViewLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(400)
-        )
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(400)
-        )
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        
-        let section = NSCollectionLayoutSection(group: group)
-        return UICollectionViewCompositionalLayout(section: section)
-    }
     func categoryCollectionViewLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .estimated(150),

@@ -11,7 +11,7 @@ import SnapKit
 
 final class CapsuleLbView: BaseView {
     private lazy var lb : PlainLabel = {
-        let lb = PlainLabel(fontSize: Constant.Font.regular15, txtColor: Constant.Color.white)
+        let lb = PlainLabel(fontSize: Constant.Font.regular14, txtColor: Constant.Color.white)
         return lb
     }()
     
