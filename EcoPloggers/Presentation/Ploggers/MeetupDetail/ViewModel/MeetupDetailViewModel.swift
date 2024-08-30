@@ -42,9 +42,9 @@ final class MeetupDetailViewModel: ViewModelType {
             })
             .subscribe(with: self) { owner, result in
                 
-                var posts = UserDefaultsManager.shared.postLists
-                posts.append(owner.detailPost)
-                UserDefaultsManager.shared.postLists = posts
+//                var posts = UserDefaultsManager.shared.postLists
+//                posts.append(owner.detailPost)
+//                UserDefaultsManager.shared.postLists = posts
                 
                 var section = [DetailSectionModel]()
                 section.append(.meetupInfoSection(title: "Top info", items: [DetailSectionItem.infoSectionItem(data: owner.detailPost)]))

@@ -18,6 +18,7 @@ final class MeetupDetailCVCell: BaseCollectionViewCell {
             .forEach { contentView.addSubview($0) }
     }
     override func configureLayout() {
+        super.configureLayout()
         contentLabel.numberOfLines = .zero
         contentLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(8)

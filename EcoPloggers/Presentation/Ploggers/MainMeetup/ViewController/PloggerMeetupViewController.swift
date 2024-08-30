@@ -154,6 +154,7 @@ final class PloggerMeetupViewController: BaseViewController {
 
         Observable.zip(output.postRouter, output.naviTitle)
             .bind(with: self) { owner, arg1 in
+                print((arg1.0))
                 let vc = MeetupListViewController(viewModel: MeetupViewModel(router: arg1.0))
                 vc.navigationItem.title = arg1.1
                 owner.navigationController?.pushViewController(vc, animated: true)
@@ -237,7 +238,7 @@ extension PloggerMeetupViewController {
             case 2:
                 return self.createFavoriteSectionLayout()
             case 3:
-                return self.createLatestSectionLayout()
+                return self.createFavoriteSectionLayout()
             default:
                 return self.createBannerSectionLayout()
             }
@@ -303,25 +304,6 @@ extension PloggerMeetupViewController {
         section.boundarySupplementaryItems = [createSectionHeader()]
         section.contentInsets = .init(top: 10, leading: 15, bottom: 10, trailing: 15)
         section.orthogonalScrollingBehavior = .continuous
-        return section
-    }
-    private func createLatestSectionLayout() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.5),
-            heightDimension: .fractionalHeight(1.0)
-        )
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 5, leading: 5, bottom: 5, trailing: 5)
-        
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(0.38)
-        )
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        
-        let section = NSCollectionLayoutSection(group: group)
-        section.boundarySupplementaryItems = [createSectionHeader()]
-        section.contentInsets = .init(top: 10, leading: 15, bottom: 10, trailing: 15)
         return section
     }
     private func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {

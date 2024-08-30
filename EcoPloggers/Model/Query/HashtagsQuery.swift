@@ -8,7 +8,7 @@
 import Foundation
 
 struct HashtagsQuery: Encodable {
-    let next: String?
+    var next: String?
     let limit: String?
     let product_id: String?
     let hashTag: String

@@ -161,7 +161,7 @@ extension MeetupDetailViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(0.81)
+            heightDimension: .fractionalHeight(0.61)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
@@ -185,7 +185,7 @@ extension MeetupDetailViewController {
         
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [createSectionHeader()]
-        section.contentInsets = .init(top: 0, leading: 8, bottom: 0, trailing: 8)
+        section.contentInsets = .init(top: 10, leading: 8, bottom: 0, trailing: 8)
         return section
     }
     /// Map layout
@@ -223,7 +223,7 @@ extension MeetupDetailViewController {
         
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [createSectionHeader()]
-        section.contentInsets = .init(top: 0, leading: 8, bottom: 0, trailing: 8)
+        section.contentInsets = .init(top: 10, leading: 8, bottom: 0, trailing: 8)
         return section
     }
     private func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {

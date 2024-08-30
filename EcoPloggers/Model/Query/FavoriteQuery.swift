@@ -8,6 +8,6 @@
 import Foundation
 
 struct FavoriteQuery: Encodable {
-    let next: String?
+    var next: String?
     let limit: String?
 }

@@ -17,8 +17,9 @@ final class MeetupInfoCVCell: BaseCollectionViewCell {
         img.clipsToBounds = true
         return img
     }()
-    private let categoryLabel = PlainLabel(fontSize: Constant.Font.medium13, txtColor: Constant.Color.lightGray)
-    private let contentTitleLabel = PlainLabel(fontSize: Constant.Font.medium18, txtColor: Constant.Color.black)
+    private let capsuleCategory = CapsuleLbView()
+    private let capsuleGathering = CapsuleLbView()
+    private let contentTitleLabel = PlainLabel(fontSize: Constant.Font.medium20, txtColor: Constant.Color.black)
     private let priceLabel = PlainLabel(fontSize: Constant.Font.regular15, txtColor: Constant.Color.black)
     private let seperateBar: UIView = {
         let view = UIView()
@@ -37,51 +38,71 @@ final class MeetupInfoCVCell: BaseCollectionViewCell {
     private let participantsView = InfoComponent(infoTitle: "참여인원")
     private let gatherDateView = InfoComponent(infoTitle: "마감날짜")
     
+    private let titleContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = Constant.Color.white
+        view.layer.shadowRadius = 10
+        view.layer.shadowOpacity = 1
+        view.layer.shadowColor = Constant.Color.black.cgColor
+        view.layer.shadowOffset = CGSize(width: 0, height: 0)
+        return view
+    }()
+    
     override func configureHierarchy() {
-        [bgImg, categoryLabel, contentTitleLabel, priceLabel, seperateBar, compoStackView]
+        [bgImg, titleContainerView, seperateBar, compoStackView]
             .forEach { contentView.addSubview($0) }
+        
+       [capsuleCategory, contentTitleLabel, capsuleGathering, priceLabel]
+            .forEach { titleContainerView.addSubview($0) }
+        
         [timeView, participantsView, gatherDateView]
             .forEach { compoStackView.addArrangedSubview($0) }
     }
     override func configureLayout() {
-//        super.configureLayout()
-        
-        categoryLabel.textAlignment = .center
+        super.configureLayout()
+        contentTitleLabel.numberOfLines = .zero
         contentTitleLabel.textAlignment = .center
         priceLabel.textAlignment = .center
         
         bgImg.snp.makeConstraints { make in
             make.top.horizontalEdges.equalToSuperview()
-            make.height.equalTo(bgImg.snp.width)
         }
-        categoryLabel.snp.makeConstraints { make in
-            make.top.equalTo(bgImg.snp.bottom).offset(8)
-            make.horizontalEdges.equalToSuperview().inset(8)
+        titleContainerView.snp.makeConstraints { make in
+            make.top.equalTo(bgImg.snp.centerY).offset(70)
+            make.horizontalEdges.equalToSuperview().inset(24)
+            make.bottom.equalTo(bgImg.snp.bottom).offset(50)
         }
         contentTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(categoryLabel.snp.bottom).offset(12)
+            make.top.equalTo(titleContainerView.snp.top).offset(12)
             make.horizontalEdges.equalToSuperview().inset(8)
+        }
+        capsuleCategory.snp.makeConstraints { make in
+            make.top.equalTo(contentTitleLabel.snp.bottom).offset(8)
+            make.trailing.equalTo(bgImg.snp.centerX).offset(-12)
+            make.height.equalTo(30)
+        }
+        capsuleGathering.snp.makeConstraints { make in
+            make.top.equalTo(contentTitleLabel.snp.bottom).offset(8)
+            make.leading.equalTo(bgImg.snp.centerX).offset(12)
+            make.height.equalTo(30)
         }
         priceLabel.snp.makeConstraints { make in
-            make.top.equalTo(contentTitleLabel.snp.bottom).offset(12)
-            make.horizontalEdges.equalToSuperview().inset(8)
-        }
-        seperateBar.snp.makeConstraints { make in
-            make.top.equalTo(priceLabel.snp.bottom).offset(12)
-            make.height.equalTo(1)
-            make.horizontalEdges.equalToSuperview().inset(8)
+            make.top.equalTo(capsuleGathering.snp.bottom).offset(8)
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().inset(12)
         }
         compoStackView.snp.makeConstraints { make in
-            make.top.equalTo(seperateBar.snp.bottom).offset(8)
+            make.top.equalTo(titleContainerView.snp.bottom).offset(20)
             make.horizontalEdges.equalToSuperview().inset(8)
             make.height.equalTo(50)
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().inset(24)
         }
     }
     
     func configureUI(bgImgFilePath: String?, category: String?, titleTxt: String?, price: String?) {
         bgImg.setImgWithHeaders(path: bgImgFilePath)
-        categoryLabel.text = category
+        capsuleCategory.configureUI(lbText: category)
+        capsuleGathering.gatheringBG()
         contentTitleLabel.text = titleTxt
         if let price {
             priceLabel.text = "참가비 \(price)원"

@@ -36,10 +36,13 @@ final class MeetupListViewController: BaseViewController {
     }
     
     private func bind() {
+        let paginationTrigger = PublishRelay<Bool>()
         let selectedData = PublishRelay<ViewPostDetailResponse>()
         let input = MeetupViewModel.Input(
             viewWillAppear: rx.methodInvoked(#selector(viewWillAppear)).map { _ in },
-            cellTapEvent: selectedData)
+            cellTapEvent: selectedData,
+            paginationTrigger: paginationTrigger
+        )
         let output = viewModel.transform(input: input)
         
         output.meetupList
@@ -62,13 +65,24 @@ final class MeetupListViewController: BaseViewController {
                 owner.present(navi, animated: true)
             }
             .disposed(by: disposeBag)
-
+        
+        listCollectionView.rx.prefetchItems
+            .bind(with: self) { owner, indexPathArray in
+                if let indexPath = indexPathArray.first {
+                    if output.meetupList.value.count - 4 == indexPath.item {
+                        paginationTrigger.accept(true)
+                    }
+                } else {
+                    print("네 ?")
+                }
+            }
+            .disposed(by: disposeBag)
+        
     }
     override func configureHierarchy() {
         view.addSubview(listCollectionView)
     }
     override func configureLayout() {
-//        super.configureLayout()
         view.backgroundColor = Constant.Color.white
         
         listCollectionView.snp.makeConstraints { make in

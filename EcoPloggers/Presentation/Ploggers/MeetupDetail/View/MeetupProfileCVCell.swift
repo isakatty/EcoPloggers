@@ -19,6 +19,7 @@ final class MeetupProfileCVCell: BaseCollectionViewCell {
         contentView.addSubview(profileView)
     }
     override func configureLayout() {
+        super.configureLayout()
         profileView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }

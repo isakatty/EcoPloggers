@@ -23,6 +23,7 @@ class BaseCollectionViewCell: UICollectionViewCell {
     func configureHierarchy() { }
     func configureLayout() {
 //        contentView.backgroundColor = Constant.Color.secondaryBG
+        contentView.backgroundColor = Constant.Color.white
         
     }
 }

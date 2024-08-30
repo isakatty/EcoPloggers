@@ -82,6 +82,7 @@
 		C9D68BE32C6CD155002AF632 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = C9D68BE22C6CD155002AF632 /* Base */; };
 		C9E1EC462C818A6E0050D879 /* EcoProfileCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E1EC452C818A6E0050D879 /* EcoProfileCVCell.swift */; };
 		C9E1EC482C8195230050D879 /* SegmentCVHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E1EC472C8195230050D879 /* SegmentCVHeaderView.swift */; };
+		C9E1EC4A2C81DF9C0050D879 /* CapsuleLbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E1EC492C81DF9C0050D879 /* CapsuleLbView.swift */; };
 		C9E3682C2C74F52200C0207A /* UserNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E3682B2C74F52200C0207A /* UserNetworkService.swift */; };
 		C9E368482C7626F700C0207A /* PostNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E368472C7626F700C0207A /* PostNetworkService.swift */; };
 		C9E3684A2C76278900C0207A /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E368492C76278900C0207A /* CommonError.swift */; };
@@ -219,6 +220,7 @@
 		C9D68BEA2C6DD293002AF632 /* XCConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = XCConfig.xcconfig; sourceTree = "<group>"; };
 		C9E1EC452C818A6E0050D879 /* EcoProfileCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoProfileCVCell.swift; sourceTree = "<group>"; };
 		C9E1EC472C8195230050D879 /* SegmentCVHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentCVHeaderView.swift; sourceTree = "<group>"; };
+		C9E1EC492C81DF9C0050D879 /* CapsuleLbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleLbView.swift; sourceTree = "<group>"; };
 		C9E3682B2C74F52200C0207A /* UserNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNetworkService.swift; sourceTree = "<group>"; };
 		C9E368472C7626F700C0207A /* PostNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostNetworkService.swift; sourceTree = "<group>"; };
 		C9E368492C76278900C0207A /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
@@ -562,6 +564,7 @@
 				C9EF5AB12C7B11AF000DD5FB /* MeetupProfileCVCell.swift */,
 				C9EF5AE82C7C481D000DD5FB /* MeetupProfileInfoView.swift */,
 				C9EF5B0A2C7CC911000DD5FB /* MeetupCommentsCVCell.swift */,
+				C9E1EC492C81DF9C0050D879 /* CapsuleLbView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1192,6 +1195,7 @@
 				C9E1EC462C818A6E0050D879 /* EcoProfileCVCell.swift in Sources */,
 				C976FB192C7737B200E433CA /* PloggerMeetupViewController.swift in Sources */,
 				C90FF09F2C6E3BD400590563 /* SignUpViewModel.swift in Sources */,
+				C9E1EC4A2C81DF9C0050D879 /* CapsuleLbView.swift in Sources */,
 				C9EF5AA12C78EA62000DD5FB /* MeetupInfoCVCell.swift in Sources */,
 				C976FB1D2C77420300E433CA /* CornerRadiusImage.swift in Sources */,
 				C9EF5B052C7CBFE5000DD5FB /* FollowResultType.swift in Sources */,

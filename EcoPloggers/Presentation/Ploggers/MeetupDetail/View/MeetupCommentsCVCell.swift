@@ -31,6 +31,7 @@ final class MeetupCommentsCVCell: BaseCollectionViewCell {
             .forEach { contentView.addSubview($0) }
     }
     override func configureLayout() {
+        super.configureLayout()
         profileImg.snp.makeConstraints { make in
             make.verticalEdges.equalToSuperview().inset(8)
             make.leading.equalToSuperview().inset(12)

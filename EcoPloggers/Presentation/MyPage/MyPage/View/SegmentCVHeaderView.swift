@@ -10,6 +10,20 @@ import UIKit
 import RxSwift
 import SnapKit
 
+enum EcoProfile: Int, CaseIterable {
+    case favorite
+    case myPosts
+    
+    var toImg: UIImage? {
+        switch self {
+        case .favorite:
+            return UIImage(systemName: "heart")
+        case .myPosts:
+            return UIImage(systemName: "pencil.and.list.clipboard")
+        }
+    }
+}
+
 final class SegmentCVHeaderView: BaseCollectionViewCell {
     let segmentControl: UISegmentedControl = {
         let seg = UISegmentedControl()
