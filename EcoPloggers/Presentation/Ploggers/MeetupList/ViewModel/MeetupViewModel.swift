@@ -35,95 +35,69 @@ final class MeetupViewModel: ViewModelType {
         input.viewWillAppear
             .withUnretained(self)
             .flatMap { owner, _ in
-                switch owner.router {
-                case .fetchFavoritePost(let query):
-                    return PostNetworkService.fetchFavPost(query: query)
-                        .map { $0.toCommonResult() }
-                        .flatMap { result in
-                            switch result {
-                            case .success(let response):
-                                next_cursor = response.next_cursor
-                                print(response.next_cursor, "Fav - next")
-                                return response.toDomain()
-                                    .map { $0.data }
-                            default:
-                                return Single.just([])
-                            }
-                        }
-                case .hashtags(let query):
-                    return PostNetworkService.fetchHashtagPost(query: query)
-                        .map { $0.toCommonResult() }
-                        .flatMap { result in
-                            switch result {
-                            case .success(let response):
-                                next_cursor = response.next_cursor
-                                print(next_cursor, "HashTag")
-                                return response.toDomain()
-                                    .map { $0.data }
-                            default:
-                                return Single.just([])
-                            }
-                        }
-                default:
-                    return Single.just([])
-                }
+                return owner.fetchPosts(with: owner.router, nextCursor: "")
             }
-            .bind(to: lists)
+            .bind(onNext: { response in
+                lists.accept(response.data)
+            })
             .disposed(by: disposeBag)
         
         input.paginationTrigger
             .withUnretained(self)
             .flatMap { owner, isTriggered in
-                if isTriggered && next_cursor != "0"  {
-                    switch owner.router {
-                    case .hashtags(let hashQuery):
-                        var tagQuery = hashQuery
-                        tagQuery.next = next_cursor
-                        return PostNetworkService.fetchHashtagPost(query: tagQuery)
-                            .map { $0.toCommonResult() }
-                            .flatMap { result in
-                                switch result {
-                                case .success(let response):
-                                    next_cursor = response.next_cursor
-                                    print(next_cursor, "💥")
-                                    return response.toDomain()
-                                        .map { $0.data }
-                                default:
-                                    return Single.just([])
-                                }
-                            }
-                    case .fetchFavoritePost(let favQuery):
-                        var favoriteQuery = favQuery
-                        favoriteQuery.next = next_cursor
-                        return PostNetworkService.fetchFavPost(query: favoriteQuery)
-                            .map { $0.toCommonResult() }
-                            .flatMap { result in
-                                switch result {
-                                case .success(let response):
-                                    next_cursor = response.next_cursor
-                                    print(next_cursor, "💥")
-                                    return response.toDomain()
-                                        .map { $0.data }
-                                default:
-                                    return Single.just([])
-                                }
-                            }
-                    default:
-                        return Single.just([])
-                    }
+                if isTriggered && next_cursor != "0" {
+                    return owner.fetchPosts(with: owner.router, nextCursor: next_cursor)
                 } else {
-                    return Single.just([])
+                    return Single.just(ViewPostResponse(data: [], next_cursor: "0"))
                 }
             }
+            .do(onNext: { response in
+                next_cursor = response.next_cursor
+            })
+            .map { $0.data }
             .subscribe(onNext: { newItems in
-                lists.accept(lists.value + newItems)
+                let existedPosts = lists.value
+                var newthings: [ViewPostDetailResponse] = newItems
+                let newPosts = newthings.filter { item in !existedPosts.contains(where: { $0.post_id == item.post_id }) }
+                lists.accept(existedPosts + newPosts)
             })
             .disposed(by: disposeBag)
-
+        
         return Output(
             meetupList: lists,
             cellTapEvent: input.cellTapEvent
         )
     }
-    
+    private func fetchPosts(with router: PostRouter, nextCursor: String) -> Single<ViewPostResponse> {
+        switch router {
+        case .fetchFavoritePost(let query):
+            var updatedQuery = query
+            updatedQuery.next = nextCursor
+            return PostNetworkService.fetchFavPost(query: updatedQuery)
+                .map { $0.toCommonResult() }
+                .flatMap { result in
+                    switch result {
+                    case .success(let response):
+                        return response.toDomain()
+                    default:
+                        return Single.just(.init(data: [], next_cursor: "0"))
+                    }
+                }
+        case .hashtags(let query):
+            var updatedQuery = query
+            updatedQuery.next = nextCursor
+            return PostNetworkService.fetchHashtagPost(query: updatedQuery)
+                .map { $0.toCommonResult() }
+                .flatMap { result in
+                    switch result {
+                    case .success(let response):
+                        return response.toDomain()
+                    default:
+                        return Single.just(.init(data: [], next_cursor: "0"))
+                    }
+                }
+        default:
+            return Single.just(.init(data: [], next_cursor: "0"))
+        }
+    }
 }
