@@ -43,8 +43,8 @@ final class ProfileImgView: BaseView {
         }
     }
     
-    func configureUI(imgData: Data?, nickname: String) {
-//        profileImg.image = UIImage(data: imgData)
+    func configureUI(filePath: String?, nickname: String) {
+        profileImg.setImgWithHeaders(path: filePath)
         nameLabel.text = nickname
     }
 }

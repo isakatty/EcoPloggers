@@ -20,8 +20,8 @@ final class MyPageViewController: BaseViewController {
     private lazy var profileCollectionView: UICollectionView = {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: configureCVLayout())
         cv.register(MyPageProfileCVCell.self, forCellWithReuseIdentifier: MyPageProfileCVCell.identifier)
-        cv.register(PloggingClubCollectionViewCell.self, forCellWithReuseIdentifier: PloggingClubCollectionViewCell.identifier)
-        cv.register(PloggingClubHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PloggingClubHeaderView.identifier)
+        cv.register(EcoProfileCVCell.self, forCellWithReuseIdentifier: EcoProfileCVCell.identifier)
+        cv.register(SegmentCVHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SegmentCVHeaderView.identifier)
         cv.backgroundColor = .mainBG
         return cv
     }()
@@ -57,27 +57,22 @@ final class MyPageViewController: BaseViewController {
                 
                 return cell
             case .favoriteSectionItem(let data):
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PloggingClubCollectionViewCell.identifier, for: indexPath) as? PloggingClubCollectionViewCell
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EcoProfileCVCell.identifier, for: indexPath) as? EcoProfileCVCell
                 else { return UICollectionViewCell() }
                 
-                cell.configureData(imageFilePath: data.files.first, creator: data.creator.nick, title: data.title, location: "영등포")
+//                cell.configureData(imageFilePath: data.files.first, creator: data.creator.nick, title: data.title, location: "영등포")
+                cell.configureUI(filePath: data.files.first)
                 return cell
             }
         }, configureSupplementaryView: { dataSource, collectionView, headerText, indexPath in
             switch indexPath.section {
             case 1:
-                guard let header: PloggingClubHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PloggingClubHeaderView.identifier, for: indexPath) as? PloggingClubHeaderView else { return UICollectionReusableView() }
+                guard let header: SegmentCVHeaderView = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: UICollectionView.elementKindSectionHeader,
+                    withReuseIdentifier: SegmentCVHeaderView.identifier,
+                    for: indexPath
+                ) as? SegmentCVHeaderView else { return UICollectionReusableView() }
                 
-                let section = dataSource.sectionModels[indexPath.section]
-                header.configureUI(headerText: section.title, sectionNum: indexPath.section)
-                
-//                header.clearBtn.rx.tap
-//                    .map { indexPath }
-//                    .bind(with: self) { owner, indexPath in
-//                        owner.headerTapEvent.accept(indexPath)
-//                        owner.headerText.accept(section.title)
-//                    }
-//                    .disposed(by: header.disposeBag)
                 
                 return header
             default:
@@ -161,20 +156,17 @@ extension MyPageViewController {
     /// Fav layout
     private func createFavoriteSectionLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(0.5),
+            widthDimension: .fractionalWidth(0.33),
             heightDimension: .fractionalHeight(1.0)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 5, leading: 5, bottom: 5, trailing: 5)
         
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(0.45)
+            heightDimension: .fractionalHeight(0.25)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuous
         section.boundarySupplementaryItems = [createSectionHeader()]
         return section
     }

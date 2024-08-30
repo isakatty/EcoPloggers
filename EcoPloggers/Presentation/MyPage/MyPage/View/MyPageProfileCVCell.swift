@@ -14,11 +14,6 @@ final class MyPageProfileCVCell: BaseCollectionViewCell {
     var disposeBag = DisposeBag()
     private let profileImgView = ProfileImgView()
     
-    private let horizontalBar: UIView = {
-        let view = UIView()
-        view.backgroundColor = Constant.Color.lightGray.withAlphaComponent(0.6)
-        return view
-    }()
     let postButton = ProfileInfoButton(category: "게시글")
     let followersBtn = ProfileInfoButton(category: "팔로워")
     let followingsBtn = ProfileInfoButton(category: "팔로잉")
@@ -35,7 +30,7 @@ final class MyPageProfileCVCell: BaseCollectionViewCell {
     }()
     
     override func configureHierarchy() {
-        [profileImgView, horizontalBar, postButton, seperateBar, followersBtn, secondBar, followingsBtn]
+        [profileImgView, postButton, seperateBar, followersBtn, secondBar, followingsBtn]
             .forEach { contentView.addSubview($0) }
     }
     override func configureLayout() {
@@ -43,13 +38,8 @@ final class MyPageProfileCVCell: BaseCollectionViewCell {
             make.top.horizontalEdges.equalToSuperview()
             make.height.equalTo(80)
         }
-        horizontalBar.snp.makeConstraints { make in
-            make.top.equalTo(profileImgView.snp.bottom).offset(8)
-            make.horizontalEdges.equalToSuperview().inset(4)
-            make.height.equalTo(1)
-        }
         postButton.snp.makeConstraints { make in
-            make.top.equalTo(horizontalBar.snp.bottom).offset(4)
+            make.top.equalTo(profileImgView.snp.bottom).offset(4)
             make.leading.bottom.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.33)
         }
@@ -76,7 +66,7 @@ final class MyPageProfileCVCell: BaseCollectionViewCell {
     }
     
     func configureUI(profile: ProfileResponse) {
-        profileImgView.configureUI(imgData: nil, nickname: profile.nick)
+        profileImgView.configureUI(filePath: profile.profileImage, nickname: profile.nick)
         postButton.configureUI(count: String(profile.posts.count))
         followersBtn.configureUI(count: String(profile.followers.count))
         followingsBtn.configureUI(count: String(profile.following.count))

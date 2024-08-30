@@ -15,6 +15,8 @@ extension UIImageView {
            let baseURL = Constant.NetworkComponents.baseURL,
            let url = URL(string: "\(baseURL)/v1/" + path) {
             self.kf.setImage(with: url, options: [.requestModifier(KingfisherManager.shared.modifier)])
+        } else {
+            self.image = UIImage(named: "emptyProfile")
         }
     }
 }

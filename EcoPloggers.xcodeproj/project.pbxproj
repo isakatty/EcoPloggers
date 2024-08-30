@@ -80,6 +80,8 @@
 		C9D68BDB2C6CD154002AF632 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D68BDA2C6CD154002AF632 /* LogInViewController.swift */; };
 		C9D68BE02C6CD155002AF632 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9D68BDF2C6CD155002AF632 /* Assets.xcassets */; };
 		C9D68BE32C6CD155002AF632 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = C9D68BE22C6CD155002AF632 /* Base */; };
+		C9E1EC462C818A6E0050D879 /* EcoProfileCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E1EC452C818A6E0050D879 /* EcoProfileCVCell.swift */; };
+		C9E1EC482C8195230050D879 /* SegmentCVHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E1EC472C8195230050D879 /* SegmentCVHeaderView.swift */; };
 		C9E3682C2C74F52200C0207A /* UserNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E3682B2C74F52200C0207A /* UserNetworkService.swift */; };
 		C9E368482C7626F700C0207A /* PostNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E368472C7626F700C0207A /* PostNetworkService.swift */; };
 		C9E3684A2C76278900C0207A /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E368492C76278900C0207A /* CommonError.swift */; };
@@ -215,6 +217,8 @@
 		C9D68BE22C6CD155002AF632 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C9D68BE42C6CD155002AF632 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C9D68BEA2C6DD293002AF632 /* XCConfig.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = XCConfig.xcconfig; sourceTree = "<group>"; };
+		C9E1EC452C818A6E0050D879 /* EcoProfileCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoProfileCVCell.swift; sourceTree = "<group>"; };
+		C9E1EC472C8195230050D879 /* SegmentCVHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentCVHeaderView.swift; sourceTree = "<group>"; };
 		C9E3682B2C74F52200C0207A /* UserNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNetworkService.swift; sourceTree = "<group>"; };
 		C9E368472C7626F700C0207A /* PostNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostNetworkService.swift; sourceTree = "<group>"; };
 		C9E368492C76278900C0207A /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
@@ -857,6 +861,8 @@
 				C9EF5ABA2C7B1C7F000DD5FB /* ProfileImgView.swift */,
 				C9EF5ABE2C7B253E000DD5FB /* ProfileDetailInfoCVCell.swift */,
 				C9EF5AC02C7B25B8000DD5FB /* ProfileInfoButton.swift */,
+				C9E1EC452C818A6E0050D879 /* EcoProfileCVCell.swift */,
+				C9E1EC472C8195230050D879 /* SegmentCVHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1183,6 +1189,7 @@
 				C9EF5ABF2C7B253E000DD5FB /* ProfileDetailInfoCVCell.swift in Sources */,
 				C90FF0B12C6F27E800590563 /* SignUpQuery.swift in Sources */,
 				C9EF5AE42C7C1304000DD5FB /* UIImageView+.swift in Sources */,
+				C9E1EC462C818A6E0050D879 /* EcoProfileCVCell.swift in Sources */,
 				C976FB192C7737B200E433CA /* PloggerMeetupViewController.swift in Sources */,
 				C90FF09F2C6E3BD400590563 /* SignUpViewModel.swift in Sources */,
 				C9EF5AA12C78EA62000DD5FB /* MeetupInfoCVCell.swift in Sources */,
@@ -1208,6 +1215,7 @@
 				C9EF5ABB2C7B1C7F000DD5FB /* ProfileImgView.swift in Sources */,
 				C90FF0BB2C6F4B4000590563 /* ValidateEmailResponse.swift in Sources */,
 				C99AA8622C6DFC1500C07BC2 /* Constant.swift in Sources */,
+				C9E1EC482C8195230050D879 /* SegmentCVHeaderView.swift in Sources */,
 				C9EF5AB02C7A3CEF000DD5FB /* DateFormatter.swift in Sources */,
 				C9EF5AAC2C79F92A000DD5FB /* DetailSectionModel.swift in Sources */,
 				C90FF0B32C6F394000590563 /* NetworkManager.swift in Sources */,
