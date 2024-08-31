@@ -28,10 +28,12 @@ final class MeetupDetailViewModel: ViewModelType {
     struct Output {
         let postData: PublishRelay<[DetailSectionModel]>
         let detailPost: PublishRelay<ViewPostDetailResponse>
+        let followState: PublishRelay<FollowState>
     }
     func transform(input: Input) -> Output {
         let postData = PublishRelay<[DetailSectionModel]>()
         let detailPost = PublishRelay<ViewPostDetailResponse>()
+        let isSuccessFollow = PublishRelay<FollowState>()
         
         input.viewWillAppear
             .map({ _ in
@@ -64,23 +66,27 @@ final class MeetupDetailViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
         
-//        input.followTapEvent
-//            .flatMap { userID in
-//                return FollowNetworkService.follow(userID: userID)
-//            }
-//            .subscribe { result in
-//                switch result {
-//                case .success(let response):
-//                    print(response)
-//                case .alreadyFollowed:
-//                    print("이미 followed")
-//                default:
-//                    print("나머지 에러")
-//                }
-//            } onError: { err in
-//                print("error: \(err)")
-//            }
-//            .disposed(by: disposeBag)
+        input.followTapEvent
+            .flatMap { userID in
+                return FollowNetworkService.follow(userID: userID)
+            }
+            .subscribe { result in
+                switch result {
+                case .success(let response):
+                    print(response)
+                    isSuccessFollow.accept(.success)
+                case .alreadyFollowed:
+                    print("이미 followed")
+                    isSuccessFollow.accept(.cancel)
+                default:
+                    print("나머지 에러")
+                    isSuccessFollow.accept(.failure)
+                }
+            } onError: { err in
+                print("error: \(err)")
+                isSuccessFollow.accept(.failure)
+            }
+            .disposed(by: disposeBag)
         
         input.commentHeaderTap
             .bind(with: self) { owner, _ in
@@ -91,7 +97,8 @@ final class MeetupDetailViewModel: ViewModelType {
         
         return Output(
             postData: postData,
-            detailPost: detailPost
+            detailPost: detailPost,
+            followState: isSuccessFollow
         )
     }
 }

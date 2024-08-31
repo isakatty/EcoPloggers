@@ -83,6 +83,7 @@
 		C9E1EC482C8195230050D879 /* SegmentCVHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E1EC472C8195230050D879 /* SegmentCVHeaderView.swift */; };
 		C9E1EC4A2C81DF9C0050D879 /* CapsuleLbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E1EC492C81DF9C0050D879 /* CapsuleLbView.swift */; };
 		C9E1EC4C2C81FED00050D879 /* MeetupPostCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E1EC4B2C81FED00050D879 /* MeetupPostCreatorView.swift */; };
+		C9E1EC4E2C82FEB60050D879 /* FollowState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E1EC4D2C82FEB60050D879 /* FollowState.swift */; };
 		C9E3682C2C74F52200C0207A /* UserNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E3682B2C74F52200C0207A /* UserNetworkService.swift */; };
 		C9E368482C7626F700C0207A /* PostNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E368472C7626F700C0207A /* PostNetworkService.swift */; };
 		C9E3684A2C76278900C0207A /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E368492C76278900C0207A /* CommonError.swift */; };
@@ -221,6 +222,7 @@
 		C9E1EC472C8195230050D879 /* SegmentCVHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentCVHeaderView.swift; sourceTree = "<group>"; };
 		C9E1EC492C81DF9C0050D879 /* CapsuleLbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleLbView.swift; sourceTree = "<group>"; };
 		C9E1EC4B2C81FED00050D879 /* MeetupPostCreatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupPostCreatorView.swift; sourceTree = "<group>"; };
+		C9E1EC4D2C82FEB60050D879 /* FollowState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowState.swift; sourceTree = "<group>"; };
 		C9E3682B2C74F52200C0207A /* UserNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNetworkService.swift; sourceTree = "<group>"; };
 		C9E368472C7626F700C0207A /* PostNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostNetworkService.swift; sourceTree = "<group>"; };
 		C9E368492C76278900C0207A /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
@@ -377,6 +379,7 @@
 			children = (
 				C9EF5A8A2C776968000DD5FB /* NetworkKey.swift */,
 				C9EF5AEC2C7C58D5000DD5FB /* Region.swift */,
+				C9E1EC4D2C82FEB60050D879 /* FollowState.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -1187,6 +1190,7 @@
 				C9EF5A892C7766CF000DD5FB /* FavoriteQuery.swift in Sources */,
 				C9EF5ABD2C7B1F64000DD5FB /* FollowingButton.swift in Sources */,
 				C90FF0942C6E30B300590563 /* LogInViewModel.swift in Sources */,
+				C9E1EC4E2C82FEB60050D879 /* FollowState.swift in Sources */,
 				C90FF0902C6E280C00590563 /* PlainLabel.swift in Sources */,
 				C9EF5ABF2C7B253E000DD5FB /* ProfileDetailInfoCVCell.swift in Sources */,
 				C90FF0B12C6F27E800590563 /* SignUpQuery.swift in Sources */,

@@ -58,6 +58,13 @@ final class MeetupDetailViewController: BaseViewController {
                 owner.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: disposeBag)
+        
+        output.followState
+            .bind(with: self) { owner, followState in
+                print(followState.toastMsg)
+                owner.showToast(message: followState.toastMsg)
+            }
+            .disposed(by: disposeBag)
     }
     private func configureDataSource() {
         dataSource = RxCollectionViewSectionedReloadDataSource<DetailSectionModel>(configureCell: { dataSource, collectionView, indexPath, item in
@@ -84,7 +91,13 @@ final class MeetupDetailViewController: BaseViewController {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetupProfileCVCell.identifier, for: indexPath) as? MeetupProfileCVCell else { return UICollectionViewCell() }
                 cell.configureProfile(profile: data)
                 cell.profileView.followBtn.rx.tap
-                    .map { data.creator.user_id }
+                    .map {
+                        if data.creator.user_id != UserDefaultsManager.shared.myUserID {
+                            return data.creator.user_id
+                        } else {
+                            return ""
+                        }
+                    }
                     .bind(with: self, onNext: { owner, user_id in
                         owner.followBtnTapEvent.accept(user_id)
                     })
