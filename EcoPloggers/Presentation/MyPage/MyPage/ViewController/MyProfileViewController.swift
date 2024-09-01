@@ -92,7 +92,8 @@ final class MyProfileViewController: BaseViewController {
         let input = MyProfileViewModel.Input(
             viewWillAppear: rx.methodInvoked(#selector(viewWillAppear)).map { _ in },
             segmented: segmentControl.rx.selectedSegmentIndex,
-            logout: logout
+            logout: logout,
+            withdrawBtnTap: withdrawBtn.rx.tap
         )
         let output = viewModel.transform(input: input)
         
@@ -119,6 +120,15 @@ final class MyProfileViewController: BaseViewController {
         output.logoutResult
             .bind(with: self) { owner, logout in
                 if logout {
+                    owner.setRootViewController(UINavigationController(rootViewController: LogInViewController()))
+                }
+            }
+            .disposed(by: disposeBag)
+        output.validateWithdrawTxt
+            .bind(with: self) { owner, validateTxt in
+                owner.showToast(message: validateTxt)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                     owner.setRootViewController(UINavigationController(rootViewController: LogInViewController()))
                 }
             }

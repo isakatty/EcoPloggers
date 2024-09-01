@@ -128,4 +128,33 @@ struct UserNetworkService {
             return Disposables.create()
         }
     }
+    static func withdrawUser() -> Single<WithdrawResult> {
+        return Single.create { single in
+            let urlRequest: URLRequest
+            do {
+                urlRequest = try UserRouter.withdraw.asURLRequest()
+            } catch {
+                single(.success(.error(.invalidURL)))
+                return Disposables.create()
+            }
+            AF.request(urlRequest, interceptor: NetworkInterceptor())
+                .responseDecodable(of: SignUpResponse.self) { response in
+                    switch response.result {
+                    case .success(let result):
+                        single(.success(.success(result)))
+                    case .failure(_):
+                        switch response.response?.statusCode {
+                        case 401:
+                            single(.success(.invalidToken))
+                        case 403:
+                            single(.success(.forbidden))
+                        default:
+                            single(.success(.error(CommonError(rawValue: response.response?.statusCode ?? 999) ?? .unknown)))
+                        }
+                    }
+                }
+            
+            return Disposables.create()
+        }
+    }
 }

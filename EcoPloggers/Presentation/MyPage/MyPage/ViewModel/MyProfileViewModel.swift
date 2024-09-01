@@ -17,16 +17,19 @@ final class MyProfileViewModel: ViewModelType {
         let viewWillAppear: Observable<Void>
         let segmented: ControlProperty<Int>
         let logout: PublishRelay<Void>
+        let withdrawBtnTap: ControlEvent<Void>
     }
     struct Output {
         let myProfile: PublishRelay<ProfileResponse>
         let posts: PublishRelay<[ViewPostDetailResponse]>
         let logoutResult: PublishRelay<Bool>
+        let validateWithdrawTxt: PublishRelay<String>
     }
     func transform(input: Input) -> Output {
         let myProfile: PublishRelay<ProfileResponse> = .init()
         let posts: PublishRelay<[ViewPostDetailResponse]> = .init()
         let logoutResult: PublishRelay<Bool> = .init()
+        let validateWithdrawTxt: PublishRelay<String> = .init()
         
         input.viewWillAppear
             .subscribe(with: self) { owner, _ in
@@ -64,22 +67,38 @@ final class MyProfileViewModel: ViewModelType {
             .disposed(by: disposeBag)
 
         input.logout
-            .subscribe { _ in
-                UserDefaultsManager.shared.accessToken = ""
-                UserDefaultsManager.shared.refreshToken = ""
-                UserDefaultsManager.shared.myUserID = ""
-                
+            .subscribe(with: self) { owner, _ in
+                owner.deleteUD()
                 logoutResult.accept(true)
-            } onError: { err in
+            } onError: { owner, err in
                 print(err)
             }
             .disposed(by: disposeBag)
 
+        input.withdrawBtnTap
+            .flatMap { _ in
+                return UserNetworkService.withdrawUser()
+            }
+            .subscribe(with: self) { owner, result in
+                switch result {
+                case .success(let response):
+                    owner.deleteUD()
+                    validateWithdrawTxt.accept("다음에 또 만나요.")
+                default:
+                    validateWithdrawTxt.accept("탈퇴 실패!")
+                }
+            } onError: { owner, err in
+                print(err, "탈퇴하기 버튼")
+            }
+            .disposed(by: disposeBag)
+
+        
         
         return Output(
             myProfile: myProfile,
             posts: posts,
-            logoutResult: logoutResult
+            logoutResult: logoutResult,
+            validateWithdrawTxt: validateWithdrawTxt
         )
     }
 }
@@ -141,5 +160,11 @@ extension MyProfileViewModel {
                 completion(nil)
             }
             .disposed(by: self.disposeBag)
+    }
+    
+    private func deleteUD() {
+        UserDefaultsManager.shared.accessToken = ""
+        UserDefaultsManager.shared.refreshToken = ""
+        UserDefaultsManager.shared.myUserID = ""
     }
 }

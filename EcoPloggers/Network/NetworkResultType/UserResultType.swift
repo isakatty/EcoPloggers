@@ -36,3 +36,10 @@ enum ValidateEmailResult {
     case invalidEmail(ValidateEmailResponse)
     case error(CommonError)
 }
+
+enum WithdrawResult {
+    case success(SignUpResponse)
+    case invalidToken
+    case forbidden
+    case error(CommonError)
+}
