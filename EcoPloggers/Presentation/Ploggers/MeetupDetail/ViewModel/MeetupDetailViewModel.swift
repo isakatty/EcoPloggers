@@ -10,6 +10,7 @@ import Foundation
 import iamport_ios
 import RxSwift
 import RxCocoa
+import RealmSwift
 
 final class MeetupDetailViewModel: ViewModelType {
     var detailPost: ViewPostDetailResponse
@@ -52,9 +53,10 @@ final class MeetupDetailViewModel: ViewModelType {
             })
             .subscribe(with: self) { owner, result in
                 
-//                var posts = UserDefaultsManager.shared.postLists
-//                posts.append(owner.detailPost)
-//                UserDefaultsManager.shared.postLists = posts
+                //                var posts = UserDefaultsManager.shared.postLists
+                //                posts.append(owner.detailPost)
+                //                UserDefaultsManager.shared.postLists = posts
+                owner.addRealm(post: owner.detailPost)
                 
                 var section = [DetailSectionModel]()
                 section.append(.meetupInfoSection(title: "Top info", items: [DetailSectionItem.infoSectionItem(data: owner.detailPost)]))
@@ -165,5 +167,56 @@ final class MeetupDetailViewModel: ViewModelType {
             paymentOutput: paymentOutput,
             paymentResultToast: paymentResultToast
         )
+    }
+}
+extension MeetupDetailViewModel {
+    func addRealm(post: ViewPostDetailResponse) {
+        
+        let filesList = List<String>()
+        filesList.append(objectsIn: post.files)
+
+        let joinsList = List<String>()
+        joinsList.append(objectsIn: post.joins)
+
+        let likes2List = List<String>()
+        likes2List.append(objectsIn: post.likes2)
+
+        let hashtagsList = List<String>()
+        hashtagsList.append(objectsIn: post.hashtags)
+        
+        let commentsList = List<CommentRealm>()
+        commentsList.append(objectsIn: post.comments.map {
+            CommentRealm(
+                comment_id: $0.comment_id,
+                content: $0.content,
+                createdAt: $0.createdAt,
+                creator: CreatorRealm(
+                    user_id: $0.creator.user_id,
+                    nick: $0.creator.nick,
+                    profileImage: $0.creator.profileImage
+                )
+            )
+        })
+        
+        let seenPost = SeenPosts(
+            post_id: post.post_id,
+            product_id: post.product_id,
+            title: post.title,
+            content: post.content,
+            required_time: post.required_time,
+            path: post.path,
+            recruits: post.recruits,
+            price: post.price,
+            due_date: post.due_date,
+            posted_date: post.posted_date,
+            creator: CreatorRealm.init(user_id: post.creator.user_id, nick: post.creator.nick, profileImage: post.creator.profileImage),
+            files: filesList,
+            joins: joinsList,
+            likes2: likes2List,
+            comments: commentsList,
+            hashtags: hashtagsList,
+            prices: post.prices
+        )
+        RealmRepository.shared.addPosts(post: seenPost)
     }
 }
