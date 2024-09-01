@@ -74,6 +74,13 @@
 		C99AA8682C6DFF6900C07BC2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8672C6DFF6900C07BC2 /* BaseViewController.swift */; };
 		C99AA86A2C6DFF9600C07BC2 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA8692C6DFF9600C07BC2 /* UIViewController+.swift */; };
 		C99AA86C2C6E001100C07BC2 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99AA86B2C6E001100C07BC2 /* BaseView.swift */; };
+		C9D43DBF2C8446C100A4C967 /* PaymentQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D43DBE2C8446C100A4C967 /* PaymentQuery.swift */; };
+		C9D43DC22C84475000A4C967 /* PaymentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D43DC12C84475000A4C967 /* PaymentRouter.swift */; };
+		C9D43DC42C84496F00A4C967 /* PaymentNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D43DC32C84496F00A4C967 /* PaymentNetworkService.swift */; };
+		C9D43DC62C8449A500A4C967 /* PaymentValidationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D43DC52C8449A500A4C967 /* PaymentValidationResponse.swift */; };
+		C9D43DC82C8449D400A4C967 /* PaymentListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D43DC72C8449D400A4C967 /* PaymentListResponse.swift */; };
+		C9D43DCA2C844C3100A4C967 /* PaymentResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D43DC92C844C3100A4C967 /* PaymentResultType.swift */; };
+		C9D43DCD2C84555B00A4C967 /* iamport-ios in Frameworks */ = {isa = PBXBuildFile; productRef = C9D43DCC2C84555B00A4C967 /* iamport-ios */; };
 		C9D68BD72C6CD154002AF632 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D68BD62C6CD154002AF632 /* AppDelegate.swift */; };
 		C9D68BD92C6CD154002AF632 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D68BD82C6CD154002AF632 /* SceneDelegate.swift */; };
 		C9D68BDB2C6CD154002AF632 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D68BDA2C6CD154002AF632 /* LogInViewController.swift */; };
@@ -211,6 +218,12 @@
 		C99AA8672C6DFF6900C07BC2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C99AA8692C6DFF9600C07BC2 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		C99AA86B2C6E001100C07BC2 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		C9D43DBE2C8446C100A4C967 /* PaymentQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentQuery.swift; sourceTree = "<group>"; };
+		C9D43DC12C84475000A4C967 /* PaymentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRouter.swift; sourceTree = "<group>"; };
+		C9D43DC32C84496F00A4C967 /* PaymentNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentNetworkService.swift; sourceTree = "<group>"; };
+		C9D43DC52C8449A500A4C967 /* PaymentValidationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentValidationResponse.swift; sourceTree = "<group>"; };
+		C9D43DC72C8449D400A4C967 /* PaymentListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentListResponse.swift; sourceTree = "<group>"; };
+		C9D43DC92C844C3100A4C967 /* PaymentResultType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentResultType.swift; sourceTree = "<group>"; };
 		C9D68BD32C6CD154002AF632 /* EcoPloggers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EcoPloggers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9D68BD62C6CD154002AF632 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9D68BD82C6CD154002AF632 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -299,6 +312,7 @@
 				C9118EF22C72F32000CF22ED /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				C9EF5AE22C7C0EE1000DD5FB /* Kingfisher in Frameworks */,
 				C90FF0992C6E30EE00590563 /* RxSwift in Frameworks */,
+				C9D43DCD2C84555B00A4C967 /* iamport-ios in Frameworks */,
 				C9118EF42C72F32000CF22ED /* FirebaseCrashlytics in Frameworks */,
 				C90FF0972C6E30EE00590563 /* RxCocoa in Frameworks */,
 				C9118ED02C71D92600CF22ED /* RxDataSources in Frameworks */,
@@ -394,6 +408,7 @@
 				C9E368492C76278900C0207A /* CommonError.swift */,
 				C9EF5AC72C7B4AAE000DD5FB /* ProfileResultType.swift */,
 				C9EF5B042C7CBFE5000DD5FB /* FollowResultType.swift */,
+				C9D43DC92C844C3100A4C967 /* PaymentResultType.swift */,
 			);
 			path = NetworkResultType;
 			sourceTree = "<group>";
@@ -412,6 +427,8 @@
 				C9EF5AD12C7B5D49000DD5FB /* UserSearchResponse.swift */,
 				C9EF5AFF2C7CB236000DD5FB /* SearchUserResponse.swift */,
 				C9EF5B062C7CC00C000DD5FB /* FollowResponse.swift */,
+				C9D43DC52C8449A500A4C967 /* PaymentValidationResponse.swift */,
+				C9D43DC72C8449D400A4C967 /* PaymentListResponse.swift */,
 			);
 			path = ResponseDTO;
 			sourceTree = "<group>";
@@ -428,6 +445,7 @@
 				C9EF5A8D2C7774B0000DD5FB /* HashtagsQuery.swift */,
 				C9EF5ACB2C7B57AA000DD5FB /* SearchOtherQuery.swift */,
 				C9E1EC552C8340D30050D879 /* LikePostQuery.swift */,
+				C9D43DBE2C8446C100A4C967 /* PaymentQuery.swift */,
 			);
 			path = Query;
 			sourceTree = "<group>";
@@ -682,6 +700,7 @@
 		C99AA8572C6DF98300C07BC2 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				C9D43DC02C84474900A4C967 /* Payment */,
 				C9EF5B012C7CBCE6000DD5FB /* Follow */,
 				C9EF5ADD2C7C0E7C000DD5FB /* Kingfisher */,
 				C9EF5AC62C7B4A9D000DD5FB /* Profile */,
@@ -761,6 +780,15 @@
 				C90FF0DE2C70C64C00590563 /* BaseCollectionViewCell.swift */,
 			);
 			path = BaseUI;
+			sourceTree = "<group>";
+		};
+		C9D43DC02C84474900A4C967 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				C9D43DC12C84475000A4C967 /* PaymentRouter.swift */,
+				C9D43DC32C84496F00A4C967 /* PaymentNetworkService.swift */,
+			);
+			path = Payment;
 			sourceTree = "<group>";
 		};
 		C9D68BCA2C6CD154002AF632 = {
@@ -1085,6 +1113,7 @@
 				C9118EF32C72F32000CF22ED /* FirebaseCrashlytics */,
 				C9118F092C737C9700CF22ED /* Alamofire */,
 				C9EF5AE12C7C0EE1000DD5FB /* Kingfisher */,
+				C9D43DCC2C84555B00A4C967 /* iamport-ios */,
 			);
 			productName = EcoPloggers;
 			productReference = C9D68BD32C6CD154002AF632 /* EcoPloggers.app */;
@@ -1122,6 +1151,7 @@
 				C9118EF02C72F32000CF22ED /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				C9118F082C737C9700CF22ED /* XCRemoteSwiftPackageReference "Alamofire" */,
 				C9EF5AE02C7C0EE1000DD5FB /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				C9D43DCB2C84555B00A4C967 /* XCRemoteSwiftPackageReference "iamport-ios" */,
 			);
 			productRefGroup = C9D68BD42C6CD154002AF632 /* Products */;
 			projectDirPath = "";
@@ -1210,6 +1240,7 @@
 				C99AA8682C6DFF6900C07BC2 /* BaseViewController.swift in Sources */,
 				C9EF5AA92C79F76B000DD5FB /* MeetupMapCVCell.swift in Sources */,
 				C9EF5AFA2C7C92C3000DD5FB /* BoroughView.swift in Sources */,
+				C9D43DC22C84475000A4C967 /* PaymentRouter.swift in Sources */,
 				C9EF5AA52C79BD06000DD5FB /* MeetupProfileView.swift in Sources */,
 				C9EF5B002C7CB236000DD5FB /* SearchUserResponse.swift in Sources */,
 				C9EF5AE92C7C481D000DD5FB /* MeetupProfileInfoView.swift in Sources */,
@@ -1220,7 +1251,9 @@
 				C9118F122C73940100CF22ED /* PostRouter.swift in Sources */,
 				C976FB222C774FA800E433CA /* MeetupSectionModel.swift in Sources */,
 				C90FF09D2C6E38E000590563 /* SignUpViewController.swift in Sources */,
+				C9D43DCA2C844C3100A4C967 /* PaymentResultType.swift in Sources */,
 				C9EF5B2C2C7DBD80000DD5FB /* TitleTextFieldView.swift in Sources */,
+				C9D43DC82C8449D400A4C967 /* PaymentListResponse.swift in Sources */,
 				C90FF0BD2C6F9A9B00590563 /* LoginResponse.swift in Sources */,
 				C9EF5ABB2C7B1C7F000DD5FB /* ProfileImgView.swift in Sources */,
 				C90FF0BB2C6F4B4000590563 /* ValidateEmailResponse.swift in Sources */,
@@ -1239,6 +1272,7 @@
 				C9EF5AB92C7B1A64000DD5FB /* MyPageProfileCVCell.swift in Sources */,
 				C9EF5AB72C7B1474000DD5FB /* ProfileViewModel.swift in Sources */,
 				C9EF5ADC2C7B8F8A000DD5FB /* ProfileEditViewController.swift in Sources */,
+				C9D43DC62C8449A500A4C967 /* PaymentValidationResponse.swift in Sources */,
 				C9118F072C737C6100CF22ED /* TargetType.swift in Sources */,
 				C90FF0852C6E187B00590563 /* LogInQuery.swift in Sources */,
 				C9118ED22C71DC7200CF22ED /* ViewPostResponseDTO.swift in Sources */,
@@ -1258,6 +1292,7 @@
 				C9EF5B302C7DCACD000DD5FB /* DetailPickerView.swift in Sources */,
 				C9EF5AC82C7B4AAE000DD5FB /* ProfileResultType.swift in Sources */,
 				C9118ECB2C71B1DB00CF22ED /* BannerCollectionViewCell.swift in Sources */,
+				C9D43DBF2C8446C100A4C967 /* PaymentQuery.swift in Sources */,
 				C90FF0CE2C70935800590563 /* SignUpResponse.swift in Sources */,
 				C99AA86C2C6E001100C07BC2 /* BaseView.swift in Sources */,
 				C9EF5AD42C7B624E000DD5FB /* ProfileNetworkService.swift in Sources */,
@@ -1288,6 +1323,7 @@
 				C90FF09B2C6E311E00590563 /* ViewModelType.swift in Sources */,
 				C9EF5AAE2C79FE00000DD5FB /* MeetupDetailViewModel.swift in Sources */,
 				C9EF5AF62C7C73FC000DD5FB /* SpecificRegionViewController.swift in Sources */,
+				C9D43DC42C84496F00A4C967 /* PaymentNetworkService.swift in Sources */,
 				C90FF0D92C70A06600590563 /* MyPageViewController.swift in Sources */,
 				C9E3684A2C76278900C0207A /* CommonError.swift in Sources */,
 				C976FB1F2C77438D00E433CA /* HashtagLabel.swift in Sources */,
@@ -1580,6 +1616,14 @@
 				minimumVersion = 5.9.1;
 			};
 		};
+		C9D43DCB2C84555B00A4C967 /* XCRemoteSwiftPackageReference "iamport-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/iamport/iamport-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.2;
+			};
+		};
 		C9EF5AE02C7C0EE1000DD5FB /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -1630,6 +1674,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C9118F082C737C9700CF22ED /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		C9D43DCC2C84555B00A4C967 /* iamport-ios */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C9D43DCB2C84555B00A4C967 /* XCRemoteSwiftPackageReference "iamport-ios" */;
+			productName = "iamport-ios";
 		};
 		C9EF5AE12C7C0EE1000DD5FB /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
