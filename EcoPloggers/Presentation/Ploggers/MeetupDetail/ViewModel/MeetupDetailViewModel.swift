@@ -33,12 +33,14 @@ final class MeetupDetailViewModel: ViewModelType {
         let detailPost: PublishRelay<ViewPostDetailResponse>
         let followState: PublishRelay<FollowState>
         let paymentOutput: PublishRelay<IamportPayment?>
+        let paymentResultToast: PublishRelay<String>
     }
     func transform(input: Input) -> Output {
         let postData = PublishRelay<[DetailSectionModel]>()
         let detailPost = PublishRelay<ViewPostDetailResponse>()
         let isSuccessFollow = PublishRelay<FollowState>()
         let paymentOutput: PublishRelay<IamportPayment?> = .init()
+        let paymentResultToast: PublishRelay<String> = .init()
         
         input.viewWillAppear
             .withUnretained(self)
@@ -146,33 +148,22 @@ final class MeetupDetailViewModel: ViewModelType {
                 switch result {
                 case .success(let payment):
                     print(payment)
-                case .alreadyValidated:
-                    print("이미 validate?")
-                case .disappearPost:
-                    print("post 없음")
-                case .forbidden:
-                    print("forbidden")
-                case .invalidPayment:
-                    print("payment 실패")
-                case .invalidToken:
-                    print("토큰 오류")
-                case .error(let error):
-                    print("err: \(error.localizedDescription)")
+                    paymentResultToast.accept("결제 성공!")
                 default:
-                    print("실패")
+                    paymentResultToast.accept("결제 실패! 잠시후 다시 시도해주세요.")
                 }
             } onError: { err in
                 print("err: \(err)")
             }
             .disposed(by: disposeBag)
-
-        
+             
         
         return Output(
             postData: postData,
             detailPost: detailPost,
             followState: isSuccessFollow,
-            paymentOutput: paymentOutput
+            paymentOutput: paymentOutput,
+            paymentResultToast: paymentResultToast
         )
     }
 }

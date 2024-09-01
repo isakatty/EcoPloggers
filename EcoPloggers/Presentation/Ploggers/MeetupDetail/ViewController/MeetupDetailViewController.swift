@@ -88,20 +88,22 @@ final class MeetupDetailViewController: BaseViewController {
             .bind { [weak self] payment in
                 guard let self else { return }
                 
-                print("payment - 1번")
                 if let payment {
-                    print("payment - 1번")
                     Iamport.shared.payment(
                         navController: self.navigationController ?? UINavigationController(),
                         userCode: "imp57573124",
                         payment: payment
                     ) { iamportResponse in
                         guard let iamportResponse else { return }
-                        print(iamportResponse, "VC에서의 repsonse", "🔔")
                         paymentResponse.accept(iamportResponse)
                     }
                 }
-                print("payment - 3번")
+            }
+            .disposed(by: disposeBag)
+        
+        output.paymentResultToast
+            .bind(with: self) { owner, paymentResultText in
+                owner.showToast(message: paymentResultText)
             }
             .disposed(by: disposeBag)
     }
