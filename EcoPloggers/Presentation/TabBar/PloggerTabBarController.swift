@@ -40,7 +40,7 @@ final class PloggerTabBarController: UITabBarController {
             PloggerMeetupViewController(),
             SearchViewController(),
             SearchViewController(),
-            MyPageViewController()
+            MyProfileViewController()
         ]
         
         setViewControllers(

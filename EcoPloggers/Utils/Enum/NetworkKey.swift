@@ -8,6 +8,6 @@
 import Foundation
 
 enum NetworkKey: String {
-    case banner = "ecoPloggers_Banners"
+    case banner = "ecoPloggers_Banner"
     case hashtag = "eco_랜덤"
 }

@@ -116,37 +116,14 @@ extension PloggersViewModel {
         }
     }
     private func fetchBanner(completion: @escaping (MultiSectionModel?) -> Void) {
-        let banner = ViewPostQuery(next: nil, limit: "1", product_id: NetworkKey.banner.rawValue)
-        PostNetworkService.fetchPost(postQuery: banner)
+        let bannerQuery = ViewPostQuery(next: nil, limit: "1", product_id: NetworkKey.banner.rawValue)
+        PostNetworkService.fetchPost(postQuery: bannerQuery)
             .subscribe(onSuccess: { response in
                 switch response {
-                case .success(let data):
-                    // 비동기 작업을 기다리기 위해 DispatchGroup 사용
-                    let dispatchGroup = DispatchGroup()
-                    var sectionItems: [SectionItem] = []
-                    
-                    let filePaths = data.toDomainProperty.data.flatMap { $0.files }
-                    
-                    for filePath in filePaths {
-                        dispatchGroup.enter()
-                        
-                        PostNetworkService.fetchFiles(filePath: filePath)
-                            .subscribe(onSuccess: { fileData in
-                                let sectionItem = SectionItem.bannerSectionItem(data: fileData)
-                                sectionItems.append(sectionItem)
-                                dispatchGroup.leave()
-                            }, onFailure: { error in
-                                print("파일 다운로드 실패: \(error)")
-                                dispatchGroup.leave()
-                            })
-                            .disposed(by: self.disposeBag)
-
-                    }
-                    dispatchGroup.notify(queue: .main) {
-                        let bannerSection = MultiSectionModel.bannerSection(title: "", items: sectionItems)
-                        completion(bannerSection)
-                    }
-                    
+                case .success(let response):
+                    let banner = response.toDomainProperty.data.flatMap { $0.files.map { SectionItem.bannerSectionItem(data: $0)}}
+                    let bannerSection = MultiSectionModel.bannerSection(title: "", items: banner)
+                    completion(bannerSection)
                 default:
                     print("멈춰")
                     completion(nil)

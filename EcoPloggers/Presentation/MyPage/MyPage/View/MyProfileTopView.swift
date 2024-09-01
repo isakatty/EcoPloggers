@@ -1,17 +1,15 @@
 //
-//  MyPageProfileCVCell.swift
+//  MyProfileTopView.swift
 //  EcoPloggers
 //
-//  Created by Jisoo Ham on 8/25/24.
+//  Created by Jisoo Ham on 9/2/24.
 //
 
 import UIKit
 
-import RxSwift
 import SnapKit
 
-final class MyPageProfileCVCell: BaseCollectionViewCell {
-    var disposeBag = DisposeBag()
+final class MyProfileTopView: BaseView {
     private let profileImgView = ProfileImgView()
     
     let postButton = ProfileInfoButton(category: "게시글")
@@ -31,7 +29,7 @@ final class MyPageProfileCVCell: BaseCollectionViewCell {
     
     override func configureHierarchy() {
         [profileImgView, postButton, seperateBar, followersBtn, secondBar, followingsBtn]
-            .forEach { contentView.addSubview($0) }
+            .forEach { addSubview($0) }
     }
     override func configureLayout() {
         profileImgView.snp.makeConstraints { make in
@@ -70,11 +68,5 @@ final class MyPageProfileCVCell: BaseCollectionViewCell {
         postButton.configureUI(count: String(profile.posts.count))
         followersBtn.configureUI(count: String(profile.followers.count))
         followingsBtn.configureUI(count: String(profile.following.count))
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        disposeBag = DisposeBag()
     }
 }

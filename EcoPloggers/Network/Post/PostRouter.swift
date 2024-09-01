@@ -16,7 +16,7 @@ enum PostRouter {
     case specificPost(postID: String)
     case editPost(postID: String, query: UploadPostQuery)
     case deletePost(postID: String)
-    case userPost(postID: String, query: ViewPostQuery)
+    case userPost(userID: String, query: ViewPostQuery)
     case fetchFavoritePost(query: FavoriteQuery)
     case hashtags(query: HashtagsQuery)
     case fetchImage(query: String)
@@ -57,8 +57,8 @@ extension PostRouter: TargetType {
             return "/v1/posts/\(postID)"
         case .deletePost(let postID):
             return "/v1/posts/\(postID)"
-        case .userPost(let postID, _):
-            return "/v1/posts/users/\(postID)"
+        case .userPost(let userID, _):
+            return "/v1/posts/users/\(userID)"
         case .fetchFavoritePost:
             return "/v1/posts/likes-2/me"
         case .hashtags:

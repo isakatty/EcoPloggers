@@ -32,7 +32,7 @@ enum MultiSectionModel: Comparable {
 }
 
 enum SectionItem {
-    case bannerSectionItem(data: Data)
+    case bannerSectionItem(data: String)
     case regionSectionItem(data: Region)
     case favoriteSectionItem(data: ViewPostDetailResponse)
     case latestSectionItem(data: ViewPostDetailResponse)

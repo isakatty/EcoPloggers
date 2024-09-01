@@ -76,7 +76,7 @@ final class PloggerMeetupViewController: BaseViewController {
             case .bannerSectionItem(let data):
                 guard let cell: BannerCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: BannerCollectionViewCell.identifier, for: indexPath) as? BannerCollectionViewCell
                 else { return UICollectionViewCell() }
-                cell.configureUI(count: String(indexPath.item + 1), img: UIImage(data: data))
+                cell.configureData(count: String(indexPath.item + 1), imgPath: data)
                 
                 return cell
             case .regionSectionItem(let data):
@@ -137,13 +137,11 @@ final class PloggerMeetupViewController: BaseViewController {
             .bind(to: ploggingCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
-        // MARK: Cell Tap Event -> VM -> output -> View 이동
-        // Detail VC에 likes2 버튼 넣어야함.
         Observable.zip(ploggingCollectionView.rx.modelSelected(SectionItem.self), ploggingCollectionView.rx.itemSelected)
             .bind { model, indexPath in
                 switch model {
                 case .bannerSectionItem(let data):
-                    print(data, indexPath)
+                    print("")
                 case .regionSectionItem(let data):
                     regionCellTap.accept(data)
                 case .favoriteSectionItem(let data), .latestSectionItem(let data):
