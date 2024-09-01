@@ -31,36 +31,25 @@ final class MyProfileViewModel: ViewModelType {
         let logoutResult: PublishRelay<Bool> = .init()
         let validateWithdrawTxt: PublishRelay<String> = .init()
         
-        input.viewWillAppear
-            .subscribe(with: self) { owner, _ in
+        Observable.combineLatest(input.viewWillAppear, input.segmented)
+            .subscribe(with: self) { owner, arg1 in
+                print("1")
                 owner.fetchProfile { response in
                     if let response {
                         myProfile.accept(response)
                     }
                 }
+                owner.fetchPosts(forSegment: arg1.1, posts: posts)
             } onError: { owner, err in
                 print(err, "transform VM")
             }
             .disposed(by: disposeBag)
 
+
         input.segmented
             .subscribe(with: self) { owner, segmented in
-                switch segmented {
-                case 0:
-                    owner.fetchMyPosts { response in
-                        if let response {
-                            posts.accept(response)
-                        }
-                    }
-                case 1:
-                    owner.fetchFavPosts { response in
-                        if let response {
-                            posts.accept(response)
-                        }
-                    }
-                default:
-                    print("default")
-                }
+                print("2")
+                owner.fetchPosts(forSegment: segmented, posts: posts)
             } onError: { owner, err in
                 print(err, "transform VM")
             }
@@ -108,7 +97,6 @@ extension MyProfileViewModel {
             .subscribe(with: self) { owner, result  in
                 switch result {
                 case .success(let response):
-                    print(response)
                     completion(response)
                 case .invalidToken:
                     print("invalidToken - ProfileVM - Fetch Profile")
@@ -166,5 +154,24 @@ extension MyProfileViewModel {
         UserDefaultsManager.shared.accessToken = ""
         UserDefaultsManager.shared.refreshToken = ""
         UserDefaultsManager.shared.myUserID = ""
+    }
+    
+    private func fetchPosts(forSegment segment: Int, posts: PublishRelay<[ViewPostDetailResponse]>) {
+        switch segment {
+        case 0:
+            fetchMyPosts { response in
+                if let response {
+                    posts.accept(response)
+                }
+            }
+        case 1:
+            fetchFavPosts { response in
+                if let response {
+                    posts.accept(response)
+                }
+            }
+        default:
+            print("default")
+        }
     }
 }

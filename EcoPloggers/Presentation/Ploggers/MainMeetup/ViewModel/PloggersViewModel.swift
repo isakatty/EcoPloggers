@@ -140,16 +140,9 @@ extension PloggersViewModel {
             .subscribe(onSuccess: { result in
                 switch result {
                 case .success(let response):
-                    response.toDomain()
-                        .subscribe(onSuccess: { viewPostResponse in
-                            let fav = viewPostResponse.data.map { SectionItem.favoriteSectionItem(data: $0) }
-                            let favSection = MultiSectionModel.favoriteSection(title: "즐겨찾기한 플로깅 모임", items: fav)
-                            completion(favSection)
-                        }, onFailure: { error in
-                            print("ViewPostResponse 변환 실패: \(error)")
-                            completion(nil)
-                        })
-                        .disposed(by: self.disposeBag)
+                    let fav = response.toDomainProperty.data.map { SectionItem.favoriteSectionItem(data: $0)}
+                    let favSection = MultiSectionModel.favoriteSection(title: "즐겨찾기 한 플로깅 모임", items: fav)
+                    completion(favSection)
                 default:
                     print("멈춰")
                     completion(nil)
@@ -166,16 +159,9 @@ extension PloggersViewModel {
             .subscribe(onSuccess: { response in
                 switch response {
                 case .success(let response):
-                    response.toDomain()
-                        .subscribe(onSuccess: { viewPostResponse in
-                            let hash = viewPostResponse.data.map { SectionItem.latestSectionItem(data: $0) }
-                            let hashtagSection = MultiSectionModel.latestSection(title: "최신 모집글", items: hash)
-                            completion(hashtagSection)
-                        }, onFailure: { error in
-                            print("ViewPostResponse 변환 실패: \(error)")
-                            completion(nil)
-                        })
-                        .disposed(by: self.disposeBag)
+                    let latest = response.toDomainProperty.data.map { SectionItem.favoriteSectionItem(data: $0)}
+                    let latestSection = MultiSectionModel.favoriteSection(title: "최신 모집글", items: latest)
+                    completion(latestSection)
                 default:
                     print("멈춰")
                     completion(nil)

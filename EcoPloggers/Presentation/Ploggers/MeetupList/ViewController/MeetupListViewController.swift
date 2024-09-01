@@ -66,9 +66,10 @@ final class MeetupListViewController: BaseViewController {
         output.cellTapEvent
             .bind(with: self) { owner, detailData in
                 let vc = MeetupDetailViewController(viewModel: MeetupDetailViewModel(detailPost: detailData))
-                vc.navigationItem.title = detailData.title
+//                vc.navigationItem.title = detailData.title
                 let navi = UINavigationController(rootViewController: vc)
                 navi.modalPresentationStyle = .fullScreen
+                navi.navigationItem.title = detailData.title
                 owner.present(navi, animated: true)
             }
             .disposed(by: disposeBag)
