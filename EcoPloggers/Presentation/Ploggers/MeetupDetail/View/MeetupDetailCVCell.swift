@@ -22,7 +22,7 @@ final class MeetupDetailCVCell: BaseCollectionViewCell {
         contentLabel.numberOfLines = .zero
         contentLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(8)
-            make.horizontalEdges.equalToSuperview().inset(4)
+            make.horizontalEdges.equalToSuperview().inset(12)
             make.bottom.equalToSuperview().inset(8)
         }
     }

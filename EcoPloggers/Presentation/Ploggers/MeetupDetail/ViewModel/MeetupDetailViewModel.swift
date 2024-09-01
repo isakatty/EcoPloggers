@@ -36,8 +36,9 @@ final class MeetupDetailViewModel: ViewModelType {
         let isSuccessFollow = PublishRelay<FollowState>()
         
         input.viewWillAppear
-            .map({ _ in
-                self.detailPost
+            .withUnretained(self)
+            .map({ vm, _ in
+                return vm.detailPost
             })
             .flatMapLatest({ post in
                 return ProfileNetworkService.fetchOtherProfile(userId: post.creator.user_id)
@@ -65,6 +66,15 @@ final class MeetupDetailViewModel: ViewModelType {
                 print(error)
             }
             .disposed(by: disposeBag)
+        
+//        input.viewWillAppear
+//            .withUnretained(self)
+//            .map { vm, _ in
+//                return (vm.detailPost.post_id, UserDefaultsManager.shared.myUserID)
+//            }
+//            .flatMap { post_id, myUserId in
+//                
+//            }
         
         input.followTapEvent
             .flatMap { userID in

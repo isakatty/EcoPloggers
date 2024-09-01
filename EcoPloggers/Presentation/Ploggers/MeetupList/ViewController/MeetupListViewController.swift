@@ -50,7 +50,10 @@ final class MeetupListViewController: BaseViewController {
         
         output.meetupList
             .asDriver()
-            .drive(listCollectionView.rx.items(cellIdentifier: MeetupListSndCVCell.identifier, cellType: MeetupListSndCVCell.self)) { row, element, cell in
+            .drive(listCollectionView.rx.items(
+                cellIdentifier: MeetupListSndCVCell.identifier,
+                cellType: MeetupListSndCVCell.self)
+            ) { row, element, cell in
                 cell.configureUI(data: element)
             }
             .disposed(by: disposeBag)
@@ -63,6 +66,7 @@ final class MeetupListViewController: BaseViewController {
         output.cellTapEvent
             .bind(with: self) { owner, detailData in
                 let vc = MeetupDetailViewController(viewModel: MeetupDetailViewModel(detailPost: detailData))
+                vc.navigationItem.title = detailData.title
                 let navi = UINavigationController(rootViewController: vc)
                 navi.modalPresentationStyle = .fullScreen
                 owner.present(navi, animated: true)

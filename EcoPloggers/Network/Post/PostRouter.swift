@@ -20,6 +20,7 @@ enum PostRouter {
     case fetchFavoritePost(query: FavoriteQuery)
     case hashtags(query: HashtagsQuery)
     case fetchImage(query: String)
+    case likePost(postID: String, query: LikePostQuery)
 }
 extension PostRouter: TargetType {
     var baseURL: String {
@@ -37,6 +38,8 @@ extension PostRouter: TargetType {
                 .put
         case .deletePost:
                 .delete
+        case .likePost:
+                .post
         }
     }
     
@@ -49,11 +52,11 @@ extension PostRouter: TargetType {
         case .viewPost:
             return "/v1/posts"
         case .specificPost(let postID):
-            return "/v1/pots/\(postID)"
+            return "/v1/posts/\(postID)"
         case .editPost(let postID, _):
-            return "/v1/pots/\(postID)"
+            return "/v1/posts/\(postID)"
         case .deletePost(let postID):
-            return "/v1/pots/\(postID)"
+            return "/v1/posts/\(postID)"
         case .userPost(let postID, _):
             return "/v1/posts/users/\(postID)"
         case .fetchFavoritePost:
@@ -62,6 +65,8 @@ extension PostRouter: TargetType {
             return "/v1/posts/hashtags"
         case .fetchImage(let query):
             return "/v1/\(query)"
+        case .likePost(let postID, _):
+            return "/v1/posts\(postID)/like"
         }
     }
     
@@ -87,14 +92,14 @@ extension PostRouter: TargetType {
                 Constant.NetworkHeader.sesacKey.rawValue: apiKey,
                 Constant.NetworkHeader.contentType.rawValue: Constant.NetworkHeader.json.rawValue
             ]
-        case .viewPost, .specificPost, .deletePost, .userPost, .fetchFavoritePost, .hashtags, .fetchImage:
+        case .viewPost, .specificPost, .deletePost, .userPost, .fetchFavoritePost, .hashtags, .fetchImage, .likePost:
             return baseHeaders
         }
     }
     
     var query: [URLQueryItem]? {
         switch self {
-        case .uploadImg, .uploadPost:
+        case .uploadImg, .uploadPost, .likePost:
             return nil
         case .viewPost(let viewPostQuery):
             return [
@@ -143,6 +148,8 @@ extension PostRouter: TargetType {
             return nil
         case .userPost, .fetchFavoritePost, .hashtags, .fetchImage:
             return nil
+        case .likePost(_, let query):
+            return try? encoder.encode(query)
         }
     }
     

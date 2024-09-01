@@ -29,6 +29,12 @@ final class MeetupDetailViewController: BaseViewController {
         cv.showsVerticalScrollIndicator = false
         return cv
     }()
+    private lazy var bookmarkBtn: UIBarButtonItem = {
+        let btn = UIBarButtonItem(image: UIImage(systemName: "bookmark"), style: .plain, target: self, action: nil)
+        btn.tintColor = Constant.Color.black
+        return btn
+    }()
+    
     private var dataSource: RxCollectionViewSectionedReloadDataSource<DetailSectionModel>!
     
     init(viewModel: MeetupDetailViewModel) {
@@ -63,6 +69,12 @@ final class MeetupDetailViewController: BaseViewController {
             .bind(with: self) { owner, followState in
                 print(followState.toastMsg)
                 owner.showToast(message: followState.toastMsg)
+            }
+            .disposed(by: disposeBag)
+        
+        bookmarkBtn.rx.tap
+            .bind(with: self) { owner, _ in
+                print("하이루")
             }
             .disposed(by: disposeBag)
     }
@@ -145,6 +157,8 @@ final class MeetupDetailViewController: BaseViewController {
     override func configureLayout() {
         view.backgroundColor = Constant.Color.white
         
+        navigationItem.rightBarButtonItem = bookmarkBtn
+        
         detailCollectionView.snp.makeConstraints { make in
             make.edges.equalTo(safeArea)
         }
@@ -184,7 +198,7 @@ extension MeetupDetailViewController {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: 0, leading: 0, bottom: 10, trailing: 0)
+        section.contentInsets = .init(top: 0, leading: 0, bottom: 5, trailing: 0)
         return section
     }
     /// Content Detail layout
@@ -203,7 +217,7 @@ extension MeetupDetailViewController {
         
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [createSectionHeader()]
-        section.contentInsets = .init(top: 10, leading: 0, bottom: 0, trailing: 0)
+        section.contentInsets = .init(top: 5, leading: 0, bottom: 5, trailing: 0)
         return section
     }
     /// Map layout
@@ -222,7 +236,7 @@ extension MeetupDetailViewController {
         
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [createSectionHeader()]
-        section.contentInsets = .init(top: 10, leading: 0, bottom: 0, trailing: 0)
+        section.contentInsets = .init(top: 5, leading: 0, bottom: 5, trailing: 0)
         return section
     }
     private func createProfileSectionLayout() -> NSCollectionLayoutSection {
@@ -240,7 +254,7 @@ extension MeetupDetailViewController {
         
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [createSectionHeader()]
-        section.contentInsets = .init(top: 10, leading: 0, bottom: 0, trailing: 0)
+        section.contentInsets = .init(top: 5, leading: 0, bottom: 0, trailing: 0)
         return section
     }
     private func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {

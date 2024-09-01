@@ -12,7 +12,7 @@ import SnapKit
 
 final class MeetupListSndCVCell: BaseCollectionViewCell {
     var disposeBag = DisposeBag()
-    private let creatorView = MeetupPostCreatorView()
+    let creatorView = MeetupPostCreatorView()
     
     private let postImgView: UIImageView = {
         let view = UIImageView()

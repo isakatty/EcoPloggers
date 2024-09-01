@@ -84,6 +84,7 @@
 		C9E1EC4A2C81DF9C0050D879 /* CapsuleLbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E1EC492C81DF9C0050D879 /* CapsuleLbView.swift */; };
 		C9E1EC4C2C81FED00050D879 /* MeetupPostCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E1EC4B2C81FED00050D879 /* MeetupPostCreatorView.swift */; };
 		C9E1EC4E2C82FEB60050D879 /* FollowState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E1EC4D2C82FEB60050D879 /* FollowState.swift */; };
+		C9E1EC562C8340D30050D879 /* LikePostQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E1EC552C8340D30050D879 /* LikePostQuery.swift */; };
 		C9E3682C2C74F52200C0207A /* UserNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E3682B2C74F52200C0207A /* UserNetworkService.swift */; };
 		C9E368482C7626F700C0207A /* PostNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E368472C7626F700C0207A /* PostNetworkService.swift */; };
 		C9E3684A2C76278900C0207A /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E368492C76278900C0207A /* CommonError.swift */; };
@@ -223,6 +224,7 @@
 		C9E1EC492C81DF9C0050D879 /* CapsuleLbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleLbView.swift; sourceTree = "<group>"; };
 		C9E1EC4B2C81FED00050D879 /* MeetupPostCreatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupPostCreatorView.swift; sourceTree = "<group>"; };
 		C9E1EC4D2C82FEB60050D879 /* FollowState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowState.swift; sourceTree = "<group>"; };
+		C9E1EC552C8340D30050D879 /* LikePostQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikePostQuery.swift; sourceTree = "<group>"; };
 		C9E3682B2C74F52200C0207A /* UserNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNetworkService.swift; sourceTree = "<group>"; };
 		C9E368472C7626F700C0207A /* PostNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostNetworkService.swift; sourceTree = "<group>"; };
 		C9E368492C76278900C0207A /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
@@ -425,6 +427,7 @@
 				C9EF5A882C7766CF000DD5FB /* FavoriteQuery.swift */,
 				C9EF5A8D2C7774B0000DD5FB /* HashtagsQuery.swift */,
 				C9EF5ACB2C7B57AA000DD5FB /* SearchOtherQuery.swift */,
+				C9E1EC552C8340D30050D879 /* LikePostQuery.swift */,
 			);
 			path = Query;
 			sourceTree = "<group>";
@@ -1270,6 +1273,7 @@
 				C9118ED42C71DFAA00CF22ED /* ViewPostQuery.swift in Sources */,
 				C9EF5AA32C79B38A000DD5FB /* InfoComponent.swift in Sources */,
 				C9118F142C739B7500CF22ED /* UploadPostQuery.swift in Sources */,
+				C9E1EC562C8340D30050D879 /* LikePostQuery.swift in Sources */,
 				C9EF5ACC2C7B57AA000DD5FB /* SearchOtherQuery.swift in Sources */,
 				C90FF0DF2C70C64C00590563 /* BaseCollectionViewCell.swift in Sources */,
 				C90FF0E12C70CAC400590563 /* PloggersViewModel.swift in Sources */,

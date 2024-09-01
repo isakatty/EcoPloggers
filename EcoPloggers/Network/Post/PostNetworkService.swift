@@ -190,4 +190,43 @@ struct PostNetworkService {
             return Disposables.create()
         }
     }
+    
+    static func likePost(postId: String, likeQuery: LikePostQuery) -> Single<LikePostResultType> {
+        return Single.create { single in
+            let likeRouter = PostRouter.likePost(postID: postId, query: likeQuery)
+            
+            let urlRequset: URLRequest
+            do {
+                urlRequset = try likeRouter.asURLRequest()
+            } catch {
+                single(.failure(error))
+                return Disposables.create()
+            }
+            
+            AF.request(urlRequset, interceptor: NetworkInterceptor())
+                .responseDecodable(of: LikePostQuery.self) { response in
+                    switch response.result {
+                    case .success(let result):
+                        single(.success(.success(result)))
+                    case .failure(_):
+                        switch response.response?.statusCode {
+                        case 400:
+                            single(.success(.badRequest))
+                        case 401:
+                            single(.success(.invalidToken))
+                        case 403:
+                            single(.success(.forbidden))
+                        case 410:
+                            single(.success(.disappearPost))
+                        case 419:
+                            single(.success(.expiredToken))
+                        default:
+                            single(.success(.error(CommonError(rawValue: response.response?.statusCode ?? 999) ?? .unknown)))
+                        }
+                    }
+                }
+            
+            return Disposables.create()
+        }
+    }
 }
