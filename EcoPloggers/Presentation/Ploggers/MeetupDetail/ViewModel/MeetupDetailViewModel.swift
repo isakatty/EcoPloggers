@@ -7,6 +7,7 @@
 
 import Foundation
 
+import iamport_ios
 import RxSwift
 import RxCocoa
 
@@ -24,16 +25,20 @@ final class MeetupDetailViewModel: ViewModelType {
         let viewWillAppear: Observable<Void>
         let followTapEvent: PublishRelay<String>
         let commentHeaderTap: PublishRelay<Void>
+        let engageBtnTap: PublishRelay<ViewPostDetailResponse>
+        let paymentResponse: PublishRelay<IamportResponse>
     }
     struct Output {
         let postData: PublishRelay<[DetailSectionModel]>
         let detailPost: PublishRelay<ViewPostDetailResponse>
         let followState: PublishRelay<FollowState>
+        let paymentOutput: PublishRelay<IamportPayment?>
     }
     func transform(input: Input) -> Output {
         let postData = PublishRelay<[DetailSectionModel]>()
         let detailPost = PublishRelay<ViewPostDetailResponse>()
         let isSuccessFollow = PublishRelay<FollowState>()
+        let paymentOutput: PublishRelay<IamportPayment?> = .init()
         
         input.viewWillAppear
             .withUnretained(self)
@@ -67,15 +72,6 @@ final class MeetupDetailViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
         
-//        input.viewWillAppear
-//            .withUnretained(self)
-//            .map { vm, _ in
-//                return (vm.detailPost.post_id, UserDefaultsManager.shared.myUserID)
-//            }
-//            .flatMap { post_id, myUserId in
-//                
-//            }
-        
         input.followTapEvent
             .flatMap { userID in
                 return FollowNetworkService.follow(userID: userID)
@@ -104,11 +100,79 @@ final class MeetupDetailViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
         
+        input.engageBtnTap
+            .map { postData -> IamportPayment? in
+                guard let apiKey = Constant.NetworkComponents.apiKey else {
+                    print("🔑 API Key error")
+                    return nil
+                }
+                let payment = IamportPayment(
+                    pg: PG.html5_inicis.makePgRawName(pgId: "INIpayTest"),
+                    merchant_uid: "ios_\(apiKey)_\(Int(Date().timeIntervalSince1970))",
+                    amount: String(postData.prices ?? 1000)
+                ).then {
+                    $0.pay_method = PayMethod.card.rawValue
+                    $0.name = postData.title
+                    $0.buyer_name = postData.creator.nick
+                    $0.app_scheme = "ecoPloggers"
+                }
+                
+                return payment
+            }
+            .bind(to: paymentOutput)
+            .disposed(by: disposeBag)
+        
+        input.paymentResponse
+            .withUnretained(self)
+            .map { vm, response -> PaymentQuery in
+                guard let isSuccess = response.success,
+                      let imp_uid = response.imp_uid 
+                else {
+                    return PaymentQuery(imp_uid: "", post_id: "")
+                }
+                
+                if isSuccess {
+                    let paymentQuery = PaymentQuery(imp_uid: imp_uid, post_id: vm.detailPost.post_id)
+                    return paymentQuery
+                } else {
+                    return PaymentQuery(imp_uid: "", post_id: "")
+                }
+            }
+            .flatMap { query in
+                return PaymentNetworkService.validatePayment(query: query)
+            }
+            .subscribe { result in
+                print("4 - subscribe")
+                switch result {
+                case .success(let payment):
+                    print(payment)
+                case .alreadyValidated:
+                    print("이미 validate?")
+                case .disappearPost:
+                    print("post 없음")
+                case .forbidden:
+                    print("forbidden")
+                case .invalidPayment:
+                    print("payment 실패")
+                case .invalidToken:
+                    print("토큰 오류")
+                case .error(let error):
+                    print("err: \(error.localizedDescription)")
+                default:
+                    print("실패")
+                }
+            } onError: { err in
+                print("err: \(err)")
+            }
+            .disposed(by: disposeBag)
+
+        
         
         return Output(
             postData: postData,
             detailPost: detailPost,
-            followState: isSuccessFollow
+            followState: isSuccessFollow,
+            paymentOutput: paymentOutput
         )
     }
 }

@@ -42,7 +42,7 @@ final class MeetupListViewController: BaseViewController {
         let paginationTrigger = PublishRelay<Bool>()
         let selectedData = PublishRelay<ViewPostDetailResponse>()
         let input = MeetupViewModel.Input(
-            viewWillAppear: rx.methodInvoked(#selector(viewWillAppear)).map { _ in },
+            viewWillAppear: rx.methodInvoked(#selector(viewWillAppear)).map { _ in }, // MARK: 시점 변경 
             cellTapEvent: selectedData,
             paginationTrigger: paginationTrigger
         )

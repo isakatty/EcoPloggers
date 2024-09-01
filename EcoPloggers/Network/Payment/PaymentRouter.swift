@@ -21,7 +21,7 @@ extension PaymentRouter: TargetType {
     }
     var method: HTTPMethod {
         switch self {
-        case .payment(let query):
+        case .payment:
             return .post
         case .paymentList:
             return .get
@@ -42,24 +42,23 @@ extension PaymentRouter: TargetType {
         }
         let baseHeaders: HTTPHeaders = [
             Constant.NetworkHeader.authorization.rawValue: UserDefaultsManager.shared.accessToken,
-            Constant.NetworkHeader.sesacKey.rawValue: apiKey
+            Constant.NetworkHeader.sesacKey.rawValue: apiKey,
+            Constant.NetworkHeader.contentType.rawValue: Constant.NetworkHeader.json.rawValue
         ]
         return baseHeaders
     }
     
     var query: [URLQueryItem]? {
-        switch self {
-        case .payment(let query):
-            return [
-                URLQueryItem(name: "imp_uid", value: query.imp_uid),
-                URLQueryItem(name: "post_id", value: query.post_id),
-            ]
-        case .paymentList:
-            return nil
-        }
+        return nil
     }
     
     var body: Data? {
-        nil
+        let encoder = JSONEncoder()
+        switch self {
+        case .payment(let query):
+            return try? encoder.encode(query)
+        case .paymentList:
+            return nil
+        }
     }
 }

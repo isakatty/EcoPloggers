@@ -45,7 +45,6 @@ struct PaymentNetworkService {
                     }
                 }
             
-            
             return Disposables.create()
         }
     }

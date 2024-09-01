@@ -11,6 +11,7 @@ import RxDataSources
 import RxSwift
 import RxCocoa
 import SnapKit
+import iamport_ios
 
 final class MeetupDetailViewController: BaseViewController {
     private var disposeBag = DisposeBag()
@@ -18,6 +19,7 @@ final class MeetupDetailViewController: BaseViewController {
     
     private let followBtnTapEvent = PublishRelay<String>()
     private let commentsHeaderTapEvent = PublishRelay<Void>()
+    private let engagementBtnTapEvent = PublishRelay<ViewPostDetailResponse>()
     private lazy var detailCollectionView: UICollectionView = {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: configureCVLayout())
         cv.register(MeetupInfoCVCell.self, forCellWithReuseIdentifier: MeetupInfoCVCell.identifier)
@@ -47,10 +49,14 @@ final class MeetupDetailViewController: BaseViewController {
     }
     
     private func bind() {
+        let paymentResponse = PublishRelay<IamportResponse>()
+        
         let input = MeetupDetailViewModel.Input(
             viewWillAppear: rx.methodInvoked(#selector(viewWillAppear)).map { _ in },
             followTapEvent: followBtnTapEvent,
-            commentHeaderTap: commentsHeaderTapEvent
+            commentHeaderTap: commentsHeaderTapEvent,
+            engageBtnTap: engagementBtnTapEvent,
+            paymentResponse: paymentResponse
         )
         let output = viewModel.transform(input: input)
         
@@ -77,6 +83,27 @@ final class MeetupDetailViewController: BaseViewController {
                 print("하이루")
             }
             .disposed(by: disposeBag)
+        
+        output.paymentOutput
+            .bind { [weak self] payment in
+                guard let self else { return }
+                
+                print("payment - 1번")
+                if let payment {
+                    print("payment - 1번")
+                    Iamport.shared.payment(
+                        navController: self.navigationController ?? UINavigationController(),
+                        userCode: "imp57573124",
+                        payment: payment
+                    ) { iamportResponse in
+                        guard let iamportResponse else { return }
+                        print(iamportResponse, "VC에서의 repsonse", "🔔")
+                        paymentResponse.accept(iamportResponse)
+                    }
+                }
+                print("payment - 3번")
+            }
+            .disposed(by: disposeBag)
     }
     private func configureDataSource() {
         dataSource = RxCollectionViewSectionedReloadDataSource<DetailSectionModel>(configureCell: { dataSource, collectionView, indexPath, item in
@@ -100,7 +127,11 @@ final class MeetupDetailViewController: BaseViewController {
                 }
                 return cell
             case .profileSectionItem(let data):
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetupProfileCVCell.identifier, for: indexPath) as? MeetupProfileCVCell else { return UICollectionViewCell() }
+                guard let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: MeetupProfileCVCell.identifier,
+                    for: indexPath
+                ) as? MeetupProfileCVCell else { return UICollectionViewCell() }
+                
                 cell.configureProfile(profile: data)
                 cell.profileView.followBtn.rx.tap
                     .map {
@@ -114,6 +145,16 @@ final class MeetupDetailViewController: BaseViewController {
                         owner.followBtnTapEvent.accept(user_id)
                     })
                     .disposed(by: cell.disposeBag)
+                
+                cell.profileView.engageBtn.rx.tap
+                    .map {
+                        return data.post
+                    }
+                    .bind(with: self) { owner, postData in
+                        owner.engagementBtnTapEvent.accept(postData)
+                    }
+                    .disposed(by: cell.disposeBag)
+                
                 return cell
             }
         }, configureSupplementaryView: { dataSource, collectionView, title, indexPath in
