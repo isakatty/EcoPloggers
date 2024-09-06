@@ -133,6 +133,17 @@ final class MyProfileViewController: BaseViewController {
                 }
             }
             .disposed(by: disposeBag)
+        
+        dataCollectionView.rx.modelSelected(ViewPostDetailResponse.self)
+            .bind(with: self) { owner, response in
+                print(response.post_id, "select!")
+                let vc = MeetupDetailViewController(viewModel: .init(detailPost: response))
+                vc.navigationItem.title = response.title
+                let navi = UINavigationController(rootViewController: vc)
+                navi.modalPresentationStyle = .fullScreen
+                owner.present(navi, animated: true)
+            }
+            .disposed(by: disposeBag)
     }
 }
 extension MyProfileViewController {

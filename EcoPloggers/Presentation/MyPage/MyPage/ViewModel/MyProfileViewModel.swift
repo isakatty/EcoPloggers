@@ -70,7 +70,7 @@ final class MyProfileViewModel: ViewModelType {
             }
             .subscribe(with: self) { owner, result in
                 switch result {
-                case .success(let response):
+                case .success( _):
                     owner.deleteUD()
                     validateWithdrawTxt.accept("다음에 또 만나요.")
                 default:
