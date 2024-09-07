@@ -19,6 +19,8 @@ final class MeetupDetailViewController: BaseViewController {
     
     private let followBtnTapEvent = PublishRelay<String>()
     private let commentsHeaderTapEvent = PublishRelay<Void>()
+    private let editMenuTap = PublishRelay<Void>()
+    private let deleteMenuTap = PublishRelay<Void>()
     private let engagementBtnTapEvent = PublishRelay<ViewPostDetailResponse>()
     private lazy var detailCollectionView: UICollectionView = {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: configureCVLayout())
@@ -32,10 +34,25 @@ final class MeetupDetailViewController: BaseViewController {
         return cv
     }()
     private lazy var bookmarkBtn: UIBarButtonItem = {
-        let btn = UIBarButtonItem(image: UIImage(systemName: "bookmark"), style: .plain, target: self, action: nil)
+        let btn = UIBarButtonItem(title: nil, image: UIImage(systemName: "ellipsis"), primaryAction: nil, menu: rightBarMenu)
         btn.tintColor = Constant.Color.black
         return btn
     }()
+    private var rightBarMenu: UIMenu {
+        return UIMenu(title: "My menu", image: nil, identifier: nil, options: [], children: menuItems)
+    }
+    
+    private var menuItems: [UIAction] {
+        return [
+            UIAction(title: "글 수정", image: nil, handler: { _ in
+                print("Handler?")
+                self.editMenuTap.accept(())
+            }),
+            UIAction(title: "삭제", image: nil, attributes: .destructive, handler: { _ in
+                self.deleteMenuTap.accept(())
+            })
+        ]
+    }
     
     private var dataSource: RxCollectionViewSectionedReloadDataSource<DetailSectionModel>!
     
@@ -56,7 +73,8 @@ final class MeetupDetailViewController: BaseViewController {
             followTapEvent: followBtnTapEvent,
             commentHeaderTap: commentsHeaderTapEvent,
             engageBtnTap: engagementBtnTapEvent,
-            paymentResponse: paymentResponse
+            paymentResponse: paymentResponse,
+            deleteMenuTap: deleteMenuTap
         )
         let output = viewModel.transform(input: input)
         
@@ -75,12 +93,6 @@ final class MeetupDetailViewController: BaseViewController {
             .bind(with: self) { owner, followState in
                 print(followState.toastMsg)
                 owner.showToast(message: followState.toastMsg)
-            }
-            .disposed(by: disposeBag)
-        
-        bookmarkBtn.rx.tap
-            .bind(with: self) { owner, _ in
-                print("하이루")
             }
             .disposed(by: disposeBag)
         
@@ -104,6 +116,21 @@ final class MeetupDetailViewController: BaseViewController {
         output.paymentResultToast
             .bind(with: self) { owner, paymentResultText in
                 owner.showToast(message: paymentResultText)
+            }
+            .disposed(by: disposeBag)
+        
+        output.deleteSuccessToast
+            .bind(with: self) { owner, successMSG in
+                owner.showToast(message: successMSG)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    owner.dismiss(animated: true)
+                }
+            }
+            .disposed(by: disposeBag)
+        output.deleteFailToast
+            .bind(with: self) { owner, failMSG in
+                owner.showToast(message: failMSG)
             }
             .disposed(by: disposeBag)
     }

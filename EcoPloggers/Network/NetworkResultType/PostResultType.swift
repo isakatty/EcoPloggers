@@ -64,6 +64,15 @@ enum FetchHashtagsResult {
     case expiredToken
     case error(CommonError)
 }
+enum RemovePostResult {
+    case success
+    case invalidToken
+    case forbidden
+    case invalidPost
+    case expiredToken
+    case noPermission
+    case error(CommonError)
+}
 
 extension FetchPostResult {
     func toCommonResult() -> CommonResult {

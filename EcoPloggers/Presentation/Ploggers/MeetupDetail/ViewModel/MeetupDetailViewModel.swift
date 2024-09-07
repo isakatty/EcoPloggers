@@ -28,6 +28,7 @@ final class MeetupDetailViewModel: ViewModelType {
         let commentHeaderTap: PublishRelay<Void>
         let engageBtnTap: PublishRelay<ViewPostDetailResponse>
         let paymentResponse: PublishRelay<IamportResponse>
+        let deleteMenuTap: PublishRelay<Void>
     }
     struct Output {
         let postData: PublishRelay<[DetailSectionModel]>
@@ -35,6 +36,8 @@ final class MeetupDetailViewModel: ViewModelType {
         let followState: PublishRelay<FollowState>
         let paymentOutput: PublishRelay<IamportPayment?>
         let paymentResultToast: PublishRelay<String>
+        let deleteSuccessToast: PublishRelay<String>
+        let deleteFailToast: PublishRelay<String>
     }
     func transform(input: Input) -> Output {
         let postData = PublishRelay<[DetailSectionModel]>()
@@ -42,6 +45,9 @@ final class MeetupDetailViewModel: ViewModelType {
         let isSuccessFollow = PublishRelay<FollowState>()
         let paymentOutput: PublishRelay<IamportPayment?> = .init()
         let paymentResultToast: PublishRelay<String> = .init()
+        let deleteMyPost: PublishRelay<Bool> = .init()
+        let deleteSuccessToast: PublishRelay<String> = .init()
+        let deleteFailToast: PublishRelay<String> = .init()
         
         input.viewWillAppear
             .withUnretained(self)
@@ -101,6 +107,24 @@ final class MeetupDetailViewModel: ViewModelType {
         input.commentHeaderTap
             .bind(with: self) { owner, _ in
                 detailPost.accept(owner.detailPost)
+            }
+            .disposed(by: disposeBag)
+        
+        input.deleteMenuTap
+            .withUnretained(self)
+            .flatMap { vm, _ in
+                return PostNetworkService.removeMyPost(postID: vm.detailPost.post_id)
+            }
+            .debug("DELETE MENU TAP")
+            .subscribe { result in
+                switch result {
+                case .success:
+                    deleteSuccessToast.accept("삭제 성공")
+                case .noPermission:
+                    deleteFailToast.accept("본인 글만 삭제할 수 있습니다.")
+                default:
+                    deleteFailToast.accept("잠시후에 다시 시도해주세요.")
+                }
             }
             .disposed(by: disposeBag)
         
@@ -165,7 +189,9 @@ final class MeetupDetailViewModel: ViewModelType {
             detailPost: detailPost,
             followState: isSuccessFollow,
             paymentOutput: paymentOutput,
-            paymentResultToast: paymentResultToast
+            paymentResultToast: paymentResultToast,
+            deleteSuccessToast: deleteSuccessToast,
+            deleteFailToast: deleteFailToast
         )
     }
 }

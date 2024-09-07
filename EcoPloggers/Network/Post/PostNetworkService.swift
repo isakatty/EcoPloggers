@@ -106,6 +106,42 @@ struct PostNetworkService {
         }
     }
     
+    static func removeMyPost(postID: String) -> Single<RemovePostResult> {
+        return Single.create { single in
+            let urlRequest: URLRequest
+            do {
+                urlRequest = try PostRouter.deletePost(postID: postID).asURLRequest()
+            } catch {
+                single(.success(.error(.invalidURL)))
+                return Disposables.create()
+            }
+            
+            AF.request(urlRequest, interceptor: NetworkInterceptor())
+                .responseData { response in
+                    let statusCode = response.response?.statusCode ?? 999
+                    
+                    switch statusCode {
+                    case 200..<300:  // 성공 범위 (2xx)
+                        single(.success(.success))
+                    case 401:
+                        single(.success(.invalidToken))
+                    case 403:
+                        single(.success(.forbidden))
+                    case 410:
+                        single(.success(.invalidPost))
+                    case 419:
+                        single(.success(.expiredToken))
+                    case 445:
+                        single(.success(.noPermission))
+                    default:
+                        single(.success(.error(CommonError(rawValue: statusCode) ?? .unknown)))
+                    }
+                }
+            
+            return Disposables.create()
+        }
+    }
+    
     static func fetchSpecificPost(postId: String) -> Single<FetchPostResult> {
         return Single.create { single in
             let urlRequest: URLRequest
