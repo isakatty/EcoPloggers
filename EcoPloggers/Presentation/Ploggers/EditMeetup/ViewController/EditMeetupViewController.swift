@@ -72,12 +72,18 @@ final class EditMeetupViewController: BaseViewController {
         return view
     }()
     private let chosedImg = BehaviorRelay<NSItemProviderReading?>(value: nil)
-    private let rightSaveBtn = UIBarButtonItem(title: "수정", style: .done, target: self, action: nil)
+    private lazy var rightSaveBtn = UIBarButtonItem(title: "수정", style: .done, target: self, action: nil)
     
     private func bind() {
         bindPHPicker()
+        let selectedCategory = PublishRelay<Int>()
         let input = EditViewModel.Input(
-            viewWillAppear: rx.methodInvoked(#selector(viewWillAppear)).map { _ in }
+            viewWillAppear: rx.methodInvoked(#selector(viewWillAppear)).map { _ in },
+            editBtnTap: rightSaveBtn.rx.tap,
+            titleText: titleTFView.textField.rx.text.orEmpty,
+            contentText: commentTFView.textView.rx.text.orEmpty,
+            priceText: priceTFView.textField.rx.text.orEmpty,
+            selectedCategory: selectedCategory
         )
         let output = viewModel.transform(input: input)
         
@@ -96,6 +102,37 @@ final class EditMeetupViewController: BaseViewController {
                 cellType: BoroughCVCell.self)
             ) { row, element, cell in
                 cell.configureUI(categoryTxt: element.toTitle)
+                
+                if row == output.selectedCategory.value {
+                    cell.selectedUI()
+                } else {
+                    cell.unSelectedUI()
+                }
+            }
+            .disposed(by: disposeBag)
+    
+        categoryCV.rx.itemSelected
+            .bind(onNext: { indexPath in
+                selectedCategory.accept(indexPath.item)
+            })
+            .disposed(by: disposeBag)
+        
+        output.selectedCategory
+            .bind(with: self) { owner, _ in
+                owner.categoryCV.reloadData()
+            }
+            .disposed(by: disposeBag)
+        output.resultToast
+            .bind(with: self) { owner, text in
+                owner.showToast(message: text)
+            }
+            .disposed(by: disposeBag)
+        
+        output.isEdited
+            .bind(with: self) { onwer, isSuccess in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+                    self?.dismiss(animated: true)
+                }
             }
             .disposed(by: disposeBag)
     }

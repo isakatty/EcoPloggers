@@ -120,4 +120,15 @@ enum RegionBorough2: String, CaseIterable {
         case .eco_111201: return "마포구"
         }
     }
+    var toNumber: Int {
+        switch self {
+        case .eco_111121: return 0
+        case .eco_111261: return 1
+        case .eco_111262: return 2
+        case .eco_111273: return 3
+        case .eco_111231: return 4
+        case .eco_111152: return 5
+        case .eco_111201: return 6
+        }
+    }
 }
