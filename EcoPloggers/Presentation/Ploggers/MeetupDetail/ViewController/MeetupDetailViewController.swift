@@ -44,12 +44,12 @@ final class MeetupDetailViewController: BaseViewController {
     
     private var menuItems: [UIAction] {
         return [
-            UIAction(title: "글 수정", image: nil, handler: { _ in
+            UIAction(title: "글 수정", image: nil, handler: { [weak self] _ in
                 print("Handler?")
-                self.editMenuTap.accept(())
+                self?.editMenuTap.accept(())
             }),
-            UIAction(title: "삭제", image: nil, attributes: .destructive, handler: { _ in
-                self.deleteMenuTap.accept(())
+            UIAction(title: "삭제", image: nil, attributes: .destructive, handler: { [weak self] _ in
+                self?.deleteMenuTap.accept(())
             })
         ]
     }
@@ -74,7 +74,8 @@ final class MeetupDetailViewController: BaseViewController {
             commentHeaderTap: commentsHeaderTapEvent,
             engageBtnTap: engagementBtnTapEvent,
             paymentResponse: paymentResponse,
-            deleteMenuTap: deleteMenuTap
+            deleteMenuTap: deleteMenuTap,
+            editMenuTap: editMenuTap
         )
         let output = viewModel.transform(input: input)
         
@@ -131,6 +132,12 @@ final class MeetupDetailViewController: BaseViewController {
         output.deleteFailToast
             .bind(with: self) { owner, failMSG in
                 owner.showToast(message: failMSG)
+            }
+            .disposed(by: disposeBag)
+        output.editPost
+            .bind(with: self) { owner, detailPost in
+                let vc = EditMeetupViewController(viewModel: .init(detailPost: detailPost))
+                owner.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: disposeBag)
     }

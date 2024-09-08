@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C9081C782C8D73A600491BC7 /* EditMeetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9081C772C8D73A600491BC7 /* EditMeetupViewController.swift */; };
+		C9081C7A2C8D73AE00491BC7 /* EditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9081C792C8D73AE00491BC7 /* EditViewModel.swift */; };
 		C90EAE602C6E13E300F5F0AE /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C90EAE572C6E13E300F5F0AE /* Pretendard-ExtraBold.otf */; };
 		C90EAE612C6E13E300F5F0AE /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C90EAE582C6E13E300F5F0AE /* Pretendard-SemiBold.otf */; };
 		C90EAE622C6E13E300F5F0AE /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = C90EAE592C6E13E300F5F0AE /* Pretendard-ExtraLight.otf */; };
@@ -158,6 +160,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C9081C772C8D73A600491BC7 /* EditMeetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMeetupViewController.swift; sourceTree = "<group>"; };
+		C9081C792C8D73AE00491BC7 /* EditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewModel.swift; sourceTree = "<group>"; };
 		C90EAE572C6E13E300F5F0AE /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
 		C90EAE582C6E13E300F5F0AE /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		C90EAE592C6E13E300F5F0AE /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
@@ -323,6 +327,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C9081C732C8D738A00491BC7 /* EditMeetup */ = {
+			isa = PBXGroup;
+			children = (
+				C9081C762C8D739D00491BC7 /* View */,
+				C9081C752C8D739700491BC7 /* ViewController */,
+				C9081C742C8D738F00491BC7 /* ViewModel */,
+			);
+			path = EditMeetup;
+			sourceTree = "<group>";
+		};
+		C9081C742C8D738F00491BC7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C9081C792C8D73AE00491BC7 /* EditViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C9081C752C8D739700491BC7 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C9081C772C8D73A600491BC7 /* EditMeetupViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		C9081C762C8D739D00491BC7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		C90EAE542C6E131F00F5F0AE /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -454,6 +491,7 @@
 		C90FF0C22C6FBF6A00590563 /* Ploggers */ = {
 			isa = PBXGroup;
 			children = (
+				C9081C732C8D738A00491BC7 /* EditMeetup */,
 				C9EF5B252C7DB8C6000DD5FB /* PostMeetup */,
 				C9EF5B0C2C7CCF9F000DD5FB /* Comments */,
 				C9EF5AF02C7C73D4000DD5FB /* SpecificRegion */,
@@ -1225,6 +1263,7 @@
 				C9EF5ABD2C7B1F64000DD5FB /* FollowingButton.swift in Sources */,
 				C90FF0942C6E30B300590563 /* LogInViewModel.swift in Sources */,
 				C9E1EC4E2C82FEB60050D879 /* FollowState.swift in Sources */,
+				C9081C782C8D73A600491BC7 /* EditMeetupViewController.swift in Sources */,
 				C90FF0902C6E280C00590563 /* PlainLabel.swift in Sources */,
 				C90FF0B12C6F27E800590563 /* SignUpQuery.swift in Sources */,
 				C9EF5AE42C7C1304000DD5FB /* UIImageView+.swift in Sources */,
@@ -1257,6 +1296,7 @@
 				C9EF5B2C2C7DBD80000DD5FB /* TitleTextFieldView.swift in Sources */,
 				C9D43DCF2C84C88A00A4C967 /* MyProfileTopView.swift in Sources */,
 				C9D43DC82C8449D400A4C967 /* PaymentListResponse.swift in Sources */,
+				C9081C7A2C8D73AE00491BC7 /* EditViewModel.swift in Sources */,
 				C90FF0BD2C6F9A9B00590563 /* LoginResponse.swift in Sources */,
 				C9EF5ABB2C7B1C7F000DD5FB /* ProfileImgView.swift in Sources */,
 				C90FF0BB2C6F4B4000590563 /* ValidateEmailResponse.swift in Sources */,

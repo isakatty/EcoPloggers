@@ -105,7 +105,6 @@ struct PostNetworkService {
             return Disposables.create()
         }
     }
-    
     static func removeMyPost(postID: String) -> Single<RemovePostResult> {
         return Single.create { single in
             let urlRequest: URLRequest
@@ -141,7 +140,6 @@ struct PostNetworkService {
             return Disposables.create()
         }
     }
-    
     static func fetchSpecificPost(postId: String) -> Single<FetchPostResult> {
         return Single.create { single in
             let urlRequest: URLRequest
@@ -175,7 +173,6 @@ struct PostNetworkService {
             return Disposables.create()
         }
     }
-    
     static func fetchMyPosts(query: ViewPostQuery) -> Single<FetchPostResult> {
         return Single.create { single in
             
@@ -204,6 +201,44 @@ struct PostNetworkService {
                             single(.success(.expiredToken))
                         default:
                             single(.success(.error(.unknown)))
+                        }
+                    }
+                }
+            
+            return Disposables.create()
+        }
+    }
+    static func editPost(postID: String, query: UploadPostQuery) -> Single<EditPostResultType> {
+        return Single.create { single in
+            let urlRequest: URLRequest
+            do {
+                urlRequest = try PostRouter.editPost(postID: postID, query: query).asURLRequest()
+            } catch {
+                single(.success(.error(.invalidURL)))
+                return Disposables.create()
+            }
+            
+            AF.request(urlRequest, interceptor: NetworkInterceptor())
+                .responseDecodable(of: ViewPostDetailResponseDTO.self) { response in
+                    switch response.result {
+                    case .success(let response):
+                        single(.success(.success(response)))
+                    case .failure(_):
+                        switch response.response?.statusCode {
+                        case 400:
+                            single(.success(.badRequest))
+                        case 401:
+                            single(.success(.invalidToken))
+                        case 403:
+                            single(.success(.forbidden))
+                        case 410:
+                            single(.success(.emptyPost))
+                        case 419:
+                            single(.success(.expiredToken))
+                        case 445:
+                            single(.success(.noPermission))
+                        default:
+                            single(.success(.error(CommonError(rawValue: response.response?.statusCode ?? 999) ?? .unknown)))
                         }
                     }
                 }

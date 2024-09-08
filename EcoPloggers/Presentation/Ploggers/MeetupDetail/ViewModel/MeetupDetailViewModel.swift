@@ -29,6 +29,7 @@ final class MeetupDetailViewModel: ViewModelType {
         let engageBtnTap: PublishRelay<ViewPostDetailResponse>
         let paymentResponse: PublishRelay<IamportResponse>
         let deleteMenuTap: PublishRelay<Void>
+        let editMenuTap: PublishRelay<Void>
     }
     struct Output {
         let postData: PublishRelay<[DetailSectionModel]>
@@ -38,6 +39,7 @@ final class MeetupDetailViewModel: ViewModelType {
         let paymentResultToast: PublishRelay<String>
         let deleteSuccessToast: PublishRelay<String>
         let deleteFailToast: PublishRelay<String>
+        let editPost: PublishRelay<ViewPostDetailResponse>
     }
     func transform(input: Input) -> Output {
         let postData = PublishRelay<[DetailSectionModel]>()
@@ -48,6 +50,7 @@ final class MeetupDetailViewModel: ViewModelType {
         let deleteMyPost: PublishRelay<Bool> = .init()
         let deleteSuccessToast: PublishRelay<String> = .init()
         let deleteFailToast: PublishRelay<String> = .init()
+        let editPost: PublishRelay<ViewPostDetailResponse> = .init()
         
         input.viewWillAppear
             .withUnretained(self)
@@ -59,9 +62,6 @@ final class MeetupDetailViewModel: ViewModelType {
             })
             .subscribe(with: self) { owner, result in
                 
-                //                var posts = UserDefaultsManager.shared.postLists
-                //                posts.append(owner.detailPost)
-                //                UserDefaultsManager.shared.postLists = posts
                 owner.addRealm(post: owner.detailPost)
                 
                 var section = [DetailSectionModel]()
@@ -115,7 +115,6 @@ final class MeetupDetailViewModel: ViewModelType {
             .flatMap { vm, _ in
                 return PostNetworkService.removeMyPost(postID: vm.detailPost.post_id)
             }
-            .debug("DELETE MENU TAP")
             .subscribe { result in
                 switch result {
                 case .success:
@@ -170,16 +169,30 @@ final class MeetupDetailViewModel: ViewModelType {
                 return PaymentNetworkService.validatePayment(query: query)
             }
             .subscribe { result in
-                print("4 - subscribe")
                 switch result {
                 case .success(let payment):
-                    print(payment)
                     paymentResultToast.accept("결제 성공!")
                 default:
                     paymentResultToast.accept("결제 실패! 잠시후 다시 시도해주세요.")
                 }
             } onError: { err in
                 print("err: \(err)")
+            }
+            .disposed(by: disposeBag)
+        
+        let isMyPost = input.editMenuTap
+            .withUnretained(self)
+            .map { vm, _ in
+                return vm.detailPost.creator.user_id == UserDefaultsManager.shared.myUserID
+            }
+        
+        isMyPost
+            .bind(with: self) { owner, isMyPost in
+                if isMyPost {
+                    editPost.accept(owner.detailPost)
+                } else {
+                    deleteFailToast.accept("수정 불가. 본인 글만 수정 가능합니다.")
+                }
             }
             .disposed(by: disposeBag)
              
@@ -191,7 +204,8 @@ final class MeetupDetailViewModel: ViewModelType {
             paymentOutput: paymentOutput,
             paymentResultToast: paymentResultToast,
             deleteSuccessToast: deleteSuccessToast,
-            deleteFailToast: deleteFailToast
+            deleteFailToast: deleteFailToast,
+            editPost: editPost
         )
     }
 }

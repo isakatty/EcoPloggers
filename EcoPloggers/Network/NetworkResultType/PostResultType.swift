@@ -37,6 +37,17 @@ enum UploadPostResultType {
     case error(CommonError)
 }
 
+enum EditPostResultType {
+    case success(ViewPostDetailResponseDTO)
+    case badRequest
+    case invalidToken
+    case forbidden
+    case emptyPost
+    case expiredToken
+    case noPermission
+    case error(CommonError)
+}
+
 enum FetchPostResult {
     case success(ViewPostResponseDTO)
     case badRequest

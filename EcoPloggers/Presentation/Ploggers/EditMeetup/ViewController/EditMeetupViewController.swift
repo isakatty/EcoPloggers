@@ -1,8 +1,8 @@
 //
-//  PostMeetupViewController.swift
+//  EditMeetupViewController.swift
 //  EcoPloggers
 //
-//  Created by Jisoo Ham on 8/27/24.
+//  Created by Jisoo Ham on 9/8/24.
 //
 
 import UIKit
@@ -11,11 +11,20 @@ import PhotosUI
 import RxSwift
 import RxCocoa
 import SnapKit
+import Kingfisher
 
-final class PostMeetupViewController: BaseViewController {
+final class EditMeetupViewController: BaseViewController {
     private var disposeBag = DisposeBag()
     
-    private let viewModel = PostViewModel()
+    private let viewModel: EditViewModel
+    
+    init(viewModel: EditViewModel) {
+        self.viewModel = viewModel
+        
+        super.init()
+        bind()
+    }
+    
     private let scrollView = UIScrollView()
     private let scrollContainerView: UIView = {
         let view = UIView()
@@ -47,7 +56,6 @@ final class PostMeetupViewController: BaseViewController {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: categoryCVLayout())
         cv.register(BoroughCVCell.self, forCellWithReuseIdentifier: BoroughCVCell.identifier)
         cv.backgroundColor = Constant.Color.white
-//        cv.alwaysBounceVertical = false
         return cv
     }()
     private let titleTFView: TitleTextFieldView = {
@@ -63,24 +71,35 @@ final class PostMeetupViewController: BaseViewController {
         let view = TitleContentView(title: "자세한 설명", placeholder: "아직 어차피 안나와요")
         return view
     }()
-    private let uploadBtn: UIButton = {
-        var config = UIButton.Configuration.filled()
-        config.baseBackgroundColor = Constant.Color.blueGreen
-        config.titleAlignment = .center
-        var titleAttribute = AttributedString("작성 완료")
-        titleAttribute.font = Constant.Font.medium16
-        titleAttribute.foregroundColor = Constant.Color.white
-        config.attributedTitle = titleAttribute
-        let btn = UIButton(configuration: config)
-        return btn
-    }()
     private let chosedImg = BehaviorRelay<NSItemProviderReading?>(value: nil)
-
-    override init() {
-        super.init()
+    private let rightSaveBtn = UIBarButtonItem(title: "수정", style: .done, target: self, action: nil)
+    
+    private func bind() {
+        bindPHPicker()
+        let input = EditViewModel.Input(
+            viewWillAppear: rx.methodInvoked(#selector(viewWillAppear)).map { _ in }
+        )
+        let output = viewModel.transform(input: input)
         
-        bind()
+        output.wrotedPost
+            .bind(with: self) { owner, detailPost in
+                owner.selectedImg.setImgWithHeaders(path: detailPost.files.first)
+                owner.titleTFView.textField.text = detailPost.title
+                owner.commentTFView.textView.text = detailPost.content
+                owner.priceTFView.textField.text = detailPost.price
+            }
+            .disposed(by: disposeBag)
+        
+        output.category
+            .bind(to: categoryCV.rx.items(
+                cellIdentifier: BoroughCVCell.identifier,
+                cellType: BoroughCVCell.self)
+            ) { row, element, cell in
+                cell.configureUI(categoryTxt: element.toTitle)
+            }
+            .disposed(by: disposeBag)
     }
+    
     private func bindPHPicker() {
         addImgBtn.rx.tap
             .bind(with: self) { owner, _ in
@@ -94,64 +113,8 @@ final class PostMeetupViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
     }
-    
-    private func bind() {
-        bindPHPicker()
-        let selectedCategory = BehaviorRelay<Int>(value: 0)
-        let input = PostViewModel.Input(
-            selectedImg: chosedImg,
-            viewWillAppear: rx.methodInvoked(#selector(viewWillAppear)).map { _ in },
-            postBtnTapEvent: uploadBtn.rx.tap,
-            titleText: titleTFView.textField.rx.text.orEmpty,
-            contentText: commentTFView.textView.rx.text.orEmpty,
-            priceText: priceTFView.textField.rx.text.orEmpty,
-            selectedCategory: selectedCategory
-        )
-        let output = viewModel.transform(input: input)
-        
-        output.category
-            .bind(to: categoryCV.rx.items(cellIdentifier: BoroughCVCell.identifier, cellType: BoroughCVCell.self)) { row, element, cell in
-                cell.configureUI(categoryTxt: element.toTitle)
-                
-                if row == output.selectedCategory.value {
-                    cell.selectedUI()
-                } else {
-                    cell.unSelectedUI()
-                }
-                
-            }
-            .disposed(by: disposeBag)
-        
-        output.avaliablPostBtn
-            .bind(with: self) { owner, boolean in
-                owner.uploadBtn.isEnabled = boolean
-            }
-            .disposed(by: disposeBag)
-        
-        output.selectedCategory
-            .bind(with: self) { owner, _ in
-                owner.categoryCV.reloadData()
-            }
-            .disposed(by: disposeBag)
-        
-        categoryCV.rx.itemSelected
-            .bind(onNext: { indexPath in
-                print(indexPath.item)
-                selectedCategory.accept(indexPath.item)
-            })
-            .disposed(by: disposeBag)
-        
-        output.successUpload
-            .bind(with: self) { owner, isUploaded in
-                if isUploaded {
-                    owner.dismiss(animated: true)
-                }
-            }
-            .disposed(by: disposeBag)
-        
-    }
     override func configureHierarchy() {
-        [scrollView, uploadBtn]
+        [scrollView]
             .forEach { view.addSubview($0) }
         scrollView.addSubview(scrollContainerView)
         
@@ -164,11 +127,6 @@ final class PostMeetupViewController: BaseViewController {
         
         scrollView.snp.makeConstraints { make in
             make.edges.equalTo(safeArea)
-        }
-        uploadBtn.snp.makeConstraints { make in
-            make.bottom.equalTo(safeArea)
-            make.horizontalEdges.equalToSuperview().inset(20)
-            make.height.equalTo(50)
         }
         scrollContainerView.snp.makeConstraints { make in
             make.width.verticalEdges.equalTo(scrollView)
@@ -209,14 +167,14 @@ final class PostMeetupViewController: BaseViewController {
             make.height.equalTo(100)
             make.bottom.equalTo(scrollContainerView).inset(60)
         }
-        selectedImg.isHidden = true
         
         configureModalBackBtn()
+        navigationItem.rightBarButtonItem = rightSaveBtn
     }
     
 }
 
-extension PostMeetupViewController: PHPickerViewControllerDelegate {
+extension EditMeetupViewController: PHPickerViewControllerDelegate {
     func picker(
         _ picker: PHPickerViewController,
         didFinishPicking results: [PHPickerResult]
@@ -239,7 +197,6 @@ extension PostMeetupViewController: PHPickerViewControllerDelegate {
                     self.selectedImg.image = image as? UIImage
                     self.selectedImg.isHidden = false
                     
-                    // VC -> VM 이미지 전달
                     self.chosedImg.accept(image)
                 }
             } else {
@@ -248,22 +205,3 @@ extension PostMeetupViewController: PHPickerViewControllerDelegate {
         }
     }
 }
-extension UIViewController {
-    static func categoryCVLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .estimated(100),
-            heightDimension: .fractionalHeight(1.0)
-        )
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .estimated(300),
-            heightDimension: .fractionalHeight(1.0)
-        )
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        group.interItemSpacing = .fixed(15)
-        let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuous
-        return UICollectionViewCompositionalLayout(section: section)
-    }
-}
-
