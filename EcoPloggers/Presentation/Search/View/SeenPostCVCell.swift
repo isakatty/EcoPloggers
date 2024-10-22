@@ -56,4 +56,10 @@ final class SeenPostCVCell: BaseCollectionViewCell {
             categoryLb.text = ""
         }
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        postImg.image = nil
+    }
 }
