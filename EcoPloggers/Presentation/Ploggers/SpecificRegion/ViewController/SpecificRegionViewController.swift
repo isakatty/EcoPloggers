@@ -58,7 +58,7 @@ final class SpecificRegionViewController: BaseViewController {
             .forEach { view.addSubview($0) }
     }
     override func configureLayout() {
-        view.backgroundColor = Constant.Color.white
+        super.configureLayout()
         
         configureNavigationLeftBar(action: nil)
         
@@ -74,7 +74,7 @@ final class SpecificRegionViewController: BaseViewController {
             make.top.equalTo(safeArea)
         }
         categoryCV.snp.makeConstraints { make in
-            make.top.equalTo(safeArea).offset(4)
+            make.top.equalTo(safeArea)
             make.horizontalEdges.equalTo(safeArea)
             make.height.equalTo(40)
         }

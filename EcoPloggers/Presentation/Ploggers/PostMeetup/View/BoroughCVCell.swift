@@ -29,11 +29,11 @@ final class BoroughCVCell: BaseCollectionViewCell {
     }
     override func configureLayout() {
         containersView.snp.makeConstraints { make in
-            make.verticalEdges.equalToSuperview()
+            make.verticalEdges.equalToSuperview().inset(2)
             make.horizontalEdges.equalToSuperview().inset(4)
         }
         categoryLabel.snp.makeConstraints { make in
-            make.verticalEdges.equalToSuperview().inset(2)
+            make.verticalEdges.equalToSuperview().inset(3)
             make.horizontalEdges.equalToSuperview().inset(8)
         }
         

@@ -33,6 +33,7 @@ final class PloggerTabBarController: UITabBarController {
         super.viewDidLoad()
         
         configureTabbar()
+        configureTabColor()
     }
     
     private func configureTabbar() {
@@ -55,5 +56,10 @@ final class PloggerTabBarController: UITabBarController {
             navController.tabBarItem = tabBarItemCase.tabItem
             return navController
         }
+    }
+    
+    private func configureTabColor() {
+        tabBar.barTintColor = Constant.Color.secondaryBG
+        tabBar.tintColor = Constant.Color.core
     }
 }

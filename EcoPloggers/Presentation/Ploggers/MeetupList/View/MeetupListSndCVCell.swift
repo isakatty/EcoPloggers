@@ -43,7 +43,7 @@ final class MeetupListSndCVCell: BaseCollectionViewCell {
     }()
     
     override func configureHierarchy() {
-        [creatorView, postImgView, postTitleLb, categoryLb, seoulLb]
+        [creatorView, postImgView, postTitleLb]
             .forEach { contentView.addSubview($0) }
     }
     override func configureLayout() {
@@ -66,17 +66,18 @@ final class MeetupListSndCVCell: BaseCollectionViewCell {
             make.centerX.equalToSuperview()
             make.width.equalTo(postImgView)
             make.height.equalTo(20)
-        }
-        categoryLb.snp.makeConstraints { make in
-            make.top.equalTo(postTitleLb.snp.bottom).offset(8)
-            make.trailing.equalTo(postImgView.snp.centerX).offset(-12)
             make.bottom.equalToSuperview().inset(12)
         }
-        seoulLb.snp.makeConstraints { make in
-            make.top.equalTo(categoryLb)
-            make.leading.equalTo(postImgView.snp.centerX).offset(12)
-            make.bottom.equalToSuperview().inset(12)
-        }
+//        categoryLb.snp.makeConstraints { make in
+//            make.top.equalTo(postTitleLb.snp.bottom).offset(8)
+//            make.trailing.equalTo(postImgView.snp.centerX).offset(-12)
+//            make.bottom.equalToSuperview().inset(12)
+//        }
+//        seoulLb.snp.makeConstraints { make in
+//            make.top.equalTo(categoryLb)
+//            make.leading.equalTo(postImgView.snp.centerX).offset(12)
+//            make.bottom.equalToSuperview().inset(12)
+//        }
     }
     
     func configureUI(data: ViewPostDetailResponse) {
