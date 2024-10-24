@@ -106,7 +106,8 @@ final class MeetupInfoCVCell: BaseCollectionViewCell {
         capsuleGathering.gatheringBG()
         contentTitleLabel.text = titleTxt
         if let price {
-            priceLabel.text = "참가비 \(price)원"
+            let changedPrice = Int(price)?.formatted(.number)
+            priceLabel.text = "참가비 \(changedPrice ?? "1,000")원"
         }
     }
     func configureCompoUI(time: String?, people: String?, date: String?) {
